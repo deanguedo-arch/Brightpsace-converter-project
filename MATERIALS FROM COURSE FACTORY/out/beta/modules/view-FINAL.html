@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en" style="background: #0f172a !important; background-color: #0f172a !important;">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MENTAL FITNESS FINAL | New Course</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css?family=Inter:ital,wght@0,400;0,700;1,400;1,900&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html, body {
+      background: #0f172a !important;
+      background-color: #0f172a !important;
+      font-family: 'Inter', sans-serif;
+    }
+    body {
+      min-height: 100vh;
+    }
+    .custom-scroll::-webkit-scrollbar { width: 6px; }
+    .custom-scroll::-webkit-scrollbar-track { background: #1e293b; }
+    .custom-scroll::-webkit-scrollbar-thumb { background: #475569; border-radius: 3px; }
+    .glass { background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(10px); }
+    .material-card { transition: all 0.2s; }
+    .material-card:hover { transform: translateY(-2px); box-shadow: 0 10px 40px rgba(0,0,0,0.3); }
+    .assessment-container [class*="bg-slate-9"],
+    .assessment-container [class*="bg-slate-8"],
+    .assessment-container [class*="bg-slate-7"],
+    .assessment-container [class*="bg-slate-6"],
+    .assessment-container [class*="bg-gray-9"],
+    .assessment-container [class*="bg-gray-8"],
+    .assessment-container [class*="bg-gray-7"] {
+      background: var(--cf-container-bg) !important;
+    }
+    :root { --cf-container-bg: rgba(15, 23, 42, 0.8); }
+    
+    
+  </style>
+  <script>
+    (function() {
+      function setBackground() {
+        document.documentElement.style.backgroundColor = '#0f172a';
+        document.documentElement.style.background = '#0f172a';
+        if (document.body) {
+          document.body.style.backgroundColor = '#0f172a';
+          document.body.style.background = '#0f172a';
+        }
+      }
+      setBackground();
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', setBackground);
+      }
+      setTimeout(setBackground, 100);
+      setTimeout(setBackground, 500);
+    })();
+  </script>
+</head>
+<body class="text-white custom-scroll" style="background: #0f172a !important; background-color: #0f172a !important;">
+  <header class="sticky top-0 z-50 bg-slate-900/95 backdrop-blur border-b border-slate-700">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="../index.html" class="flex items-center gap-2 text-slate-400 hover:text-purple-400 transition-colors text-sm font-bold">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+        </svg>
+        Back to Course
+      </a>
+      <h1 class="text-sm font-bold text-white uppercase tracking-wider">MENTAL FITNESS FINAL</h1>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-6 py-8">
+    <div class="w-full rounded-xl overflow-hidden border border-slate-700 shadow-2xl">
+      <iframe srcdoc="<!DOCTYPE html>
+<html lang=&quot;en&quot;>
+<head>
+    <meta charset=&quot;UTF-8&quot;>
+    <meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;>
+    <title>Mental Fitness: Clinical Deployment</title>
+    <script src=&quot;https://cdn.tailwindcss.com&quot;></script>
+    <link href=&quot;https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,700;1,400;1,900&family=JetBrains+Mono:wght@700&display=swap&quot; rel=&quot;stylesheet&quot;>
+    <style>
+        body { font-family: &#39;Inter&#39;, sans-serif; background-color: #020617; color: #e2e8f0; margin: 0; min-height: 100vh; }
+        .mono { font-family: &#39;JetBrains Mono&#39;, monospace; }
+        .glass { background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(10px); border: 1px solid rgba(51, 65, 85, 0.5); }
+        input, textarea, select { background: #0f172a !important; border: 1px solid #1e293b !important; transition: all 0.2s; color: white !important; }
+        input:focus, textarea:focus, select:focus { border-color: #0ea5e9 !important; outline: none; box-shadow: 0 0 0 1px #0ea5e9; }
+        
+        .step-content { display: none; }
+        .step-content.active { display: block; }
+        .nav-btn.active { background: #0ea5e9; color: #020617; font-weight: 900; border-color: #0ea5e9; }
+        
+        .avatar-box { border: 1px solid #1e293b; transition: all 0.3s; cursor: pointer; }
+        .avatar-box:hover { border-color: #0ea5e9; background: rgba(14, 165, 233, 0.05); }
+        .avatar-box.selected { border-color: #10b981; background: rgba(16, 185, 129, 0.1); box-shadow: 0 0 15px rgba(16, 185, 129, 0.2); }
+
+        /* Rubric Styles */
+        .rubric-row { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+        .rubric-cell { padding: 10px; border: 1px solid #334155; border-radius: 8px; cursor: pointer; transition: all 0.2s; font-size: 10px; }
+        .rubric-cell:hover { background: #1e293b; }
+        .rubric-cell.selected-elite { background: rgba(16, 185, 129, 0.2); border-color: #10b981; color: white; }
+        .rubric-cell.selected-prof { background: rgba(56, 189, 248, 0.2); border-color: #38bdf8; color: white; }
+        .rubric-cell.selected-emer { background: rgba(244, 63, 94, 0.2); border-color: #f43f5e; color: white; }
+
+        /* Save Status Pulse */
+        @keyframes pulse-green {
+            0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+            70% { box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+        .status-saved { animation: pulse-green 2s infinite; }
+        .info-card { background: rgba(30, 41, 59, 0.4); border-left: 3px solid #0ea5e9; padding: 1.5rem; border-radius: 0.75rem; }
+        .theory-tag { color: #38bdf8; font-family: &#39;JetBrains Mono&#39;, monospace; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; background: rgba(56, 189, 248, 0.1); padding: 2px 8px; border-radius: 4px; border: 1px solid rgba(56, 189, 248, 0.2); }
+    </style>
+</head>
+<body class=&quot;p-4 md:p-8&quot;>
+    <div class=&quot;max-w-6xl mx-auto&quot;>
+        
+        <header class=&quot;mb-8&quot;>
+            <div class=&quot;text-center mb-6&quot;>
+                <h1 class=&quot;text-3xl font-black italic tracking-tighter text-white uppercase mb-2&quot;>Clinical Deployment Manual</h1>
+                <p class=&quot;text-[10px] font-mono uppercase tracking-[0.3em] text-sky-500 font-bold underline decoration-sky-500/30 underline-offset-4&quot;>Integrated Operator Final Configuration</p>
+            </div>
+
+            <div class=&quot;flex flex-wrap justify-center gap-3 mb-6 bg-slate-900/50 p-3 rounded-xl border border-slate-800&quot;>
+                <div class=&quot;flex items-center gap-2 px-3&quot;>
+                    <div id=&quot;save-indicator&quot; class=&quot;w-2 h-2 rounded-full bg-slate-600 transition-all&quot;></div>
+                    <span id=&quot;save-text&quot; class=&quot;text-[9px] uppercase font-bold text-slate-500 tracking-widest&quot;>System Ready</span>
+                </div>
+                <div class=&quot;w-px h-6 bg-slate-800 mx-2 hidden sm:block&quot;></div>
+                <button onclick=&quot;downloadBackup()&quot; class=&quot;flex items-center gap-2 bg-emerald-700 hover:bg-emerald-600 text-white px-4 py-2 rounded-lg text-[10px] uppercase font-bold tracking-wider border border-emerald-600 transition-colors shadow-lg&quot;>
+                    Save File
+                </button>
+                <button onclick=&quot;document.getElementById(&#39;file-upload&#39;).click()&quot; class=&quot;flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-sky-400 px-3 py-1.5 rounded-lg text-[10px] uppercase font-bold tracking-wider border border-slate-700 transition-colors&quot;>
+                    Load File
+                </button>
+                <input type=&quot;file&quot; id=&quot;file-upload&quot; accept=&quot;.json&quot; style=&quot;display: none;&quot; onchange=&quot;loadBackup(this)&quot;>
+            </div>
+
+            <div class=&quot;flex justify-center gap-2 overflow-x-auto pb-2 px-2&quot;>
+                <button onclick=&quot;showStep(0)&quot; class=&quot;nav-btn active px-4 py-2 rounded-lg border border-slate-700 text-[10px] font-bold uppercase tracking-widest mono transition-all&quot;>00 Briefing</button>
+                <button onclick=&quot;showStep(1)&quot; class=&quot;nav-btn px-4 py-2 rounded-lg border border-slate-700 text-[10px] font-bold uppercase tracking-widest mono transition-all&quot;>01 Career Intel</button>
+                <button onclick=&quot;showStep(2)&quot; class=&quot;nav-btn px-4 py-2 rounded-lg border border-slate-700 text-[10px] font-bold uppercase tracking-widest mono transition-all&quot;>02 My Inventory</button>
+                <button onclick=&quot;showStep(3)&quot; class=&quot;nav-btn px-4 py-2 rounded-lg border border-slate-700 text-[10px] font-bold uppercase tracking-widest mono transition-all&quot;>03 Case Study</button>
+                <button onclick=&quot;showStep(4)&quot; class=&quot;nav-btn px-4 py-2 rounded-lg border border-slate-700 text-[10px] font-bold uppercase tracking-widest mono transition-all&quot;>04 Protocol & Audit</button>
+            </div>
+        </header>
+
+        <div class=&quot;glass rounded-[2.5rem] shadow-2xl overflow-hidden min-h-[700px] border border-slate-700/50&quot;>
+            
+            <div id=&quot;step0&quot; class=&quot;step-content active&quot;>
+                <div class=&quot;relative px-10 py-6 border-b border-slate-800 bg-slate-900/50&quot;>
+                    <div class=&quot;absolute top-0 left-0 w-full h-1 bg-sky-500&quot;></div>
+                    <h2 class=&quot;text-2xl font-black text-white uppercase italic tracking-tight&quot;>Step 00: Consultant Briefing</h2>
+                </div>
+                <div class=&quot;p-12 space-y-8 max-w-4xl mx-auto&quot;>
+                    <div class=&quot;info-card&quot;>
+                        <h3 class=&quot;text-sky-400 font-bold uppercase text-xs mb-4 mono underline underline-offset-4 tracking-widest italic&quot;>Mission Objective</h3>
+                        <p class=&quot;text-sm text-slate-300 leading-relaxed mb-4&quot;>
+                            You are now the **Lead Performance Consultant**. Your objective is to map your professional pathway. You must choose a career in sport psychology or coaching, audit your personal readiness, and design a clinical intervention for an elite athlete in crisis.
+                        </p>
+                        <div class=&quot;p-3 bg-amber-900/20 border border-amber-600/30 rounded-lg text-[10px] text-amber-500 italic&quot;>
+                            <strong>OPERATOR NOTE:</strong> Use the <strong>Green Save Button</strong> to back up your work often. This system does not auto-save to the cloud.
+                        </div>
+                    </div>
+                    <div class=&quot;flex justify-center&quot;>
+                        <button onclick=&quot;showStep(1)&quot; class=&quot;bg-sky-600 px-16 py-5 rounded-2xl text-white font-black uppercase text-sm tracking-[0.2em] hover:bg-sky-500 transition-all shadow-xl shadow-sky-900/20 active:scale-95&quot;>Initiate Config</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id=&quot;step1&quot; class=&quot;step-content&quot;>
+                <div class=&quot;relative px-10 py-6 border-b border-slate-800 bg-slate-900/50&quot;>
+                    <div class=&quot;absolute top-0 left-0 w-full h-1 bg-sky-500&quot;></div>
+                    <h2 class=&quot;text-2xl font-black text-white uppercase italic tracking-tight&quot;>01: Professional Arena Selection</h2>
+                </div>
+                <div class=&quot;p-10 space-y-6&quot;>
+                    <div class=&quot;grid grid-cols-1 md:grid-cols-2 gap-8&quot;>
+                        <div>
+                            <label class=&quot;block text-[10px] font-bold uppercase text-slate-500 mb-2 tracking-widest mono italic&quot;>Target Profession</label>
+                            <select id=&quot;career_choice&quot; onchange=&quot;saveData()&quot; class=&quot;w-full p-4 rounded-xl text-sm font-bold bg-slate-900&quot;>
+                                <option value=&quot;&quot;>Select Pathway...</option>
+                                <option value=&quot;Mental Performance Consultant&quot;>Mental Performance Consultant</option>
+                                <option value=&quot;High-Performance Coach&quot;>High-Performance Coach</option>
+                                <option value=&quot;Athletic Therapist / Trainer&quot;>Athletic Therapist / Trainer</option>
+                                <option value=&quot;Strength & Conditioning Specialist&quot;>Strength & Conditioning Specialist</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class=&quot;block text-[10px] font-bold uppercase text-slate-500 mb-2 tracking-widest mono italic&quot;>Role Intel (Research)</label>
+                            <textarea id=&quot;career_research&quot; oninput=&quot;saveData()&quot; placeholder=&quot;Briefly research: What are the primary demands of this role?&quot; class=&quot;w-full p-4 h-24 rounded-xl text-xs resize-none&quot;></textarea>
+                        </div>
+                    </div>
+                    <div class=&quot;flex justify-end pt-8&quot;>
+                        <button onclick=&quot;showStep(2)&quot; class=&quot;bg-sky-600 px-10 py-4 rounded-xl text-white font-bold uppercase text-xs tracking-widest&quot;>Next: Audit Inventory →</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id=&quot;step2&quot; class=&quot;step-content&quot;>
+                <div class=&quot;relative px-10 py-6 border-b border-slate-800 bg-slate-900/50&quot;>
+                    <div class=&quot;absolute top-0 left-0 w-full h-1 bg-sky-500&quot;></div>
+                    <h2 class=&quot;text-2xl font-black text-white uppercase italic tracking-tight&quot;>02: Personal Inventory (6.1)</h2>
+                </div>
+                <div class=&quot;p-10 space-y-6&quot;>
+                    <div class=&quot;grid grid-cols-1 md:grid-cols-2 gap-6&quot;>
+                        <div class=&quot;p-5 bg-slate-950/40 rounded-2xl border border-slate-800&quot;>
+                            <label class=&quot;block text-[10px] font-bold uppercase text-slate-500 mb-2 tracking-widest mono&quot;>Interests & Fuel</label>
+                            <input type=&quot;text&quot; id=&quot;inv_interests&quot; oninput=&quot;saveData()&quot; placeholder=&quot;What excites you in this field?&quot; class=&quot;w-full p-3 rounded-lg text-xs&quot;>
+                        </div>
+                        <div class=&quot;p-5 bg-slate-950/40 rounded-2xl border border-slate-800&quot;>
+                            <label class=&quot;block text-[10px] font-bold uppercase text-slate-500 mb-2 tracking-widest mono&quot;>Core Values (Phase 2)</label>
+                            <input type=&quot;text&quot; id=&quot;inv_values&quot; oninput=&quot;saveData()&quot; placeholder=&quot;e.g. Precision, Growth, Grit...&quot; class=&quot;w-full p-3 rounded-lg text-xs&quot;>
+                        </div>
+                        <div class=&quot;p-5 bg-slate-950/40 rounded-2xl border border-slate-800&quot;>
+                            <label class=&quot;block text-[10px] font-bold uppercase text-slate-500 mb-2 tracking-widest mono&quot;>Core Beliefs</label>
+                            <textarea id=&quot;inv_beliefs&quot; oninput=&quot;saveData()&quot; placeholder=&quot;Your personal philosophy on performance...&quot; class=&quot;w-full p-3 h-20 rounded-lg text-xs resize-none&quot;></textarea>
+                        </div>
+                        <div class=&quot;p-5 bg-slate-950/40 rounded-2xl border border-slate-800&quot;>
+                            <label class=&quot;block text-[10px] font-bold uppercase text-slate-500 mb-2 tracking-widest mono&quot;>Resources & Experience</label>
+                            <textarea id=&quot;inv_resources&quot; oninput=&quot;saveData()&quot; placeholder=&quot;What skills do you already have?&quot; class=&quot;w-full p-3 h-20 rounded-lg text-xs resize-none&quot;></textarea>
+                        </div>
+                    </div>
+                    <div class=&quot;flex justify-between pt-8&quot;>
+                        <button onclick=&quot;showStep(1)&quot; class=&quot;text-slate-500 font-bold uppercase text-xs mono tracking-widest&quot;>← Back</button>
+                        <button onclick=&quot;showStep(3)&quot; class=&quot;bg-sky-600 px-10 py-4 rounded-xl text-white font-bold uppercase text-xs tracking-widest&quot;>Next: Select Case →</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id=&quot;step3&quot; class=&quot;step-content&quot;>
+                <div class=&quot;relative px-10 py-6 border-b border-slate-800 bg-slate-900/50&quot;>
+                    <div class=&quot;absolute top-0 left-0 w-full h-1 bg-sky-500&quot;></div>
+                    <h2 class=&quot;text-2xl font-black text-white uppercase italic tracking-tight&quot;>03: Clinical Asset Selection</h2>
+                </div>
+                <div class=&quot;p-10 space-y-8&quot;>
+                    <p class=&quot;text-xs text-slate-500 mb-8 uppercase text-center font-bold tracking-widest italic underline underline-offset-8&quot;>Select the &#39;Asset&#39; requiring professional intervention:</p>
+                    <div class=&quot;grid grid-cols-1 md:grid-cols-3 gap-6&quot;>
+                        <div onclick=&quot;selectAvatar(&#39;The Redliner&#39;)&quot; class=&quot;avatar-box p-6 rounded-[2rem]&quot; id=&quot;avatar-redliner&quot;>
+                            <h4 class=&quot;text-white font-black italic uppercase text-sm mb-2&quot;>The Redliner</h4>
+                            <p class=&quot;text-[10px] text-rose-500 font-bold mb-2 tracking-widest uppercase&quot;>Issue: Anxiety & Choking</p>
+                            <p class=&quot;text-[10px] text-slate-400 italic&quot;>Elite skill, but somatic indicators (shaking, rapid heart rate) take over. High cognitive anxiety.</p>
+                        </div>
+                        <div onclick=&quot;selectAvatar(&#39;The Empty Tank&#39;)&quot; class=&quot;avatar-box p-6 rounded-[2rem]&quot; id=&quot;avatar-empty&quot;>
+                            <h4 class=&quot;text-white font-black italic uppercase text-sm mb-2&quot;>The Empty Tank</h4>
+                            <p class=&quot;text-[10px] text-amber-500 font-bold mb-2 tracking-widest uppercase&quot;>Issue: Burnout & Identity</p>
+                            <p class=&quot;text-[10px] text-slate-400 italic&quot;>Losing &#39;Drive&#39; and experiencing &#39;Under-Recovery&#39;. Identity is too tied to results.</p>
+                        </div>
+                        <div onclick=&quot;selectAvatar(&#39;The Flincher&#39;)&quot; class=&quot;avatar-box p-6 rounded-[2rem]&quot; id=&quot;avatar-flincher&quot;>
+                            <h4 class=&quot;text-white font-black italic uppercase text-sm mb-2&quot;>The Flincher</h4>
+                            <p class=&quot;text-[10px] text-sky-500 font-bold mb-2 tracking-widest uppercase&quot;>Issue: Confidence & Focus</p>
+                            <p class=&quot;text-[10px] text-slate-400 italic&quot;>Recovering from injury. &#39;Confidence Account&#39; is empty. Constant &#39;What-If&#39; future thoughts.</p>
+                        </div>
+                    </div>
+                    <div class=&quot;flex justify-between pt-8&quot;>
+                        <button onclick=&quot;showStep(2)&quot; class=&quot;text-slate-500 font-bold uppercase text-xs mono tracking-widest&quot;>← Back</button>
+                        <button onclick=&quot;showStep(4)&quot; class=&quot;bg-sky-600 px-10 py-4 rounded-xl text-white font-bold uppercase text-xs tracking-widest&quot;>Next: Design Protocol →</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id=&quot;step4&quot; class=&quot;step-content&quot;>
+                <div class=&quot;relative px-10 py-6 border-b border-slate-800 bg-slate-900/50&quot;>
+                    <div class=&quot;absolute top-0 left-0 w-full h-1 bg-emerald-500&quot;></div>
+                    <h2 class=&quot;text-2xl font-black text-white uppercase italic tracking-tight&quot;>04: Protocol & Self-Audit</h2>
+                </div>
+                <div class=&quot;p-10 space-y-8&quot;>
+                    
+                    <div class=&quot;grid grid-cols-1 md:grid-cols-2 gap-10&quot;>
+                        <div class=&quot;space-y-6&quot;>
+                            <label class=&quot;block text-[10px] font-bold uppercase text-emerald-500 mb-2 tracking-widest mono italic underline underline-offset-4&quot;>Professional Protocol</label>
+                            <p class=&quot;text-[10px] text-slate-500 italic leading-relaxed&quot;>As a <span id=&quot;display-career&quot; class=&quot;text-white font-bold&quot;>[Chosen Role]</span>, use tools from Phases 1-4 to fix your Avatar&#39;s problem.</p>
+                            <textarea id=&quot;protocol_tools&quot; oninput=&quot;saveData()&quot; placeholder=&quot;List 3 specific Phase tools and how you will apply them to the case...&quot; class=&quot;w-full p-5 h-48 rounded-[2rem] text-xs resize-none&quot;></textarea>
+                        </div>
+                        <div class=&quot;space-y-6&quot;>
+                            <label class=&quot;block text-[10px] font-bold uppercase text-emerald-500 mb-2 tracking-widest mono italic underline underline-offset-4&quot;>Integrated Logic (Alignment)</label>
+                            <p class=&quot;text-[10px] text-slate-500 italic leading-relaxed&quot;>Why YOU? Explain how your personal inventory (Step 2) makes you perfect for this professional pathway.</p>
+                            <textarea id=&quot;final_justification&quot; oninput=&quot;saveData()&quot; placeholder=&quot;Connect your Values to the requirements of the job and the case study...&quot; class=&quot;w-full p-5 h-48 rounded-[2rem] text-xs resize-none border-2 border-emerald-500/20&quot;></textarea>
+                        </div>
+                    </div>
+
+                    <div class=&quot;mt-12 pt-8 border-t border-slate-800&quot;>
+                        <div class=&quot;flex justify-between items-end mb-6&quot;>
+                            <h3 class=&quot;text-white font-black italic uppercase text-lg&quot;>Self-Assessment Audit</h3>
+                            <div class=&quot;text-right&quot;>
+                                <span class=&quot;text-[10px] font-bold text-slate-500 uppercase tracking-widest&quot;>Predicted Grade</span>
+                                <div class=&quot;text-3xl font-black italic text-emerald-400&quot;><span id=&quot;total-score&quot;>00</span>/100</div>
+                            </div>
+                        </div>
+
+                        <div class=&quot;space-y-6&quot;>
+                            <div>
+                                <label class=&quot;text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2 block&quot;>1. Career Intel (10 pts)</label>
+                                <div class=&quot;rubric-row&quot;>
+                                    <div onclick=&quot;setScore(&#39;career&#39;, 10)&quot; id=&quot;career-10&quot; class=&quot;rubric-cell text-slate-400&quot;><strong>Elite (10):</strong> Specific role selected. Research shows deep understanding of psychological demands.</div>
+                                    <div onclick=&quot;setScore(&#39;career&#39;, 7)&quot; id=&quot;career-7&quot; class=&quot;rubric-cell text-slate-400&quot;><strong>Proficient (7):</strong> Role selected. Research is present but generic.</div>
+                                    <div onclick=&quot;setScore(&#39;career&#39;, 4)&quot; id=&quot;career-4&quot; class=&quot;rubric-cell text-slate-400&quot;><strong>Emerging (4):</strong> Role undefined or research missing.</div>
+                                </div>
+                            </div>
+                            <div>
+                                <label class=&quot;text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2 block&quot;>2. Personal Inventory 6.1 (25 pts)</label>
+                                <div class=&quot;rubric-row&quot;>
+                                    <div onclick=&quot;setScore(&#39;inv&#39;, 25)&quot; id=&quot;inv-25&quot; class=&quot;rubric-cell text-slate-400&quot;><strong>Elite (25):</strong> 3 distinct values identified. Philosophy is clear. Resources specific.</div>
+                                    <div onclick=&quot;setScore(&#39;inv&#39;, 18)&quot; id=&quot;inv-18&quot; class=&quot;rubric-cell text-slate-400&quot;><strong>Proficient (18):</strong> Values listed but generic. Beliefs surface level.</div>
+                                    <div onclick=&quot;setScore(&#39;inv&#39;, 10)&quot; id=&quot;inv-10&quot; class=&quot;rubric-cell text-slate-400&quot;><strong>Emerging (10):</strong> Sections blank or one-word answers.</div>
+                                </div>
+                            </div>
+                            <div>
+                                <label class=&quot;text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2 block&quot;>3. Clinical Protocol (30 pts)</label>
+                                <div class=&quot;rubric-row&quot;>
+                                    <div onclick=&quot;setScore(&#39;proto&#39;, 30)&quot; id=&quot;proto-30&quot; class=&quot;rubric-cell text-slate-400&quot;><strong>Elite (30):</strong> 3+ Specific tools named. Clear application instructions (how/when).</div>
+                                    <div onclick=&quot;setScore(&#39;proto&#39;, 22)&quot; id=&quot;proto-22&quot; class=&quot;rubric-cell text-slate-400&quot;><strong>Proficient (22):</strong> Good advice but lacks technical terms. Tools mentioned but not applied.</div>
+                                    <div onclick=&quot;setScore(&#39;proto&#39;, 15)&quot; id=&quot;proto-15&quot; class=&quot;rubric-cell text-slate-400&quot;><strong>Emerging (15):</strong> Vague advice (&quot;relax&quot;). No course material used.</div>
+                                </div>
+                            </div>
+                            <div>
+                                <label class=&quot;text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2 block&quot;>4. Integrated Logic 6.2 (25 pts)</label>
+                                <div class=&quot;rubric-row&quot;>
+                                    <div onclick=&quot;setScore(&#39;logic&#39;, 25)&quot; id=&quot;logic-25&quot; class=&quot;rubric-cell text-slate-400&quot;><strong>Elite (25):</strong> Explicitly connects Personal Inventory to Career choice. Deep logic.</div>
+                                    <div onclick=&quot;setScore(&#39;logic&#39;, 18)&quot; id=&quot;logic-18&quot; class=&quot;rubric-cell text-slate-400&quot;><strong>Proficient (18):</strong> Explains career desire but fails to link back to values.</div>
+                                    <div onclick=&quot;setScore(&#39;logic&#39;, 10)&quot; id=&quot;logic-10&quot; class=&quot;rubric-cell text-slate-400&quot;><strong>Emerging (10):</strong> &quot;I like sports.&quot; No critical thinking.</div>
+                                </div>
+                            </div>
+                             <div>
+                                <label class=&quot;text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2 block&quot;>5. Operational Standard (10 pts)</label>
+                                <div class=&quot;rubric-row&quot;>
+                                    <div onclick=&quot;setScore(&#39;std&#39;, 10)&quot; id=&quot;std-10&quot; class=&quot;rubric-cell text-slate-400&quot;><strong>Elite (10):</strong> Professional tone. No errors.</div>
+                                    <div onclick=&quot;setScore(&#39;std&#39;, 7)&quot; id=&quot;std-7&quot; class=&quot;rubric-cell text-slate-400&quot;><strong>Proficient (7):</strong> Minor errors. Casual tone.</div>
+                                    <div onclick=&quot;setScore(&#39;std&#39;, 4)&quot; id=&quot;std-4&quot; class=&quot;rubric-cell text-slate-400&quot;><strong>Emerging (4):</strong> Sloppy formatting. Incomplete.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class=&quot;flex flex-col md:flex-row gap-4 pt-10 border-t border-slate-800&quot;>
+                        <button onclick=&quot;showStep(1)&quot; class=&quot;flex-1 text-slate-500 font-bold uppercase text-[10px] border border-slate-800 rounded-2xl py-5 hover:bg-slate-900 tracking-widest&quot;>Return to Start</button>
+                        <button onclick=&quot;generateFullPrint()&quot; class=&quot;flex-[2] bg-emerald-600 hover:bg-emerald-500 text-white font-black uppercase tracking-[0.2em] py-5 rounded-2xl shadow-2xl transition-all active:scale-95&quot;>
+                            Generate Professional Portfolio Blueprint
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class=&quot;mt-8 text-center text-slate-600 text-[10px] font-mono uppercase tracking-[0.4em]&quot;>
+            “The Architect builds. The Consultant solves.”
+        </footer>
+    </div>
+
+    <script>
+        let selectedAvatar = &quot;&quot;;
+        let saveTimeout;
+        let rubricScores = { career: 0, inv: 0, proto: 0, logic: 0, std: 0 };
+
+        function showStep(n) {
+            document.querySelectorAll(&#39;.step-content&#39;).forEach(s => s.classList.remove(&#39;active&#39;));
+            document.getElementById(&#39;step&#39; + n).classList.add(&#39;active&#39;);
+            document.querySelectorAll(&#39;.nav-btn&#39;).forEach((b, i) => {
+                b.classList.toggle(&#39;active&#39;, i === n);
+            });
+            window.scrollTo(0, 0);
+        }
+
+        function selectAvatar(name) {
+            selectedAvatar = name;
+            document.querySelectorAll(&#39;.avatar-box&#39;).forEach(c => c.classList.remove(&#39;selected&#39;));
+            const id = &#39;avatar-&#39; + name.toLowerCase().replace(&#39;the &#39;, &#39;&#39;).replace(&#39; &#39;, &#39;&#39;);
+            const el = document.getElementById(id);
+            if(el) el.classList.add(&#39;selected&#39;);
+            saveData();
+        }
+
+        function setScore(category, value) {
+            rubricScores[category] = value;
+            
+            // UI Update
+            const cells = document.querySelectorAll(`[id^=&quot;${category}-&quot;]`);
+            cells.forEach(c => {
+                c.classList.remove(&#39;selected-elite&#39;, &#39;selected-prof&#39;, &#39;selected-emer&#39;);
+                if (c.id === `${category}-${value}`) {
+                    if (value >= 10 && category !== &#39;std&#39;) c.classList.add(&#39;selected-elite&#39;);
+                    else if (value >= 18) c.classList.add(&#39;selected-prof&#39;); 
+                    else if (value <= 15 && value > 5) c.classList.add(&#39;selected-prof&#39;);
+                    else c.classList.add(&#39;selected-emer&#39;);
+                    
+                    // Special coloring for different point scales
+                    if (value === 10 && category === &#39;career&#39;) c.className += &#39; selected-elite&#39;;
+                    if (value === 25) c.className += &#39; selected-elite&#39;;
+                    if (value === 30) c.className += &#39; selected-elite&#39;;
+                    if (value === 10 && category === &#39;std&#39;) c.className += &#39; selected-elite&#39;;
+                }
+            });
+
+            const total = Object.values(rubricScores).reduce((a, b) => a + b, 0);
+            document.getElementById(&#39;total-score&#39;).innerText = total;
+            saveData();
+        }
+
+        function getFormData() {
+            return {
+                career: document.getElementById(&#39;career_choice&#39;).value || &quot;&quot;,
+                research: document.getElementById(&#39;career_research&#39;).value || &quot;&quot;,
+                avatar: selectedAvatar || &quot;&quot;,
+                inv_interests: document.getElementById(&#39;inv_interests&#39;).value || &quot;&quot;,
+                inv_values: document.getElementById(&#39;inv_values&#39;).value || &quot;&quot;,
+                inv_beliefs: document.getElementById(&#39;inv_beliefs&#39;).value || &quot;&quot;,
+                inv_resources: document.getElementById(&#39;inv_resources&#39;).value || &quot;&quot;,
+                protocol: document.getElementById(&#39;protocol_tools&#39;).value || &quot;&quot;,
+                justification: document.getElementById(&#39;final_justification&#39;).value || &quot;&quot;,
+                scores: rubricScores
+            };
+        }
+
+        function saveData() {
+            const data = getFormData();
+            try {
+                localStorage.setItem(&#39;consultant_deployment_final&#39;, JSON.stringify(data));
+                const ind = document.getElementById(&#39;save-indicator&#39;);
+                const txt = document.getElementById(&#39;save-text&#39;);
+                ind.classList.remove(&#39;bg-slate-600&#39;);
+                ind.classList.add(&#39;bg-emerald-500&#39;, &#39;status-saved&#39;);
+                txt.innerText = &quot;Saving...&quot;;
+                clearTimeout(saveTimeout);
+                saveTimeout = setTimeout(() => {
+                    ind.classList.remove(&#39;status-saved&#39;);
+                    txt.innerText = &quot;System Synced&quot;;
+                }, 1000);
+            } catch (e) { console.warn(&quot;Auto-save failed.&quot;); }
+
+            if(data.career) document.getElementById(&#39;display-career&#39;).innerText = data.career;
+        }
+
+        function init() {
+            try {
+                const saved = JSON.parse(localStorage.getItem(&#39;consultant_deployment_final&#39;) || &#39;{}&#39;);
+                if (saved.career) document.getElementById(&#39;career_choice&#39;).value = saved.career;
+                if (saved.research) document.getElementById(&#39;career_research&#39;).value = saved.research;
+                if (saved.avatar) selectAvatar(saved.avatar);
+                if (saved.inv_interests) document.getElementById(&#39;inv_interests&#39;).value = saved.inv_interests;
+                if (saved.inv_values) document.getElementById(&#39;inv_values&#39;).value = saved.inv_values;
+                if (saved.inv_beliefs) document.getElementById(&#39;inv_beliefs&#39;).value = saved.inv_beliefs;
+                if (saved.inv_resources) document.getElementById(&#39;inv_resources&#39;).value = saved.inv_resources;
+                if (saved.protocol) document.getElementById(&#39;protocol_tools&#39;).value = saved.protocol;
+                if (saved.justification) document.getElementById(&#39;final_justification&#39;).value = saved.justification;
+                if (saved.scores) {
+                    rubricScores = saved.scores;
+                    Object.keys(rubricScores).forEach(k => { if(rubricScores[k] > 0) setScore(k, rubricScores[k]); });
+                }
+                saveData();
+            } catch (e) { }
+        }
+
+        function downloadBackup() {
+            const data = getFormData();
+            const blob = new Blob([JSON.stringify(data)], { type: &quot;application/json&quot; });
+            const url = URL.createObjectURL(blob);
+            const dlNode = document.createElement(&#39;a&#39;);
+            dlNode.href = url;
+            dlNode.download = &quot;consultant-backup.json&quot;;
+            document.body.appendChild(dlNode);
+            dlNode.click();
+            document.body.removeChild(dlNode);
+            URL.revokeObjectURL(url);
+        }
+
+        function loadBackup(input) {
+            const file = input.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const data = JSON.parse(e.target.result);
+                try { localStorage.setItem(&#39;consultant_deployment_final&#39;, JSON.stringify(data)); } catch(err) {}
+                location.reload();
+            };
+            reader.readAsText(file);
+        }
+
+        function generateFullPrint() {
+            const data = getFormData();
+            const total = Object.values(data.scores).reduce((a, b) => a + b, 0);
+            
+            const printHTML = `
+                <html>
+                <head><title>Consultant Portfolio</title><link href=&quot;https://cdn.tailwindcss.com&quot; rel=&quot;stylesheet&quot;>
+                <style>body { padding: 40px; color: black; background: white; font-family: sans-serif; line-height: 1.2; } h1, h2, h3 { font-weight: 900; text-transform: uppercase; font-style: italic; } .box { border: 1px solid black; padding: 12px; margin-bottom: 12px; border-left: 10px solid black; } .label { font-size: 8px; font-weight: bold; text-transform: uppercase; color: #888; display: block; }</style>
+                </head>
+                <body>
+                    <div class=&quot;flex justify-between border-b-8 border-black pb-4 mb-8&quot;>
+                        <div><h1>Consultant Deployment Blueprint</h1><p class=&quot;text-xs font-bold uppercase tracking-[0.3em]&quot;>Phase 5 Clinical System File</p></div>
+                        <div class=&quot;text-right&quot;><h3>Score</h3><p class=&quot;text-5xl font-black italic&quot;>${total}/100</p></div>
+                    </div>
+                    <div class=&quot;box&quot;><span class=&quot;label&quot;>6.1 Consultant Inventory Summary</span><strong>Values:</strong> ${data.inv_values}<br><strong>Beliefs:</strong> ${data.inv_beliefs}<br><strong>Resources:</strong> ${data.inv_resources}</div>
+                    <div class=&quot;grid grid-cols-2 gap-4 mb-4&quot;>
+                        <div class=&quot;box&quot;><span class=&quot;label&quot;>Case Asset Identified</span><h2 class=&quot;text-lg&quot;>${data.avatar}</h2></div>
+                        <div class=&quot;box&quot;><span class=&quot;label&quot;>Consultant Field Research</span><p class=&quot;text-[10px] italic&quot;>${data.research}</p></div>
+                    </div>
+                    <div class=&quot;box&quot;><span class=&quot;label text-emerald-600 uppercase&quot;>Operational Protocol (Remedy)</span><p class=&quot;text-xs italic leading-relaxed mt-2 whitespace-pre-wrap&quot;>${data.protocol}</p></div>
+                    <div class=&quot;box&quot; style=&quot;border-left-color: #10b981;&quot;><span class=&quot;label text-emerald-600 uppercase&quot;>6.2 Integrated Pathway Logic (Alignment)</span><p class=&quot;text-xs italic leading-relaxed mt-2 whitespace-pre-wrap&quot;>${data.justification}</p></div>
+                    <div class=&quot;mt-4 pt-4 border-t border-gray-300&quot;>
+                        <p class=&quot;text-[10px] font-bold uppercase&quot;>Self-Audit Breakdown:</p>
+                        <p class=&quot;text-[10px]&quot;>Career: ${data.scores.career} | Inventory: ${data.scores.inv} | Protocol: ${data.scores.proto} | Logic: ${data.scores.logic} | Std: ${data.scores.std}</p>
+                    </div>
+                    <script>window.onload = function() { window.print(); };<\/script>
+                </body>
+                </html>
+            `;
+            const win = window.open(&#39;&#39;, &#39;_blank&#39;);
+            win.document.write(printHTML);
+            win.document.close();
+        }
+
+        window.onload = init;
+    </script>
+</body>
+</html>" class="w-full border-0" style="min-height: 80vh; height: 100%;" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-modals allow-downloads allow-top-navigation-by-user-activation"></iframe>
+    </div>
+  </main>
+
+  
+
+  <script>
+    window.CF_ASSET_BASE_URL = "";
+    
+    
+    
+(function() {
+  var MODULE_KEY = 'CF_Module_MENTAL_FITNESS_FINAL_v1';
+  var saveTimeout = null;
+  function getAllInputState() {
+    var state = {};
+    document.querySelectorAll('input, textarea, select').forEach(function(el, i) {
+      var key = el.id || el.name || ('field_' + i);
+      if (el.type === 'checkbox' || el.type === 'radio') {
+        if (el.checked) state[key] = el.type === 'radio' ? el.value : true;
+      } else {
+        if (el.value) state[key] = el.value;
+      }
+    });
+    return state;
+  }
+  function restoreInputState(state) {
+    if (!state || typeof state !== 'object') return;
+    document.querySelectorAll('input, textarea, select').forEach(function(el, i) {
+      var key = el.id || el.name || ('field_' + i);
+      var savedValue = state[key];
+      if (savedValue !== undefined) {
+        if (el.type === 'checkbox') {
+          el.checked = !!savedValue;
+        } else if (el.type === 'radio') {
+          el.checked = (el.value === savedValue);
+        } else {
+          el.value = savedValue;
+        }
+      }
+    });
+  }
+  function saveNow() {
+    try {
+      var state = getAllInputState();
+      if (Object.keys(state).length > 0) {
+        localStorage.setItem(MODULE_KEY, JSON.stringify({
+          timestamp: Date.now(),
+          state: state
+        }));
+      }
+    } catch (e) {}
+  }
+  function debouncedSave() {
+    clearTimeout(saveTimeout);
+    saveTimeout = setTimeout(saveNow, 800);
+  }
+  function loadSaved() {
+    try {
+      var raw = localStorage.getItem(MODULE_KEY);
+      if (raw) {
+        var parsed = JSON.parse(raw);
+        if (parsed && parsed.state) restoreInputState(parsed.state);
+      }
+    } catch (e) {}
+  }
+  function init() {
+    loadSaved();
+    document.addEventListener('input', debouncedSave);
+    document.addEventListener('change', debouncedSave);
+    window.addEventListener('pagehide', saveNow);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+  </script>
+</body>
+</html>

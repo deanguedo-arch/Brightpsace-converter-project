@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en" style="background: #0f172a !important; background-color: #0f172a !important;">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Course Materials | New Course</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css?family=Inter:ital,wght@0,400;0,700;1,400;1,900&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html, body {
+      background: #0f172a !important;
+      background-color: #0f172a !important;
+      font-family: 'Inter', sans-serif;
+    }
+    body {
+      min-height: 100vh;
+    }
+    .custom-scroll::-webkit-scrollbar { width: 6px; }
+    .custom-scroll::-webkit-scrollbar-track { background: #1e293b; }
+    .custom-scroll::-webkit-scrollbar-thumb { background: #475569; border-radius: 3px; }
+    .glass { background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(10px); }
+    .material-card { transition: all 0.2s; }
+    .material-card:hover { transform: translateY(-2px); box-shadow: 0 10px 40px rgba(0,0,0,0.3); }
+    .assessment-container [class*="bg-slate-9"],
+    .assessment-container [class*="bg-slate-8"],
+    .assessment-container [class*="bg-slate-7"],
+    .assessment-container [class*="bg-slate-6"],
+    .assessment-container [class*="bg-gray-9"],
+    .assessment-container [class*="bg-gray-8"],
+    .assessment-container [class*="bg-gray-7"] {
+      background: var(--cf-container-bg) !important;
+    }
+    :root { --cf-container-bg: rgba(15, 23, 42, 0.8); }
+    
+    
+  </style>
+  <script>
+    (function() {
+      function setBackground() {
+        document.documentElement.style.backgroundColor = '#0f172a';
+        document.documentElement.style.background = '#0f172a';
+        if (document.body) {
+          document.body.style.backgroundColor = '#0f172a';
+          document.body.style.background = '#0f172a';
+        }
+      }
+      setBackground();
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', setBackground);
+      }
+      setTimeout(setBackground, 100);
+      setTimeout(setBackground, 500);
+    })();
+  </script>
+</head>
+<body class="text-white custom-scroll" style="background: #0f172a !important; background-color: #0f172a !important;">
+  <header class="sticky top-0 z-50 bg-slate-900/95 backdrop-blur border-b border-slate-700">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="../index.html" class="flex items-center gap-2 text-slate-400 hover:text-purple-400 transition-colors text-sm font-bold">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+        </svg>
+        Back to Course
+      </a>
+      <h1 class="text-sm font-bold text-white uppercase tracking-wider">Course Materials</h1>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-6 py-8">
+    
+      <div class="space-y-8">
+        <div class="mb-8">
+          <h2 class="text-3xl font-black text-white italic uppercase tracking-tighter">Course Materials</h2>
+          <p class="text-xs text-slate-400 font-mono uppercase tracking-widest mt-2">Access lectures, presentations, and briefing documents.</p>
+        </div>
+        <div id="pdf-viewer-container" class="hidden mb-8 bg-black rounded-xl border border-slate-700 overflow-hidden shadow-2xl">
+          <div class="flex justify-between items-center p-3 bg-slate-800 border-b border-slate-700">
+            <span id="viewer-title" class="text-xs font-bold text-white uppercase tracking-widest px-2">Document Viewer</span>
+            <button onclick="closeViewer()" class="text-xs text-rose-400 hover:text-white font-bold uppercase tracking-widest px-2">Close X</button>
+          </div>
+          <iframe id="pdf-frame" src="" width="100%" height="600" style="border:none;"></iframe>
+        </div>
+        <div id="digital-reader-container" class="hidden mb-8 bg-slate-900 rounded-xl border border-emerald-500/30 overflow-hidden shadow-2xl">
+          <div class="flex justify-between items-center p-3 bg-slate-800 border-b border-emerald-500/30">
+            <span id="reader-title" class="text-xs font-bold text-emerald-400 uppercase tracking-widest px-2 flex items-center gap-2">Digital Resource</span>
+            <button onclick="closeDigitalReader()" class="text-xs text-rose-400 hover:text-white font-bold uppercase tracking-widest px-2">Close X</button>
+          </div>
+          <div class="flex" style="height: 600px;">
+            <div id="reader-toc" class="w-64 bg-slate-950 border-r border-slate-700 p-4 overflow-y-auto hidden md:block">
+              <h4 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4">Contents</h4>
+              <div id="reader-toc-items" class="space-y-1"></div>
+            </div>
+            <div id="reader-content" class="flex-1 p-6 md:p-8 overflow-y-auto">
+              <div id="reader-body" class="prose prose-invert max-w-none"></div>
+              <div class="flex justify-between items-center mt-8 pt-4 border-t border-slate-700">
+                <button id="prev-btn" onclick="prevChapter()" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white text-xs font-bold uppercase rounded-lg transition-all disabled:opacity-30">Previous</button>
+                <span id="reader-progress" class="text-xs text-slate-400"></span>
+                <button id="next-btn" onclick="nextChapter()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold uppercase rounded-lg transition-all disabled:opacity-30">Next</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="materials-list" class="grid grid-cols-1 gap-4">
+          <div class="material-card flex flex-col md:flex-row items-center justify-between gap-6 p-6 bg-slate-900 rounded-xl border border-slate-700 ">
+        <div class="flex items-center gap-6">
+          <div class="w-12 h-12 rounded-lg bg-slate-800 flex items-center justify-center text-slate-400 font-black italic text-xl border border-slate-700"></div>
+          <div>
+            <h3 class="text-lg font-bold text-white uppercase italic">FDSF</h3>
+            <p class="text-xs text-slate-400 font-mono"></p>
+          </div>
+        </div>
+        <div class="flex gap-3 w-full md:w-auto"><button data-digital-reader="mat-1769467556892" class="digital-reader-btn flex-1 bg-purple-600 hover:bg-purple-500 text-slate-400 text-[10px] font-bold uppercase tracking-widest py-3 px-6 rounded-lg transition-all flex items-center justify-center gap-2">Read</button></div>
+      </div>
+<div class="material-card flex flex-col md:flex-row items-center justify-between gap-6 p-6 bg-slate-900 rounded-xl border border-slate-700 ">
+        <div class="flex items-center gap-6">
+          <div class="w-12 h-12 rounded-lg bg-slate-800 flex items-center justify-center text-slate-400 font-black italic text-xl border border-slate-700"></div>
+          <div>
+            <h3 class="text-lg font-bold text-white uppercase italic">dfasfd</h3>
+            <p class="text-xs text-slate-400 font-mono"></p>
+          </div>
+        </div>
+        <div class="flex gap-3 w-full md:w-auto"><button onclick="openPDF('https://drive.google.com/file/d/1DQvItijEudKroqUieRBKaJAqJJnzEa2x/preview', 'dfasfd')" class="flex-1 bg-purple-600 hover:bg-purple-500 text-slate-400 text-[10px] font-bold uppercase tracking-widest py-3 px-6 rounded-lg border border-slate-600 transition-all">View Slides</button><a href="https://drive.google.com/file/d/1DQvItijEudKroqUieRBKaJAqJJnzEa2x/view" target="_blank" class="flex-1 bg-purple-600 hover:bg-purple-500 text-slate-400 text-[10px] font-bold uppercase tracking-widest py-3 px-6 rounded-lg transition-all text-center flex items-center justify-center">Download</a></div>
+      </div>
+<div class="material-card flex flex-col md:flex-row items-center justify-between gap-6 p-6 bg-slate-900 rounded-xl border border-slate-700 ">
+        <div class="flex items-center gap-6">
+          <div class="w-12 h-12 rounded-lg bg-slate-800 flex items-center justify-center text-slate-400 font-black italic text-xl border border-slate-700"></div>
+          <div>
+            <h3 class="text-lg font-bold text-white uppercase italic">dsafdf</h3>
+            <p class="text-xs text-slate-400 font-mono"></p>
+          </div>
+        </div>
+        <div class="flex gap-3 w-full md:w-auto"><button data-digital-reader="mat-1769534725428" class="digital-reader-btn flex-1 bg-purple-600 hover:bg-purple-500 text-slate-400 text-[10px] font-bold uppercase tracking-widest py-3 px-6 rounded-lg transition-all flex items-center justify-center gap-2">Read</button></div>
+      </div>
+<div class="material-card flex flex-col md:flex-row items-center justify-between gap-6 p-6 bg-slate-900 rounded-xl border border-slate-700 ">
+        <div class="flex items-center gap-6">
+          <div class="w-12 h-12 rounded-lg bg-slate-800 flex items-center justify-center text-slate-400 font-black italic text-xl border border-slate-700"></div>
+          <div>
+            <h3 class="text-lg font-bold text-white uppercase italic">test</h3>
+            <p class="text-xs text-slate-400 font-mono"></p>
+          </div>
+        </div>
+        <div class="flex gap-3 w-full md:w-auto"><button onclick="openPDF('/Course-factoryPERFECT/materials/test-vault-doc.pdf', 'test')" class="flex-1 bg-purple-600 hover:bg-purple-500 text-slate-400 text-[10px] font-bold uppercase tracking-widest py-3 px-6 rounded-lg border border-slate-600 transition-all">View Slides</button><a href="/Course-factoryPERFECT/materials/test-vault-doc.pdf" target="_blank" class="flex-1 bg-purple-600 hover:bg-purple-500 text-slate-400 text-[10px] font-bold uppercase tracking-widest py-3 px-6 rounded-lg transition-all text-center flex items-center justify-center">Download</a></div>
+      </div>
+        </div>
+      </div>
+  </main>
+
+  
+
+  <script>
+    window.CF_ASSET_BASE_URL = "";
+    
+    
+      function isGoogleSitesHost() {
+        var ref = '';
+        try { ref = document.referrer || ''; } catch (e) { ref = ''; }
+        if (/sites\.google\.com/i.test(ref)) return true;
+        try { return /sites\.google\.com/i.test(window.top.location.host || ''); } catch (e) { return /sites\.google\.com/i.test(ref); }
+      }
+      function getPdfEmbedUrl(url) {
+        if (!url) return url;
+        var clean = String(url).trim();
+        if (!clean) return clean;
+        if (clean.indexOf('docs.google.com/viewer') !== -1) return clean;
+        var isDrive = clean.indexOf('drive.google.com') !== -1;
+        if (isDrive) {
+          var driveIdMatch = clean.match(/\/file\/d\/([a-zA-Z0-9_-]+)/i) || clean.match(/[?&]id=([a-zA-Z0-9_-]+)/i);
+          if (driveIdMatch && driveIdMatch[1]) {
+            return 'https://drive.google.com/file/d/' + driveIdMatch[1] + '/preview';
+          }
+          if (clean.indexOf('/view') !== -1) {
+            return clean.replace('/view', '/preview');
+          }
+          return clean;
+        }
+        if (/^(\/|\.\/|\.\.\/|blob:|data:)/i.test(clean)) {
+          return clean;
+        }
+        var isSameOrigin = false;
+        try {
+          var parsed = new URL(clean, window.location.href);
+          isSameOrigin = parsed.origin === window.location.origin;
+        } catch (e) {
+          isSameOrigin = false;
+        }
+        if (isSameOrigin) {
+          return clean;
+        }
+        var forceViewer = isGoogleSitesHost() || window.CF_FORCE_PDF_VIEWER === true;
+        if (forceViewer && /^https?:\/\//i.test(clean)) {
+          return 'https://docs.google.com/viewer?embedded=true&url=' + encodeURIComponent(clean);
+        }
+        return clean;
+      }
+      function openPDF(url, title) {
+        var container = document.getElementById('pdf-viewer-container');
+        var previewUrl = getPdfEmbedUrl(url);
+        document.getElementById('pdf-frame').src = previewUrl || '';
+        document.getElementById('viewer-title').innerText = "VIEWING: " + title;
+        container.classList.remove('hidden');
+        container.scrollIntoView({ behavior: 'smooth' });
+      }
+      function closeViewer() {
+        document.getElementById('pdf-viewer-container').classList.add('hidden');
+        document.getElementById('pdf-frame').src = "";
+      }
+      
+      var DIGITAL_CONTENT = {"mat-1769467556892":{"title":"The Confident Mind: A Battle-Tested Guide to Unshakable Performance","author":"Nathaniel Zinsser","sourceInfo":"First edition. New York, NY: Custom House, [2022]. Digital Edition January 2022. ISBN 978-0-06-301485-5. Copyright © 2022 by Nathaniel Zinsser.","chapters":[{"number":1,"title":"Accepting What You Cannot Change","sections":[{"heading":"Introduction","content":"It was a relatively normal day at the pharmaceutical firm where Ginny Stevens worked as a midlevel executive. She knew there’d be a product presentation to a conference room full of corporate vice presidents today, but she was one of several attendees with no formal role in the actual presentation, so she was her usual calm and relaxed self. All that changed as she left her office and headed to the meeting. Her boss caught up to her just a few strides away from the conference room door and told her that she would be giving the presentation herself. What followed was a moment of utter panic.\n\nGinny described it to me this way: “I stopped in midstride and my head did such a fast 180 to look back at my boss that I almost hurt my neck. I take pride in being a good employee, so I really couldn’t say no. But inside my mind was screaming, ‘What!?! Are you kidding me? You want me to do a presentation to a room full of VPs with no forewarning and no preparation?!!’ We kept walking toward the conference room and the doors seemed to grow before my eyes, getting bigger and bigger until it seemed like I was entering some huge cathedral where a council of elders was waiting to pass judgment on me. Even though I knew the product pretty well, I had no idea how I was going to pull this off. I just about lost it when the doors opened and I could see those VPs sitting inside waiting for me.”\n\nLuckily for Ginny, the VPs took it easy on her and the presentation turned into a pleasant, collaborative conversation. But it might not have gone that way, and Ginny’s moment of panic was so upsetting that she knew she had to do something about it. “I hear that you help athletes with their confidence,” she said to me, “but I sure need it, too. And so does my entire work team. Can you help me? I don’t ever want to feel that way again.”\n\nGinny’s story is one I have heard a thousand times: a sudden change of circumstance or situation sends someone into a tailspin of self-doubt. The heart starts pounding, the thoughts start racing, and even everyday perceptions of time, space, and surroundings shift uncomfortably. One moment you are walking to a run-of-the-mill event, and the next moment you are staggering toward what seems like your own execution.\n\nBut it doesn’t have to be that way. You can armor yourself against any unexpected turn of events and also against all the known and expected difficulties of life by building for yourself a personal mental fortress, a guaranteed foolproof bank that holds your personal confidence account.\n\nHow do you build that bank? You start with some strong foundations, and naturally, because this is a mental bank account, your foundations are mental too. There are four mental pillars that we begin with, four factors that affect all human performance. Once you accept them, you’ll see the pursuit of excellence a lot more clearly, and you’ll have the peace of mind that will help you win the First Victory.\n\nThe First Victory is a concept I use in my work with athletes. Before any athlete (or anyone) can win the “Second Victory”—the externally recognizable achievement, such as a championship title or a promotion or a successful social interaction—he or she must first win the First Victory, the internal victory over their own doubts, fears, and worries. Put simply, the First Victory is the moment when the question “Can I do this?” is answered in the affirmative.\n\nWhen you win the First Victory, you don’t necessarily feel euphoric or invincible. You just feel like you can handle what is in front of you. You feel solid. You can breathe and focus and get down to the business of doing what you know you can do.\n\nThe problem is that most of us do not reliably win that First Victory. Instead, we often lose it. We lose it before we even get the chance to compete or perform. We lose it in the minutes and hours leading up to the event. We lose it because our minds are not trained to support us.\n\nSo the first thing to do is to accept certain realities of being human. We can’t make them go away. We can deny them, fight them, resent them, and try to pretend they don’t exist, or we can accept them and learn to use them.\n\nThat’s what this chapter is about: accepting what you cannot change.\n\nThe four pillars that I’m about to describe are not “tips” or “tricks.” They are not optional. They are the concrete realities of being a human being trying to do something difficult in the presence of other human beings.\n\nWe can choose to ignore these concrete realities of our human existence, or we can choose to acknowledge them and work with them. The former path leads to stagnation and mediocrity, and the latter path to growth and success. The choice is yours. Let’s explore the four pillars of a kick-ass confident attitude."},{"heading":"Pillar #1: The Mind-Body Connection Is Real. Use It or Be Used by It.","content":"The term mind-body connection entered the public vocabulary during the late 1960s and early 1970s, a period of considerable social and ideological change. In earlier years, it was generally understood in Western rational scientific thought that the mind and the body were entirely separate and distinct; your thoughts and emotions were the domains of priests and poets, while your body, obeying the physical laws of chemistry and physics, was the domain of mechanistically trained medical doctors. So it really didn’t matter what or how you thought—your body, the instrument through which you played your sport or performed at your job, didn’t care. That started to change during the late ’60s and early ’70s, largely due to new research in the fields of neurology and endocrinology.\n\nIn short, the mind-body connection is the principle that the thoughts and emotions you experience affect the physical state of your body and thus affect your physical performance. Your thoughts and emotions can make your performance better or worse.\n\nThis connection is constant. It’s not something that turns on and off. It’s happening right now as you read these words.\n\nThe mind-body connection works through the nervous system, and it works through the hormones that the nervous system helps regulate. It works through changes in muscle tension, breathing patterns, blood flow, digestion, and sensory perception.\n\nWhen your mind is filled with fear, doubt, and worry, your body responds in predictable ways. Your muscles tense up. Your breathing becomes shallow. Your vision narrows. Your body floods with stress hormones. You become physically less capable of performing your best.\n\nThe mind-body connection is not “mystical” or “spiritual.” It is a physical reality. Your thoughts have consequences.\n\nThink of it this way: your thoughts and emotions produce a physical state, and that physical state in turn produces more thoughts and emotions. This is a cycle.\n\nWhen your emotional state is driven by fear, doubt, and worry, it produces a physical state of tightness and tension. That tightness and tension then creates more fear, doubt, and worry. The cycle feeds itself.\n\nI call this the sewer cycle.\n\nYou can visualize it this way:\n\nConversely, if your emotional state is driven by a flood of constructive thoughts (notice I did not say “positive” thoughts), it produces a rather different and vastly more effective physical state. Instead of feeling tense, you feel energized; your vision opens up instead of closing in; there are natural pain-reducing chemicals released in the brain. All these changes make your best possible performance far more likely, as pictured below:\n\n[FIGURE: Diagram illustrating the sewer cycle and the success cycle (mind-body feedback loops)]\n\nThree key points about these cycles are important to winning the First Victory. First, we all find ourselves switching back and forth from the not-so-helpful sewer cycle to the more helpful success cycle many times a day and even many times an hour. No one, not the mentally toughest, most confident individual on the planet, is immune to the occasional trip around the sewer cycle. What matters, then, is (1) how often and how frequently you’re on which cycle and (2) which cycle you’re on when it’s time to perform. Take this simple two-question test right now. Answer honestly: What percentage of your conscious thoughts over a day, a week, a semester, a season, or a year are personally affirmative and emotionally supportive, and what percentage are personally disparaging and emotionally discouraging? And where do your thoughts tend to run when you are moments away from stepping into your personal performance arena? Do they move you toward the sewer or more toward the success cycle?\n\nSecond, you can’t stop the mind-body connection. It’s built into the human operating system. You can only decide whether it will work against you or for you.\n\nThird, the First Victory is not won in some distant future moment, when you have finally achieved some mythical “perfect confidence.” The First Victory is won in the moment when you recognize the mind-body cycle you are currently on and deliberately choose to shift onto the more helpful cycle.\n\nThat shift is not a matter of willpower. It’s a matter of practiced thinking. It’s a matter of having habits of thought that reliably lead you to constructive emotions, which then lead to constructive physical states.\n\nIf you understand this pillar, you can stop being surprised by your own physical reactions to stress. You can stop thinking that the pounding heart and the tight chest mean that you are “not confident.” Instead, you can recognize them as predictable outputs of a nervous system that has been influenced by your thoughts.\n\nAnd you can change those thoughts.\n\nThe mind-body connection is real. Use it or be used by it."},{"heading":"Pillar #2: Inevitable Human Imperfection. You Won’t Escape It, So You Might as Well Make Friends with It.","content":"Here is the second pillar: you are going to mess up.\n\nYou’re going to make mistakes. You’re going to have bad days. You’re going to forget things you practiced. You’re going to make the wrong decision at the wrong time. You’re going to look foolish. You’re going to feel embarrassed. You’re going to feel regret.\n\nAnd this will happen even if you are talented, even if you are prepared, even if you have trained hard, even if you care deeply.\n\nThis is not a pessimistic statement. It is a liberating statement.\n\nMost people carry around a hidden assumption that if they are “good enough,” they will not make mistakes. They assume that mistakes are evidence that they are not good enough.\n\nThat assumption is wrong.\n\nMistakes are evidence that you are human.\n\nThe difference between people who become excellent and people who stay mediocre is not that the excellent people don’t make mistakes. The difference is how they respond to mistakes.\n\nWhen you make a mistake, you can respond in one of two ways.\n\nYou can respond with shame.\n\nShame is the belief that a mistake means you are a flawed person. Shame turns an event into an identity. Shame says, “I messed up, therefore I am a mess.” Shame is self-attack.\n\nOr you can respond with guilt.\n\nGuilt is the belief that a mistake means you did something that needs correcting. Guilt turns an event into information. Guilt says, “I messed up, therefore I need to adjust.” Guilt is self-coaching.\n\nShame is destructive. Guilt is constructive.\n\nShame drains your mental bank account. Guilt can actually build it.\n\nHere is why: when you respond to a mistake with shame, your mind fills with negative thoughts. Those thoughts trigger the mind-body connection. You tense up. You feel threatened. You become less capable of executing the skills you have. And the negative thoughts continue. The sewer cycle begins.\n\nWhen you respond to a mistake with guilt, your mind stays engaged with the task. You stay oriented toward improvement. You stay oriented toward the future. You keep your emotional energy.\n\nThis is what I mean by making friends with inevitable human imperfection.\n\nYou need to accept that imperfection is part of the package. You can’t avoid it, so you might as well build a relationship with it.\n\nThink about it: if you believe you must be perfect to succeed, then every mistake is catastrophic. Every mistake is proof you’re not ready. Every mistake becomes a reason to doubt yourself.\n\nBut if you accept imperfection as normal, then mistakes become expected. They become part of the process. They become feedback.\n\nThis doesn’t mean you excuse your mistakes. It means you respond to them like a professional.\n\nProfessionals evaluate mistakes and then move on.\n\nThey don’t keep replaying them.\n\nThey don’t keep punishing themselves.\n\nThey don’t create a negative identity out of a single event.\n\nThe most important skill here is the ability to “forget” the imperfection once you’ve extracted the lesson from it. That does not mean you deny the mistake. It means you don’t carry it forward emotionally.\n\nIf you find yourself replaying mistakes and insulting yourself for them, you are not “being accountable.” You are draining your bank account.\n\nIt is always possible to say to yourself: “That wasn’t good. Here’s what I’m going to do differently next time.” Then you commit to doing that next time, and you let the mistake go.\n\nThis is not soft. This is not coddling. This is how excellence is built.\n\nIf you want to win the First Victory consistently, you have to stop demanding perfection from yourself.\n\nYou have to accept that imperfection is inevitable.\n\nYou won’t escape it, so you might as well make friends with it."},{"heading":"Pillar #3: Your Helpful, But Mostly Misunderstood, Autonomic Nervous System. Fall in Love with Your Butterflies.","content":"Now we arrive at the pillar that causes the most confusion and the most needless suffering: your autonomic nervous system.\n\nThe autonomic nervous system is the part of your nervous system that controls your automatic bodily functions: heart rate, breathing, blood flow, sweating, digestion, and more. It operates largely outside your conscious control.\n\nAnd it is the system that produces the physical sensations we associate with anxiety: the pounding heart, the fluttering stomach, the sweaty palms, the tight chest.\n\nMost people interpret these sensations as a sign that something is wrong.\n\nThey interpret them as a sign that they are “not confident.”\n\nThey interpret them as a sign that they are “not ready.”\n\nThey interpret them as a sign that they are about to fail.\n\nThat interpretation is the problem.\n\nThose sensations are not evidence that you are weak.\n\nThey are evidence that your nervous system is doing its job.\n\nYour autonomic nervous system has one primary mission: to help you survive.\n\nWhen it detects that you are about to do something important, something uncertain, something that matters, it activates.\n\nIt releases energy.\n\nIt prepares you for action.\n\nThis activation is not your enemy. It is your ally.\n\nThe problem is that most people don’t know how to interpret the activation. They see it as a threat. That thought triggers the mind-body connection and pushes them onto the sewer cycle.\n\nBut if you understand the autonomic nervous system, you can interpret the activation differently.\n\nYou can interpret it as fuel.\n\nYou can interpret it as readiness.\n\nYou can interpret it as your body saying, “Let’s go.”\n\nThis is why I tell athletes to fall in love with their butterflies.\n\nThe butterflies are not a sign that you’re in trouble.\n\nThey’re a sign that you care.\n\nThey’re a sign that you’re alive.\n\nThey’re a sign that you’re about to do something challenging.\n\nYou can’t get rid of the butterflies, because they are produced by a system that exists to prepare you for challenge.\n\nAnd you don’t want to get rid of them.\n\nIf you had no activation, you would be flat.\n\nYou would be under-energized.\n\nYou would be indifferent.\n\nThe goal is not to eliminate activation. The goal is to harness it.\n\nThe autonomic nervous system is intelligent. It learns.\n\nIt learns what you interpret as threatening.\n\nIt learns what you interpret as exciting.\n\nIt learns what you interpret as normal.\n\nIf you repeatedly interpret activation as a threat, it will keep activating in ways that feel threatening.\n\nIf you repeatedly interpret activation as fuel, it will still activate, but you will experience it as fuel.\n\nThis is why the best performers in the world are not “calm” in the sense of being emotionally flat.\n\nThey are energized.\n\nThey are activated.\n\nThey have butterflies.\n\nThey just don’t panic about them.\n\nThey understand the system.\n\nThey respect the system.\n\nThey don’t try to fight it.\n\nThey work with it.\n\nWhen I work with athletes, we spend a lot of time training this reinterpretation.\n\nWe train them to recognize autonomic activation and label it as readiness.\n\nWe train them to smile when the fuel shows up.\n\nWe train them to say, “Good. This means I’m ready.”\n\nAnd when they do that consistently, their nervous system becomes a reliable ally.\n\nThis pillar matters because if you misinterpret the autonomic nervous system, you will sabotage yourself right before performance.\n\nYou will take your own fuel and turn it into fear.\n\nIf you interpret it correctly, you will take your own fuel and turn it into focus.\n\nFall in love with your butterflies."},{"heading":"Pillar #4: The Inconsistent and Delayed Returns of Practice. Great Changes Are Happening That You Can’t See.","content":"The final pillar is the one that breaks the spirit of most people before they ever get close to their potential: the inconsistent and delayed returns of practice.\n\nMost people have a simple, childish expectation about practice:\n\nIf I practice, I should get better.\n\nAnd not only should I get better, but I should get better quickly.\n\nAnd not only should I get better quickly, but I should get better in a smooth, predictable, linear way.\n\nThat expectation is wrong.\n\nPractice does make you better.\n\nBut the returns are delayed.\n\nAnd they are inconsistent.\n\nAnd they are often invisible while they are happening.\n\nThis is why practice is so mentally challenging.\n\nYou can work hard for days or weeks and feel like nothing is changing.\n\nYou can work hard and actually feel worse.\n\nYou can have a great practice and then a terrible one.\n\nYou can have a breakthrough and then regress.\n\nYou can feel like you’re going backward.\n\nAnd then suddenly, one day, something clicks.\n\nThe nervous system is changing in ways you cannot consciously feel.\n\nThe body is adapting in ways you cannot consciously perceive.\n\nGreat changes are happening that you can’t see.\n\nBut because you can’t see them, many people conclude that practice is not working.\n\nThey lose faith.\n\nThey lose patience.\n\nThey drain their mental bank account.\n\nThey quit.\n\nThe people who become excellent are the people who stay in the game long enough for the invisible changes to become visible.\n\nThey understand that practice is not a vending machine.\n\nYou don’t put in effort and get out improvement immediately.\n\nPractice is more like planting seeds.\n\nYou water the soil, you pull weeds, you tend the garden.\n\nAnd for a long time, you see nothing.\n\nBut the roots are growing.\n\nThe system is changing.\n\nAnd then, eventually, the plant emerges.\n\nThis is why consistency matters more than intensity.\n\nBecause the changes happen over time.\n\nThis is why patience matters more than excitement.\n\nBecause the returns are delayed.\n\nThis is why trust matters more than mood.\n\nBecause the returns are inconsistent.\n\nYou can’t base your commitment to practice on how you feel today.\n\nYou have to base it on a long-term understanding of how change happens.\n\nIf you accept this pillar, you can stop being surprised by the normal ups and downs of progress.\n\nYou can stop interpreting a bad day as evidence that you are failing.\n\nYou can stop interpreting a plateau as evidence that you are stuck.\n\nYou can stop interpreting a setback as evidence that you are doomed.\n\nInstead, you can interpret these things as part of the process.\n\nYou can keep practicing.\n\nYou can keep depositing.\n\nYou can keep building.\n\nAnd you can protect your mental bank account from the impatience that destroys so many people.\n\nGreat changes are happening that you can’t see.\n\nStay with it."}]},{"number":2,"title":"Building Your Bank Account #1: Filtering Your Past for Valuable Deposits","sections":[{"heading":"Selective Thinking and the Mental Filter","content":"Back in the 1990s, before the coming of video streaming services like Netflix, a common family ritual was the weekly trip to the local video store. There Mom and/or Dad could find a drama or action movie, and the kids could find a G- or PG-rated movie of their choice. Being dutiful parents, my wife and I embarked on many such trips, bringing home such classics as First Wives Club, Wayne’s World, and Mrs. Doubtfire, (yes, I know I’m dating myself). We’d all huddle on the living room couch and crank up the now obsolete VCR machine. On one of these trips my two young daughters ran over to me after making their selection from the rack. “Daddy, can we get this one?” It was the recently released comedy Dumb and Dumber, starring Jim Carrey and Jeff Daniels as two bumbling adults with the common sense and worldly experience of ten-year-olds. I remember not being impressed with my daughters’ selection, but being the doting dad that I was, I relented and prepared myself for a very forgettable evening. I was getting pretty much what I expected (slapstick gags and scatological jokes) when there appeared on my TV a scene that I had to stop, rewind, and watch again. It’s the scene (maybe some of you have seen it) where Jim Carrey’s character, Lloyd, a gangly, homely, and altogether unsophisticated man, has finally tracked down the beautiful Mary (played by Carrey’s soon-to-be wife, Lauren Holly) and asks her if there is any way the two of them could ever end up together as a romantic couple. Not wanting to be rude, but utterly uninterested in Lloyd, Mary tries to let him down gently with a few noncommittal answers. Finally Lloyd insists that she give him a straight answer about what his chances are. “Not good,” she says. “Like one out of a hundred?” Lloyd asks. “More like one out of a million,” she answers, knowing that she has just broken the poor man’s heart. Upon hearing this pronouncement Lloyd at first swallows hard and bites his lip, disappointed that his quest for love seems hopeless. But after a moment’s reflection he smiles a huge, gap-toothed smile and proclaims, “So you’re telling me there’s a chance!” before breaking into a howl of glee. He has determined that he actually has a chance at love after all. Not much of a chance, to be sure, but enough of a chance in his own mind to be a cause for celebration. First Victory won.\n\nIn that moment Lloyd exhibited the single most important mental skill anyone can have, and indeed must have, to build confidence in an indifferent and often uncaring world. He is thinking selectively—only allowing into his mind thoughts and memories that create energy, optimism, and enthusiasm. He may only have one chance in a million, but he is completely focused on that one chance and consequently he feels on top of the world. Because of the ongoing mind-body connection presented in Chapter One, Lloyd’s optimistic feeling will keep him pressing on in his persistent pursuit of love.\n\nPut differently, Lloyd displays a remarkably effective mental filter—a screen through which all his thoughts and experiences pass before they become part of his running total, before they can affect his mental bank account—either building it up or bringing it down. This filter performs two functions in the service of that mental bank account. It allows the thoughts and memories that create energy, optimism, and enthusiasm to pass through and build the mental bank account up, but it prevents the thoughts and memories that create fear, doubt, and worry from getting in and drawing the bank account down. With a functioning mental filter, you could play in an afternoon softball game, get only one hit in four at bats, and spend the evening reliving and enjoying that one successful trip to the plate. Naturally, you might also want to sharpen up your batting stance and your swing with a little practice before your next game, but by hanging on to the memory of that one hit, rather than beating yourself up by reliving the three misses, you give the part of your nervous system that sees the ball and swings the bat an image of what you want more of, and thus you get that mind-body connection described in Chapter One working for you.\n\nThis is precisely how the best hitters in baseball have always thought. Hall of Famer Tony Gwynn exercised his mental filter by editing the video of each at bat after every game. Into one video file he would put his best at bat from the game, and into another file he would put his worst at bat from the game. Guess which file he would study? The best at bat file. This is not because Gwynn was deluding himself or avoiding the reality of his flaws. It is because he understood that you improve by giving your nervous system a clear picture of what you want to repeat.\n\nWhatever your conscious mind tends to dwell on, your nervous system will tend to repeat.\n\nIf your conscious mind dwells on the failures, your nervous system gets a picture of failure.\n\nIf your conscious mind dwells on the success, your nervous system gets a picture of success.\n\nTony Gwynn knew that the mind-body connection works both ways, and he was deliberately using his mind to influence his body.\n\nThe question is: are you?\n\nIf you don’t have a filter, your mind becomes a junkyard.\n\nEvery failure becomes a permanent resident.\n\nEvery mistake becomes a defining event.\n\nEvery disappointment becomes a repeated movie.\n\nAnd your mental bank account is constantly drained.\n\nIf you do have a filter, your mind becomes a bank.\n\nYou keep the valuable deposits.\n\nYou use the deposits to build optimism and enthusiasm.\n\nYou still learn from mistakes, but you don’t keep them as emotional baggage.\n\nThis is the core skill that will allow you to build your confidence account: selective thinking.\n\nSelective thinking is not denial.\n\nSelective thinking is not arrogance.\n\nSelective thinking is not pretending you are better than you are.\n\nSelective thinking is choosing which experiences and memories you keep emotionally alive.\n\nYou cannot control everything that happens to you.\n\nBut you can control what you do with what happens.\n\nThat is the beginning of mental strength.\n\nNow let’s get practical.\n\nThe rest of this chapter will give you specific exercises to build your filter and deposit “money” into your mental bank account by filtering your past for valuable deposits."},{"heading":"Exercise One: Your Top Ten","content":"Think back to when you first started participating in your chosen field (from here on in I’ll use this term, chosen field, to refer to whatever it is that matters most to you and whatever it is that you desire to excel in—your chosen sport, profession, etc.). What did you enjoy about that activity? What made it cool, or fun, or interesting for you? It may be hard to put a finger on it but I’m sure there’s a feeling, a rather special feeling, back there in your memory. Center yourself on that feeling and then start thinking about the best times you have ever had in that activity.\n\nI want you to identify your Top Ten experiences in your chosen field, the ten best experiences you can recall—moments of achievement, progress, victory, enjoyment, and satisfaction. These memories can be from any time in your life: last week, last year, ten years ago, or more.\n\nThis is not a list of your ten biggest external accomplishments. It is a list of your ten best internal experiences.\n\nThe moment when you finally “got” something.\n\nThe moment when you did something you didn’t think you could do.\n\nThe moment when you felt like you were “in the zone.”\n\nThe moment when you felt proud.\n\nThe moment when you felt like this activity was yours.\n\nWrite them down.\n\nDo not worry about writing them in perfect language. Just capture them.\n\nAnd don’t be surprised if you find yourself smiling as you do this.\n\nThose smiles are deposits.\n\nIf you are like most people, you may find that your mind initially resists this exercise.\n\nYou may find that you are more practiced at remembering failures than successes.\n\nYou may find that you have trained yourself to be “realistic” by focusing on what went wrong.\n\nBut this exercise is not about being unrealistic.\n\nIt’s about being accurate.\n\nYour past is not only failures.\n\nYour past includes successes.\n\nYour past includes progress.\n\nYour past includes moments of excellence.\n\nThose are real.\n\nAnd they matter.\n\nThis exercise is the first deliberate step in building your filter.\n\nOnce you have your Top Ten, read them.\n\nThen read them again.\n\nThen ask yourself a simple question: what do these memories have in common?\n\nYou will likely find that they reveal something important about you.\n\nThey reveal that you have already done hard things.\n\nThey reveal that you have already improved.\n\nThey reveal that you are not starting from zero.\n\nThey reveal that you are a bigger fish than you may have been telling yourself.\n\nIn my work with athletes, I often hear a version of the same complaint: “Coach, I’m just not confident.” When I ask them to tell me about their best performances and best experiences, they suddenly realize they have been undermining themselves by failing to keep their own deposits.\n\nHere is an example of how this dialogue typically went:\n\nPLAYER:\nI just don’t feel confident.\n\nME:\nTell me about the best times you’ve ever had in your sport.\n\nPLAYER:\nWell, I mean, I’ve had some good days, but that’s in the past.\n\nME:\nSo you’re telling me you’ve had good days.\n\nPLAYER:\nYeah, but those don’t matter now.\n\nME:\nOf course they matter. They matter because they prove you can do it.\n\nPLAYER:\nBut all that’s in the past. I’m at a whole new level of competition now.\n\nME:\nYes. And that’s exactly why you need to remember just how big a fish you are.\n\nPLAYER:\nI figure by now I wouldn’t need to be nervous before competition.\n\nME:\nThat’s Pillar #3. You’re going to be nervous. The question is what you do with it.\n\nPLAYER:\nI never realized I was undermining myself by thinking that way!\n\nHow big a fish are you? Put together your My Top Ten list and I bet you’ll be pleasantly surprised by the answer."},{"heading":"Exercise Two: Your Daily E-S-P","content":"Now that you’ve got your bank account started, the work of deliberately building it up and protecting it from losses really begins. The confidence that you want to feel six months from now when you take the MCAT or compete in that conference tournament is either built up day by day or allowed to diminish day by day. In fact, every day is a source of deposits, and you will find them if you choose to look for them.\n\nThis is where the Daily E-S-P comes in.\n\nE-S-P stands for Effort, Success, and Progress.\n\nEvery day, you are doing things that require effort.\n\nEvery day, you are having some successes.\n\nEvery day, you are making some progress.\n\nThe problem is that most people let these deposits disappear.\n\nThey don’t acknowledge them.\n\nThey don’t record them.\n\nThey don’t let them build interest.\n\nInstead, they live as if the only things that matter are the mistakes.\n\nThe Daily E-S-P is a simple practice.\n\nAt the end of each day, or at the end of each practice session, or at the end of each workday, you identify and write down:\n\n1. One thing you did that required effort.\n2. One thing you did that was a success.\n3. One thing you did that represented progress.\n\nThese can be small.\n\nIn fact, they should often be small.\n\nBecause small deposits add up.\n\nAnd because the whole point is to train your mind to notice what you are doing right.\n\nEffort deposits matter because effort is the one thing you can always control.\n\nSuccess deposits matter because success is evidence.\n\nProgress deposits matter because progress is the story of improvement.\n\nThis exercise is not about ignoring problems.\n\nYou still fix problems.\n\nYou still learn.\n\nBut you stop letting the mind default to negativity.\n\nA lot of people ask me, “How can writing down these little things make any difference?”\n\nMy answer is simple: because of the mind-body connection and because of memory.\n\nYour nervous system is influenced by the images your mind provides.\n\nIf you provide it with images of effort, success, and progress, you are literally training yourself to repeat those things.\n\nAnd because these deposits are recorded, they begin to earn interest.\n\nYou begin to build a running total.\n\nYou begin to build evidence.\n\nYou begin to build trust.\n\nThere is also the mental management principle of “lost opportunity.” How many opportunities to win a First Victory are you missing out on by not taking advantage of your daily experience? Without meaning to, you are likely contributing to your own stagnation by letting moments of effort, success, and progress go by unacknowledged.\n\nThis exercise is a direct attack on that lost opportunity.\n\nIt forces you to notice the deposits.\n\nIt forces you to keep them.\n\nIt forces you to become your own coach.\n\nIt is simple.\n\nAnd it is powerful."},{"heading":"Exercise Three: The Immediate Progress Review, or IPR","content":"This brings us to the last and potentially most powerful method of building your bank account by filtering memories from your past. Your account will grow fastest when you make the greatest number of deposits possible and give those deposits the maximum possible time to earn interest. That being the case, you can take advantage of the opportunities to reflect and filter in constructive memories during the course of a workday, or a practice session, or a workout, not just at the end of the day.\n\nThe Immediate Progress Review, or IPR, is exactly what it sounds like.\n\nIt is a quick, deliberate review of what you just did that went well.\n\nIt can take ten seconds.\n\nIt can take thirty seconds.\n\nIt can take a minute.\n\nThe key is that it is immediate.\n\nRight after you do something well—right after you make a good decision, right after you execute a skill correctly, right after you make a small improvement—you pause and you take it in.\n\nYou let the nervous system see it.\n\nYou let the brain record it.\n\nYou let the deposit land.\n\nThis is how you accelerate learning.\n\nThis is how you build confidence quickly.\n\nBecause you are not waiting until the end of the day to notice the deposits.\n\nYou are collecting them in real time.\n\nIn high-performance environments, this is incredibly relevant.\n\nIn sports, every successful rep is a deposit.\n\nIn academics, every solved problem is a deposit.\n\nIn medicine, each contact with a patient, each consult with a team member, each case completed, and each filed surgical report can all be filtered and can all serve as sources of energy, optimism, and enthusiasm.\n\nThese three exercises, the Top Ten list, the Daily E-S-P, and the Immediate Progress Review, are how you can make the most of your memories, both those from long ago and those from what happened just moments ago. None of them require much in the way of time, and let’s face it—they’re not complicated at all. They require only your decision to look for the best in yourself day after day, and moment after moment. For all of you who grew up believing that you should remember your mistakes and imperfections as a way to achieve success, these exercises represent a big change in our thinking habits. How well are those current thinking habits working for you? Are you gaining confidence every day no matter what happens to you by thinking that way? Or to paraphrase Dr. Bob Rotella from his book Your 15th Club, “Is your present way of thinking consistent with the level of success you’d like to have? Does it help you find out how good you could be? And do you dare to change it?”\n\nLet’s take that dare! Start managing your memories and depositing as much “money” as possible into your mental bank account."}]}]},"mat-1769534725428":{"title":"HSS 1010 Health Services Foundations","author":"","sourceInfo":"Black Gold Outreach School - Black Gold Regional Schools. Resource adapted from materials and information developed by T4T – LearnAlberta.ca, youtube.com video clips, Peace River Outreach School, Frank Spragins Outreach School, and Your Body and How It Works Science Reproducible Activity Book.","chapters":[{"number":1,"title":"Introduction and Course Orientation","sections":[{"heading":"Overview","content":"Black Gold Outreach School - Black Gold Regional Schools\nHSS\n1010 HEALTH SERVICES FOUNDATIONS\n\nThis resource is an adaptation of materials and information developed by T4T – LearnAlberta.ca, youtube.com video clips, Peace River Outreach School, Frank Spragins Outreach School, and Your Body and How It Works Science Reproducible Activity Book."},{"heading":"Introduction","content":"HSS1010 is an introductory level course that allows you to explore concepts related to the determinants of health; the dimensions of wellness; basic principles of anatomy, physiology, and disease; and basic safety and reporting protocols for providing care to individuals. These concepts are directly applicable to potential post-secondary studies and future career paths in health, recreation, volunteer, and community-support settings. This course is a prerequisite for several advanced Human and Social Services courses that you may choose to enroll in during your high school studies.\n\nIn HSS1010: Health Services Foundations you will\n- evaluate the determinants of good health and how these determinants affect personal wellness\n- explain the basic structure and function of the human body using medical terminology\n- describe safety strategies to prevent infection from blood borne pathogens in health care and recreation settings, and identify basic safety and reporting protocols for these settings\n- examine the public health system, justify the importance of an active lifestyle, and identify personal opportunities to enhance wellness\n\nYou will explore the following guiding questions:\n- What does it mean to be well?\n- How does society define health?\n- What is your personal definition of health and wellness?\n- How does the human body work to achieve and maintain optimum health and wellness?\n- What is the role of the individual in creating and maintaining personal health and wellness?\n- What choices can you make to maximize your personal physical, mental, and spiritual health and wellness?\n- What are the shared roles, rights, and responsibilities of stakeholders in maintaining safe and healthy homes, schools, and communities?\n\nIn order to succeed in this course, it is important that you understand its design and structure."},{"heading":"Course Orientation","content":"This course is divided into four sections.\n\nSECTION 1 – DEFINING HEALTH AND WELLNESS\nIn this section you will explore definitions of health and wellness, and consider what it means to be healthy.\n\nSECTION 2 – INSIDE OUT: HOW THE BODY WORKS\nIn this section you will learn about the structure and function of the human body, and the basic principles of anatomy, physiology, and disease.\n\nSECTION3 – ROAD MAP TO HEALTH AND WELLNESS\nIn this section you will learn about choices you can make to ensure optimum health and wellness.\n\nSECTION 4 – PUBLIC HEALTH\nIn this section you will learn about public health systems, and the rights and responsibilities of individuals, caregivers, and other stakeholders in maintaining safe and healthy homes, schools and communities.\n\nEach section begins with an overview page that introduces the topics, outcomes, and key questions of the section. The sections include a variety of activities, information, and assessments.\n\nThis course is designed so that you can work through it independently. If you have any questions as you work through the materials, be sure to contact your teacher."}]},{"number":2,"title":"Section 1 – Defining Health and Wellness","sections":[{"heading":"Overview","content":"What does it mean to be healthy? What does wellness look or feel like? Since 1948, the World Health Organization has defined health as “a state of complete physical, mental, and social well-being” and not merely the absence of disease or infirmity. Wellness has been defined as “an active process of becoming aware of and making choices toward a more successful existence.”\n\nSection 1 addresses the following outcome:\n- evaluate the determinants of good health in Canadian society\n  - compare recognized international and national definitions of health and wellness\n  - describe the twelve key determinants of health as defined by Health Canada, providing specific examples\n  - describe how the determinants of health are used for evidence- based decision-making related to health care policies\n\nKeep these guiding questions in mind as you work through Section 1:\n- What does it mean to be well?\n- How does society define health?\n- What is your personal definition of health and wellness?"},{"heading":"Dimensions of Health and Wellness","content":"One way to describe health and wellness is to refer to the dimensions of wellness. The dimensions represent different influences on your total health and well-being, including physical, psychological, social, emotional, and spiritual aspects. The dimensions are interdependent—they are constantly interacting with each other.\n\nPHYSICAL\nPhysical wellness is the ability, motivation, and confidence to move effectively and efficiently in a variety of situations; and the healthy growth, development, and care of the body.\n\n- How much sleep do you get? Do you awake feeling refreshed?\n- How much physical activity do you get?\n- How well-balanced is your nutrition?\n- How is your general health?\n- Do you avoid or minimize dangerous or risky behaviours?\n- Do you regularly visit a doctor?\n- How well do you manage stress?\n\nINTELLECTUAL\nIntellectual wellness is the development and the critical and creative use of the mind to its fullest potential.\n\n- Are you interested in learning new things?\n- Do you enjoy creative and stimulating mental activities?\n- Are you able to think critically and solve problems effectively?\n- Do you have the skills to use technology and information sources wisely?\n\nSOCIAL\nSocial wellness is the ability to develop and maintain relationships and to interact positively with others.\n\n- Do you have supportive, healthy relationships?\n- Do you communicate effectively with others?\n- Do you feel you belong to a group or community?\n- Do you respect the diversity of others?\n\nOCCUPATIONAL\nOccupational wellness is the satisfaction and enrichment you gain from your work, school, or daily activities.\n\n- Do you feel satisfied with your work or school experience?\n- Do you feel you are using your skills and abilities?\n- Do you feel challenged and motivated?\n\nSPIRITUAL\nSpiritual wellness is an understanding of one’s own values and beliefs leading to a sense of meaning or purpose and a relationship to the global community.\n\nDo you generally feel happy and “at peace” with your life? Do you have strong beliefs and values? Do you respect the values and beliefs of others? Do you believe your life has direction and meaning? Is there a direct relationship between your values and your daily actions?\n\nEMOTIONAL\nEmotional wellness is acknowledging, understanding, and expressing thoughts and feelings in a constructive manner.\n\nDo you have people who you can ask for support when you need it? How much time do you spend in self-improvement and self-exploration? How self-aware are you? How well do you handle positive or negative emotions?\n\nWhile there are many different versions of a “Wellness Wheel”, all of them provide a visual representation of the concept that wellness demonstrates the need for “balanced” or “well-rounded” lives. To achieve and maintain harmony and balance in our lives, we must pay attention to all the dimensions of wellness."},{"heading":"What Determines Health?","content":"According to Health Canada, wellness means making positive choices that enhance your physical, mental, and spiritual health. At every stage of life, health is determined by complex interactions between social and economic factors, the physical environment, and individual behaviour. The Public Health Agency of Canada identifies twelve key determinants of health.\n\nLearn about them by viewing the YouTube video,\n\n“Determinants of Health” by SolveSocialProblems\nat   [https://goo.gl/mBx0qj\n\nThe](https://goo.gl/mBx0qj\n\nThe) determinants of health are ranked by the Public Health Agency of Canada as most influential to least influential, in the following order.\n\nKEY DETERMINANT – 1.  Income and Social Status\n\nHealth and wellness improve at each step up the income and social ladder. High income determines living conditions such as safe housing and ability to buy sufficient good food. The healthiest populations are those in societies which are prosperous and have an equitable distribution of wealth.\n\nKEY DETERMINANT – 2. Social Support Networks\n\nWhen someone has a strong support network of family, friends, and community, they will generally have better health. A social support network can enable someone to solve problems and deal with adversity more effectively. The caring and respect that occurs in social relationships, and the resulting sense of satisfaction and well-being, seem to act as a buffer against health problems.\n\nKEY DETERMINANT – 3. Education and Literacy\n\nHigher levels of education and literacy are associated with better health. Health status improves with each level of education. Education increases opportunities for job and income security, and provides people with a sense of control over their lives.\n\nKEY DETERMINANT – 4. Employment and Working Conditions\n\nUnemployment, underemployment, and stressful or unsafe work are associated with poorer health. People who have more control over their working conditions and who are supported in the workplace have better health.\n\nKEY DETERMINANT – 5. Social Environments\n\nSupportive social environments have a positive impact on health. The values and norms of society affect health and well-being. The social environment includes the ways society interacts, supports, and values individuals.\n\nKEY DETERMINANT – 6. Physical Environments\n\nThe physical environment includes safe water and air, healthy workplaces, safe houses, communities and roads. All of these factors contribute to good health. Natural and built environments can influence physical activity, exposure to hazards, and access to resources.\n\nKEY DETERMINANT – 7. Personal Health Practices and Coping Skills\n\nPersonal health practices and coping skills are related to health and wellness. They include behaviours such as diet, physical activity, and the use of alcohol, tobacco, and drugs. Coping skills also influence how people deal with stress and challenges.\n\nKEY DETERMINANT – 8. Healthy Child Development\n\nThe early years of life are important for health throughout the lifespan. Experiences and exposures during pregnancy and early childhood influence physical health, mental health, and coping skills.\n\nKEY DETERMINANT – 9. Biology and Genetic Endowment\n\nBiology and genetic endowment influence health. Some people are more at risk for certain diseases because of inherited characteristics. However, genetics interact with social and environmental factors.\n\nKEY DETERMINANT – 10. Health Services\n\nHealth services include prevention and treatment services. Access to health services can influence health outcomes, but factors outside the health care system also have a significant impact on health.\n\nKEY DETERMINANT – 11. Gender\n\nGender refers to the roles, behaviours, activities, and attributes that society considers appropriate for men and women. Gender affects health risks, access to resources, and experiences within society.\n\nKEY DETERMINANT – 12. Culture\n\nCulture refers to values, beliefs, and traditions. Culture can influence health practices and access to health services. In some cases, culture can provide protective factors; in other cases, it can contribute to health risks.\n\nTurn to your Assignment Booklet and complete questions 1 – 3 in the Section 1 Assignment.\n\nAssessment\nYour teacher will provide you with information about how your work in Section 1 will be assessed."},{"heading":"Determinants and Public Policy","content":"The Public Health Agency of Canada and the World Health Organization have concluded that there is a direct correlation between the determinants of health and the health of individuals in a population.\n\nCanada has adopted a “population health approach” to improving health care issues. A population health approach is based on the belief that factors outside the health care system significantly affect health. Canada’s public health system seeks to address these factors to improve health outcomes.\n\nThe determinants of health are used for evidence-based decision-making related to health care policies.\n\n--- CONTINUE FROM: [Chapter 3, Section 2 – Inside Out: How the Body Works] ---"}]}]}};
+      var currentReader = { matId: null, chapterIdx: 0, data: null };
+
+      function openDigitalReader(matId) {
+        var content = DIGITAL_CONTENT[matId];
+        if (!content) { console.error('No digital content for', matId); return; }
+
+        currentReader = { matId: matId, chapterIdx: 0, data: content };
+
+        document.getElementById('reader-title').innerText = (content.title || 'Digital Resource');
+
+        var tocHTML = '';
+        (content.chapters || []).forEach(function(ch, idx) {
+          tocHTML += '<button onclick="goToChapter(' + idx + ')" class="toc-item w-full text-left px-3 py-2 rounded text-xs hover:bg-slate-800 transition-colors ' + (idx === 0 ? 'bg-emerald-900/50 text-emerald-400' : 'text-slate-400') + '">' +
+            '<span class="font-bold">' + (ch.number || (idx + 1)) + '.</span> ' + ch.title +
+          '</button>';
+        });
+        document.getElementById('reader-toc-items').innerHTML = tocHTML;
+
+        renderChapter(0);
+
+        document.getElementById('digital-reader-container').classList.remove('hidden');
+        document.getElementById('materials-list').classList.add('hidden');
+        document.getElementById('pdf-viewer-container').classList.add('hidden');
+      }
+
+      function closeDigitalReader() {
+        document.getElementById('digital-reader-container').classList.add('hidden');
+        document.getElementById('materials-list').classList.remove('hidden');
+        currentReader = { matId: null, chapterIdx: 0, data: null };
+      }
+
+      function renderChapter(idx) {
+        if (!currentReader.data || !currentReader.data.chapters) return;
+        var chapters = currentReader.data.chapters;
+        if (idx < 0 || idx >= chapters.length) return;
+
+        currentReader.chapterIdx = idx;
+        var chapter = chapters[idx];
+
+        var html = '<h2 class="text-2xl font-bold text-white mb-2">' + (chapter.number || (idx + 1)) + '. ' + chapter.title + '</h2>';
+
+        (chapter.sections || []).forEach(function(sec) {
+          html += '<div class="mt-6">';
+          if (sec.heading) {
+            html += '<h3 class="text-lg font-bold text-emerald-400 mb-3">' + sec.heading + '</h3>';
+          }
+          var content = (sec.content || '').replace(/\n/g, '<br>').replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>').replace(/\*(.+?)\*/g, '<em>$1</em>').replace(/^- /gm, '- ');
+          html += '<div class="text-slate-300 leading-relaxed whitespace-pre-line">' + content + '</div>';
+          html += '</div>';
+        });
+
+        document.getElementById('reader-body').innerHTML = html;
+
+        document.querySelectorAll('.toc-item').forEach(function(btn, i) {
+          if (i === idx) {
+            btn.classList.add('bg-emerald-900/50', 'text-emerald-400');
+            btn.classList.remove('text-slate-400');
+          } else {
+            btn.classList.remove('bg-emerald-900/50', 'text-emerald-400');
+            btn.classList.add('text-slate-400');
+          }
+        });
+
+        document.getElementById('prev-btn').disabled = idx === 0;
+        document.getElementById('next-btn').disabled = idx === chapters.length - 1;
+        document.getElementById('reader-progress').textContent = 'Chapter ' + (idx + 1) + ' of ' + chapters.length;
+
+        document.getElementById('reader-content').scrollTop = 0;
+      }
+
+      function goToChapter(idx) {
+        renderChapter(idx);
+      }
+
+      function prevChapter() {
+        if (currentReader.chapterIdx > 0) {
+          renderChapter(currentReader.chapterIdx - 1);
+        }
+      }
+
+      function nextChapter() {
+        if (currentReader.data && currentReader.data.chapters && currentReader.chapterIdx < currentReader.data.chapters.length - 1) {
+          renderChapter(currentReader.chapterIdx + 1);
+        }
+      }
+
+      document.addEventListener('click', function(e) {
+        var readerBtn = e.target.closest('[data-digital-reader]');
+        if (readerBtn) {
+          e.preventDefault();
+          openDigitalReader(readerBtn.getAttribute('data-digital-reader'));
+          return;
+        }
+      });
+    
+(function() {
+  var MODULE_KEY = 'CF_Module_Course_Materials_v1';
+  var saveTimeout = null;
+  function getAllInputState() {
+    var state = {};
+    document.querySelectorAll('input, textarea, select').forEach(function(el, i) {
+      var key = el.id || el.name || ('field_' + i);
+      if (el.type === 'checkbox' || el.type === 'radio') {
+        if (el.checked) state[key] = el.type === 'radio' ? el.value : true;
+      } else {
+        if (el.value) state[key] = el.value;
+      }
+    });
+    return state;
+  }
+  function restoreInputState(state) {
+    if (!state || typeof state !== 'object') return;
+    document.querySelectorAll('input, textarea, select').forEach(function(el, i) {
+      var key = el.id || el.name || ('field_' + i);
+      var savedValue = state[key];
+      if (savedValue !== undefined) {
+        if (el.type === 'checkbox') {
+          el.checked = !!savedValue;
+        } else if (el.type === 'radio') {
+          el.checked = (el.value === savedValue);
+        } else {
+          el.value = savedValue;
+        }
+      }
+    });
+  }
+  function saveNow() {
+    try {
+      var state = getAllInputState();
+      if (Object.keys(state).length > 0) {
+        localStorage.setItem(MODULE_KEY, JSON.stringify({
+          timestamp: Date.now(),
+          state: state
+        }));
+      }
+    } catch (e) {}
+  }
+  function debouncedSave() {
+    clearTimeout(saveTimeout);
+    saveTimeout = setTimeout(saveNow, 800);
+  }
+  function loadSaved() {
+    try {
+      var raw = localStorage.getItem(MODULE_KEY);
+      if (raw) {
+        var parsed = JSON.parse(raw);
+        if (parsed && parsed.state) restoreInputState(parsed.state);
+      }
+    } catch (e) {}
+  }
+  function init() {
+    loadSaved();
+    document.addEventListener('input', debouncedSave);
+    document.addEventListener('change', debouncedSave);
+    window.addEventListener('pagehide', saveNow);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+  </script>
+</body>
+</html>

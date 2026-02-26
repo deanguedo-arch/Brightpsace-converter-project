@@ -1,0 +1,61 @@
+{
+  "courseTitle": "New Course",
+  "updatedAt": "2026-02-17T16:47:52.431Z",
+  "modules": [
+    {
+      "id": "item-1768749223001",
+      "title": "Course Materials",
+      "path": "modules/item-1768749223001.html"
+    },
+    {
+      "id": "item-assessments",
+      "title": "Assessments",
+      "path": "modules/item-assessments.html"
+    },
+    {
+      "id": "view-1",
+      "title": "HSS3020",
+      "path": "modules/view-1.html"
+    },
+    {
+      "id": "view-BASE",
+      "title": "BASE",
+      "path": "modules/view-BASE.html"
+    },
+    {
+      "id": "view-arousal",
+      "title": "AROUSAL",
+      "path": "modules/view-arousal.html"
+    },
+    {
+      "id": "view-VALUES",
+      "title": "VALUES",
+      "path": "modules/view-VALUES.html"
+    },
+    {
+      "id": "view-GOALS",
+      "title": "GOAL SETTING",
+      "path": "modules/view-GOALS.html"
+    },
+    {
+      "id": "view-FOCUS",
+      "title": "FOCUS",
+      "path": "modules/view-FOCUS.html"
+    },
+    {
+      "id": "view-CONFIDENCE",
+      "title": "CONFIDENCE",
+      "path": "modules/view-CONFIDENCE.html"
+    },
+    {
+      "id": "view-VISUAL",
+      "title": "VISUALIZATION",
+      "path": "modules/view-VISUAL.html"
+    },
+    {
+      "id": "view-FINAL",
+      "title": "MENTAL FITNESS FINAL",
+      "path": "modules/view-FINAL.html"
+    }
+  ]
+}

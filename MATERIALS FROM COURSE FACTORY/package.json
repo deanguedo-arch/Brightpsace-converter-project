@@ -1,0 +1,48 @@
+{
+  "name": "builder-tool",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "deploy": "vite build && gh-pages -d dist",
+    "exports:render": "node scripts/render_exports.mjs",
+    "exports:baseline": "node scripts/verify_exports.mjs baseline",
+    "exports:verify": "node scripts/verify_exports.mjs verify",
+    "exports:parity": "node scripts/exports_parity.mjs",
+    "exports:fixtures": "node scripts/verify_composer_fixtures.mjs",
+    "build:calm4-draft": "node scripts/build_calm_module4_draft.mjs",
+    "build:ab30-theme1-draft": "node scripts/build_ab30_theme1_draft.mjs",
+    "release:check": "node scripts/release_gate.mjs",
+    "validate": "npm run build && npm run lint && npm run release:check"
+  },
+  "dependencies": {
+    "autoprefixer": "^10.4.23",
+    "firebase": "^12.8.0",
+    "lucide-react": "^0.562.0",
+    "postcss": "^8.5.6",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "react-grid-layout": "^1.5.2",
+    "react-resizable": "^3.0.5",
+    "tailwindcss": "^4.1.18"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "@types/react": "^19.2.5",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.1.1",
+    "eslint": "^9.39.1",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-refresh": "^0.4.24",
+    "gh-pages": "^6.3.0",
+    "globals": "^16.5.0",
+    "vite": "npm:rolldown-vite@7.2.5"
+  },
+  "overrides": {
+    "vite": "npm:rolldown-vite@7.2.5"
+  }
+}

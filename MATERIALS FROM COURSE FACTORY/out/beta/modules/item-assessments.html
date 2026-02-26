@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en" style="background: #0f172a !important; background-color: #0f172a !important;">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assessments | New Course</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css?family=Inter:ital,wght@0,400;0,700;1,400;1,900&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html, body {
+      background: #0f172a !important;
+      background-color: #0f172a !important;
+      font-family: 'Inter', sans-serif;
+    }
+    body {
+      min-height: 100vh;
+    }
+    .custom-scroll::-webkit-scrollbar { width: 6px; }
+    .custom-scroll::-webkit-scrollbar-track { background: #1e293b; }
+    .custom-scroll::-webkit-scrollbar-thumb { background: #475569; border-radius: 3px; }
+    .glass { background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(10px); }
+    .material-card { transition: all 0.2s; }
+    .material-card:hover { transform: translateY(-2px); box-shadow: 0 10px 40px rgba(0,0,0,0.3); }
+    .assessment-container [class*="bg-slate-9"],
+    .assessment-container [class*="bg-slate-8"],
+    .assessment-container [class*="bg-slate-7"],
+    .assessment-container [class*="bg-slate-6"],
+    .assessment-container [class*="bg-gray-9"],
+    .assessment-container [class*="bg-gray-8"],
+    .assessment-container [class*="bg-gray-7"] {
+      background: var(--cf-container-bg) !important;
+    }
+    :root { --cf-container-bg: rgba(15, 23, 42, 0.8); }
+    
+    
+  </style>
+  <script>
+    (function() {
+      function setBackground() {
+        document.documentElement.style.backgroundColor = '#0f172a';
+        document.documentElement.style.background = '#0f172a';
+        if (document.body) {
+          document.body.style.backgroundColor = '#0f172a';
+          document.body.style.background = '#0f172a';
+        }
+      }
+      setBackground();
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', setBackground);
+      }
+      setTimeout(setBackground, 100);
+      setTimeout(setBackground, 500);
+    })();
+  </script>
+</head>
+<body class="text-white custom-scroll" style="background: #0f172a !important; background-color: #0f172a !important;">
+  <header class="sticky top-0 z-50 bg-slate-900/95 backdrop-blur border-b border-slate-700">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="../index.html" class="flex items-center gap-2 text-slate-400 hover:text-purple-400 transition-colors text-sm font-bold">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+        </svg>
+        Back to Course
+      </a>
+      <h1 class="text-sm font-bold text-white uppercase tracking-wider">Assessments</h1>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-6 py-8">
+    
+      <div class="space-y-8">
+        
+        <div class="mb-8">
+          <h2 class="text-3xl font-black text-white italic uppercase tracking-tighter">Assessment Center</h2>
+          <p class="text-xs text-slate-400 font-mono uppercase tracking-widest mt-2">Quizzes, tests, and reflection exercises.</p>
+        </div>
+        <div id="assessment-list" class="grid grid-cols-1 gap-4">
+          <div class="assessment-card p-6 bg-slate-900/80 rounded-xl border border-slate-700 hover:border-purple-500 transition-all cursor-pointer group" onclick="showAssessment(0)">
+        <div class="flex items-center justify-between">
+          <div class="flex-1">
+            <div class="flex items-center gap-3 mb-2">
+              <span class="text-[10px] font-black uppercase tracking-widest text-slate-400">MIX</span>
+              <div>
+                <h3 class="text-xl font-bold text-white group-hover:text-purple-400 transition-colors">fdsgfg</h3>
+                <p class="text-xs text-slate-400 uppercase tracking-wider">Mixed Assessment</p>
+              </div>
+            </div>
+          </div>
+          <div class="text-purple-400 group-hover:translate-x-1 transition-transform">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+        </div>
+        <div id="assessment-0" class="assessment-container hidden">
+        <button onclick="backToAssessmentList()" class="mb-6 inline-flex items-center gap-2 bg-purple-600 hover:bg-purple-500 text-slate-400 font-bold text-[10px] uppercase tracking-widest px-4 py-2 rounded-lg transition-colors">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+          </svg>
+          Back to Assessments
+        </button>
+        <div id="mixed_1769534196685" class="w-full h-full custom-scroll p-8">
+      <div class="max-w-4xl mx-auto">
+        <header class="mb-8">
+          <h1 class="text-3xl font-black text-white italic mb-2 print-title">fdsgfg</h1>
+          <p class="text-sm text-slate-400 no-print">
+            Complete all 1 questions. Your responses are auto-saved.
+          </p>
+        </header>
+        
+        
+          <!-- Student Info (only for long-answer assessments) -->
+          <div class="grid grid-cols-2 gap-4 mb-8 p-6 bg-slate-900 rounded-xl border border-slate-700 print-header no-print">
+            <div>
+              <label class="block text-xs font-bold text-slate-400 uppercase mb-2">Student Name</label>
+              <input 
+                type="text" 
+                id="mixed_1769534196685-student-name"
+                placeholder="Enter your name..."
+                class="w-full bg-slate-950 border border-slate-700 rounded p-3 text-white text-sm focus:border-purple-500 focus:outline-none"
+              />
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-400 uppercase mb-2">Date</label>
+              <input 
+                type="date" 
+                id="mixed_1769534196685-student-date"
+                class="w-full bg-slate-950 border border-slate-700 rounded p-3 text-white text-sm focus:border-purple-500 focus:outline-none"
+              />
+            </div>
+          </div>
+        
+
+        <!-- Questions -->
+        <form id="mixed_1769534196685-form" class="space-y-6">
+          
+          <div class="mb-8 p-6 bg-slate-900 rounded-xl border border-slate-700 print-section">
+            <h3 class="text-lg font-bold text-white mb-4 print-question">1. fdsgfsgf</h3>
+            <textarea 
+              id="mixed_1769534196685-answer-0" 
+              placeholder="Type your answer here..."
+              class="w-full h-48 bg-slate-950 border border-slate-700 rounded-lg p-4 text-white resize-none focus:border-purple-500 focus:outline-none print-response"
+            ></textarea>
+            <p class="text-xs text-slate-500 italic mt-2 no-print">Auto-saved to browser ✓</p>
+          </div>
+        
+        </form>
+
+        <!-- Action Buttons -->
+        <div class="flex flex-wrap gap-3 mt-8 no-print">
+          <button type="button" onclick="mixed_1769534196685_reset()" class="bg-slate-700 hover:bg-slate-600 text-white font-bold py-3 px-6 rounded-lg flex items-center gap-2">
+            🔄 Reset
+          </button>
+          
+          <button type="button" onclick="mixed_1769534196685_download()" class="bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 px-6 rounded-lg flex items-center gap-2">
+            📥 Download Backup
+          </button>
+          <button type="button" onclick="document.getElementById('mixed_1769534196685-upload').click()" class="bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-3 px-6 rounded-lg flex items-center gap-2">
+            📤 Upload Backup
+          </button>
+          
+          <button type="button" onclick="mixed_1769534196685_generateReport()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 px-6 rounded-lg flex items-center gap-2">
+            🖨️ Print & Submit
+          </button>
+        </div>
+        
+        
+        <input type="file" id="mixed_1769534196685-upload" accept=".json" style="display: none;" onchange="mixed_1769534196685_loadBackup(this)" />
+        <div id="mixed_1769534196685-loaded" class="hidden mt-6 p-4 rounded-xl bg-blue-900/20 border border-blue-500">
+          <p class="text-blue-400 font-bold">✅ Backup loaded successfully!</p>
+        </div>
+        
+
+        <!-- Reset Confirmation Modal -->
+        <div id="mixed_1769534196685-reset-modal" class="fixed inset-0 bg-black/80 z-50 flex items-center justify-center hidden">
+          <div class="bg-slate-900 border border-slate-700 rounded-xl p-6 max-w-md mx-4">
+            <h3 class="text-lg font-bold text-white mb-4">Reset Assessment?</h3>
+            <p class="text-slate-300 mb-6">Are you sure you want to reset all your answers? This cannot be undone.</p>
+            <div class="flex gap-3">
+              <button onclick="document.getElementById('mixed_1769534196685-reset-modal').classList.add('hidden')" class="flex-1 bg-slate-700 hover:bg-slate-600 text-white font-bold py-2 rounded">Cancel</button>
+              <button onclick="mixed_1769534196685_confirmReset()" class="flex-1 bg-rose-600 hover:bg-rose-500 text-white font-bold py-2 rounded">Reset</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Print Instructions -->
+        <div class="mt-8 p-4 bg-amber-900/20 border border-amber-500/30 rounded-lg no-print">
+          <p class="text-amber-300 text-sm">
+            📋 <strong>Instructions:</strong> Complete all questions, then click "Print & Submit" to generate a clean printable report.
+          </p>
+        </div>
+
+        <!-- Print Styles -->
+        <style>
+          @media print {
+            body { background: white !important; }
+            .no-print { display: none !important; }
+            .print-title { color: black !important; font-size: 24pt; text-align: center; border-bottom: 3px solid black; padding-bottom: 10px; margin-bottom: 20px; }
+            .print-header { background: white !important; border: 2px solid black !important; margin-bottom: 20px; }
+            .print-header label { color: black !important; }
+            .print-header input { border: none !important; border-bottom: 1px solid black !important; background: white !important; color: black !important; }
+            .print-section { page-break-inside: avoid; background: white !important; border: 1px solid #ccc !important; margin-bottom: 20px; }
+            .print-question { color: black !important; border-bottom: 2px solid #666; padding-bottom: 5px; }
+            .print-response { background: white !important; color: black !important; border: 1px solid #999 !important; min-height: 200px; font-family: Arial, sans-serif; }
+          }
+        </style>
+      </div>
+    </div>
+      </div>
+      </div>
+  </main>
+
+  
+
+  <script>
+    window.CF_ASSET_BASE_URL = "";
+    
+    
+      function showAssessment(index) {
+        document.getElementById('assessment-list').classList.add('hidden');
+        document.querySelectorAll('.assessment-container').forEach(function(c) { c.classList.add('hidden'); });
+        var target = document.getElementById('assessment-' + index);
+        if (target) target.classList.remove('hidden');
+        window.scrollTo(0, 0);
+      }
+      function backToAssessmentList() {
+        document.querySelectorAll('.assessment-container').forEach(function(c) { c.classList.add('hidden'); });
+        document.getElementById('assessment-list').classList.remove('hidden');
+        window.scrollTo(0, 0);
+      }
+      
+      // Reset function - shows confirmation modal
+      function mixed_1769534196685_reset() {
+        var modal = document.getElementById('mixed_1769534196685-reset-modal');
+        if (modal) modal.classList.remove('hidden');
+      }
+      
+      // Confirm Reset - actually performs the reset
+      function mixed_1769534196685_confirmReset() {
+        document.getElementById('mixed_1769534196685-reset-modal').classList.add('hidden');
+        var form = document.getElementById('mixed_1769534196685-form');
+        if (form) form.reset();
+        
+        // Clear localStorage for this assessment
+        try {
+          localStorage.removeItem('mixed_1769534196685-student-name');
+          localStorage.removeItem('mixed_1769534196685-student-date');
+          var container = document.getElementById('mixed_1769534196685');
+          if (container) {
+            container.querySelectorAll('textarea, input').forEach(function(el) {
+              if (el.id) localStorage.removeItem(el.id);
+            });
+          }
+        } catch(e) {}
+      }
+      
+      // Generate Report - creates a clean printable page in new window
+      function mixed_1769534196685_generateReport() {
+        var container = document.getElementById('mixed_1769534196685');
+        if (!container) { alert('Assessment not found'); return; }
+        
+        // Gather all data
+        var studentName = document.getElementById('mixed_1769534196685-student-name')?.value || 'Not Provided';
+        var studentDate = document.getElementById('mixed_1769534196685-student-date')?.value || new Date().toLocaleDateString();
+        
+        // Build questions HTML
+        var questionsHTML = '';
+        var questions = container.querySelectorAll('[class*="print-section"], [class*="mb-8 p-6"]');
+        var qNum = 1;
+        
+        questions.forEach(function(q) {
+          var questionText = q.querySelector('h3')?.textContent || 'Question ' + qNum;
+          var textarea = q.querySelector('textarea');
+          var answer = textarea ? textarea.value : '';
+          
+          // Check for radio buttons (MC questions)
+          var selectedRadio = q.querySelector('input[type="radio"]:checked');
+          if (selectedRadio) {
+            var label = selectedRadio.closest('label');
+            answer = label ? label.textContent.trim() : 'Selected: Option ' + (parseInt(selectedRadio.value) + 1);
+          }
+          
+          if (questionText.trim()) {
+            questionsHTML += '<div style="margin-bottom:25px; border-left:4px solid #333; padding-left:15px;">' +
+              '<h3 style="font-size:14px; font-weight:bold; margin-bottom:10px; color:#333;">' + questionText + '</h3>' +
+              '<div style="background:#f9f9f9; padding:15px; border-radius:8px; border:1px solid #ddd; min-height:60px; white-space:pre-wrap; font-size:13px;">' + 
+              (answer || '<em style="color:#999;">No answer provided</em>') + 
+              '</div></div>';
+            qNum++;
+          }
+        });
+        
+        // Build the print HTML
+        var printHTML = '<!DOCTYPE html><html><head><title>fdsgfg - Submission</title>' +
+          '<style>' +
+          'body { font-family: Arial, sans-serif; padding: 40px; color: #333; background: white; line-height: 1.5; max-width: 800px; margin: 0 auto; }' +
+          '.header { border-bottom: 4px solid #333; padding-bottom: 15px; margin-bottom: 25px; display: flex; justify-content: space-between; align-items: flex-end; }' +
+          '.header h1 { font-size: 24px; font-weight: 900; text-transform: uppercase; font-style: italic; margin: 0; }' +
+          '.student-info { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 30px; padding: 20px; background: #f5f5f5; border-radius: 8px; }' +
+          '.student-info div { font-size: 14px; }' +
+          '.student-info strong { display: block; font-size: 11px; text-transform: uppercase; color: #666; margin-bottom: 4px; }' +
+          '</style></head><body>' +
+          '<div class="header">' +
+          '<div><h1>fdsgfg</h1><p style="font-size:11px; text-transform:uppercase; letter-spacing:2px; color:#666; margin-top:5px;">Assessment Submission</p></div>' +
+          '</div>' +
+          '<div class="student-info">' +
+          '<div><strong>Student Name</strong>' + studentName + '</div>' +
+          '<div><strong>Date</strong>' + studentDate + '</div>' +
+          '</div>' +
+          '<div class="questions">' + questionsHTML + '</div>' +
+          '<div style="margin-top:40px; border-top:2px solid #333; padding-top:20px; text-align:center;">' +
+          '<p style="font-size:10px; text-transform:uppercase; letter-spacing:2px; color:#999;">End of Submission</p>' +
+          '</div>' +
+          '<script>window.onload = function() { setTimeout(function() { window.print(); }, 500); }<\/script>' +
+          '</body></html>';
+        
+        var pw = window.open('', '_blank');
+        if (pw) {
+          pw.document.open();
+          pw.document.write(printHTML);
+          pw.document.close();
+        } else {
+          alert('Please allow popups to print.');
+        }
+      }
+    
+      var mixed_1769534196685_laCount = 1;
+      
+      // Initialize: Load saved data on page load
+      window.addEventListener('load', function() {
+        mixed_1769534196685_loadFromLocalStorage();
+      });
+      
+      // Auto-save on input for all fields
+      function mixed_1769534196685_setupAutoSave() {
+        var nameField = document.getElementById('mixed_1769534196685-student-name');
+        var dateField = document.getElementById('mixed_1769534196685-student-date');
+        if (nameField) {
+          nameField.addEventListener('input', function() {
+            localStorage.setItem('mixed_1769534196685-student-name', this.value);
+          });
+        }
+        if (dateField) {
+          dateField.addEventListener('input', function() {
+            localStorage.setItem('mixed_1769534196685-student-date', this.value);
+          });
+        }
+        
+        for (var i = 0; i < mixed_1769534196685_laCount; i++) {
+          var textarea = document.getElementById('mixed_1769534196685-answer-' + i);
+          if (textarea) {
+            (function(idx) {
+              textarea.addEventListener('input', function() {
+                localStorage.setItem('mixed_1769534196685-answer-' + idx, this.value);
+              });
+            })(i);
+          }
+        }
+      }
+      
+      // Load from localStorage
+      function mixed_1769534196685_loadFromLocalStorage() {
+        var nameField = document.getElementById('mixed_1769534196685-student-name');
+        var dateField = document.getElementById('mixed_1769534196685-student-date');
+        
+        if (nameField) {
+          var savedName = localStorage.getItem('mixed_1769534196685-student-name');
+          if (savedName) nameField.value = savedName;
+        }
+        if (dateField) {
+          var savedDate = localStorage.getItem('mixed_1769534196685-student-date');
+          if (savedDate) dateField.value = savedDate;
+        }
+        
+        for (var i = 0; i < mixed_1769534196685_laCount; i++) {
+          var textarea = document.getElementById('mixed_1769534196685-answer-' + i);
+          if (textarea) {
+            var saved = localStorage.getItem('mixed_1769534196685-answer-' + i);
+            if (saved) textarea.value = saved;
+          }
+        }
+        
+        mixed_1769534196685_setupAutoSave();
+      }
+      
+      // Download Backup
+      function mixed_1769534196685_download() {
+        var data = {
+          studentName: document.getElementById('mixed_1769534196685-student-name')?.value || '',
+          studentDate: document.getElementById('mixed_1769534196685-student-date')?.value || '',
+          answers: []
+        };
+        
+        for (var i = 0; i < mixed_1769534196685_laCount; i++) {
+          var textarea = document.getElementById('mixed_1769534196685-answer-' + i);
+          data.answers.push(textarea ? textarea.value : '');
+        }
+        
+        var blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = 'fdsgfg_backup.json';
+        a.click();
+        URL.revokeObjectURL(url);
+      }
+      
+      // Load Backup
+      function mixed_1769534196685_loadBackup(input) {
+        var file = input.files[0];
+        if (!file) return;
+        
+        var reader = new FileReader();
+        reader.onload = function(e) {
+          try {
+            var data = JSON.parse(e.target.result);
+            
+            var nameField = document.getElementById('mixed_1769534196685-student-name');
+            var dateField = document.getElementById('mixed_1769534196685-student-date');
+            
+            if (nameField && data.studentName) {
+              nameField.value = data.studentName;
+              localStorage.setItem('mixed_1769534196685-student-name', data.studentName);
+            }
+            if (dateField && data.studentDate) {
+              dateField.value = data.studentDate;
+              localStorage.setItem('mixed_1769534196685-student-date', data.studentDate);
+            }
+            
+            data.answers.forEach(function(answer, i) {
+              var textarea = document.getElementById('mixed_1769534196685-answer-' + i);
+              if (textarea) {
+                textarea.value = answer;
+                localStorage.setItem('mixed_1769534196685-answer-' + i, answer);
+              }
+            });
+            
+            var loadedDiv = document.getElementById('mixed_1769534196685-loaded');
+            if (loadedDiv) {
+              loadedDiv.classList.remove('hidden');
+              setTimeout(function() { loadedDiv.classList.add('hidden'); }, 3000);
+            }
+          } catch(err) {
+            alert('Error loading backup file.');
+          }
+        };
+        reader.readAsText(file);
+      }
+      
+    
+(function() {
+  var MODULE_KEY = 'CF_Module_Assessments_v1';
+  var saveTimeout = null;
+  function getAllInputState() {
+    var state = {};
+    document.querySelectorAll('input, textarea, select').forEach(function(el, i) {
+      var key = el.id || el.name || ('field_' + i);
+      if (el.type === 'checkbox' || el.type === 'radio') {
+        if (el.checked) state[key] = el.type === 'radio' ? el.value : true;
+      } else {
+        if (el.value) state[key] = el.value;
+      }
+    });
+    return state;
+  }
+  function restoreInputState(state) {
+    if (!state || typeof state !== 'object') return;
+    document.querySelectorAll('input, textarea, select').forEach(function(el, i) {
+      var key = el.id || el.name || ('field_' + i);
+      var savedValue = state[key];
+      if (savedValue !== undefined) {
+        if (el.type === 'checkbox') {
+          el.checked = !!savedValue;
+        } else if (el.type === 'radio') {
+          el.checked = (el.value === savedValue);
+        } else {
+          el.value = savedValue;
+        }
+      }
+    });
+  }
+  function saveNow() {
+    try {
+      var state = getAllInputState();
+      if (Object.keys(state).length > 0) {
+        localStorage.setItem(MODULE_KEY, JSON.stringify({
+          timestamp: Date.now(),
+          state: state
+        }));
+      }
+    } catch (e) {}
+  }
+  function debouncedSave() {
+    clearTimeout(saveTimeout);
+    saveTimeout = setTimeout(saveNow, 800);
+  }
+  function loadSaved() {
+    try {
+      var raw = localStorage.getItem(MODULE_KEY);
+      if (raw) {
+        var parsed = JSON.parse(raw);
+        if (parsed && parsed.state) restoreInputState(parsed.state);
+      }
+    } catch (e) {}
+  }
+  function init() {
+    loadSaved();
+    document.addEventListener('input', debouncedSave);
+    document.addEventListener('change', debouncedSave);
+    window.addEventListener('pagehide', saveNow);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+  </script>
+</body>
+</html>

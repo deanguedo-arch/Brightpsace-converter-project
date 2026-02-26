@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en" style="background: #0f172a !important; background-color: #0f172a !important;">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>New Course</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css?family=Inter:ital,wght@0,400;0,700;1,400;1,900&display=swap" rel="stylesheet">
+<style>
+  * { 
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  html, body { 
+    background: #0f172a !important;
+    background-color: #0f172a !important;
+    font-family: 'Inter', sans-serif;
+  }
+  body { 
+    min-height: 100vh;
+  }
+  :root { --cf-container-bg: rgba(15, 23, 42, 0.8); }
+  .custom-scroll::-webkit-scrollbar { width: 6px; }
+  .custom-scroll::-webkit-scrollbar-track { background: #1e293b; }
+  .custom-scroll::-webkit-scrollbar-thumb { background: #475569; border-radius: 3px; }
+  
+</style>
+<script>
+  // Force background color after Tailwind loads
+  (function() {
+    function setBackground() {
+      document.documentElement.style.backgroundColor = '#0f172a';
+      document.documentElement.style.background = '#0f172a';
+      if (document.body) {
+        document.body.style.backgroundColor = '#0f172a';
+        document.body.style.background = '#0f172a';
+      }
+    }
+    setBackground();
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', setBackground);
+    }
+    setTimeout(setBackground, 100);
+    setTimeout(setBackground, 500);
+  })();
+</script>
+</head>
+<body class="text-slate-400 custom-scroll" style="background: #0f172a !important; background-color: #0f172a !important;">
+<div class="max-w-4xl mx-auto px-6 py-12">
+  <header class="mb-12 text-center">
+    <h1 class="text-4xl font-black text-white uppercase tracking-tight mb-2">New Course</h1>
+    <p class="text-sm text-slate-400">Select a module to begin</p>
+    <p class="text-xs text-slate-500 mt-2 font-mono">Last updated: 2/17/2026</p>
+  </header>
+  
+  <nav class="space-y-4">
+    
+    <a href="./modules/item-1768749223001.html" class="block p-6 bg-slate-900/80 rounded-xl border border-slate-700 hover:border-purple-500 hover:bg-slate-900 transition-all group">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-4">
+          <div class="w-10 h-10 rounded-lg bg-purple-500/20 flex items-center justify-center text-purple-400 font-bold">
+            01
+          </div>
+          <div>
+            <h3 class="text-lg font-bold text-white group-hover:text-purple-400 transition-colors">Course Materials</h3>
+            <p class="text-xs text-slate-500 font-mono">item-1768749223001</p>
+          </div>
+        </div>
+        <svg class="w-5 h-5 text-slate-400 group-hover:text-purple-400 group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+      </div>
+    </a>
+  
+
+    <a href="./modules/item-assessments.html" class="block p-6 bg-slate-900/80 rounded-xl border border-slate-700 hover:border-purple-500 hover:bg-slate-900 transition-all group">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-4">
+          <div class="w-10 h-10 rounded-lg bg-purple-500/20 flex items-center justify-center text-purple-400 font-bold">
+            02
+          </div>
+          <div>
+            <h3 class="text-lg font-bold text-white group-hover:text-purple-400 transition-colors">Assessments</h3>
+            <p class="text-xs text-slate-500 font-mono">item-assessments</p>
+          </div>
+        </div>
+        <svg class="w-5 h-5 text-slate-400 group-hover:text-purple-400 group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+      </div>
+    </a>
+  
+
+    <a href="./modules/view-1.html" class="block p-6 bg-slate-900/80 rounded-xl border border-slate-700 hover:border-purple-500 hover:bg-slate-900 transition-all group">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-4">
+          <div class="w-10 h-10 rounded-lg bg-purple-500/20 flex items-center justify-center text-purple-400 font-bold">
+            03
+          </div>
+          <div>
+            <h3 class="text-lg font-bold text-white group-hover:text-purple-400 transition-colors">HSS3020</h3>
+            <p class="text-xs text-slate-500 font-mono">view-1</p>
+          </div>
+        </div>
+        <svg class="w-5 h-5 text-slate-400 group-hover:text-purple-400 group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+      </div>
+    </a>
+  
+
+    <a href="./modules/view-BASE.html" class="block p-6 bg-slate-900/80 rounded-xl border border-slate-700 hover:border-purple-500 hover:bg-slate-900 transition-all group">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-4">
+          <div class="w-10 h-10 rounded-lg bg-purple-500/20 flex items-center justify-center text-purple-400 font-bold">
+            04
+          </div>
+          <div>
+            <h3 class="text-lg font-bold text-white group-hover:text-purple-400 transition-colors">BASE</h3>
+            <p class="text-xs text-slate-500 font-mono">view-BASE</p>
+          </div>
+        </div>
+        <svg class="w-5 h-5 text-slate-400 group-hover:text-purple-400 group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+      </div>
+    </a>
+  
+
+    <a href="./modules/view-arousal.html" class="block p-6 bg-slate-900/80 rounded-xl border border-slate-700 hover:border-purple-500 hover:bg-slate-900 transition-all group">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-4">
+          <div class="w-10 h-10 rounded-lg bg-purple-500/20 flex items-center justify-center text-purple-400 font-bold">
+            05
+          </div>
+          <div>
+            <h3 class="text-lg font-bold text-white group-hover:text-purple-400 transition-colors">AROUSAL</h3>
+            <p class="text-xs text-slate-500 font-mono">view-arousal</p>
+          </div>
+        </div>
+        <svg class="w-5 h-5 text-slate-400 group-hover:text-purple-400 group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+      </div>
+    </a>
+  
+
+    <a href="./modules/view-VALUES.html" class="block p-6 bg-slate-900/80 rounded-xl border border-slate-700 hover:border-purple-500 hover:bg-slate-900 transition-all group">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-4">
+          <div class="w-10 h-10 rounded-lg bg-purple-500/20 flex items-center justify-center text-purple-400 font-bold">
+            06
+          </div>
+          <div>
+            <h3 class="text-lg font-bold text-white group-hover:text-purple-400 transition-colors">VALUES</h3>
+            <p class="text-xs text-slate-500 font-mono">view-VALUES</p>
+          </div>
+        </div>
+        <svg class="w-5 h-5 text-slate-400 group-hover:text-purple-400 group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+      </div>
+    </a>
+  
+
+    <a href="./modules/view-GOALS.html" class="block p-6 bg-slate-900/80 rounded-xl border border-slate-700 hover:border-purple-500 hover:bg-slate-900 transition-all group">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-4">
+          <div class="w-10 h-10 rounded-lg bg-purple-500/20 flex items-center justify-center text-purple-400 font-bold">
+            07
+          </div>
+          <div>
+            <h3 class="text-lg font-bold text-white group-hover:text-purple-400 transition-colors">GOAL SETTING</h3>
+            <p class="text-xs text-slate-500 font-mono">view-GOALS</p>
+          </div>
+        </div>
+        <svg class="w-5 h-5 text-slate-400 group-hover:text-purple-400 group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+      </div>
+    </a>
+  
+
+    <a href="./modules/view-FOCUS.html" class="block p-6 bg-slate-900/80 rounded-xl border border-slate-700 hover:border-purple-500 hover:bg-slate-900 transition-all group">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-4">
+          <div class="w-10 h-10 rounded-lg bg-purple-500/20 flex items-center justify-center text-purple-400 font-bold">
+            08
+          </div>
+          <div>
+            <h3 class="text-lg font-bold text-white group-hover:text-purple-400 transition-colors">FOCUS</h3>
+            <p class="text-xs text-slate-500 font-mono">view-FOCUS</p>
+          </div>
+        </div>
+        <svg class="w-5 h-5 text-slate-400 group-hover:text-purple-400 group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+      </div>
+    </a>
+  
+
+    <a href="./modules/view-CONFIDENCE.html" class="block p-6 bg-slate-900/80 rounded-xl border border-slate-700 hover:border-purple-500 hover:bg-slate-900 transition-all group">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-4">
+          <div class="w-10 h-10 rounded-lg bg-purple-500/20 flex items-center justify-center text-purple-400 font-bold">
+            09
+          </div>
+          <div>
+            <h3 class="text-lg font-bold text-white group-hover:text-purple-400 transition-colors">CONFIDENCE</h3>
+            <p class="text-xs text-slate-500 font-mono">view-CONFIDENCE</p>
+          </div>
+        </div>
+        <svg class="w-5 h-5 text-slate-400 group-hover:text-purple-400 group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+      </div>
+    </a>
+  
+
+    <a href="./modules/view-VISUAL.html" class="block p-6 bg-slate-900/80 rounded-xl border border-slate-700 hover:border-purple-500 hover:bg-slate-900 transition-all group">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-4">
+          <div class="w-10 h-10 rounded-lg bg-purple-500/20 flex items-center justify-center text-purple-400 font-bold">
+            10
+          </div>
+          <div>
+            <h3 class="text-lg font-bold text-white group-hover:text-purple-400 transition-colors">VISUALIZATION</h3>
+            <p class="text-xs text-slate-500 font-mono">view-VISUAL</p>
+          </div>
+        </div>
+        <svg class="w-5 h-5 text-slate-400 group-hover:text-purple-400 group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+      </div>
+    </a>
+  
+
+    <a href="./modules/view-FINAL.html" class="block p-6 bg-slate-900/80 rounded-xl border border-slate-700 hover:border-purple-500 hover:bg-slate-900 transition-all group">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-4">
+          <div class="w-10 h-10 rounded-lg bg-purple-500/20 flex items-center justify-center text-purple-400 font-bold">
+            11
+          </div>
+          <div>
+            <h3 class="text-lg font-bold text-white group-hover:text-purple-400 transition-colors">MENTAL FITNESS FINAL</h3>
+            <p class="text-xs text-slate-500 font-mono">view-FINAL</p>
+          </div>
+        </div>
+        <svg class="w-5 h-5 text-slate-400 group-hover:text-purple-400 group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+      </div>
+    </a>
+  
+  </nav>
+  
+  <footer class="mt-16 pt-8 border-t border-slate-700 text-center">
+    <p class="text-xs text-slate-500">Built with Course Factory</p>
+  </footer>
+</div>
+</body>
+</html>

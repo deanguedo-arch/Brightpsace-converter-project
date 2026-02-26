@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en" style="background: #0f172a !important; background-color: #0f172a !important;">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BASE | New Course</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css?family=Inter:ital,wght@0,400;0,700;1,400;1,900&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html, body {
+      background: #0f172a !important;
+      background-color: #0f172a !important;
+      font-family: 'Inter', sans-serif;
+    }
+    body {
+      min-height: 100vh;
+    }
+    .custom-scroll::-webkit-scrollbar { width: 6px; }
+    .custom-scroll::-webkit-scrollbar-track { background: #1e293b; }
+    .custom-scroll::-webkit-scrollbar-thumb { background: #475569; border-radius: 3px; }
+    .glass { background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(10px); }
+    .material-card { transition: all 0.2s; }
+    .material-card:hover { transform: translateY(-2px); box-shadow: 0 10px 40px rgba(0,0,0,0.3); }
+    .assessment-container [class*="bg-slate-9"],
+    .assessment-container [class*="bg-slate-8"],
+    .assessment-container [class*="bg-slate-7"],
+    .assessment-container [class*="bg-slate-6"],
+    .assessment-container [class*="bg-gray-9"],
+    .assessment-container [class*="bg-gray-8"],
+    .assessment-container [class*="bg-gray-7"] {
+      background: var(--cf-container-bg) !important;
+    }
+    :root { --cf-container-bg: rgba(15, 23, 42, 0.8); }
+    
+    
+  </style>
+  <script>
+    (function() {
+      function setBackground() {
+        document.documentElement.style.backgroundColor = '#0f172a';
+        document.documentElement.style.background = '#0f172a';
+        if (document.body) {
+          document.body.style.backgroundColor = '#0f172a';
+          document.body.style.background = '#0f172a';
+        }
+      }
+      setBackground();
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', setBackground);
+      }
+      setTimeout(setBackground, 100);
+      setTimeout(setBackground, 500);
+    })();
+  </script>
+</head>
+<body class="text-white custom-scroll" style="background: #0f172a !important; background-color: #0f172a !important;">
+  <header class="sticky top-0 z-50 bg-slate-900/95 backdrop-blur border-b border-slate-700">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="../index.html" class="flex items-center gap-2 text-slate-400 hover:text-purple-400 transition-colors text-sm font-bold">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+        </svg>
+        Back to Course
+      </a>
+      <h1 class="text-sm font-bold text-white uppercase tracking-wider">BASE</h1>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-6 py-8">
+    <div class="w-full rounded-xl overflow-hidden border border-slate-700 shadow-2xl">
+      <iframe srcdoc="<!DOCTYPE html>
+<html lang=&quot;en&quot;>
+<head>
+    <meta charset=&quot;UTF-8&quot;>
+    <meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;>
+    <title>Protocol 001: Baseline Diagnostic</title>
+    <script src=&quot;https://cdn.tailwindcss.com&quot;></script>
+    <link href=&quot;https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,700;1,400;1,900&family=JetBrains+Mono:wght@700&display=swap&quot; rel=&quot;stylesheet&quot;>
+    <style>
+        body { font-family: &#39;Inter&#39;, sans-serif; background-color: #020617; color: #e2e8f0; margin: 0; min-height: 100vh; overflow-x: hidden; }
+        .mono { font-family: &#39;JetBrains Mono&#39;, monospace; }
+        .glass { background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(10px); border: 1px solid rgba(51, 65, 85, 0.5); }
+        
+        /* Boot Sequence Animation */
+        #boot-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 50; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 0.5s ease-out; }
+        .typing { overflow: hidden; white-space: nowrap; border-right: 2px solid #00ff41; animation: typing 2s steps(40, end), blink-caret .75s step-end infinite; color: #00ff41; font-family: &#39;JetBrains Mono&#39;, monospace; font-size: 1.5rem; }
+        @keyframes typing { from { width: 0 } to { width: 100% } }
+        @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: #00ff41; } }
+        
+        /* Tactical Elements */
+        .scan-line { height: 2px; width: 100%; background: rgba(0, 255, 65, 0.2); position: absolute; animation: scan 3s linear infinite; pointer-events: none; }
+        @keyframes scan { 0% { top: 0%; } 100% { top: 100%; } }
+        
+        .score-btn { background: #0f172a; border: 1px solid #1e293b; color: #64748b; width: 100%; padding: 10px; transition: all 0.2s; font-family: &#39;JetBrains Mono&#39;; font-size: 0.8rem; }
+        .score-btn:hover { border-color: #0ea5e9; color: white; }
+        .score-btn.active { background: #0ea5e9; color: #000; font-weight: 900; border-color: #0ea5e9; box-shadow: 0 0 10px rgba(14, 165, 233, 0.5); }
+
+        .phase-header { border-left: 4px solid #334155; padding-left: 1rem; margin-bottom: 1rem; }
+        .phase-header.active { border-color: #0ea5e9; }
+    </style>
+</head>
+<body class=&quot;p-4 md:p-8&quot;>
+
+    <div id=&quot;boot-screen&quot;>
+        <div class=&quot;text-left space-y-2&quot;>
+            <p class=&quot;text-xs text-slate-500 mono&quot;>BIOS CHECK... OK</p>
+            <p class=&quot;text-xs text-slate-500 mono&quot;>LOADING MODULES... OK</p>
+            <div class=&quot;typing&quot;>INITIALIZING PROTOCOL 001...</div>
+        </div>
+    </div>
+
+    <div class=&quot;max-w-4xl mx-auto relative&quot;>
+        <div class=&quot;scan-line&quot;></div>
+        
+        <header class=&quot;mb-6 flex flex-col md:flex-row justify-between items-end border-b border-slate-800 pb-6&quot;>
+            <div>
+                <h1 class=&quot;text-4xl font-black italic tracking-tighter text-white uppercase mb-1&quot;>BASELINE DIAGNOSTIC</h1>
+                <p class=&quot;text-[10px] font-mono uppercase tracking-[0.3em] text-slate-500&quot;>System Initialization // Day 01</p>
+            </div>
+            <div class=&quot;text-right mt-4 md:mt-0&quot;>
+                <p class=&quot;text-[10px] font-bold uppercase text-slate-600 tracking-widest&quot;>Current System Status</p>
+                <div id=&quot;system-status&quot; class=&quot;text-2xl font-black mono text-rose-500 animate-pulse&quot;>UNKNOWN</div>
+            </div>
+        </header>
+
+        <div class=&quot;flex flex-wrap justify-center md:justify-end gap-3 mb-8 bg-slate-900/50 p-3 rounded-xl border border-slate-800&quot;>
+            <div class=&quot;flex items-center gap-2 px-3&quot;>
+                <div id=&quot;save-indicator&quot; class=&quot;w-2 h-2 rounded-full bg-slate-600 transition-all&quot;></div>
+                <span id=&quot;save-text&quot; class=&quot;text-[9px] uppercase font-bold text-slate-500 tracking-widest&quot;>System Ready</span>
+            </div>
+            <div class=&quot;w-px h-6 bg-slate-800 mx-2 hidden sm:block&quot;></div>
+            
+            <button onclick=&quot;downloadBackup()&quot; class=&quot;flex items-center gap-2 bg-emerald-700 hover:bg-emerald-600 text-white px-3 py-1.5 rounded-lg text-[10px] uppercase font-bold tracking-wider border border-emerald-600 transition-colors shadow-lg&quot;>
+                Save Data File
+            </button>
+            <button onclick=&quot;document.getElementById(&#39;file-upload&#39;).click()&quot; class=&quot;flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-sky-400 px-3 py-1.5 rounded-lg text-[10px] uppercase font-bold tracking-wider border border-slate-700 transition-colors&quot;>
+                Load Data File
+            </button>
+            <input type=&quot;file&quot; id=&quot;file-upload&quot; accept=&quot;.json&quot; style=&quot;display: none;&quot; onchange=&quot;loadBackup(this)&quot;>
+        </div>
+
+        <div class=&quot;space-y-12 mb-12&quot;>
+            
+            <div class=&quot;glass p-8 rounded-2xl&quot;>
+                <div class=&quot;phase-header active&quot;>
+                    <h2 class=&quot;text-xl font-bold text-white uppercase italic&quot;>Phase 1: The Engine (Arousal)</h2>
+                    <p class=&quot;text-xs text-slate-400&quot;>Diagnostic: How does your hardware handle pressure?</p>
+                </div>
+                <div class=&quot;grid gap-8&quot;>
+                    <div>
+                        <label class=&quot;block text-sm font-bold text-slate-300 mb-4&quot;>When the pressure spikes (big game/test), my physical reaction is...</label>
+                        <div class=&quot;grid grid-cols-5 gap-2&quot; id=&quot;q1&quot;>
+                            <button onclick=&quot;setScore(&#39;q1&#39;, 1)&quot; class=&quot;score-btn rounded-l-lg&quot;>1. Panic / Freeze</button>
+                            <button onclick=&quot;setScore(&#39;q1&#39;, 2)&quot; class=&quot;score-btn&quot;>2. Jitters</button>
+                            <button onclick=&quot;setScore(&#39;q1&#39;, 3)&quot; class=&quot;score-btn&quot;>3. Manageable</button>
+                            <button onclick=&quot;setScore(&#39;q1&#39;, 4)&quot; class=&quot;score-btn&quot;>4. Focused</button>
+                            <button onclick=&quot;setScore(&#39;q1&#39;, 5)&quot; class=&quot;score-btn rounded-r-lg&quot;>5. Ice Cold</button>
+                        </div>
+                    </div>
+                    <div>
+                        <label class=&quot;block text-sm font-bold text-slate-300 mb-4&quot;>I can lower my heart rate on command within 30 seconds.</label>
+                        <div class=&quot;grid grid-cols-5 gap-2&quot; id=&quot;q2&quot;>
+                            <button onclick=&quot;setScore(&#39;q2&#39;, 1)&quot; class=&quot;score-btn rounded-l-lg&quot;>1. Never</button>
+                            <button onclick=&quot;setScore(&#39;q2&#39;, 2)&quot; class=&quot;score-btn&quot;>2. Rarely</button>
+                            <button onclick=&quot;setScore(&#39;q2&#39;, 3)&quot; class=&quot;score-btn&quot;>3. Sometimes</button>
+                            <button onclick=&quot;setScore(&#39;q2&#39;, 4)&quot; class=&quot;score-btn&quot;>4. Often</button>
+                            <button onclick=&quot;setScore(&#39;q2&#39;, 5)&quot; class=&quot;score-btn rounded-r-lg&quot;>5. Always</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class=&quot;glass p-8 rounded-2xl&quot;>
+                <div class=&quot;phase-header&quot; style=&quot;border-color: #f59e0b;&quot;>
+                    <h2 class=&quot;text-xl font-bold text-white uppercase italic&quot;>Phase 2: The Drive (Motivation)</h2>
+                    <p class=&quot;text-xs text-slate-400&quot;>Diagnostic: What fuel is in your tank?</p>
+                </div>
+                <div class=&quot;grid gap-8&quot;>
+                    <div>
+                        <label class=&quot;block text-sm font-bold text-slate-300 mb-4&quot;>I train/perform primarily because...</label>
+                        <div class=&quot;grid grid-cols-5 gap-2&quot; id=&quot;q3&quot;>
+                            <button onclick=&quot;setScore(&#39;q3&#39;, 1)&quot; class=&quot;score-btn rounded-l-lg&quot;>1. I Have To</button>
+                            <button onclick=&quot;setScore(&#39;q3&#39;, 2)&quot; class=&quot;score-btn&quot;>2. Guilt/Fear</button>
+                            <button onclick=&quot;setScore(&#39;q3&#39;, 3)&quot; class=&quot;score-btn&quot;>3. Rewards</button>
+                            <button onclick=&quot;setScore(&#39;q3&#39;, 4)&quot; class=&quot;score-btn&quot;>4. Goals</button>
+                            <button onclick=&quot;setScore(&#39;q3&#39;, 5)&quot; class=&quot;score-btn rounded-r-lg&quot;>5. I Love It</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class=&quot;glass p-8 rounded-2xl&quot;>
+                <div class=&quot;phase-header&quot; style=&quot;border-color: #a855f7;&quot;>
+                    <h2 class=&quot;text-xl font-bold text-white uppercase italic&quot;>Phase 3: The Focus (Concentration)</h2>
+                    <p class=&quot;text-xs text-slate-400&quot;>Diagnostic: Can you lock on target?</p>
+                </div>
+                <div class=&quot;grid gap-8&quot;>
+                    <div>
+                        <label class=&quot;block text-sm font-bold text-slate-300 mb-4&quot;>When I make a mistake, my recovery time is...</label>
+                        <div class=&quot;grid grid-cols-5 gap-2&quot; id=&quot;q4&quot;>
+                            <button onclick=&quot;setScore(&#39;q4&#39;, 1)&quot; class=&quot;score-btn rounded-l-lg&quot;>1. Game Over</button>
+                            <button onclick=&quot;setScore(&#39;q4&#39;, 2)&quot; class=&quot;score-btn&quot;>2. Long Time</button>
+                            <button onclick=&quot;setScore(&#39;q4&#39;, 3)&quot; class=&quot;score-btn&quot;>3. Minutes</button>
+                            <button onclick=&quot;setScore(&#39;q4&#39;, 4)&quot; class=&quot;score-btn&quot;>4. Seconds</button>
+                            <button onclick=&quot;setScore(&#39;q4&#39;, 5)&quot; class=&quot;score-btn rounded-r-lg&quot;>5. Instant</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class=&quot;glass p-8 rounded-2xl&quot;>
+                <div class=&quot;phase-header&quot; style=&quot;border-color: #10b981;&quot;>
+                    <h2 class=&quot;text-xl font-bold text-white uppercase italic&quot;>Phase 4: The Toolkit (Confidence)</h2>
+                    <p class=&quot;text-xs text-slate-400&quot;>Diagnostic: Is your software updated?</p>
+                </div>
+                <div class=&quot;grid gap-8&quot;>
+                    <div>
+                        <label class=&quot;block text-sm font-bold text-slate-300 mb-4&quot;>I use mental imagery (Visualization) to prepare...</label>
+                        <div class=&quot;grid grid-cols-5 gap-2&quot; id=&quot;q5&quot;>
+                            <button onclick=&quot;setScore(&#39;q5&#39;, 1)&quot; class=&quot;score-btn rounded-l-lg&quot;>1. Never</button>
+                            <button onclick=&quot;setScore(&#39;q5&#39;, 2)&quot; class=&quot;score-btn&quot;>2. Rarely</button>
+                            <button onclick=&quot;setScore(&#39;q5&#39;, 3)&quot; class=&quot;score-btn&quot;>3. Sometimes</button>
+                            <button onclick=&quot;setScore(&#39;q5&#39;, 4)&quot; class=&quot;score-btn&quot;>4. Often</button>
+                            <button onclick=&quot;setScore(&#39;q5&#39;, 5)&quot; class=&quot;score-btn rounded-r-lg&quot;>5. Daily</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class=&quot;glass p-8 rounded-2xl border border-slate-700&quot;>
+                <label class=&quot;block text-sm font-bold text-sky-400 mb-2 uppercase tracking-widest mono&quot;>Operator&#39;s Log (Required)</label>
+                <p class=&quot;text-xs text-slate-500 mb-4&quot;>In one sentence: If your mind was a computer operating system right now, is it running fast, lagging, or crashing? Why?</p>
+                <textarea id=&quot;log_entry&quot; class=&quot;w-full bg-slate-900 border border-slate-700 rounded-xl p-4 text-sm text-white h-24 focus:border-sky-500 outline-none&quot;></textarea>
+            </div>
+
+        </div>
+
+        <div class=&quot;flex flex-col md:flex-row gap-4 mb-12&quot;>
+            <button onclick=&quot;calculateStatus()&quot; class=&quot;flex-1 bg-white text-black font-black uppercase text-sm tracking-widest py-4 rounded-xl hover:bg-sky-400 transition-all shadow-[0_0_20px_rgba(255,255,255,0.3)]&quot;>
+                Run Diagnostics
+            </button>
+            <button onclick=&quot;generatePrint()&quot; id=&quot;print-btn&quot; class=&quot;flex-1 bg-slate-800 text-slate-500 font-bold uppercase text-sm tracking-widest py-4 rounded-xl border border-slate-700 cursor-not-allowed&quot; disabled>
+                Generate System Report (PDF)
+            </button>
+        </div>
+
+    </div>
+
+    <script>
+        // Boot Sequence Logic
+        window.onload = function() {
+            setTimeout(() => {
+                document.getElementById(&#39;boot-screen&#39;).style.opacity = &#39;0&#39;;
+                setTimeout(() => {
+                    document.getElementById(&#39;boot-screen&#39;).style.display = &#39;none&#39;;
+                }, 500);
+            }, 2500);
+        };
+
+        let scores = { q1: 0, q2: 0, q3: 0, q4: 0, q5: 0 };
+
+        function setScore(q, val) {
+            scores[q] = val;
+            const buttons = document.getElementById(q).getElementsByTagName(&#39;button&#39;);
+            for(let btn of buttons) {
+                btn.classList.remove(&#39;active&#39;);
+            }
+            buttons[val-1].classList.add(&#39;active&#39;);
+        }
+
+        // --- HARDENED DOWNLOAD LOGIC ---
+        function downloadBackup() {
+            // 1. Gather all current data
+            const logEntry = document.getElementById(&#39;log_entry&#39;).value;
+            const data = { scores: scores, log: logEntry };
+            
+            // 2. Create Blob
+            const blob = new Blob([JSON.stringify(data)], { type: &quot;application/json&quot; });
+            const url = URL.createObjectURL(blob);
+            
+            // 3. Trigger Download
+            const dlNode = document.createElement(&#39;a&#39;);
+            dlNode.href = url;
+            dlNode.download = &quot;protocol-001-backup.json&quot;;
+            document.body.appendChild(dlNode);
+            dlNode.click();
+            document.body.removeChild(dlNode);
+            URL.revokeObjectURL(url);
+
+            // UI Feedback
+            updateSaveStatus(&quot;Data Saved&quot;);
+        }
+
+        // --- HARDENED LOAD LOGIC ---
+        function loadBackup(input) {
+            const file = input.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const data = JSON.parse(e.target.result);
+                
+                // 1. Restore Scores
+                scores = data.scores;
+                
+                // 2. Restore Log
+                document.getElementById(&#39;log_entry&#39;).value = data.log || &quot;&quot;;
+
+                // 3. VISUALLY Update Buttons (Direct Injection)
+                Object.keys(scores).forEach(key => {
+                    const val = scores[key];
+                    if (val > 0) {
+                        const buttons = document.getElementById(key).getElementsByTagName(&#39;button&#39;);
+                        for(let btn of buttons) btn.classList.remove(&#39;active&#39;);
+                        if (buttons[val-1]) buttons[val-1].classList.add(&#39;active&#39;);
+                    }
+                });
+
+                // 4. Update Status if needed
+                calculateStatus();
+                updateSaveStatus(&quot;Data Restored&quot;);
+                alert(&quot;System Data Restored Successfully.&quot;);
+            };
+            reader.readAsText(file);
+        }
+
+        function updateSaveStatus(msg) {
+            const ind = document.getElementById(&#39;save-indicator&#39;);
+            const txt = document.getElementById(&#39;save-text&#39;);
+            ind.classList.remove(&#39;bg-slate-600&#39;);
+            ind.classList.add(&#39;bg-emerald-500&#39;, &#39;status-saved&#39;);
+            txt.innerText = msg;
+            setTimeout(() => {
+                ind.classList.remove(&#39;status-saved&#39;);
+            }, 2000);
+        }
+
+        function calculateStatus() {
+            if(Object.values(scores).includes(0)) {
+                alert(&quot;SYSTEM ERROR: Complete all diagnostic checks before running analysis.&quot;);
+                return;
+            }
+
+            const total = Object.values(scores).reduce((a, b) => a + b, 0);
+            const max = 25;
+            const percent = Math.round((total / max) * 100);
+            
+            const statusEl = document.getElementById(&#39;system-status&#39;);
+            const printBtn = document.getElementById(&#39;print-btn&#39;);
+            
+            statusEl.classList.remove(&#39;animate-pulse&#39;, &#39;text-rose-500&#39;);
+            
+            if(percent < 50) {
+                statusEl.innerText = &quot;CRITICAL (&quot; + percent + &quot;%)&quot;;
+                statusEl.classList.add(&#39;text-rose-500&#39;);
+            } else if (percent < 80) {
+                statusEl.innerText = &quot;UNSTABLE (&quot; + percent + &quot;%)&quot;;
+                statusEl.classList.add(&#39;text-amber-400&#39;);
+            } else {
+                statusEl.innerText = &quot;OPERATIONAL (&quot; + percent + &quot;%)&quot;;
+                statusEl.classList.add(&#39;text-emerald-400&#39;);
+            }
+
+            printBtn.disabled = false;
+            printBtn.classList.remove(&#39;bg-slate-800&#39;, &#39;text-slate-500&#39;, &#39;cursor-not-allowed&#39;);
+            printBtn.classList.add(&#39;bg-emerald-600&#39;, &#39;text-white&#39;, &#39;hover:bg-emerald-500&#39;, &#39;shadow-lg&#39;);
+            printBtn.innerText = &quot;Generate System Report&quot;;
+        }
+
+        function generatePrint() {
+            const log = document.getElementById(&#39;log_entry&#39;).value;
+            const status = document.getElementById(&#39;system-status&#39;).innerText;
+            
+            const printHTML = `
+                <html>
+                <head>
+                    <title>Protocol 001 Report</title>
+                    <link href=&quot;https://cdn.tailwindcss.com&quot; rel=&quot;stylesheet&quot;>
+                    <style>body { font-family: monospace; padding: 40px; background: white; color: black; }</style>
+                </head>
+                <body>
+                    <div class=&quot;border-b-4 border-black pb-4 mb-8 flex justify-between items-end&quot;>
+                        <div>
+                            <h1 class=&quot;text-4xl font-black uppercase&quot;>Protocol 001</h1>
+                            <p class=&quot;text-sm font-bold uppercase tracking-widest&quot;>Baseline Diagnostic Report</p>
+                        </div>
+                        <div class=&quot;text-right&quot;>
+                            <p class=&quot;text-xs uppercase&quot;>System Status</p>
+                            <h2 class=&quot;text-2xl font-black italic&quot;>${status}</h2>
+                        </div>
+                    </div>
+
+                    <div class=&quot;grid grid-cols-2 gap-4 mb-8&quot;>
+                        <div class=&quot;p-4 border border-black&quot;>
+                            <strong class=&quot;block uppercase text-xs mb-1&quot;>Phase 1: Engine</strong>
+                            <div class=&quot;text-lg font-bold&quot;>${scores.q1}/5 (Pressure)</div>
+                            <div class=&quot;text-lg font-bold&quot;>${scores.q2}/5 (Regulation)</div>
+                        </div>
+                        <div class=&quot;p-4 border border-black&quot;>
+                            <strong class=&quot;block uppercase text-xs mb-1&quot;>Phase 2: Drive</strong>
+                            <div class=&quot;text-lg font-bold&quot;>${scores.q3}/5 (Fuel Source)</div>
+                        </div>
+                        <div class=&quot;p-4 border border-black&quot;>
+                            <strong class=&quot;block uppercase text-xs mb-1&quot;>Phase 3: Focus</strong>
+                            <div class=&quot;text-lg font-bold&quot;>${scores.q4}/5 (Reset Speed)</div>
+                        </div>
+                        <div class=&quot;p-4 border border-black&quot;>
+                            <strong class=&quot;block uppercase text-xs mb-1&quot;>Phase 4: Toolkit</strong>
+                            <div class=&quot;text-lg font-bold&quot;>${scores.q5}/5 (Visualization)</div>
+                        </div>
+                    </div>
+
+                    <div class=&quot;p-6 bg-gray-100 border-l-4 border-black&quot;>
+                        <strong class=&quot;block uppercase text-xs mb-2&quot;>Operator&#39;s Log</strong>
+                        <p class=&quot;italic&quot;>&quot;${log}&quot;</p>
+                    </div>
+
+                    <div class=&quot;mt-12 text-center text-xs uppercase font-bold tracking-widest&quot;>
+                        End of Report // Ready for Phase 1
+                    </div>
+                    <script>window.onload = function() { window.print(); };<\/script>
+                </body>
+                </html>
+            `;
+            
+            const win = window.open(&#39;&#39;, &#39;_blank&#39;);
+            win.document.write(printHTML);
+            win.document.close();
+        }
+    </script>
+</body>
+</html>" class="w-full border-0" style="min-height: 80vh; height: 100%;" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-modals allow-downloads allow-top-navigation-by-user-activation"></iframe>
+    </div>
+  </main>
+
+  
+
+  <script>
+    window.CF_ASSET_BASE_URL = "";
+    
+    
+    
+(function() {
+  var MODULE_KEY = 'CF_Module_BASE_v1';
+  var saveTimeout = null;
+  function getAllInputState() {
+    var state = {};
+    document.querySelectorAll('input, textarea, select').forEach(function(el, i) {
+      var key = el.id || el.name || ('field_' + i);
+      if (el.type === 'checkbox' || el.type === 'radio') {
+        if (el.checked) state[key] = el.type === 'radio' ? el.value : true;
+      } else {
+        if (el.value) state[key] = el.value;
+      }
+    });
+    return state;
+  }
+  function restoreInputState(state) {
+    if (!state || typeof state !== 'object') return;
+    document.querySelectorAll('input, textarea, select').forEach(function(el, i) {
+      var key = el.id || el.name || ('field_' + i);
+      var savedValue = state[key];
+      if (savedValue !== undefined) {
+        if (el.type === 'checkbox') {
+          el.checked = !!savedValue;
+        } else if (el.type === 'radio') {
+          el.checked = (el.value === savedValue);
+        } else {
+          el.value = savedValue;
+        }
+      }
+    });
+  }
+  function saveNow() {
+    try {
+      var state = getAllInputState();
+      if (Object.keys(state).length > 0) {
+        localStorage.setItem(MODULE_KEY, JSON.stringify({
+          timestamp: Date.now(),
+          state: state
+        }));
+      }
+    } catch (e) {}
+  }
+  function debouncedSave() {
+    clearTimeout(saveTimeout);
+    saveTimeout = setTimeout(saveNow, 800);
+  }
+  function loadSaved() {
+    try {
+      var raw = localStorage.getItem(MODULE_KEY);
+      if (raw) {
+        var parsed = JSON.parse(raw);
+        if (parsed && parsed.state) restoreInputState(parsed.state);
+      }
+    } catch (e) {}
+  }
+  function init() {
+    loadSaved();
+    document.addEventListener('input', debouncedSave);
+    document.addEventListener('change', debouncedSave);
+    window.addEventListener('pagehide', saveNow);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+  </script>
+</body>
+</html>

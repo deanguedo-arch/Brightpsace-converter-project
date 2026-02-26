@@ -1,0 +1,25 @@
+{
+  "name": "brightspace-course-builder",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "cf": "node packages/cli/src/index.js",
+    "cf:preview": "node packages/cli/src/index.js preview",
+    "cf:build": "node packages/cli/src/index.js build",
+    "cf:validate": "node packages/cli/src/index.js validate --brightspace",
+    "cf:import": "node packages/cli/src/index.js import",
+    "cf:init": "node packages/cli/src/index.js init",
+    "cf:doctor": "node packages/cli/src/index.js doctor",
+    "skills:bootstrap": "node scripts/skills-bootstrap.mjs",
+    "skills:list": "node scripts/skills-list.mjs",
+    "skills:check": "node scripts/skills-check.mjs",
+    "test": "node --test packages/core/test/*.test.js"
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "hash": "04ea02bd",
+  "configHash": "4704318a",
+  "lockfileHash": "93dc8e78",
+  "browserHash": "4ae7c903",
+  "optimized": {
+    "firebase/app": {
+      "src": "../../node_modules/firebase/app/dist/esm/index.esm.js",
+      "file": "firebase_app.js",
+      "fileHash": "24fe990b",
+      "needsInterop": false
+    },
+    "firebase/auth": {
+      "src": "../../node_modules/firebase/auth/dist/esm/index.esm.js",
+      "file": "firebase_auth.js",
+      "fileHash": "52327492",
+      "needsInterop": false
+    },
+    "firebase/firestore": {
+      "src": "../../node_modules/firebase/firestore/dist/esm/index.esm.js",
+      "file": "firebase_firestore.js",
+      "fileHash": "79f7d498",
+      "needsInterop": false
+    },
+    "lucide-react": {
+      "src": "../../node_modules/lucide-react/dist/esm/lucide-react.js",
+      "file": "lucide-react.js",
+      "fileHash": "adb945f8",
+      "needsInterop": false
+    },
+    "react-dom/client": {
+      "src": "../../node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "0c8fb54b",
+      "needsInterop": true
+    },
+    "react": {
+      "src": "../../node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "52d63d06",
+      "needsInterop": true
+    },
+    "react/jsx-dev-runtime": {
+      "src": "../../node_modules/react/jsx-dev-runtime.js",
+      "file": "react_jsx-dev-runtime.js",
+      "fileHash": "aa27aba6",
+      "needsInterop": true
+    }
+  },
+  "chunks": {
+    "index.esm-dXxxyFkt": {
+      "file": "index.esm-dXxxyFkt.js",
+      "isDynamicEntry": false
+    },
+    "react-cXx3nQF5": {
+      "file": "react-cXx3nQF5.js",
+      "isDynamicEntry": false
+    }
+  }
+}

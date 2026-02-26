@@ -1,0 +1,12 @@
+{
+  "name": "@cf/cli",
+  "version": "0.1.0",
+  "type": "module",
+  "bin": {
+    "cf": "src/index.js"
+  },
+  "dependencies": {
+    "@cf/core": "0.1.0",
+    "@cf/scorm": "0.1.0"
+  }
+}

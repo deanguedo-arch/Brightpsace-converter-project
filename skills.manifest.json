@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "sourcePolicy": "trusted-and-vetted-community",
+  "targets": [
+    "codex"
+  ],
+  "skills": [
+    {
+      "repo": "vercel-labs/skills",
+      "skill": "find-skills"
+    },
+    {
+      "repo": "vercel-labs/agent-skills",
+      "skill": "web-design-guidelines"
+    },
+    {
+      "repo": "anthropics/skills",
+      "skill": "frontend-design"
+    },
+    {
+      "repo": "anthropics/skills",
+      "skill": "brand-guidelines"
+    },
+    {
+      "repo": "anthropics/skills",
+      "skill": "theme-factory"
+    },
+    {
+      "repo": "anthropics/skills",
+      "skill": "webapp-testing"
+    },
+    {
+      "repo": "obra/superpowers",
+      "skill": "executing-plans"
+    },
+    {
+      "repo": "obra/superpowers",
+      "skill": "test-driven-development"
+    },
+    {
+      "repo": "obra/superpowers",
+      "skill": "systematic-debugging"
+    },
+    {
+      "repo": "obra/superpowers",
+      "skill": "verification-before-completion"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Focus map">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#d7f3f7" />
+      <stop offset="100%" stop-color="#e7f5ff" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)" />
+  <g fill="none" stroke="#0f8a9d" stroke-width="6">
+    <circle cx="280" cy="310" r="110" />
+    <circle cx="600" cy="310" r="110" />
+    <circle cx="920" cy="310" r="110" />
+    <path d="M390 310 H490" />
+    <path d="M710 310 H810" />
+  </g>
+  <g fill="#0d1c26" font-family="Segoe UI, Arial, sans-serif" text-anchor="middle">
+    <text x="280" y="305" font-size="36" font-weight="700">Notice</text>
+    <text x="600" y="305" font-size="36" font-weight="700">Reset</text>
+    <text x="920" y="305" font-size="36" font-weight="700">Execute</text>
+  </g>
+</svg>

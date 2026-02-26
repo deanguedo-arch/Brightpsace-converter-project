@@ -1,0 +1,24 @@
+﻿# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Environment files
+.env
+.env.local
+
+# IDE
+.vscode/
+.cursor/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Accidental duplicate editor copies
+* 2.jsx
+* 2.html

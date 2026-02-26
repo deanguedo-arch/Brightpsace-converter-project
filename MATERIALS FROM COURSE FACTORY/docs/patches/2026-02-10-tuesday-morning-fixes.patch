@@ -1,0 +1,868 @@
+diff --git a/LOG.md b/LOG.md
+index 7b90907..bc476cf 100644
+--- a/LOG.md
++++ b/LOG.md
+@@ -237,3 +237,27 @@
+ - `npm run build`
+ - `npm run exports:fixtures`
+ - `npm run release:check`
++
++## Update (Feb 10, 2026 — Tuesday Morning Fixes)
++- Added composer text-style reset hardening for content/title blocks:
++  - `Reset Style` now clears block style + body style overrides.
++  - Added `Reset Body Style` in rich editor toolbars.
++  - Body container override now defaults to block style unless explicitly changed.
++  (`src/components/modals/EditModal.jsx`, `src/components/Phase1.jsx`, `src/composer/activityRegistry.js`)
++- Added drag-and-drop hotspot authoring UI:
++  - New hotspot editor with live image preview and draggable hotspot points.
++  - Inline hotspot label/content editing in the same panel.
++  (`src/components/composer/HotspotEditor.jsx`, `src/components/modals/EditModal.jsx`, `src/components/Phase1.jsx`)
++- Updated hotspot output behavior:
++  - Hotspot points render on-image at saved coordinates.
++  - Hotspot detail panels show label + content (no coordinate text).
++  (`src/composer/activityRegistry.js`)
++- Workspace state note for this chat:
++  - Intention is to revert to yesterday’s baseline in the work terminal and then re-apply these targeted fixes there.
++- Recovery diagnosis (missing work):
++  - Multiple local clones were in use:
++    - `/Users/deanguedo/Library/Mobile Documents/com~apple~CloudDocs/Course-factoryPERFECT`
++    - `/Users/deanguedo/Documents/GitHub/Course-factoryPERFECT`
++    - `/Users/deanguedo/Projects/Course-factoryPERFECT`
++  - The iCloud workspace was behind the GitHub-backed repo and tracking a local-path remote (`/Users/deanguedo/Documents/GitHub/Course-factoryPERFECT`) rather than direct GitHub.
++  - This mismatch explains why prior changes appeared to be missing when switching workspaces.
+diff --git a/src/components/Phase1.jsx b/src/components/Phase1.jsx
+index c8010d0..8e74481 100644
+--- a/src/components/Phase1.jsx
++++ b/src/components/Phase1.jsx
+@@ -33,6 +33,7 @@ import {
+ import VaultBrowser from './VaultBrowser';
+ import { CodeBlock, Toggle } from './Shared.jsx';
+ import GenericDataEditor from './GenericDataEditor.jsx';
++import HotspotEditor from './composer/HotspotEditor.jsx';
+ import { buildModuleFrameHTML, cleanModuleScript, getMaterialBadgeLabel, validateModule } from '../utils/generators.js';
+ import { getActivityDefinition, listActivityTypeGroups } from '../composer/activityRegistry.js';
+ import {
+@@ -115,6 +116,53 @@ function normalizeColorInputValue(value, fallback = '#0f172a') {
+   return /^#[0-9a-f]{6}$/i.test(raw) ? raw : fallback;
+ }
+ 
++function extractRichEditorText(html) {
++  const input = String(html || '');
++  if (!input) return '';
++  if (typeof document === 'undefined') {
++    return input
++      .replace(/<br\s*\/?>/gi, '\n')
++      .replace(/<\/(p|div|li|h1|h2|h3|h4|h5|h6|blockquote)>/gi, '\n')
++      .replace(/<[^>]+>/g, '')
++      .replace(/\u00a0/g, ' ')
++      .trim();
++  }
++  const container = document.createElement('div');
++  container.innerHTML = input;
++  return (container.innerText || container.textContent || '').replace(/\u00a0/g, ' ').trim();
++}
++
++function stripInlineRichFormatting(html) {
++  const input = String(html || '');
++  if (!input.trim()) return '';
++  if (typeof document === 'undefined') {
++    return input
++      .replace(/<font\b[^>]*>/gi, '')
++      .replace(/<\/font>/gi, '')
++      .replace(/\sstyle\s*=\s*(['"]).*?\1/gi, '')
++      .replace(/\s(?:bgcolor|color|face|size)\s*=\s*(['"]).*?\1/gi, '');
++  }
++  const template = document.createElement('template');
++  template.innerHTML = input;
++  const fontNodes = Array.from(template.content.querySelectorAll('font'));
++  fontNodes.forEach((fontNode) => {
++    const parent = fontNode.parentNode;
++    if (!parent) return;
++    while (fontNode.firstChild) {
++      parent.insertBefore(fontNode.firstChild, fontNode);
++    }
++    parent.removeChild(fontNode);
++  });
++  Array.from(template.content.querySelectorAll('*')).forEach((node) => {
++    node.removeAttribute('style');
++    node.removeAttribute('bgcolor');
++    node.removeAttribute('color');
++    node.removeAttribute('face');
++    node.removeAttribute('size');
++  });
++  return template.innerHTML;
++}
++
+ function extractMaterialImageAsset(material) {
+   if (!material || typeof material !== 'object') return null;
+   const imagePattern = /\.(avif|bmp|gif|ico|jpe?g|png|svg|webp)(\?.*)?$/i;
+@@ -1524,6 +1572,63 @@ const Phase1 = ({ projectData, setProjectData, scannerNotes, setScannerNotes, ad
+     updateComposerActivities(nextActivities);
+   };
+ 
++  const clearPendingModuleManagerRichEditorUpdate = () => {
++    if (!moduleManagerRichEditorUpdateTimerRef.current) return;
++    clearTimeout(moduleManagerRichEditorUpdateTimerRef.current);
++    moduleManagerRichEditorUpdateTimerRef.current = null;
++  };
++
++  const getSelectedComposerRichStyleResetPayload = () => {
++    if (!selectedComposerActivity) return null;
++    const richConfig = getComposerRichEditorConfig(selectedComposerActivity);
++    if (!richConfig) return null;
++    const data = selectedComposerActivity.data || {};
++    const bodyMode = data[richConfig.modeKey] === 'plain' ? 'plain' : 'rich';
++    if (bodyMode !== 'rich') return null;
++    const sourceHtml = data[richConfig.htmlKey] || escapeEditorHtml(data[richConfig.textKey] || '').replace(/\n/g, '<br>');
++    const cleanedHtml = stripInlineRichFormatting(sourceHtml);
++    const cleanedText = extractRichEditorText(cleanedHtml);
++    return { richConfig, cleanedHtml, cleanedText };
++  };
++
++  const resetSelectedComposerBodyStyle = () => {
++    if (!selectedComposerActivity) return;
++    const payload = getSelectedComposerRichStyleResetPayload();
++    const updates = { bodyContainerBg: '' };
++    if (payload) {
++      clearPendingModuleManagerRichEditorUpdate();
++      if (moduleManagerRichEditorRef.current) {
++        moduleManagerRichEditorRef.current.innerHTML = payload.cleanedHtml;
++      }
++      updates[payload.richConfig.modeKey] = 'rich';
++      updates[payload.richConfig.htmlKey] = payload.cleanedHtml;
++      updates[payload.richConfig.textKey] = payload.cleanedText;
++    }
++    updateSelectedComposerActivityData(updates);
++  };
++
++  const resetSelectedComposerActivityStyle = () => {
++    if (!selectedComposerActivity) return;
++    const payload = getSelectedComposerRichStyleResetPayload();
++    const updates = {
++      blockTheme: 'default',
++      blockFontFamily: '',
++      blockTextColor: '',
++      blockContainerBg: '',
++      bodyContainerBg: '',
++    };
++    if (payload) {
++      clearPendingModuleManagerRichEditorUpdate();
++      if (moduleManagerRichEditorRef.current) {
++        moduleManagerRichEditorRef.current.innerHTML = payload.cleanedHtml;
++      }
++      updates[payload.richConfig.modeKey] = 'rich';
++      updates[payload.richConfig.htmlKey] = payload.cleanedHtml;
++      updates[payload.richConfig.textKey] = payload.cleanedText;
++    }
++    updateSelectedComposerActivityData(updates);
++  };
++
+   const replaceSelectedComposerActivityData = (nextData) => {
+     if (!selectedComposerActivity) return;
+     const nextActivities = moduleManagerComposerActivities.map((activity, idx) =>
+@@ -1725,16 +1830,9 @@ const Phase1 = ({ projectData, setProjectData, scannerNotes, setScannerNotes, ad
+           <p className="text-[11px] font-bold uppercase tracking-wide text-slate-300">Block Style</p>
+           <button
+             type="button"
+-            onClick={() =>
+-              updateSelectedComposerActivityData({
+-                blockTheme: 'default',
+-                blockFontFamily: '',
+-                blockTextColor: '',
+-                blockContainerBg: '',
+-              })
+-            }
++            onClick={resetSelectedComposerActivityStyle}
+             className="rounded bg-slate-800 hover:bg-slate-700 px-2 py-1 text-[10px] font-bold text-slate-200"
+-            title="Reset this block to default style"
++            title="Reset block and body styles to defaults"
+           >
+             Reset Style
+           </button>
+@@ -1903,7 +2001,7 @@ const Phase1 = ({ projectData, setProjectData, scannerNotes, setScannerNotes, ad
+                   <button type="button" onMouseDown={preserveModuleManagerRichSelection} onClick={() => runModuleManagerRichEditorCommand('removeFormat')} className="px-2 py-1 rounded bg-slate-800 hover:bg-slate-700 text-white text-xs">Clear</button>
+                 </div>
+                 <div className="px-2 pb-2 bg-slate-900/80 border-b border-slate-700">
+-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
++                  <div className="grid grid-cols-1 sm:grid-cols-4 gap-2">
+                     <select
+                       defaultValue=""
+                       onChange={(e) => {
+@@ -1937,15 +2035,24 @@ const Phase1 = ({ projectData, setProjectData, scannerNotes, setScannerNotes, ad
+                       <input
+                         type="color"
+                         value={normalizeColorInputValue(
+-                          data.blockContainerBg || data.containerBg,
++                          data.bodyContainerBg || data.blockContainerBg || data.containerBg,
+                           selectedComposerActivity.type === 'title_block' ? '#1e1b4b' : '#0f172a',
+                         )}
+-                        onChange={(e) => updateSelectedComposerActivityData({ blockContainerBg: e.target.value })}
++                        onChange={(e) => updateSelectedComposerActivityData({ bodyContainerBg: e.target.value })}
+                         className="h-6 w-10 cursor-pointer border border-slate-600 rounded bg-transparent"
+-                        title="Set block container background color"
+-                        aria-label="Set block container background color"
++                        title="Set body container background color override"
++                        aria-label="Set body container background color override"
+                       />
+                     </label>
++                    <button
++                      type="button"
++                      onMouseDown={preserveModuleManagerRichSelection}
++                      onClick={resetSelectedComposerBodyStyle}
++                      className="rounded bg-slate-800 hover:bg-slate-700 px-2 py-1 text-[10px] font-bold uppercase tracking-wide text-slate-200"
++                      title="Reset body style overrides"
++                    >
++                      Reset Body Style
++                    </button>
+                   </div>
+                 </div>
+                 <div
+@@ -2313,6 +2420,10 @@ const Phase1 = ({ projectData, setProjectData, scannerNotes, setScannerNotes, ad
+       );
+     }
+ 
++    if (selectedComposerActivity.type === 'hotspot_image') {
++      return <HotspotEditor data={data} onChange={updateSelectedComposerActivityData} />;
++    }
++
+     if (selectedComposerActivity.type === 'assessment_embed') {
+       const items = Array.isArray(data.items) ? data.items : [];
+       return (
+diff --git a/src/components/modals/EditModal.jsx b/src/components/modals/EditModal.jsx
+index 3b23244..50bd241 100644
+--- a/src/components/modals/EditModal.jsx
++++ b/src/components/modals/EditModal.jsx
+@@ -24,6 +24,7 @@ import {
+ import { isComposerEnabled } from '../../utils/composer.js';
+ import { buildModuleFrameHTML } from '../../utils/generators.js';
+ import GenericDataEditor from '../GenericDataEditor.jsx';
++import HotspotEditor from '../composer/HotspotEditor.jsx';
+ 
+ const { useEffect, useMemo, useRef, useState } = React;
+ 
+@@ -108,6 +109,53 @@ function normalizeColorInputValue(value, fallback = '#0f172a') {
+   return /^#[0-9a-f]{6}$/i.test(raw) ? raw : fallback;
+ }
+ 
++function extractRichEditorText(html) {
++  const input = String(html || '');
++  if (!input) return '';
++  if (typeof document === 'undefined') {
++    return input
++      .replace(/<br\s*\/?>/gi, '\n')
++      .replace(/<\/(p|div|li|h1|h2|h3|h4|h5|h6|blockquote)>/gi, '\n')
++      .replace(/<[^>]+>/g, '')
++      .replace(/\u00a0/g, ' ')
++      .trim();
++  }
++  const container = document.createElement('div');
++  container.innerHTML = input;
++  return (container.innerText || container.textContent || '').replace(/\u00a0/g, ' ').trim();
++}
++
++function stripInlineRichFormatting(html) {
++  const input = String(html || '');
++  if (!input.trim()) return '';
++  if (typeof document === 'undefined') {
++    return input
++      .replace(/<font\b[^>]*>/gi, '')
++      .replace(/<\/font>/gi, '')
++      .replace(/\sstyle\s*=\s*(['"]).*?\1/gi, '')
++      .replace(/\s(?:bgcolor|color|face|size)\s*=\s*(['"]).*?\1/gi, '');
++  }
++  const template = document.createElement('template');
++  template.innerHTML = input;
++  const fontNodes = Array.from(template.content.querySelectorAll('font'));
++  fontNodes.forEach((fontNode) => {
++    const parent = fontNode.parentNode;
++    if (!parent) return;
++    while (fontNode.firstChild) {
++      parent.insertBefore(fontNode.firstChild, fontNode);
++    }
++    parent.removeChild(fontNode);
++  });
++  Array.from(template.content.querySelectorAll('*')).forEach((node) => {
++    node.removeAttribute('style');
++    node.removeAttribute('bgcolor');
++    node.removeAttribute('color');
++    node.removeAttribute('face');
++    node.removeAttribute('size');
++  });
++  return template.innerHTML;
++}
++
+ function extractMaterialImageAsset(material) {
+   if (!material || typeof material !== 'object') return null;
+   const imagePattern = /\.(avif|bmp|gif|ico|jpe?g|png|svg|webp)(\?.*)?$/i;
+@@ -365,6 +413,63 @@ export default function EditModal({
+     updateActivities(nextActivities);
+   };
+ 
++  const clearPendingRichEditorUpdate = () => {
++    if (!richEditorUpdateTimerRef.current) return;
++    clearTimeout(richEditorUpdateTimerRef.current);
++    richEditorUpdateTimerRef.current = null;
++  };
++
++  const getSelectedRichStyleResetPayload = () => {
++    if (!selectedActivity) return null;
++    const richConfig = getActivityRichEditorConfig(selectedActivity);
++    if (!richConfig) return null;
++    const data = selectedActivity.data || {};
++    const bodyMode = data[richConfig.modeKey] === 'plain' ? 'plain' : 'rich';
++    if (bodyMode !== 'rich') return null;
++    const sourceHtml = data[richConfig.htmlKey] || escapeEditorHtml(data[richConfig.textKey] || '').replace(/\n/g, '<br>');
++    const cleanedHtml = stripInlineRichFormatting(sourceHtml);
++    const cleanedText = extractRichEditorText(cleanedHtml);
++    return { richConfig, cleanedHtml, cleanedText };
++  };
++
++  const resetSelectedActivityBodyStyle = () => {
++    if (!selectedActivity) return;
++    const payload = getSelectedRichStyleResetPayload();
++    const updates = { bodyContainerBg: '' };
++    if (payload) {
++      clearPendingRichEditorUpdate();
++      if (richEditorRef.current) {
++        richEditorRef.current.innerHTML = payload.cleanedHtml;
++      }
++      updates[payload.richConfig.modeKey] = 'rich';
++      updates[payload.richConfig.htmlKey] = payload.cleanedHtml;
++      updates[payload.richConfig.textKey] = payload.cleanedText;
++    }
++    updateSelectedActivityData(updates);
++  };
++
++  const resetSelectedActivityStyle = () => {
++    if (!selectedActivity) return;
++    const payload = getSelectedRichStyleResetPayload();
++    const updates = {
++      blockTheme: 'default',
++      blockFontFamily: '',
++      blockTextColor: '',
++      blockContainerBg: '',
++      bodyContainerBg: '',
++    };
++    if (payload) {
++      clearPendingRichEditorUpdate();
++      if (richEditorRef.current) {
++        richEditorRef.current.innerHTML = payload.cleanedHtml;
++      }
++      updates[payload.richConfig.modeKey] = 'rich';
++      updates[payload.richConfig.htmlKey] = payload.cleanedHtml;
++      updates[payload.richConfig.textKey] = payload.cleanedText;
++    }
++    updateSelectedActivityData(updates);
++  };
++
+   const replaceSelectedActivityData = (nextData) => {
+     if (!selectedActivity) return;
+     const nextActivities = activities.map((activity, idx) =>
+@@ -576,16 +681,9 @@ export default function EditModal({
+           <p className="text-[11px] font-bold uppercase tracking-wide text-slate-300">Block Style</p>
+           <button
+             type="button"
+-            onClick={() =>
+-              updateSelectedActivityData({
+-                blockTheme: 'default',
+-                blockFontFamily: '',
+-                blockTextColor: '',
+-                blockContainerBg: '',
+-              })
+-            }
++            onClick={resetSelectedActivityStyle}
+             className="rounded bg-slate-800 hover:bg-slate-700 px-2 py-1 text-[10px] font-bold text-slate-200"
+-            title="Reset this block to default style"
++            title="Reset block and body styles to defaults"
+           >
+             Reset Style
+           </button>
+@@ -754,7 +852,7 @@ export default function EditModal({
+                   <button type="button" onMouseDown={preserveRichSelection} onClick={() => runRichEditorCommand('removeFormat')} className="px-2 py-1 rounded bg-slate-800 hover:bg-slate-700 text-white text-xs">Clear</button>
+                 </div>
+                 <div className="px-2 pb-2 bg-slate-900/80 border-b border-slate-700">
+-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
++                  <div className="grid grid-cols-1 sm:grid-cols-4 gap-2">
+                     <select
+                       defaultValue=""
+                       onChange={(e) => {
+@@ -788,15 +886,24 @@ export default function EditModal({
+                       <input
+                         type="color"
+                         value={normalizeColorInputValue(
+-                          data.blockContainerBg || data.containerBg,
++                          data.bodyContainerBg || data.blockContainerBg || data.containerBg,
+                           selectedActivity.type === 'title_block' ? '#1e1b4b' : '#0f172a',
+                         )}
+-                        onChange={(e) => updateSelectedActivityData({ blockContainerBg: e.target.value })}
++                        onChange={(e) => updateSelectedActivityData({ bodyContainerBg: e.target.value })}
+                         className="h-6 w-10 cursor-pointer border border-slate-600 rounded bg-transparent"
+-                        title="Set block container background color"
+-                        aria-label="Set block container background color"
++                        title="Set body container background color override"
++                        aria-label="Set body container background color override"
+                       />
+                     </label>
++                    <button
++                      type="button"
++                      onMouseDown={preserveRichSelection}
++                      onClick={resetSelectedActivityBodyStyle}
++                      className="rounded bg-slate-800 hover:bg-slate-700 px-2 py-1 text-[10px] font-bold uppercase tracking-wide text-slate-200"
++                      title="Reset body style overrides"
++                    >
++                      Reset Body Style
++                    </button>
+                   </div>
+                 </div>
+                 <div
+@@ -1131,6 +1238,10 @@ export default function EditModal({
+       );
+     }
+ 
++    if (selectedActivity.type === 'hotspot_image') {
++      return <HotspotEditor data={data} onChange={updateSelectedActivityData} />;
++    }
++
+     if (selectedActivity.type === 'assessment_embed') {
+       const items = Array.isArray(data.items) ? data.items : [];
+       return (
+diff --git a/src/composer/activityRegistry.js b/src/composer/activityRegistry.js
+index 06549d7..e7e91a1 100644
+--- a/src/composer/activityRegistry.js
++++ b/src/composer/activityRegistry.js
+@@ -60,12 +60,13 @@ export const ACTIVITY_REGISTRY = {
+         bodyMode: 'rich',
+         bodyHtml: '<p>Write your lesson content here.</p>',
+         blockContainerBg: '',
++        bodyContainerBg: '',
+       };
+     },
+     compileToHtml({ data = {} } = {}) {
+       const richBody = sanitizeRichHtml(data.bodyHtml || '');
+       const bodyHtml = data.bodyMode === 'plain' || !richBody ? renderSimpleBody(data.body) : richBody;
+-      const containerBg = sanitizeCssColor(data.blockContainerBg || data.containerBg);
++      const containerBg = sanitizeCssColor(data.bodyContainerBg || data.blockContainerBg || data.containerBg);
+       const containerStyle = containerBg ? ` style="background:${escapeHtml(containerBg)};"` : '';
+       return `
+         <article class="rounded-xl border border-slate-700 bg-slate-900/70 p-6"${containerStyle}>
+@@ -105,6 +106,7 @@ export const ACTIVITY_REGISTRY = {
+         textHtml: '<h2>Module Title</h2>',
+         align: 'left',
+         blockContainerBg: '',
++        bodyContainerBg: '',
+       };
+     },
+     compileToHtml({ data = {} } = {}) {
+@@ -112,7 +114,7 @@ export const ACTIVITY_REGISTRY = {
+       const textHtml = data.textMode === 'plain' || !richText ? renderSimpleBody(data.text || '') : richText;
+       const align = String(data.align || 'left').toLowerCase();
+       const alignClass = align === 'center' ? 'text-center' : align === 'right' ? 'text-right' : 'text-left';
+-      const containerBg = sanitizeCssColor(data.blockContainerBg || data.containerBg);
++      const containerBg = sanitizeCssColor(data.bodyContainerBg || data.blockContainerBg || data.containerBg);
+       const containerStyle = containerBg ? ` style="background:${escapeHtml(containerBg)};"` : '';
+       return `
+         <article class="rounded-xl border border-indigo-500/30 bg-indigo-950/20 p-5 ${alignClass}" data-title-block${containerStyle}>
+@@ -1051,20 +1053,22 @@ export const ACTIVITY_REGISTRY = {
+                           const x = Math.max(0, Math.min(100, Number.parseFloat(spot?.x) || 0));
+                           const y = Math.max(0, Math.min(100, Number.parseFloat(spot?.y) || 0));
+                           return `
+-                          <button
+-                            type="button"
+-                            data-hotspot-btn
+-                            data-hotspot-index="${idx}"
+-                            style="left:${x}%;top:${y}%;"
+-                            class="absolute -translate-x-1/2 -translate-y-1/2 w-7 h-7 rounded-full border text-[10px] font-black transition-colors ${
+-                              idx === 0
+-                                ? 'border-sky-300 bg-sky-500 text-slate-950'
+-                                : 'border-slate-200/80 bg-slate-900/85 text-white hover:bg-sky-500 hover:text-slate-950'
+-                            }"
+-                            title="${escapeHtml(spot?.label || `Hotspot ${idx + 1}`)}"
+-                            aria-label="${escapeHtml(spot?.label || `Hotspot ${idx + 1}`)}"
+-                          >${idx + 1}</button>
+-                        `;
++                        <button
++                          type="button"
++                          data-hotspot-btn
++                          data-hotspot-index="${idx}"
++                          style="left:${x}%;top:${y}%;"
++                          class="absolute -translate-x-1/2 -translate-y-1/2 w-8 h-8 rounded-full border text-[11px] font-black transition-colors ${
++                            idx === 0
++                              ? 'border-sky-300 bg-sky-500 text-slate-950'
++                              : 'border-slate-200/80 bg-slate-900/85 text-white hover:bg-sky-500 hover:text-slate-950'
++                          }"
++                          title="${escapeHtml(spot?.label || `Hotspot ${idx + 1}`)}"
++                          aria-label="${escapeHtml(spot?.label || `Hotspot ${idx + 1}`)}"
++                        >
++                          ${idx + 1}
++                        </button>
++                      `;
+                         })
+                         .join('\n')
+                     : ''
+@@ -1076,16 +1080,12 @@ export const ACTIVITY_REGISTRY = {
+                   <div class="mt-3 grid md:grid-cols-2 gap-2">
+                     ${hotspots
+                       .map(
+-                        (spot, idx) => {
+-                          const x = Math.max(0, Math.min(100, Number.parseFloat(spot?.x) || 0));
+-                          const y = Math.max(0, Math.min(100, Number.parseFloat(spot?.y) || 0));
+-                          return `
++                        (spot, idx) => `
+                         <div data-hotspot-panel data-hotspot-index="${idx}" class="rounded border border-slate-700 bg-slate-950/70 p-2 text-xs text-slate-300 ${idx === 0 ? '' : 'hidden'}">
+-                          <p class="font-bold text-slate-100">${escapeHtml(spot.label || `Hotspot ${idx + 1}`)} (${x}%, ${y}%)</p>
++                          <p class="font-bold text-slate-100">${escapeHtml(spot.label || `Hotspot ${idx + 1}`)}</p>
+                           <p class="mt-1">${renderSimpleBody(spot?.content || '')}</p>
+                         </div>
+-                      `;
+-                        },
++                      `,
+                       )
+                       .join('\n')}
+                   </div>
+diff --git a/src/components/composer/HotspotEditor.jsx b/src/components/composer/HotspotEditor.jsx
+new file mode 100644
+index 0000000..f6863ba
+--- /dev/null
++++ b/src/components/composer/HotspotEditor.jsx
+@@ -0,0 +1,341 @@
++import * as React from 'react';
++import { Plus, Trash2 } from 'lucide-react';
++
++function clampPercent(value) {
++  const parsed = Number.parseFloat(value);
++  if (!Number.isFinite(parsed)) return 0;
++  return Math.max(0, Math.min(100, parsed));
++}
++
++function formatPercent(value) {
++  return clampPercent(value).toFixed(1);
++}
++
++function buildDefaultHotspot(index) {
++  const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
++  const label = index < alphabet.length ? `Point ${alphabet[index]}` : `Point ${index + 1}`;
++  return {
++    label,
++    x: 50,
++    y: 50,
++    content: 'Explain this area.',
++  };
++}
++
++function normalizeHotspots(rawHotspots) {
++  if (!Array.isArray(rawHotspots)) return [];
++  return rawHotspots.map((spot, idx) => ({
++    label: typeof spot?.label === 'string' ? spot.label : `Hotspot ${idx + 1}`,
++    x: clampPercent(spot?.x),
++    y: clampPercent(spot?.y),
++    content: typeof spot?.content === 'string' ? spot.content : '',
++  }));
++}
++
++function toRoundedPercent(value) {
++  return Number(clampPercent(value).toFixed(2));
++}
++
++export default function HotspotEditor({ data, onChange }) {
++  const normalizedHotspots = React.useMemo(() => normalizeHotspots(data?.hotspots), [data?.hotspots]);
++  const [selectedIndex, setSelectedIndex] = React.useState(0);
++  const [draggingIndex, setDraggingIndex] = React.useState(null);
++  const previewRef = React.useRef(null);
++  const hotspotsRef = React.useRef(normalizedHotspots);
++  const dragIndexRef = React.useRef(null);
++
++  React.useEffect(() => {
++    hotspotsRef.current = normalizedHotspots;
++  }, [normalizedHotspots]);
++
++  React.useEffect(() => {
++    if (normalizedHotspots.length === 0) {
++      if (selectedIndex !== 0) setSelectedIndex(0);
++      return;
++    }
++    if (selectedIndex > normalizedHotspots.length - 1) {
++      setSelectedIndex(normalizedHotspots.length - 1);
++    }
++  }, [normalizedHotspots.length, selectedIndex]);
++
++  const updateHotspots = React.useCallback(
++    (nextHotspots) => {
++      onChange({ hotspots: nextHotspots });
++    },
++    [onChange],
++  );
++
++  const setHotspotField = React.useCallback(
++    (index, key, value) => {
++      const nextHotspots = hotspotsRef.current.map((spot, spotIndex) =>
++        spotIndex === index
++          ? {
++              ...spot,
++              [key]:
++                key === 'x' || key === 'y'
++                  ? toRoundedPercent(value)
++                  : value,
++            }
++          : spot,
++      );
++      hotspotsRef.current = nextHotspots;
++      updateHotspots(nextHotspots);
++    },
++    [updateHotspots],
++  );
++
++  const setHotspotPosition = React.useCallback(
++    (index, nextX, nextY) => {
++      const nextHotspots = hotspotsRef.current.map((spot, spotIndex) =>
++        spotIndex === index
++          ? {
++              ...spot,
++              x: toRoundedPercent(nextX),
++              y: toRoundedPercent(nextY),
++            }
++          : spot,
++      );
++      hotspotsRef.current = nextHotspots;
++      updateHotspots(nextHotspots);
++    },
++    [updateHotspots],
++  );
++
++  const removeHotspot = React.useCallback(
++    (index) => {
++      const nextHotspots = hotspotsRef.current.filter((_, spotIndex) => spotIndex !== index);
++      hotspotsRef.current = nextHotspots;
++      updateHotspots(nextHotspots);
++      setSelectedIndex((current) => {
++        if (nextHotspots.length === 0) return 0;
++        if (current > nextHotspots.length - 1) return nextHotspots.length - 1;
++        return current;
++      });
++      if (dragIndexRef.current === index) {
++        dragIndexRef.current = null;
++        setDraggingIndex(null);
++      }
++    },
++    [updateHotspots],
++  );
++
++  const addHotspot = React.useCallback(() => {
++    const nextHotspots = [...hotspotsRef.current, buildDefaultHotspot(hotspotsRef.current.length)];
++    hotspotsRef.current = nextHotspots;
++    updateHotspots(nextHotspots);
++    setSelectedIndex(nextHotspots.length - 1);
++  }, [updateHotspots]);
++
++  const getPointerPercent = React.useCallback((event) => {
++    const preview = previewRef.current;
++    if (!preview) return null;
++    const rect = preview.getBoundingClientRect();
++    if (!rect.width || !rect.height) return null;
++    const x = ((event.clientX - rect.left) / rect.width) * 100;
++    const y = ((event.clientY - rect.top) / rect.height) * 100;
++    return { x: toRoundedPercent(x), y: toRoundedPercent(y) };
++  }, []);
++
++  const applyDraggedPosition = React.useCallback(
++    (event) => {
++      const index = dragIndexRef.current;
++      if (!Number.isInteger(index)) return;
++      const point = getPointerPercent(event);
++      if (!point) return;
++      setHotspotPosition(index, point.x, point.y);
++    },
++    [getPointerPercent, setHotspotPosition],
++  );
++
++  React.useEffect(() => {
++    if (draggingIndex == null) return undefined;
++    const handlePointerMove = (event) => {
++      applyDraggedPosition(event);
++    };
++    const handlePointerUp = () => {
++      dragIndexRef.current = null;
++      setDraggingIndex(null);
++    };
++    window.addEventListener('pointermove', handlePointerMove);
++    window.addEventListener('pointerup', handlePointerUp);
++    window.addEventListener('pointercancel', handlePointerUp);
++    return () => {
++      window.removeEventListener('pointermove', handlePointerMove);
++      window.removeEventListener('pointerup', handlePointerUp);
++      window.removeEventListener('pointercancel', handlePointerUp);
++    };
++  }, [applyDraggedPosition, draggingIndex]);
++
++  const startDragging = (event, index) => {
++    event.preventDefault();
++    event.stopPropagation();
++    dragIndexRef.current = index;
++    setDraggingIndex(index);
++    setSelectedIndex(index);
++    applyDraggedPosition(event);
++  };
++
++  const hasImage = Boolean(String(data?.url || '').trim());
++  const hotspots = normalizedHotspots;
++
++  return (
++    <div className="space-y-3">
++      <div>
++        <label className="block text-xs font-bold text-slate-300 mb-1">Block Title</label>
++        <input
++          type="text"
++          value={data?.title || ''}
++          onChange={(event) => onChange({ title: event.target.value })}
++          className="w-full bg-slate-950 border border-slate-700 rounded p-2 text-white text-sm"
++        />
++      </div>
++      <div>
++        <label className="block text-xs font-bold text-slate-300 mb-1">Image URL</label>
++        <input
++          type="text"
++          value={data?.url || ''}
++          onChange={(event) => onChange({ url: event.target.value })}
++          className="w-full bg-slate-950 border border-slate-700 rounded p-2 text-white text-sm"
++          placeholder="https://... or /materials/image.jpg"
++        />
++      </div>
++      <div>
++        <label className="block text-xs font-bold text-slate-300 mb-1">Alt Text</label>
++        <input
++          type="text"
++          value={data?.alt || ''}
++          onChange={(event) => onChange({ alt: event.target.value })}
++          className="w-full bg-slate-950 border border-slate-700 rounded p-2 text-white text-sm"
++        />
++      </div>
++
++      <div className="rounded border border-slate-700 bg-slate-900 p-2">
++        <div
++          ref={previewRef}
++          className="relative rounded border border-slate-700 bg-black overflow-hidden min-h-[220px] select-none"
++        >
++          {hasImage ? (
++            <img
++              src={data.url}
++              alt={data?.alt || 'Hotspot preview'}
++              className="block w-full h-auto"
++              loading="lazy"
++              draggable={false}
++              onDragStart={(event) => event.preventDefault()}
++            />
++          ) : (
++            <div className="absolute inset-0 flex items-center justify-center p-4 text-center text-xs text-slate-400">
++              Paste an image URL to preview and drag hotspot markers.
++            </div>
++          )}
++          {hasImage
++            ? hotspots.map((spot, idx) => {
++                const isSelected = idx === selectedIndex;
++                const isDragging = idx === draggingIndex;
++                return (
++                  <button
++                    key={`hotspot-preview-marker-${idx}`}
++                    type="button"
++                    data-hotspot-editor-marker
++                    onPointerDown={(event) => startDragging(event, idx)}
++                    onClick={() => setSelectedIndex(idx)}
++                    style={{ left: `${spot.x}%`, top: `${spot.y}%` }}
++                    className={`absolute -translate-x-1/2 -translate-y-1/2 w-8 h-8 rounded-full border text-[11px] font-black touch-none ${
++                      isSelected || isDragging
++                        ? 'border-sky-300 bg-sky-500 text-slate-950 cursor-grabbing'
++                        : 'border-slate-200/80 bg-slate-900/90 text-white hover:bg-sky-500 hover:text-slate-950 cursor-grab'
++                    }`}
++                    title={spot.label || `Hotspot ${idx + 1}`}
++                    aria-label={spot.label || `Hotspot ${idx + 1}`}
++                  >
++                    {idx + 1}
++                  </button>
++                );
++              })
++            : null}
++        </div>
++        <p className="text-[10px] text-slate-500 mt-2">Drag hotspot dots directly on the image to position them.</p>
++      </div>
++
++      <div className="space-y-2">
++        <div className="flex items-center justify-between">
++          <label className="block text-xs font-bold text-slate-300">Hotspots</label>
++          <button
++            type="button"
++            onClick={addHotspot}
++            className="px-2 py-1 rounded bg-slate-700 hover:bg-slate-600 text-xs font-bold text-white inline-flex items-center gap-1"
++          >
++            <Plus size={12} /> Add Hotspot
++          </button>
++        </div>
++        {hotspots.length === 0 ? <p className="text-xs text-slate-500">No hotspots yet.</p> : null}
++        {hotspots.map((spot, idx) => {
++          const isSelected = idx === selectedIndex;
++          return (
++            <div
++              key={`hotspot-editor-item-${idx}`}
++              className={`rounded border p-2 ${
++                isSelected ? 'border-sky-500 bg-slate-900' : 'border-slate-700 bg-slate-950/60'
++              }`}
++            >
++              <div className="grid grid-cols-12 gap-2 items-center">
++                <button
++                  type="button"
++                  onClick={() => setSelectedIndex(idx)}
++                  className={`col-span-1 w-7 h-7 rounded-full border text-[11px] font-black justify-self-start ${
++                    isSelected
++                      ? 'border-sky-300 bg-sky-500 text-slate-950'
++                      : 'border-slate-200/80 bg-slate-900/85 text-white'
++                  }`}
++                  title="Select hotspot"
++                >
++                  {idx + 1}
++                </button>
++                <button
++                  type="button"
++                  onClick={() => setSelectedIndex(idx)}
++                  className="col-span-7 text-left text-xs font-bold text-white truncate"
++                  title={spot.label || `Hotspot ${idx + 1}`}
++                >
++                  {spot.label || `Hotspot ${idx + 1}`}
++                </button>
++                <p className="col-span-3 text-[10px] text-slate-400 font-mono text-right">
++                  {formatPercent(spot.x)}%, {formatPercent(spot.y)}%
++                </p>
++                <button
++                  type="button"
++                  onClick={() => removeHotspot(idx)}
++                  className="col-span-1 bg-rose-600 hover:bg-rose-500 text-white rounded text-xs h-7"
++                  title="Remove hotspot"
++                >
++                  <Trash2 size={12} className="mx-auto" />
++                </button>
++              </div>
++              {isSelected ? (
++                <div className="space-y-2 mt-2">
++                  <div>
++                    <label className="block text-[10px] font-bold uppercase tracking-wide text-slate-400 mb-1">Label</label>
++                    <input
++                      type="text"
++                      value={spot.label || ''}
++                      onChange={(event) => setHotspotField(idx, 'label', event.target.value)}
++                      className="w-full bg-slate-950 border border-slate-700 rounded p-2 text-white text-xs"
++                    />
++                  </div>
++                  <div>
++                    <label className="block text-[10px] font-bold uppercase tracking-wide text-slate-400 mb-1">Content</label>
++                    <textarea
++                      value={spot.content || ''}
++                      onChange={(event) => setHotspotField(idx, 'content', event.target.value)}
++                      className="w-full h-20 bg-slate-950 border border-slate-700 rounded p-2 text-white text-xs"
++                    />
++                  </div>
++                </div>
++              ) : null}
++            </div>
++          );
++        })}
++      </div>
++    </div>
++  );
++}

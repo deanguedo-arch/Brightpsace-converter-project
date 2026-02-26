@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en" style="background: #0f172a !important; background-color: #0f172a !important;">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AROUSAL | New Course</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css?family=Inter:ital,wght@0,400;0,700;1,400;1,900&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html, body {
+      background: #0f172a !important;
+      background-color: #0f172a !important;
+      font-family: 'Inter', sans-serif;
+    }
+    body {
+      min-height: 100vh;
+    }
+    .custom-scroll::-webkit-scrollbar { width: 6px; }
+    .custom-scroll::-webkit-scrollbar-track { background: #1e293b; }
+    .custom-scroll::-webkit-scrollbar-thumb { background: #475569; border-radius: 3px; }
+    .glass { background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(10px); }
+    .material-card { transition: all 0.2s; }
+    .material-card:hover { transform: translateY(-2px); box-shadow: 0 10px 40px rgba(0,0,0,0.3); }
+    .assessment-container [class*="bg-slate-9"],
+    .assessment-container [class*="bg-slate-8"],
+    .assessment-container [class*="bg-slate-7"],
+    .assessment-container [class*="bg-slate-6"],
+    .assessment-container [class*="bg-gray-9"],
+    .assessment-container [class*="bg-gray-8"],
+    .assessment-container [class*="bg-gray-7"] {
+      background: var(--cf-container-bg) !important;
+    }
+    :root { --cf-container-bg: rgba(15, 23, 42, 0.8); }
+    
+    
+  </style>
+  <script>
+    (function() {
+      function setBackground() {
+        document.documentElement.style.backgroundColor = '#0f172a';
+        document.documentElement.style.background = '#0f172a';
+        if (document.body) {
+          document.body.style.backgroundColor = '#0f172a';
+          document.body.style.background = '#0f172a';
+        }
+      }
+      setBackground();
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', setBackground);
+      }
+      setTimeout(setBackground, 100);
+      setTimeout(setBackground, 500);
+    })();
+  </script>
+</head>
+<body class="text-white custom-scroll" style="background: #0f172a !important; background-color: #0f172a !important;">
+  <header class="sticky top-0 z-50 bg-slate-900/95 backdrop-blur border-b border-slate-700">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="../index.html" class="flex items-center gap-2 text-slate-400 hover:text-purple-400 transition-colors text-sm font-bold">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+        </svg>
+        Back to Course
+      </a>
+      <h1 class="text-sm font-bold text-white uppercase tracking-wider">AROUSAL</h1>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-6 py-8">
+    <div class="w-full rounded-xl overflow-hidden border border-slate-700 shadow-2xl">
+      <iframe srcdoc="<!DOCTYPE html>
+<html lang=&quot;en&quot;>
+<head>
+    <meta charset=&quot;UTF-8&quot;>
+    <meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;>
+    <title>Elite Operator Toolkit: Phase 2-4</title>
+    <script src=&quot;https://cdn.tailwindcss.com&quot;></script>
+    <link href=&quot;https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,700;1,400;1,900&family=JetBrains+Mono:wght@700&display=swap&quot; rel=&quot;stylesheet&quot;>
+    <style>
+        body { font-family: &#39;Inter&#39;, sans-serif; background-color: #020617; color: #e2e8f0; margin: 0; min-height: 100vh; }
+        .mono { font-family: &#39;JetBrains Mono&#39;, monospace; }
+        .glass { background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(10px); border: 1px solid rgba(51, 65, 85, 0.5); }
+        input, textarea, select { background: #0f172a !important; border: 1px solid #1e293b !important; transition: all 0.2s; color: #e2e8f0; }
+        input:focus, textarea:focus, select:focus { border-color: #0ea5e9 !important; outline: none; box-shadow: 0 0 0 1px #0ea5e9; }
+        
+        /* Rubric Buttons */
+        .score-btn { background: #0f172a; border: 1px solid #1e293b; color: #64748b; transition: all 0.2s; width: 36px; height: 36px; font-size: 0.8rem; }
+        .score-btn.active { background: #0ea5e9; border-color: #0ea5e9; color: #020617; font-weight: 900; }
+        
+        /* Tabs & Nav */
+        .step-content { display: none; }
+        .step-content.active { display: block; }
+        .nav-btn.active { background: #0ea5e9; color: #020617; font-weight: 900; border-color: #0ea5e9; }
+        
+        /* Rubric Table Styling */
+        .rubric-cell { cursor: pointer; transition: all 0.2s; border: 1px solid transparent; }
+        .rubric-cell:hover { background: rgba(255,255,255,0.05); }
+        .active-proficient { background: rgba(16, 185, 129, 0.2); border: 1px solid #10b981; color: #10b981; }
+        .active-developing { background: rgba(245, 158, 11, 0.2); border: 1px solid #f59e0b; color: #f59e0b; }
+        .active-emerging { background: rgba(244, 63, 94, 0.2); border: 1px solid #f43f5e; color: #f43f5e; }
+        
+        .helper-text { font-size: 8px; color: #64748b; font-style: italic; margin-top: 4px; line-height: 1.2; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700; }
+        
+        /* Save Status Pulse */
+        @keyframes pulse-green {
+            0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+            70% { box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+        .status-saved { animation: pulse-green 2s infinite; }
+    </style>
+</head>
+<body class=&quot;p-4 md:p-8&quot;>
+    <div class=&quot;max-w-6xl mx-auto&quot;>
+        
+        <header class=&quot;mb-8 text-center&quot;>
+            <h1 class=&quot;text-3xl font-black italic tracking-tighter text-white uppercase mb-2 text-sky-500&quot;>Elite Operator Toolkit</h1>
+            <p class=&quot;text-[10px] font-mono uppercase tracking-[0.3em] text-slate-500 mb-6 font-bold underline decoration-sky-500/30 underline-offset-4&quot;>Regulation Engine: Tactical Assignment</p>
+            
+            <div class=&quot;flex flex-wrap justify-center gap-3 mb-6 bg-slate-900/50 p-3 rounded-xl border border-slate-800 max-w-2xl mx-auto&quot;>
+                <div class=&quot;flex items-center gap-2 px-3&quot;>
+                    <div id=&quot;save-indicator&quot; class=&quot;w-2 h-2 rounded-full bg-slate-600&quot;></div>
+                    <span id=&quot;save-text&quot; class=&quot;text-[9px] uppercase font-bold text-slate-500 tracking-widest&quot;>System Ready</span>
+                </div>
+                <div class=&quot;w-px h-6 bg-slate-800 mx-2 hidden sm:block&quot;></div>
+                <button onclick=&quot;downloadBackup()&quot; class=&quot;flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-white px-3 py-1.5 rounded-lg text-[10px] uppercase font-bold tracking-wider transition-colors border border-slate-700&quot;>
+                    <svg xmlns=&quot;http://www.w3.org/2000/svg&quot; class=&quot;h-3 w-3&quot; fill=&quot;none&quot; viewBox=&quot;0 0 24 24&quot; stroke=&quot;currentColor&quot;><path stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; stroke-width=&quot;2&quot; d=&quot;M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4&quot; /></svg>
+                    Save Backup File
+                </button>
+                <button onclick=&quot;document.getElementById(&#39;file-upload&#39;).click()&quot; class=&quot;flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-sky-400 px-3 py-1.5 rounded-lg text-[10px] uppercase font-bold tracking-wider transition-colors border border-slate-700&quot;>
+                    <svg xmlns=&quot;http://www.w3.org/2000/svg&quot; class=&quot;h-3 w-3&quot; fill=&quot;none&quot; viewBox=&quot;0 0 24 24&quot; stroke=&quot;currentColor&quot;><path stroke-linecap=&quot;round&quot; stroke-linejoin=&quot;round&quot; stroke-width=&quot;2&quot; d=&quot;M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12&quot; /></svg>
+                    Load Backup
+                </button>
+                <input type=&quot;file&quot; id=&quot;file-upload&quot; accept=&quot;.json&quot; style=&quot;display: none;&quot; onchange=&quot;loadBackup(this)&quot;>
+            </div>
+
+            <div class=&quot;flex justify-center gap-2 overflow-x-auto pb-2 px-2&quot;>
+                <button onclick=&quot;showStep(0)&quot; class=&quot;nav-btn active px-4 py-2 rounded-lg border border-slate-700 text-[10px] font-bold uppercase tracking-widest mono transition-all flex-shrink-0&quot;>Briefing</button>
+                <button onclick=&quot;showStep(1)&quot; class=&quot;nav-btn px-4 py-2 rounded-lg border border-slate-700 text-[10px] font-bold uppercase tracking-widest mono transition-all flex-shrink-0&quot;>01 Stress Reset</button>
+                <button onclick=&quot;showStep(2)&quot; class=&quot;nav-btn px-4 py-2 rounded-lg border border-slate-700 text-[10px] font-bold uppercase tracking-widest mono transition-all flex-shrink-0&quot;>02 Arousal</button>
+                <button onclick=&quot;showStep(3)&quot; class=&quot;nav-btn px-4 py-2 rounded-lg border border-slate-800 text-[10px] font-bold uppercase tracking-widest mono transition-all flex-shrink-0&quot;>03 Targeting</button>
+                <button onclick=&quot;showStep(4)&quot; class=&quot;nav-btn px-4 py-2 rounded-lg border border-slate-800 text-[10px] font-bold uppercase tracking-widest mono transition-all flex-shrink-0&quot;>04 Confidence</button>
+                <button onclick=&quot;showStep(5)&quot; class=&quot;nav-btn px-4 py-2 rounded-lg border border-slate-800 text-[10px] font-bold uppercase tracking-widest mono transition-all flex-shrink-0&quot;>Review & Print</button>
+            </div>
+        </header>
+
+        <div class=&quot;glass rounded-3xl shadow-2xl overflow-hidden min-h-[500px]&quot;>
+            
+            <div id=&quot;step0&quot; class=&quot;step-content active&quot;>
+                <div class=&quot;relative px-6 py-4 border-b border-slate-800 bg-slate-900/50&quot;>
+                    <div class=&quot;absolute top-0 left-0 w-full h-1 bg-sky-500&quot;></div>
+                    <h2 class=&quot;text-xl font-bold text-white uppercase italic tracking-tight&quot;>System Briefing: The Regulation Engine</h2>
+                </div>
+                <div class=&quot;p-8 space-y-8 text-center&quot;>
+                    <div class=&quot;max-w-3xl mx-auto space-y-6 text-left&quot;>
+                        <p class=&quot;text-slate-400 text-sm italic leading-relaxed&quot;>
+                            Elite performance is defined by the ability to regulate your internal operating system under pressure. While physical skill sets the floor, your mental fitness sets the ceiling. This assignment uses four <strong>Manual Overrides</strong> to ensure you stay in your <strong>Ideal Performance State (IPS)</strong>.
+                        </p>
+                        
+                        <div class=&quot;bg-sky-500/10 border border-sky-500/30 p-4 rounded-xl flex flex-col gap-4 mb-2&quot;>
+                            <h3 class=&quot;text-sky-400 font-bold uppercase text-[10px] tracking-widest&quot;>Dashboard Logic: Read then Regulate</h3>
+                            <div class=&quot;grid grid-cols-1 md:grid-cols-2 gap-4&quot;>
+                                <div class=&quot;p-3 bg-slate-900/50 rounded border border-slate-700&quot;>
+                                    <span class=&quot;text-[9px] font-black text-rose-400 uppercase block mb-1&quot;>Somatic Indicators (Body)</span>
+                                    <p class=&quot;text-[10px] text-slate-400&quot;>Cold hands, butterflies, muscle tension, sweating.</p>
+                                </div>
+                                <div class=&quot;p-3 bg-slate-900/50 rounded border border-slate-700&quot;>
+                                    <span class=&quot;text-[9px] font-black text-amber-400 uppercase block mb-1&quot;>Cognitive Indicators (Mind)</span>
+                                    <p class=&quot;text-[10px] text-slate-400&quot;>Negative self-talk, doubt, inability to concentrate.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class=&quot;flex justify-center pt-6&quot;>
+                            <button onclick=&quot;showStep(1)&quot; class=&quot;bg-sky-600 px-12 py-4 rounded-xl text-white font-black uppercase text-xs tracking-[0.2em] hover:bg-sky-500 transition-all shadow-lg active:scale-95&quot;>Initialize Stations</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id=&quot;step1&quot; class=&quot;step-content&quot;>
+                <div class=&quot;relative px-6 py-4 border-b border-slate-800 bg-slate-900/50&quot;>
+                    <div class=&quot;absolute top-0 left-0 w-full h-1 bg-rose-500&quot;></div>
+                    <h2 class=&quot;text-xl font-bold text-white uppercase italic tracking-tight&quot;>Station 01: The Stress Loop Reset</h2>
+                </div>
+                <div class=&quot;p-8 space-y-8&quot;>
+                    <div class=&quot;grid grid-cols-1 md:grid-cols-2 gap-10&quot;>
+                        <div class=&quot;space-y-4&quot;>
+                            <h3 class=&quot;text-[10px] font-bold text-slate-500 uppercase mono italic underline tracking-widest&quot;>The Pivot Point</h3>
+                            <p class=&quot;text-sm text-slate-300 leading-relaxed&quot;>
+                                Breathing is your manual override switch. It intercepts the Stress Process Loop at the moment a demand is perceived as a &quot;threat.&quot; 
+                                <strong class=&quot;text-rose-400&quot;>The goal is to identify a specific time you can execute this trigger and how the breath anchor will help you stay present in the moment.</strong>
+                            </p>
+                            <div class=&quot;bg-rose-500/10 p-3 rounded border border-rose-500/30&quot;>
+                                <span class=&quot;text-[9px] text-rose-300 font-bold uppercase&quot;>Warning:</span>
+                                <p class=&quot;text-[10px] text-rose-200&quot;>Unchecked loop acceleration leads to performance crash.</p>
+                            </div>
+                        </div>
+                        <div class=&quot;space-y-6&quot;>
+                            <div>
+                                <label class=&quot;block text-[10px] font-bold uppercase text-sky-500 mb-2 mono&quot;>Deployment Scenario</label>
+                                <input type=&quot;text&quot; id=&quot;breath_scenario&quot; oninput=&quot;saveData()&quot; placeholder=&quot;When exactly will you use this? (e.g. Between points...)&quot; class=&quot;w-full rounded-lg p-3 text-xs italic&quot;>
+                                <p class=&quot;helper-text&quot;>Identify a specific time you can execute this trigger.</p>
+                            </div>
+                            <div>
+                                <label class=&quot;block text-[10px] font-bold uppercase text-sky-500 mb-2 mono&quot;>Centering Action Detail</label>
+                                <textarea id=&quot;breath_detail&quot; oninput=&quot;saveData()&quot; placeholder=&quot;Describe your rhythmic diaphragmatic breathing habit...&quot; class=&quot;w-full h-32 rounded-lg p-3 text-xs italic resize-none&quot;></textarea>
+                                <p class=&quot;helper-text&quot;>How will this breath anchor help you stay present in the moment?</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class=&quot;flex justify-between pt-4&quot;><button onclick=&quot;showStep(0)&quot; class=&quot;text-slate-500 font-bold uppercase text-[10px] tracking-widest&quot;>← Back</button><button onclick=&quot;showStep(2)&quot; class=&quot;bg-sky-600 px-8 py-3 rounded-lg text-white font-bold uppercase text-[10px] tracking-widest&quot;>Next Station →</button></div>
+                </div>
+            </div>
+
+            <div id=&quot;step2&quot; class=&quot;step-content&quot;>
+                <div class=&quot;relative px-6 py-4 border-b border-slate-800 bg-slate-900/50&quot;>
+                    <div class=&quot;absolute top-0 left-0 w-full h-1 bg-amber-500&quot;></div>
+                    <h2 class=&quot;text-xl font-bold text-white uppercase italic tracking-tight&quot;>Station 02: Arousal Volume Control</h2>
+                </div>
+                <div class=&quot;p-8 space-y-8&quot;>
+                    <div class=&quot;grid grid-cols-1 md:grid-cols-2 gap-10&quot;>
+                        <div class=&quot;space-y-4&quot;>
+                            <h3 class=&quot;text-[10px] font-bold text-slate-500 uppercase mono italic underline tracking-widest&quot;>The Inverted-U</h3>
+                            <p class=&quot;text-sm text-slate-300 leading-relaxed&quot;>Performance peaks at moderate arousal. You must &#39;down-regulate&#39; to discharge tension or &#39;up-regulate&#39; to wake the nervous system.</p>
+                        </div>
+                        <div class=&quot;space-y-6&quot;>
+                            <div>
+                                <label class=&quot;block text-[10px] font-bold uppercase text-amber-500 mb-2 mono&quot;>Down-Regulation (Relaxation)</label>
+                                <p class=&quot;text-[10px] text-slate-400 italic mb-2&quot;><strong>PMR (Progressive Muscle Relaxation)</strong> is a technique where you systematically tense and then relax specific muscle groups to release physical tension.</p>
+                                <textarea id=&quot;relax_plan&quot; oninput=&quot;saveData()&quot; placeholder=&quot;List muscle groups for your PMR routine...&quot; class=&quot;w-full h-24 rounded-lg p-3 text-xs italic resize-none&quot;></textarea>
+                                <p class=&quot;helper-text&quot;>Describe your routine to discharge somatic tension.</p>
+                            </div>
+                            <div>
+                                <label class=&quot;block text-[10px] font-bold uppercase text-rose-500 mb-2 mono&quot;>Up-Regulation (Activation)</label>
+                                <p class=&quot;text-[10px] text-slate-400 italic mb-2&quot;><strong>Up-Regulation</strong> involves using physical actions or environmental triggers to increase heart rate and alertness when energy is too low.</p>
+                                <textarea id=&quot;active_plan&quot; oninput=&quot;saveData()&quot; placeholder=&quot;List your &#39;Psych-Up&#39; triggers (Music, Cues, Physical actions)...&quot; class=&quot;w-full h-24 rounded-lg p-3 text-xs italic resize-none&quot;></textarea>
+                                <p class=&quot;helper-text&quot;>Triggers used to discharge apathy and enter the zone.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class=&quot;flex justify-between pt-4&quot;><button onclick=&quot;showStep(1)&quot; class=&quot;text-slate-500 font-bold uppercase text-[10px] tracking-widest&quot;>← Back</button><button onclick=&quot;showStep(3)&quot; class=&quot;bg-sky-600 px-8 py-3 rounded-lg text-white font-bold uppercase text-[10px] tracking-widest&quot;>Next Station →</button></div>
+                </div>
+            </div>
+
+            <div id=&quot;step3&quot; class=&quot;step-content&quot;>
+                <div class=&quot;relative px-6 py-4 border-b border-slate-800 bg-slate-900/50&quot;>
+                    <div class=&quot;absolute top-0 left-0 w-full h-1 bg-emerald-500&quot;></div>
+                    <h2 class=&quot;text-xl font-bold text-white uppercase italic tracking-tight&quot;>Station 03: The Focus Filter</h2>
+                </div>
+                <div class=&quot;p-8 space-y-8&quot;>
+                    <div class=&quot;grid grid-cols-1 md:grid-cols-2 gap-10&quot;>
+                        <div class=&quot;space-y-4&quot;>
+                            <h3 class=&quot;text-[10px] font-bold text-slate-500 uppercase mono italic underline tracking-widest&quot;>Attentional Narrowing</h3>
+                            <p class=&quot;text-sm text-slate-300 leading-relaxed&quot;>
+                                Under high stress, your peripheral vision and mental focus shrink—often called <strong>&quot;Tunnel Vision.&quot;</strong> You lose the big picture. Cue words act as &quot;Decoder Keys&quot; that force the system to lock back onto task-relevant targets.
+                            </p>
+                            <div class=&quot;bg-emerald-500/10 p-3 rounded border border-emerald-500/30&quot;>
+                                <span class=&quot;text-[9px] text-emerald-300 font-bold uppercase&quot;>The Goal:</span>
+                                <p class=&quot;text-[10px] text-emerald-200&quot;>Shift from internal worry (Emotion) to external cues (Action).</p>
+                            </div>
+                        </div>
+                        <div class=&quot;space-y-6&quot;>
+                            <div>
+                                <label class=&quot;block text-[10px] font-bold uppercase text-sky-400 mb-2 mono&quot;>Instructional Decoder</label>
+                                <input type=&quot;text&quot; id=&quot;cue_inst&quot; oninput=&quot;saveData()&quot; placeholder=&quot;e.g., &#39;Elbows in&#39;, &#39;Smooth&#39;...&quot; class=&quot;w-full rounded-lg p-3 text-xs font-black italic&quot;>
+                                <p class=&quot;helper-text&quot;>Create a 1-2 word key specifically to FIX sloppy mechanics or technical errors.</p>
+                            </div>
+                            <div>
+                                <label class=&quot;block text-[10px] font-bold uppercase text-amber-500 mb-2 mono&quot;>Motivational Decoder</label>
+                                <input type=&quot;text&quot; id=&quot;cue_mot&quot; oninput=&quot;saveData()&quot; placeholder=&quot;e.g., &#39;Power&#39;, &#39;Explode&#39;...&quot; class=&quot;w-full rounded-lg p-3 text-xs font-black italic&quot;>
+                                <p class=&quot;helper-text&quot;>Create a 1-2 word key specifically to FIX low energy or effort when drive is fading.</p>
+                            </div>
+                            <div>
+                                <label class=&quot;block text-[10px] font-bold uppercase text-slate-400 mb-2 mono italic underline&quot;>Radar Jamming Scenario</label>
+                                <textarea id=&quot;jam_scenario&quot; oninput=&quot;saveData()&quot; placeholder=&quot;Describe a specific high-pressure moment where you lose focus...&quot; class=&quot;w-full h-24 rounded-lg p-3 text-xs italic resize-none&quot;></textarea>
+                                <p class=&quot;helper-text&quot;>Identify the exact moment panic sets in and which cue breaks the jam.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class=&quot;flex justify-between pt-4&quot;><button onclick=&quot;showStep(2)&quot; class=&quot;text-slate-500 font-bold uppercase text-[10px] tracking-widest&quot;>← Back</button><button onclick=&quot;showStep(4)&quot; class=&quot;bg-sky-600 px-8 py-3 rounded-lg text-white font-bold uppercase text-[10px] tracking-widest&quot;>Next Station →</button></div>
+                </div>
+            </div>
+
+            <div id=&quot;step4&quot; class=&quot;step-content&quot;>
+                <div class=&quot;relative px-6 py-4 border-b border-slate-800 bg-slate-900/50&quot;>
+                    <div class=&quot;absolute top-0 left-0 w-full h-1 bg-sky-500&quot;></div>
+                    <h2 class=&quot;text-xl font-bold text-white uppercase italic tracking-tight&quot;>Station 04: Confidence Builder</h2>
+                </div>
+                <div class=&quot;p-8 space-y-8&quot;>
+                    <div class=&quot;grid grid-cols-1 md:grid-cols-2 gap-10&quot;>
+                        <div class=&quot;space-y-4&quot;>
+                            <h3 class=&quot;text-[10px] font-bold text-slate-500 uppercase mono italic underline tracking-widest&quot;>Certainty Logic</h3>
+                            <p class=&quot;text-sm text-slate-300 leading-relaxed&quot;>
+                                Uncertainty generates anxiety; Certainty generates confidence. You cannot control the outcome (Winning), but you can control the process (Mechanics). By shifting your focus to what you control, you build a &quot;High Confidence&quot; state.
+                            </p>
+                            <div class=&quot;bg-slate-900 p-4 border border-slate-700 rounded-xl space-y-2&quot;>
+                                <h4 class=&quot;text-[10px] font-black text-white uppercase&quot;>S.M.A.R.T. Definition</h4>
+                                <ul class=&quot;text-[9px] text-slate-400 space-y-1 font-mono&quot;>
+                                    <li><strong class=&quot;text-sky-400&quot;>S</strong>PECIFIC: Clear and defined.</li>
+                                    <li><strong class=&quot;text-sky-400&quot;>M</strong>EASURABLE: Can be tracked.</li>
+                                    <li><strong class=&quot;text-sky-400&quot;>A</strong>CHIEVABLE: Realistic to your skill.</li>
+                                    <li><strong class=&quot;text-sky-400&quot;>R</strong>ELEVANT: Matters to your sport.</li>
+                                    <li><strong class=&quot;text-sky-400&quot;>T</strong>IME-BOUND: Has a deadline.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class=&quot;space-y-6&quot;>
+                            <div class=&quot;p-4 bg-emerald-500/10 border border-emerald-500/30 rounded-xl&quot;>
+                                <label class=&quot;block text-[10px] font-bold uppercase text-emerald-400 mb-2 mono underline italic&quot;>Process Goal (100% Control)</label>
+                                <input type=&quot;text&quot; id=&quot;goal_proc&quot; oninput=&quot;saveData()&quot; placeholder=&quot;Specific form or mechanics goal...&quot; class=&quot;w-full rounded-lg p-3 text-xs font-black italic&quot;>
+                                <p class=&quot;helper-text&quot;>This goal builds high confidence because it is entirely under your power.</p>
+                            </div>
+                            <div class=&quot;grid grid-cols-2 gap-4&quot;>
+                                <div class=&quot;p-4 bg-slate-900 border border-slate-800 rounded-xl&quot;>
+                                    <label class=&quot;block text-[10px] font-bold uppercase text-amber-500 mb-2 mono&quot;>Performance Goal</label>
+                                    <input type=&quot;text&quot; id=&quot;goal_perf&quot; oninput=&quot;saveData()&quot; placeholder=&quot;e.g. 80% accuracy...&quot; class=&quot;w-full rounded-lg p-2 text-xs italic&quot;>
+                                    <p class=&quot;helper-text&quot;>Partial Control.</p>
+                                </div>
+                                <div class=&quot;p-4 bg-slate-900 border border-slate-800 rounded-xl&quot;>
+                                    <label class=&quot;block text-[10px] font-bold uppercase text-rose-500 mb-2 mono&quot;>Outcome Goal</label>
+                                    <input type=&quot;text&quot; id=&quot;goal_out&quot; oninput=&quot;saveData()&quot; placeholder=&quot;e.g. Winning...&quot; class=&quot;w-full rounded-lg p-2 text-xs italic&quot;>
+                                    <p class=&quot;helper-text&quot;>Low Control.</p>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <label class=&quot;block text-[10px] font-bold uppercase text-white mb-2 mono italic underline leading-none&quot;>Final S.M.A.R.T. Goal Statement</label>
+                                <textarea id=&quot;smart_final&quot; oninput=&quot;saveData()&quot; placeholder=&quot;Write out your full goal statement here using the SMART criteria above...&quot; class=&quot;w-full h-24 rounded-lg p-3 text-xs italic resize-none border-2 border-slate-700 focus:border-sky-500&quot;></textarea>
+                                <p class=&quot;helper-text&quot;>Combine your goals into one clear sentence.</p>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class=&quot;flex justify-between pt-4&quot;><button onclick=&quot;showStep(3)&quot; class=&quot;text-slate-500 font-bold uppercase text-[10px] tracking-widest&quot;>← Back</button><button onclick=&quot;showStep(5)&quot; class=&quot;bg-sky-600 px-8 py-3 rounded-lg text-white font-bold uppercase text-[10px] tracking-widest&quot;>Review & Export →</button></div>
+                </div>
+            </div>
+
+            <div id=&quot;step5&quot; class=&quot;step-content&quot;>
+                <div class=&quot;relative px-6 py-4 border-b border-slate-800 bg-slate-900/50&quot;>
+                    <div class=&quot;absolute top-0 left-0 w-full h-1 bg-emerald-500&quot;></div>
+                    <h2 class=&quot;text-xl font-bold text-white uppercase italic tracking-tight&quot;>Final Review & Rubric</h2>
+                </div>
+                <div class=&quot;p-8 space-y-12&quot;>
+                    <div class=&quot;grid grid-cols-1 lg:grid-cols-2 gap-8&quot;>
+                        <div>
+                            <label class=&quot;block text-[10px] font-bold uppercase text-slate-500 mb-4 tracking-widest mono italic underline underline-offset-2&quot;>Mental Fitness Assessment</label>
+                            <div id=&quot;sc-container&quot; class=&quot;space-y-4&quot;></div>
+                            <div class=&quot;border-t border-slate-800 mt-6 pt-6 flex justify-between items-center&quot;><span class=&quot;text-[10px] uppercase font-bold text-slate-500 tracking-[0.2em]&quot;>Readiness Score</span><div class=&quot;text-4xl font-black italic text-emerald-500 leading-none&quot;><span id=&quot;total-score&quot;>00</span><span class=&quot;text-xl text-slate-700 font-normal not-italic&quot;>/25</span></div></div>
+                        </div>
+                        <div class=&quot;space-y-6&quot;>
+                            <label class=&quot;block text-[10px] font-bold uppercase text-sky-400 mb-2 tracking-widest mono italic underline leading-none underline-offset-4&quot;>Integration Narrative (Required)</label>
+                            <textarea id=&quot;final_narrative&quot; oninput=&quot;saveData()&quot; placeholder=&quot;Explain how you will use these four stations to monitor your indicators and regulate your performance state...&quot; class=&quot;w-full h-[240px] rounded-xl p-4 text-sm resize-none text-slate-200 border-2 border-sky-500/20 focus:border-sky-500 transition-all&quot;></textarea>
+                            <p class=&quot;helper-text&quot;>Prove your understanding: How do these tools prevent the &quot;Crash&quot;?</p>
+                        </div>
+                    </div>
+
+                    <div class=&quot;border-t border-slate-800 pt-8&quot;>
+                        <label class=&quot;block text-[10px] font-bold uppercase text-emerald-500 mb-4 tracking-widest mono italic underline underline-offset-4&quot;>Tactical Rubric</label>
+                        <div class=&quot;overflow-x-auto glass rounded-2xl border border-slate-800 shadow-xl&quot;>
+                            <table class=&quot;w-full text-left text-[10px] border-collapse min-w-[700px]&quot;>
+                                <thead>
+                                    <tr class=&quot;bg-slate-900 border-b border-slate-800&quot;>
+                                        <th class=&quot;p-4 text-slate-500 uppercase font-black&quot;>Criteria</th>
+                                        <th class=&quot;p-4 text-emerald-400 uppercase font-black tracking-widest&quot;>Proficient (4-5)</th>
+                                        <th class=&quot;p-4 text-amber-400 uppercase font-black tracking-widest&quot;>Developing (2-3)</th>
+                                        <th class=&quot;p-4 text-rose-400 uppercase font-black tracking-widest&quot;>Emerging (0-1)</th>
+                                    </tr>
+                                </thead>
+                                <tbody class=&quot;text-[10px] leading-relaxed italic text-slate-400&quot;>
+                                    <tr class=&quot;border-b border-slate-800/50&quot;><td class=&quot;p-4 font-bold uppercase text-white mono&quot;>Stress Reset</td><td onclick=&quot;setScore(&#39;reset&#39;, 5)&quot; id=&quot;reset-5&quot; class=&quot;rubric-cell p-4&quot;>Centering action is clearly defined (diaphragm) with a specific time trigger. Breath anchor logic is clear.</td><td onclick=&quot;setScore(&#39;reset&#39;, 3)&quot; id=&quot;reset-3&quot; class=&quot;rubric-cell p-4&quot;>Breathing technique mentioned but lacks specific trigger or physiological detail.</td><td onclick=&quot;setScore(&#39;reset&#39;, 1)&quot; id=&quot;reset-1&quot; class=&quot;rubric-cell p-4&quot;>Missing centering action or trigger.</td></tr>
+                                    <tr class=&quot;border-b border-slate-800/50&quot;><td class=&quot;p-4 font-bold uppercase text-white mono&quot;>Arousal Tuning</td><td onclick=&quot;setScore(&#39;tune&#39;, 5)&quot; id=&quot;tune-5&quot; class=&quot;rubric-cell p-4&quot;>Clear distinction between Up/Down regulation. PMR definition is accurate. Tools are actionable.</td><td onclick=&quot;setScore(&#39;tune&#39;, 3)&quot; id=&quot;tune-3&quot; class=&quot;rubric-cell p-4&quot;>Tools identified but generic. Lacks personal specificity or clear definition of PMR.</td><td onclick=&quot;setScore(&#39;tune&#39;, 1)&quot; id=&quot;tune-1&quot; class=&quot;rubric-cell p-4&quot;>Incomplete tuning strategies.</td></tr>
+                                    <tr class=&quot;border-b border-slate-800/50&quot;><td class=&quot;p-4 font-bold uppercase text-white mono&quot;>Targeting (Cues)</td><td onclick=&quot;setScore(&#39;focus&#39;, 5)&quot; id=&quot;focus-5&quot; class=&quot;rubric-cell p-4&quot;>Instructional (Technical) & Motivational (Energy) cues are distinct. Scenario breaks the &#39;jam&#39;.</td><td onclick=&quot;setScore(&#39;focus&#39;, 3)&quot; id=&quot;focus-3&quot; class=&quot;rubric-cell p-4&quot;>Cues are too long or vague. No distinction between instructional/motivational function.</td><td onclick=&quot;setScore(&#39;focus&#39;, 1)&quot; id=&quot;focus-1&quot; class=&quot;rubric-cell p-4&quot;>Missing cues or scenario.</td></tr>
+                                    <tr class=&quot;border-b border-slate-800/50&quot;><td class=&quot;p-4 font-bold uppercase text-white mono&quot;>Confidence</td><td onclick=&quot;setScore(&#39;goals&#39;, 5)&quot; id=&quot;goals-5&quot; class=&quot;rubric-cell p-4&quot;>Full SMART statement is written. Process goal is 100% controllable.</td><td onclick=&quot;setScore(&#39;goals&#39;, 3)&quot; id=&quot;goals-3&quot; class=&quot;rubric-cell p-4&quot;>Process goal relies on partial external factors. SMART statement missing or incomplete.</td><td onclick=&quot;setScore(&#39;goals&#39;, 1)&quot; id=&quot;goals-1&quot; class=&quot;rubric-cell p-4&quot;>Goals are confused (e.g. Outcome listed as Process).</td></tr>
+                                    <tr><td class=&quot;p-4 font-bold uppercase text-white mono&quot;>Integration</td><td onclick=&quot;setScore(&#39;intel&#39;, 5)&quot; id=&quot;intel-5&quot; class=&quot;rubric-cell p-4&quot;>Narrative demonstrates understanding of the Dashboard (Somatic/Cognitive) and Regulation.</td><td onclick=&quot;setScore(&#39;intel&#39;, 3)&quot; id=&quot;intel-3&quot; class=&quot;rubric-cell p-4&quot;>Restates definitions without demonstrating personal application or logic.</td><td onclick=&quot;setScore(&#39;intel&#39;, 1)&quot; id=&quot;intel-1&quot; class=&quot;rubric-cell p-4&quot;>Incomplete narrative.</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class=&quot;flex flex-col md:flex-row gap-4 pt-8&quot;>
+                        <button onclick=&quot;navigateTo(1)&quot; class=&quot;flex-1 text-slate-500 font-bold uppercase text-[10px] tracking-widest hover:text-white transition-colors border border-slate-800 rounded-xl py-4&quot;>← Start Over</button>
+                        <button onclick=&quot;generatePDF()&quot; class=&quot;flex-[2] bg-emerald-600 hover:bg-emerald-500 text-white font-black uppercase tracking-widest py-4 rounded-xl shadow-lg active:scale-95&quot;>Generate Tactical Report</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class=&quot;mt-8 text-center text-slate-600 text-[10px] font-mono uppercase tracking-[0.3em] py-8&quot;>“Recognition is the trigger for regulation.”</footer>
+    </div>
+
+    <script>
+        const cats = [ 
+            { id: &#39;reset&#39;, label: &#39;Stress Reset&#39;, desc: &#39;Station 01 Accuracy&#39; }, 
+            { id: &#39;tune&#39;, label: &#39;Arousal&#39;, desc: &#39;Station 02 Accuracy&#39; }, 
+            { id: &#39;focus&#39;, label: &#39;Targeting&#39;, desc: &#39;Station 03 Accuracy&#39; }, 
+            { id: &#39;goals&#39;, label: &#39;Confidence&#39;, desc: &#39;Station 04 Accuracy&#39; }, 
+            { id: &#39;intel&#39;, label: &#39;Integration&#39;, desc: &#39;Overall Understanding&#39; } 
+        ];
+        let scores = { reset: 0, tune: 0, focus: 0, goals: 0, intel: 0 };
+        let saveTimeout;
+
+        function showStep(n) { document.querySelectorAll(&#39;.step-content&#39;).forEach(s => s.classList.remove(&#39;active&#39;)); document.getElementById(&#39;step&#39; + n).classList.add(&#39;active&#39;); document.querySelectorAll(&#39;.nav-btn&#39;).forEach((b, i) => b.classList.toggle(&#39;active&#39;, i === n)); window.scrollTo(0,0); }
+        function navigateTo(n) { showStep(n); }
+        
+        function getFormData() {
+            return { 
+                b_scenario: document.getElementById(&#39;breath_scenario&#39;).value,
+                b_detail: document.getElementById(&#39;breath_detail&#39;).value,
+                relax: document.getElementById(&#39;relax_plan&#39;).value,
+                active: document.getElementById(&#39;active_plan&#39;).value,
+                inst: document.getElementById(&#39;cue_inst&#39;).value,
+                mot: document.getElementById(&#39;cue_mot&#39;).value,
+                jam: document.getElementById(&#39;jam_scenario&#39;).value,
+                proc: document.getElementById(&#39;goal_proc&#39;).value,
+                perf: document.getElementById(&#39;goal_perf&#39;).value,
+                out: document.getElementById(&#39;goal_out&#39;).value,
+                smart_final: document.getElementById(&#39;smart_final&#39;).value,
+                narr: document.getElementById(&#39;final_narrative&#39;).value,
+                scores 
+            };
+        }
+
+        function populateForm(data) {
+            if(data.b_scenario) document.getElementById(&#39;breath_scenario&#39;).value = data.b_scenario;
+            if(data.b_detail) document.getElementById(&#39;breath_detail&#39;).value = data.b_detail;
+            if(data.relax) document.getElementById(&#39;relax_plan&#39;).value = data.relax;
+            if(data.active) document.getElementById(&#39;active_plan&#39;).value = data.active;
+            if(data.inst) document.getElementById(&#39;cue_inst&#39;).value = data.inst;
+            if(data.mot) document.getElementById(&#39;cue_mot&#39;).value = data.mot;
+            if(data.jam) document.getElementById(&#39;jam_scenario&#39;).value = data.jam;
+            if(data.proc) document.getElementById(&#39;goal_proc&#39;).value = data.proc;
+            if(data.perf) document.getElementById(&#39;goal_perf&#39;).value = data.perf;
+            if(data.out) document.getElementById(&#39;goal_out&#39;).value = data.out;
+            if(data.smart_final) document.getElementById(&#39;smart_final&#39;).value = data.smart_final;
+            if(data.narr) document.getElementById(&#39;final_narrative&#39;).value = data.narr;
+            if(data.scores) { 
+                scores = data.scores; 
+                Object.keys(scores).forEach(c => { if(scores[c]>0) setScore(c, scores[c]); }); 
+            }
+            showSaveStatus(&quot;Restored&quot;);
+        }
+
+        function saveData() {
+            const data = getFormData();
+            localStorage.setItem(&#39;elite_operator_v3&#39;, JSON.stringify(data));
+            
+            // UI Feedback
+            const ind = document.getElementById(&#39;save-indicator&#39;);
+            const txt = document.getElementById(&#39;save-text&#39;);
+            ind.classList.remove(&#39;bg-slate-600&#39;);
+            ind.classList.add(&#39;bg-emerald-500&#39;, &#39;status-saved&#39;);
+            txt.innerText = &quot;Saving...&quot;;
+            
+            clearTimeout(saveTimeout);
+            saveTimeout = setTimeout(() => {
+                ind.classList.remove(&#39;status-saved&#39;);
+                txt.innerText = &quot;Saved Locally&quot;;
+            }, 1000);
+        }
+
+        function showSaveStatus(msg) {
+            const ind = document.getElementById(&#39;save-indicator&#39;);
+            const txt = document.getElementById(&#39;save-text&#39;);
+            ind.classList.add(&#39;bg-emerald-500&#39;);
+            txt.innerText = msg;
+        }
+
+        // --- BACKUP FUNCTIONS ---
+        function downloadBackup() {
+            const data = getFormData();
+            const dataStr = &quot;data:text/json;charset=utf-8,&quot; + encodeURIComponent(JSON.stringify(data));
+            const downloadAnchorNode = document.createElement(&#39;a&#39;);
+            downloadAnchorNode.setAttribute(&quot;href&quot;, dataStr);
+            downloadAnchorNode.setAttribute(&quot;download&quot;, &quot;elite-operator-backup.json&quot;);
+            document.body.appendChild(downloadAnchorNode);
+            downloadAnchorNode.click();
+            downloadAnchorNode.remove();
+            showSaveStatus(&quot;File Downloaded&quot;);
+        }
+
+        function loadBackup(input) {
+            const file = input.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const data = JSON.parse(e.target.result);
+                    populateForm(data);
+                    saveData();
+                    alert(&quot;System loaded successfully!&quot;);
+                } catch (err) {
+                    alert(&quot;Error loading file. Make sure it is a valid backup JSON.&quot;);
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        function setScore(cat, val) {
+            scores[cat] = val; document.getElementById(`group-${cat}`).querySelectorAll(&#39;button&#39;).forEach((b, i) => b.classList.toggle(&#39;active&#39;, (i+1) === val));
+            const rubricRows = document.querySelectorAll(`[id^=&quot;${cat}-&quot;]`);
+            rubricRows.forEach(cell => { cell.classList.remove(&#39;active-proficient&#39;, &#39;active-developing&#39;, &#39;active-emerging&#39;); const cellVal = parseInt(cell.id.split(&#39;-&#39;)[1]); if (val >= 4 && cellVal === 5) cell.classList.add(&#39;active-proficient&#39;); else if (val >= 2 && val <= 3 && cellVal === 3) cell.classList.add(&#39;active-developing&#39;); else if (val <= 1 && cellVal === 1) cell.classList.add(&#39;active-emerging&#39;); });
+            const total = Object.values(scores).reduce((a, b) => a + b, 0); document.getElementById(&#39;total-score&#39;).innerText = total.toString().padStart(2, &#39;0&#39;); saveData();
+        }
+
+        function init() {
+            const sc = document.getElementById(&#39;sc-container&#39;); 
+            cats.forEach(cat => { 
+                const d = document.createElement(&#39;div&#39;); 
+                d.className=&#39;flex items-center justify-between gap-2 bg-slate-900/30 p-3 rounded-xl border border-slate-800&#39;; 
+                d.innerHTML=`<div class=&quot;flex-1 text-left&quot;><h4 class=&quot;text-[11px] font-bold text-white uppercase italic leading-none mb-1&quot;>${cat.label}</h4><p class=&quot;text-[8px] text-slate-500 uppercase mono leading-none&quot;>${cat.desc}</p></div><div class=&quot;flex gap-1&quot; id=&quot;group-${cat.id}&quot;>${[1,2,3,4,5].map(v => `<button onclick=&quot;setScore(&#39;${cat.id}&#39;, ${v})&quot; class=&quot;score-btn rounded-lg border font-mono font-bold w-8 h-8 text-[11px]&quot;>${v}</button>`).join(&#39;&#39;)}</div>`; 
+                sc.appendChild(d); 
+            });
+            
+            // Load initial data
+            const saved = JSON.parse(localStorage.getItem(&#39;elite_operator_v3&#39;) || &#39;{}&#39;);
+            populateForm(saved);
+        }
+
+        function generatePDF() {
+            const data = getFormData();
+            const total = Object.values(scores).reduce((a, b) => a + b, 0);
+            const scoreDetails = cats.map(c => `<div style=&quot;display:flex; justify-content:space-between; border-bottom:1px solid #eee; padding:6px 0;&quot;><span style=&quot;font-size:10px; font-weight:bold; color:#666; text-transform:uppercase;&quot;>${c.label}</span><span style=&quot;font-weight:900; font-style:italic;&quot;>${scores[c.id] || 0}/5</span></div>`).join(&#39;&#39;);
+            
+            const printHTML = `<!DOCTYPE html><html><head><title>Elite Operator Report</title><link href=&quot;https://cdn.tailwindcss.com&quot; rel=&quot;stylesheet&quot;><style>body { font-family: sans-serif; padding: 40px; color: black; background: white; line-height: 1.3; } .header { border-bottom: 5px solid black; padding-bottom: 10px; margin-bottom: 25px; } .section { margin-bottom: 20px; border-left: 4px solid black; padding-left: 15px; } .label { font-size: 8px; font-weight: bold; text-transform: uppercase; color: #888; } .val { font-size: 13px; font-weight: 900; font-style: italic; border-bottom: 1px solid #ddd; margin-bottom: 8px; min-height: 18px; color: #111; } .narr-val { font-size: 11px; line-height: 1.4; padding: 12px; background: #f9f9f9; border-radius: 8px; border: 1px solid #eee; margin-top: 5px; }</style></head><body><div style=&quot;max-width: 800px; margin: auto;&quot;><div class=&quot;header flex justify-between items-end&quot;><div><h1 class=&quot;text-3xl font-black italic uppercase&quot;>Operator Report</h1><p style=&quot;font-size:10px; letter-spacing:3px; text-transform:uppercase; font-weight:bold;&quot;>Regulation Engine Tactical Assessment</p></div><div style=&quot;text-align:right;&quot;><p style=&quot;font-size:10px; text-transform:uppercase; font-weight:bold;&quot;>Mental Fitness Score</p><p style=&quot;font-size:40px; font-weight:900; font-style:italic; line-height:1;&quot;>${total}/25</p></div></div><div class=&quot;grid grid-cols-2 gap-8&quot;><div class=&quot;section&quot; style=&quot;border-left-color:#f43f5e;&quot;><h2 style=&quot;font-size:12px; font-weight:900; text-transform:uppercase; margin-bottom:10px; color:#f43f5e;&quot;>01 Stress Loop Reset</h2><div class=&quot;label&quot;>Deployment Scenario</div><div class=&quot;val&quot;>${data.b_scenario || &#39;...&#39;}</div><div class=&quot;label&quot;>Centering Action</div><div class=&quot;val&quot;>${data.b_detail || &#39;...&#39;}</div></div><div class=&quot;section&quot; style=&quot;border-left-color:#f59e0b;&quot;><h2 style=&quot;font-size:12px; font-weight:900; text-transform:uppercase; margin-bottom:10px; color:#f59e0b;&quot;>02 Arousal Tuning</h2><div class=&quot;label&quot;>Down-Regulation (PMR)</div><div class=&quot;val&quot;>${data.relax || &#39;...&#39;}</div><div class=&quot;label&quot;>Up-Regulation (Active)</div><div class=&quot;val&quot;>${data.active || &#39;...&#39;}</div></div></div><div class=&quot;grid grid-cols-2 gap-8&quot;><div class=&quot;section&quot; style=&quot;border-left-color:#10b981;&quot;><h2 style=&quot;font-size:12px; font-weight:900; text-transform:uppercase; margin-bottom:10px; color:#10b981;&quot;>03 Targeting (Cues)</h2><div class=&quot;label&quot;>Instructional Cue</div><div class=&quot;val&quot;>${data.inst || &#39;...&#39;}</div><div class=&quot;label&quot;>Motivational Cue</div><div class=&quot;val&quot;>${data.mot || &#39;...&#39;}</div><div class=&quot;label&quot;>Jamming Scenario</div><div class=&quot;val&quot; style=&quot;font-size:11px;&quot;>${data.jam || &#39;...&#39;}</div></div><div class=&quot;section&quot; style=&quot;border-left-color:#0ea5e9;&quot;><h2 style=&quot;font-size:12px; font-weight:900; text-transform:uppercase; margin-bottom:10px; color:#0ea5e9;&quot;>04 Confidence (SMART)</h2><div class=&quot;label&quot;>Process Goal (100% Control)</div><div class=&quot;val&quot;>${data.proc || &#39;...&#39;}</div><div class=&quot;label&quot;>Full SMART Statement</div><div class=&quot;val&quot; style=&quot;font-size:11px;&quot;>${data.smart_final || &#39;...&#39;}</div></div></div><div class=&quot;section&quot;><h2 style=&quot;font-size:12px; font-weight:900; text-transform:uppercase; margin-bottom:5px;&quot;>Integration Narrative</h2><div class=&quot;narr-val&quot;>${data.narr || &#39;---&#39;}</div></div><div style=&quot;margin-top:20px; border-top:2px solid black; padding-top:15px;&quot;><h2 style=&quot;font-size:10px; font-weight:900; text-transform:uppercase; margin-bottom:8px;&quot;>Evaluation Breakdown</h2>${scoreDetails}</div></div><script>window.onload = function() { setTimeout(function() { window.print(); }, 500); };<\/script></body></html>`;
+            const pw = window.open(&#39;&#39;, &#39;_blank&#39;); if(pw) { pw.document.open(); pw.document.write(printHTML); pw.document.close(); }
+        }
+        window.onload = init;
+    </script>
+</body>
+</html>" class="w-full border-0" style="min-height: 80vh; height: 100%;" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-modals allow-downloads allow-top-navigation-by-user-activation"></iframe>
+    </div>
+  </main>
+
+  
+
+  <script>
+    window.CF_ASSET_BASE_URL = "";
+    
+    
+    
+(function() {
+  var MODULE_KEY = 'CF_Module_AROUSAL_v1';
+  var saveTimeout = null;
+  function getAllInputState() {
+    var state = {};
+    document.querySelectorAll('input, textarea, select').forEach(function(el, i) {
+      var key = el.id || el.name || ('field_' + i);
+      if (el.type === 'checkbox' || el.type === 'radio') {
+        if (el.checked) state[key] = el.type === 'radio' ? el.value : true;
+      } else {
+        if (el.value) state[key] = el.value;
+      }
+    });
+    return state;
+  }
+  function restoreInputState(state) {
+    if (!state || typeof state !== 'object') return;
+    document.querySelectorAll('input, textarea, select').forEach(function(el, i) {
+      var key = el.id || el.name || ('field_' + i);
+      var savedValue = state[key];
+      if (savedValue !== undefined) {
+        if (el.type === 'checkbox') {
+          el.checked = !!savedValue;
+        } else if (el.type === 'radio') {
+          el.checked = (el.value === savedValue);
+        } else {
+          el.value = savedValue;
+        }
+      }
+    });
+  }
+  function saveNow() {
+    try {
+      var state = getAllInputState();
+      if (Object.keys(state).length > 0) {
+        localStorage.setItem(MODULE_KEY, JSON.stringify({
+          timestamp: Date.now(),
+          state: state
+        }));
+      }
+    } catch (e) {}
+  }
+  function debouncedSave() {
+    clearTimeout(saveTimeout);
+    saveTimeout = setTimeout(saveNow, 800);
+  }
+  function loadSaved() {
+    try {
+      var raw = localStorage.getItem(MODULE_KEY);
+      if (raw) {
+        var parsed = JSON.parse(raw);
+        if (parsed && parsed.state) restoreInputState(parsed.state);
+      }
+    } catch (e) {}
+  }
+  function init() {
+    loadSaved();
+    document.addEventListener('input', debouncedSave);
+    document.addEventListener('change', debouncedSave);
+    window.addEventListener('pagehide', saveNow);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+  </script>
+</body>
+</html>

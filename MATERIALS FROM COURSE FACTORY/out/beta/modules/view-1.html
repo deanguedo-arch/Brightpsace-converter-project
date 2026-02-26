@@ -1,0 +1,1602 @@
+<!DOCTYPE html>
+<html lang="en" style="background: #0f172a !important; background-color: #0f172a !important;">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HSS3020 | New Course</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css?family=Inter:ital,wght@0,400;0,700;1,400;1,900&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html, body {
+      background: #0f172a !important;
+      background-color: #0f172a !important;
+      font-family: 'Inter', sans-serif;
+    }
+    body {
+      min-height: 100vh;
+    }
+    .custom-scroll::-webkit-scrollbar { width: 6px; }
+    .custom-scroll::-webkit-scrollbar-track { background: #1e293b; }
+    .custom-scroll::-webkit-scrollbar-thumb { background: #475569; border-radius: 3px; }
+    .glass { background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(10px); }
+    .material-card { transition: all 0.2s; }
+    .material-card:hover { transform: translateY(-2px); box-shadow: 0 10px 40px rgba(0,0,0,0.3); }
+    .assessment-container [class*="bg-slate-9"],
+    .assessment-container [class*="bg-slate-8"],
+    .assessment-container [class*="bg-slate-7"],
+    .assessment-container [class*="bg-slate-6"],
+    .assessment-container [class*="bg-gray-9"],
+    .assessment-container [class*="bg-gray-8"],
+    .assessment-container [class*="bg-gray-7"] {
+      background: var(--cf-container-bg) !important;
+    }
+    :root { --cf-container-bg: rgba(15, 23, 42, 0.8); }
+    
+    
+  </style>
+  <script>
+    (function() {
+      function setBackground() {
+        document.documentElement.style.backgroundColor = '#0f172a';
+        document.documentElement.style.background = '#0f172a';
+        if (document.body) {
+          document.body.style.backgroundColor = '#0f172a';
+          document.body.style.background = '#0f172a';
+        }
+      }
+      setBackground();
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', setBackground);
+      }
+      setTimeout(setBackground, 100);
+      setTimeout(setBackground, 500);
+    })();
+  </script>
+</head>
+<body class="text-white custom-scroll" style="background: #0f172a !important; background-color: #0f172a !important;">
+  <header class="sticky top-0 z-50 bg-slate-900/95 backdrop-blur border-b border-slate-700">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+      <a href="../index.html" class="flex items-center gap-2 text-slate-400 hover:text-purple-400 transition-colors text-sm font-bold">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+        </svg>
+        Back to Course
+      </a>
+      <h1 class="text-sm font-bold text-white uppercase tracking-wider">HSS3020</h1>
+    </div>
+  </header>
+
+  <main class="max-w-6xl mx-auto px-6 py-8">
+    <div class="w-full rounded-xl overflow-hidden border border-slate-700 shadow-2xl">
+      <iframe srcdoc="<!doctype html>
+<html lang=&quot;en&quot;>
+<head>
+  <meta charset=&quot;utf-8&quot; />
+  <meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot; />
+  <title>HSS3020 — Mental Health & Wellness Hub</title>
+  <style>
+    :root { --bg:#0b0f19; --card:#121a2a; --muted:#9fb0d0; --text:#eaf0ff; --line:rgba(255,255,255,.12); --accent:#6ea8ff; --success:#10b981; }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; background: var(--bg); color: var(--text); }
+    header { position: sticky; top:0; z-index:100; background: rgba(11,15,25,.95); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+    .wrap { max-width: 1200px; margin: 0 auto; padding: 14px 16px; }
+    .top { display:flex; gap:12px; align-items:center; justify-content: space-between; flex-wrap: wrap; }
+    .brand { display:flex; gap:10px; align-items:center; }
+    .dot { width:12px; height:12px; border-radius:999px; background: var(--accent); box-shadow: 0 0 22px rgba(110,168,255,.6); }
+    h1 { font-size: 16px; margin:0; letter-spacing: .2px; }
+    
+    /* Global Save Controls */
+    .controls { display: flex; gap: 15px; align-items: center; }
+    .global-btn { background: var(--card); border: 1px solid var(--line); color: var(--text); padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 12px; font-family: monospace; text-transform: uppercase; transition: all 0.2s; }
+    .global-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .status-ind { width: 8px; height: 8px; border-radius: 50%; background: #334155; transition: background 0.3s; }
+    .status-ind.saved { background: var(--success); box-shadow: 0 0 8px var(--success); }
+
+    .nav { display:flex; gap:8px; flex-wrap: wrap; margin-top: 10px; }
+    .btn { border: 1px solid var(--line); background: transparent; color: var(--text); padding: 8px 10px; border-radius: 10px; cursor: pointer; font-size: 13px; opacity: .9; }
+    .btn:hover { opacity: 1; border-color: rgba(255,255,255,.22); }
+    .btn.active { background: rgba(110,168,255,.18); border-color: rgba(110,168,255,.55); }
+    
+    main { padding: 14px 16px 18px; }
+    .grid { max-width: 1200px; margin: 0 auto; display:grid; grid-template-columns: 300px 1fr; gap: 12px; }
+    @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
+    
+    .panel { background: var(--card); border: 1px solid var(--line); border-radius: 14px; overflow:hidden; display: flex; flex-direction: column; }
+    .panel .hd { padding: 12px 12px 10px; border-bottom: 1px solid var(--line); }
+    .panel .hd h2 { margin:0; font-size: 14px; }
+    .panel .body { padding: 12px; display:flex; flex-direction: column; gap: 10px; overflow-y: auto; max-height: calc(100vh - 200px); }
+    
+    .card { border: 1px solid var(--line); background: rgba(255,255,255,.02); border-radius: 12px; padding: 10px; cursor:pointer; transition: transform .06s ease, border-color .06s ease; }
+    .card:hover { transform: translateY(-1px); border-color: rgba(255,255,255,.22); }
+    .card.active { border-color: rgba(110,168,255,.55); background: rgba(110,168,255,.12); }
+    .card .t { font-size: 13px; margin:0; font-weight: 600; }
+    .card .d { font-size: 12px; margin: 4px 0 0; color: var(--muted); line-height: 1.35; }
+    
+    .viewer { height: calc(100vh - 140px); min-height: 720px; }
+    iframe { width:100%; height:100%; border:0; background: white; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class=&quot;wrap&quot;>
+      <div class=&quot;top&quot;>
+        <div class=&quot;brand&quot;>
+          <div class=&quot;dot&quot;></div>
+          <h1>HSS3020 — Mental Health &amp; Wellness</h1>
+        </div>
+        
+        <div class=&quot;controls&quot;>
+            <div id=&quot;globalStatus&quot; class=&quot;status-ind&quot; title=&quot;Save Status&quot;></div>
+            <button class=&quot;global-btn&quot; onclick=&quot;globalSave()&quot;>Save All Work</button>
+            <button class=&quot;global-btn&quot; onclick=&quot;document.getElementById(&#39;globalUpload&#39;).click()&quot;>Load File</button>
+            <input type=&quot;file&quot; id=&quot;globalUpload&quot; style=&quot;display:none&quot; onchange=&quot;globalLoad(this)&quot;>
+        </div>
+      </div>
+      <div class=&quot;nav&quot; id=&quot;quickNav&quot;></div>
+    </div>
+  </header>
+  <main>
+    <div class=&quot;grid&quot;>
+      <section class=&quot;panel&quot;>
+        <div class=&quot;hd&quot;>
+          <h2>Course Units</h2>
+        </div>
+        <div class=&quot;body&quot; id=&quot;unitList&quot;></div>
+      </section>
+      <section class=&quot;panel viewer&quot;>
+        <iframe id=&quot;frame&quot; title=&quot;Unit viewer&quot;></iframe>
+      </section>
+    </div>
+  </main>
+
+  <script>
+  // -- GLOBAL DATA MANAGEMENT --
+  const STORAGE_KEY = &#39;hss3020_global_data_v2&#39;;
+  
+  // Initialize global data structure
+  let globalData = { unit1: {}, unit2: {}, unit3: {}, unit4: {}, unit5: {}, unit6: {} };
+
+  // Load from local storage on startup
+  const savedLocal = localStorage.getItem(STORAGE_KEY);
+  if(savedLocal) {
+      try { globalData = JSON.parse(savedLocal); } catch(e) { console.error(&quot;Error parsing saved data&quot;, e); }
+  }
+
+  // Function called by the iframe to get its specific data
+  window.getUnitData = function(unitId) {
+      return globalData[unitId] || {};
+  };
+
+  // Function called by the iframe to update specific data
+  window.updateUnitData = function(unitId, data) {
+      globalData[unitId] = data;
+      // Auto-save to local storage
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(globalData));
+      indicateSave();
+  };
+
+  function indicateSave() {
+      const el = document.getElementById(&#39;globalStatus&#39;);
+      el.classList.add(&#39;saved&#39;);
+      setTimeout(() => el.classList.remove(&#39;saved&#39;), 1000);
+  }
+
+  function globalSave() {
+      const dataStr = &quot;data:text/json;charset=utf-8,&quot; + encodeURIComponent(JSON.stringify(globalData));
+      const dlAnchor = document.createElement(&#39;a&#39;);
+      dlAnchor.setAttribute(&quot;href&quot;, dataStr);
+      dlAnchor.setAttribute(&quot;download&quot;, &quot;HSS3020_Complete_Course_Work.json&quot;);
+      document.body.appendChild(dlAnchor);
+      dlAnchor.click();
+      dlAnchor.remove();
+  }
+
+  function globalLoad(input) {
+      const file = input.files[0];
+      if(!file) return;
+      
+      const reader = new FileReader();
+      reader.onload = (e) => {
+          try {
+              const loaded = JSON.parse(e.target.result);
+              if(loaded.unit1) {
+                  globalData = loaded;
+                  localStorage.setItem(STORAGE_KEY, JSON.stringify(globalData));
+                  alert(&quot;File loaded successfully! Reloading current unit...&quot;);
+                  const currentSrc = frame.srcdoc;
+                  frame.srcdoc = currentSrc; 
+              } else {
+                  alert(&quot;Invalid file format.&quot;);
+              }
+          } catch(err) {
+              alert(&quot;Error reading file.&quot;);
+          }
+      };
+      reader.readAsText(file);
+      input.value = &#39;&#39;;
+  }
+
+  // -- UI LOGIC --
+  const meta = [
+    { id: &quot;unit1&quot;, title: &#39;HSS3020: Mental Health Master Class&#39;, desc: &#39;Foundations + baseline check-in&#39; },
+    { id: &quot;unit2&quot;, title: &#39;HSS3020 Unit 2: Stress Master Class&#39;, desc: &#39;Stress, coping, and regulation&#39; },
+    { id: &quot;unit3&quot;, title: &#39;HSS3020 Unit 3: Mental Illness Master Class&#39;, desc: &#39;Mental illness overview + understanding&#39; },
+    { id: &quot;unit4&quot;, title: &#39;HSS3020 Unit 4: Treatments Master Class&#39;, desc: &#39;Treatments + approaches&#39; },
+    { id: &quot;unit5&quot;, title: &#39;HSS3020 Unit 5: Community Resources Master Class&#39;, desc: &#39;Community resources + supports&#39; },
+    { id: &quot;unit6&quot;, title: &#39;HSS3020 Unit 6: Self Care Master Class&#39;, desc: &#39;Self-care + sustainability&#39; },
+  ];
+
+  const unitList = document.getElementById(&quot;unitList&quot;);
+  const quickNav = document.getElementById(&quot;quickNav&quot;);
+  const frame = document.getElementById(&quot;frame&quot;);
+
+  function getUnitHTML(id) {
+    const tpl = document.getElementById(id);
+    if (!tpl) return `<html><body style=&quot;font-family:system-ui;padding:24px;color:white;background:#0b0f19&quot;><h1>Missing ${id}</h1></body></html>`;
+    return tpl.innerHTML;
+  }
+
+  function setActive(id) {
+    const safe = meta.some(m => m.id === id) ? id : meta[0].id;
+    if (window.location.hash !== `#${safe}`) window.location.hash = safe;
+
+    const html = getUnitHTML(safe);
+    frame.srcdoc = html;
+
+    document.querySelectorAll(&quot;.card&quot;).forEach(c => c.classList.toggle(&quot;active&quot;, c.dataset.unit === safe));
+    document.querySelectorAll(&quot;.btn&quot;).forEach(b => b.classList.toggle(&quot;active&quot;, b.dataset.unit === safe));
+  }
+
+  // Build side list and top buttons
+  meta.forEach(m => {
+    const c = document.createElement(&quot;div&quot;);
+    c.className = &quot;card&quot;;
+    c.dataset.unit = m.id;
+    c.innerHTML = `<p class=&quot;t&quot;>${m.title}</p><p class=&quot;d&quot;>${m.desc}</p>`;
+    c.onclick = () => setActive(m.id);
+    unitList.appendChild(c);
+
+    const b = document.createElement(&quot;button&quot;);
+    b.className = &quot;btn&quot;;
+    b.dataset.unit = m.id;
+    // Shorten title for button
+    b.textContent = m.title.replace(/^HSS3020\s*Unit\s*\d+:\s*/i, &#39;U&#39;+m.id.replace(&#39;unit&#39;,&#39;&#39;)+&#39;: &#39;).replace(&#39;HSS3020: Mental Health Master Class&#39;, &#39;U1: Mental Health&#39;);
+    b.onclick = () => setActive(m.id);
+    quickNav.appendChild(b);
+  });
+
+  window.addEventListener(&quot;hashchange&quot;, () => setActive((location.hash || &quot;&quot;).replace(&quot;#&quot;,&quot;&quot;)));
+  setActive((location.hash || &quot;&quot;).replace(&quot;#&quot;,&quot;&quot;) || meta[0].id);
+
+  </script>
+
+  <template id=&quot;unit1&quot;>
+    <!DOCTYPE html>
+    <html lang=&quot;en&quot;>
+    <head>
+       <meta charset=&quot;UTF-8&quot;>
+       <meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;>
+       <title>HSS3020: Mental Health Master Class</title>
+       <script src=&quot;https://cdn.tailwindcss.com&quot;></script>
+       <link href=&quot;https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&family=JetBrains+Mono:wght@500;700&display=swap&quot; rel=&quot;stylesheet&quot;>
+       <script>tailwind.config = { theme: { extend: { fontFamily: { sans: [&#39;Inter&#39;, &#39;sans-serif&#39;], mono: [&#39;JetBrains Mono&#39;, &#39;monospace&#39;] }, colors: { slate: { 850: &#39;#151e2e&#39;, 950: &#39;#020617&#39; } } } } }</script>
+       <style>
+          body { background-color: #020617; color: #e2e8f0; }
+          .glass { background: rgba(30, 41, 59, 0.4); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.05); }
+          .glass-header { background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+          .section-content { display: none; animation: fadeIn 0.4s ease-out; }
+          .section-content.active { display: block; }
+          input, textarea { background: #0f172a; border: 1px solid #334155; color: white; font-family: &#39;Inter&#39;, sans-serif; transition: all 0.2s; }
+          input:focus, textarea:focus { border-color: #0ea5e9; outline: none; box-shadow: 0 0 0 2px rgba(14, 165, 233, 0.2); background: #1e293b; }
+          ::-webkit-scrollbar { width: 8px; }
+          ::-webkit-scrollbar-track { background: #0f172a; }
+          ::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+          ::-webkit-scrollbar-thumb:hover { background: #475569; }
+          @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+          .myth-card { border-left: 3px solid #f43f5e; transition: transform 0.2s; }
+          .myth-card:hover { transform: translateX(4px); }
+          .term-card { border-left: 3px solid #0ea5e9; }
+          .lesson-card { background: rgba(15, 23, 42, 0.8); border: 1px solid #334155; border-radius: 0.75rem; padding: 1.5rem; margin-bottom: 1.5rem; }
+       </style>
+    </head>
+    <body class=&quot;min-h-screen flex flex-col&quot;>
+      <header class=&quot;glass-header sticky top-0 z-50 p-4 shadow-lg&quot;>
+         <div class=&quot;max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4&quot;>
+            <div>
+              <h1 class=&quot;text-xl font-black italic tracking-tighter text-white uppercase&quot;>Mental Health <span class=&quot;text-sky-500&quot;>Master Class</span></h1>
+              <p class=&quot;text-[10px] font-mono text-slate-400 tracking-widest uppercase&quot;>HSS3020 Unit 1 • Comprehensive Guide</p>
+            </div>
+            <div class=&quot;flex bg-slate-900/50 p-1.5 rounded-lg border border-slate-800 overflow-x-auto max-w-full&quot;>
+               <button onclick=&quot;switchTab(&#39;foundations&#39;)&quot; class=&quot;nav-btn active px-4 py-2 rounded text-[10px] font-bold uppercase tracking-widest hover:text-white transition-all text-sky-400 bg-slate-800 border border-slate-700 shadow-sm&quot; id=&quot;btn-foundations&quot;>01 Foundations</button>
+               <button onclick=&quot;switchTab(&#39;stigma&#39;)&quot; class=&quot;nav-btn px-4 py-2 rounded text-[10px] font-bold uppercase tracking-widest text-slate-500 hover:text-white transition-all&quot; id=&quot;btn-stigma&quot;>02 Stigma Lesson</button>
+               <button onclick=&quot;switchTab(&#39;glossary&#39;)&quot; class=&quot;nav-btn px-4 py-2 rounded text-[10px] font-bold uppercase tracking-widest text-slate-500 hover:text-white transition-all&quot; id=&quot;btn-glossary&quot;>03 Terminology</button>
+               <button onclick=&quot;switchTab(&#39;review&#39;)&quot; class=&quot;nav-btn px-4 py-2 rounded text-[10px] font-bold uppercase tracking-widest text-emerald-500 hover:text-white transition-all&quot; id=&quot;btn-review&quot;>04 Submit Work</button>
+            </div>
+         </div>
+      </header>
+      <main class=&quot;flex-grow p-4 md:p-8 max-w-6xl mx-auto w-full&quot;>
+         <div id=&quot;foundations&quot; class=&quot;section-content active space-y-8&quot;>
+            <div class=&quot;glass p-8 rounded-2xl&quot;>
+               <div class=&quot;flex items-center gap-3 mb-6&quot;>
+                  <div class=&quot;w-8 h-8 bg-sky-500 flex items-center justify-center rounded font-bold text-black&quot;>01</div>
+                  <h2 class=&quot;text-2xl font-black uppercase italic tracking-tight text-white&quot;>Defining Mental Health</h2>
+               </div>
+               <div class=&quot;grid md:grid-cols-2 gap-8&quot;>
+                  <div class=&quot;space-y-4 text-sm text-slate-300 leading-relaxed&quot;>
+                     <p>Mental health is <strong>proactive</strong>. It is staving off extreme stress, staying healthy, and creating a support network.</p>
+                     <div class=&quot;p-4 border-l-4 border-sky-500 bg-sky-500/10 rounded-r-lg my-4&quot;>
+                        <p class=&quot;font-bold text-sky-400 text-xs uppercase mb-1&quot;>CMHA Definition</p>
+                        <p class=&quot;text-white italic&quot;>&quot;Mental health is knowing and accepting yourself, understanding what makes you happy, building meaningful relationships, coping with problems of day-to-day living, and maintaining a sense of humour.&quot;</p>
+                     </div>
+                  </div>
+                  <div class=&quot;bg-slate-900 border border-slate-700 p-6 rounded-xl space-y-4 shadow-xl&quot;>
+                     <h3 class=&quot;text-sky-400 font-bold font-mono text-xs uppercase tracking-widest border-b border-slate-800 pb-2&quot;>Assignment Task 01</h3>
+                     <label class=&quot;block text-xs font-bold text-slate-400&quot;>In your own words, define &quot;Mental Health&quot;:</label>
+                     <textarea id=&quot;inp_def&quot; oninput=&quot;pushData()&quot; class=&quot;w-full h-32 rounded-lg p-3 text-sm&quot; placeholder=&quot;Based on the reading, mental health is...&quot;></textarea>
+                  </div>
+               </div>
+            </div>
+            <div class=&quot;glass p-8 rounded-2xl&quot;>
+               <h3 class=&quot;text-xl font-black uppercase italic tracking-tight text-white mb-6&quot;>The 3 Determinants of Health</h3>
+               <div class=&quot;grid md:grid-cols-3 gap-4 mb-8&quot;>
+                  <div class=&quot;p-5 bg-slate-950 rounded-xl border border-slate-800 hover:border-sky-500 transition-colors group&quot;><h4 class=&quot;text-sky-500 font-bold uppercase text-sm mb-2 group-hover:underline&quot;>1. Social Inclusion</h4><p class=&quot;text-xs text-slate-400 leading-relaxed&quot;>Having a network you feel connected to (family, friends, trusted adults). The more included you feel, the higher chance of being mentally healthy.</p></div>
+                  <div class=&quot;p-5 bg-slate-950 rounded-xl border border-slate-800 hover:border-emerald-500 transition-colors group&quot;><h4 class=&quot;text-emerald-500 font-bold uppercase text-sm mb-2 group-hover:underline&quot;>2. Freedom from Violence</h4><p class=&quot;text-xs text-slate-400 leading-relaxed&quot;>Being free from discrimination (racism, sexism) and violence. Choosing safe environments impacts this factor significantly.</p></div>
+                  <div class=&quot;p-5 bg-slate-950 rounded-xl border border-slate-800 hover:border-amber-500 transition-colors group&quot;><h4 class=&quot;text-amber-500 font-bold uppercase text-sm mb-2 group-hover:underline&quot;>3. Economic Resources</h4><p class=&quot;text-xs text-slate-400 leading-relaxed&quot;>A moderate amount of income helps improve mental health. Fewer economic restraints allow for less stress and more choices.</p></div>
+               </div>
+               <div class=&quot;bg-slate-900 border border-slate-700 p-6 rounded-xl space-y-4 shadow-xl&quot;>
+                  <h3 class=&quot;text-emerald-500 font-bold font-mono text-xs uppercase tracking-widest border-b border-slate-800 pb-2&quot;>Assignment Task 02</h3>
+                  <label class=&quot;block text-xs font-bold text-slate-400 leading-relaxed&quot;>Do you agree with the three determinants of mental health? If you were asked to add one more determinant, what would you add? Explain both of your answers in complete sentences.</label>
+                  <textarea id=&quot;inp_det&quot; oninput=&quot;pushData()&quot; class=&quot;w-full h-32 rounded-lg p-3 text-sm&quot; placeholder=&quot;I agree/disagree because... If I could add one more determinant, it would be...&quot;></textarea>
+               </div>
+            </div>
+         </div>
+         <div id=&quot;stigma&quot; class=&quot;section-content space-y-8&quot;>
+            <div class=&quot;glass p-8 rounded-2xl&quot;>
+               <div class=&quot;flex items-center gap-3 mb-6&quot;><div class=&quot;w-8 h-8 bg-rose-500 flex items-center justify-center rounded font-bold text-black&quot;>02</div><h2 class=&quot;text-2xl font-black uppercase italic tracking-tight text-white&quot;>Stigma, Media & Discrimination</h2></div>
+               <div class=&quot;lesson-card&quot;>
+                  <h3 class=&quot;text-rose-400 font-bold uppercase text-sm mb-4 tracking-wider&quot;>Part 1: Defining the Problem</h3>
+                  <div class=&quot;grid md:grid-cols-2 gap-8&quot;>
+                     <div><p class=&quot;text-sm font-bold text-white mb-2&quot;>Stigma (The Thought)</p><p class=&quot;text-sm text-slate-300 leading-relaxed&quot;>Stigma is a negative stereotype. It is an internal judgment or an attribute that is &quot;deeply discrediting.&quot; Stigma views a person as &quot;flawed&quot; or &quot;less than&quot; because of their condition. It is the belief that someone is dangerous, lazy, or weak solely because they have a mental illness.</p></div>
+                     <div><p class=&quot;text-sm font-bold text-white mb-2&quot;>Discrimination (The Action)</p><p class=&quot;text-sm text-slate-300 leading-relaxed&quot;>Discrimination is the unfair treatment that results from stigma. This is the <em>behavior</em>. It includes denying someone housing, refusing to hire them, or treating them poorly in the healthcare system. Acts of discrimination can be overt (obvious) or systemic (hidden in policies).</p></div>
+                  </div>
+               </div>
+               <div class=&quot;lesson-card&quot;>
+                  <h3 class=&quot;text-rose-400 font-bold uppercase text-sm mb-4 tracking-wider&quot;>Part 2: How Media Distorts Reality</h3>
+                  <p class=&quot;text-sm text-slate-300 mb-6&quot;>Mass media (TV, Film, News) is our primary source of information about groups of people we don&#39;t interact with daily. Media portrayals of mental illness generally fall into two harmful categories:</p>
+                  <div class=&quot;space-y-6&quot;>
+                     <div class=&quot;pl-4 border-l-2 border-rose-500&quot;><h4 class=&quot;text-white font-bold text-sm&quot;>1. Stigmatization (The &quot;Other&quot;)</h4><p class=&quot;text-sm text-slate-400 mt-1&quot;>This occurs when media portrays people with mental illness as &quot;others&quot;—unpredictable, dangerous, or evil.<br><span class=&quot;text-rose-400 italic&quot;>Example:</span> Horror movies often label the villain as an &quot;escaped mental patient.&quot;<br><span class=&quot;text-rose-400 italic&quot;>The Reality:</span> Research shows that people with mental illness are much more likely to be <strong>victims</strong> of violence than perpetrators.</p></div>
+                     <div class=&quot;pl-4 border-l-2 border-rose-500&quot;><h4 class=&quot;text-white font-bold text-sm&quot;>2. Trivialization (The &quot;Phase&quot;)</h4><p class=&quot;text-sm text-slate-400 mt-1&quot;>This minimizes the suffering of mental illness, treating it as a quirk, a phase, or a joke.<br><span class=&quot;text-rose-400 italic&quot;>Example:</span> A character who likes cleaning is labeled &quot;OCD&quot; without showing the crippling anxiety of the disorder. Or depicting Anorexia as simply &quot;dieting gone too far.&quot;<br><span class=&quot;text-rose-400 italic&quot;>The Reality:</span> These are serious medical conditions. For example, eating disorders have the highest mortality rate of any mental illness.</p></div>
+                     <div class=&quot;bg-slate-900 p-4 rounded-lg mt-4&quot;><p class=&quot;text-xs font-bold text-sky-400 uppercase mb-2&quot;>Specific Film Statistics vs. Reality</p><ul class=&quot;list-disc list-inside text-xs text-slate-300 space-y-2&quot;><li><strong>Film:</strong> Nearly 1/3 of characters with schizophrenia in movies engage in homicidal behavior.</li><li><strong>Reality:</strong> The vast majority of people with schizophrenia are non-violent and withdraw from society rather than attack it.</li><li><strong>Film:</strong> Hallucinations are almost always visual (seeing things that aren&#39;t there) because it looks good on camera.</li><li><strong>Reality:</strong> Visual hallucinations are rare. Auditory hallucinations (hearing voices) are much more common.</li></ul></div>
+                  </div>
+               </div>
+               <div class=&quot;lesson-card&quot;>
+                  <h3 class=&quot;text-rose-400 font-bold uppercase text-sm mb-4 tracking-wider&quot;>Part 3: The Consequences of Stigma</h3>
+                  <p class=&quot;text-sm text-slate-300 mb-4&quot;>Stigma is not just &quot;hurt feelings.&quot; It creates real-world barriers that prevent people from living full lives.</p>
+                  <div class=&quot;grid md:grid-cols-2 gap-4&quot;>
+                     <div class=&quot;bg-slate-950 p-4 rounded border border-slate-800&quot;><h4 class=&quot;text-white font-bold text-xs uppercase mb-2&quot;>1. Barriers to Help-Seeking</h4><p class=&quot;text-xs text-slate-400&quot;>This is the most dangerous consequence. People delay treatment because they do not want the &quot;label&quot; of being mentally ill. They fear being judged by friends or losing their jobs.</p></div>
+                     <div class=&quot;bg-slate-950 p-4 rounded border border-slate-800&quot;><h4 class=&quot;text-white font-bold text-xs uppercase mb-2&quot;>2. Self-Stigma</h4><p class=&quot;text-xs text-slate-400&quot;>This happens when a person internalizes the negative stereotypes. They begin to believe &quot;I am weak,&quot; &quot;I am dangerous,&quot; or &quot;I am incapable,&quot; leading to low self-esteem and hopelessness.</p></div>
+                     <div class=&quot;bg-slate-950 p-4 rounded border border-slate-800&quot;><h4 class=&quot;text-white font-bold text-xs uppercase mb-2&quot;>3. Social Exclusion</h4><p class=&quot;text-xs text-slate-400&quot;>Stigma leads to people losing their support networks. Friends may pull away, and family members may hide the diagnosis. 40% of parents admitted they would not tell anyone if their child had a mental illness.</p></div>
+                     <div class=&quot;bg-slate-950 p-4 rounded border border-slate-800&quot;><h4 class=&quot;text-white font-bold text-xs uppercase mb-2&quot;>4. Structural Consequences</h4><p class=&quot;text-xs text-slate-400&quot;>This includes landlords refusing to rent to people with a history of mental illness, or employers hesitating to hire them. This traps people in poverty and prevents recovery.</p></div>
+                  </div>
+               </div>
+               <div class=&quot;bg-rose-900/20 border border-rose-500/30 p-6 rounded-xl mb-8&quot;>
+                  <h4 class=&quot;text-rose-500 font-black uppercase text-lg mb-4 tracking-widest&quot;>The S.T.O.P. Criteria</h4>
+                  <p class=&quot;text-xs text-slate-300 mb-4&quot;>Use this to recognize stigma in media. Ask yourself:</p>
+                  <ul class=&quot;space-y-2&quot;>
+                     <li class=&quot;flex items-center gap-3&quot;><span class=&quot;bg-rose-500 text-white font-bold w-6 h-6 flex items-center justify-center rounded text-xs&quot;>S</span> <span class=&quot;text-sm text-white&quot;><strong>Stereotypes</strong> people with mental health conditions?</span></li>
+                     <li class=&quot;flex items-center gap-3&quot;><span class=&quot;bg-rose-500 text-white font-bold w-6 h-6 flex items-center justify-center rounded text-xs&quot;>T</span> <span class=&quot;text-sm text-white&quot;><strong>Trivializes</strong> or belittles the condition?</span></li>
+                     <li class=&quot;flex items-center gap-3&quot;><span class=&quot;bg-rose-500 text-white font-bold w-6 h-6 flex items-center justify-center rounded text-xs&quot;>O</span> <span class=&quot;text-sm text-white&quot;><strong>Offends</strong> people by insulting them?</span></li>
+                     <li class=&quot;flex items-center gap-3&quot;><span class=&quot;bg-rose-500 text-white font-bold w-6 h-6 flex items-center justify-center rounded text-xs&quot;>P</span> <span class=&quot;text-sm text-white&quot;><strong>Patronizes</strong> people by treating them as &quot;less than&quot;?</span></li>
+                  </ul>
+               </div>
+               <div class=&quot;bg-slate-900 border border-slate-700 p-6 rounded-xl space-y-6 shadow-xl&quot;>
+                  <h3 class=&quot;text-rose-400 font-bold font-mono text-xs uppercase tracking-widest border-b border-slate-800 pb-2&quot;>Assignment Task 03</h3>
+                  <div><label class=&quot;block text-xs font-bold text-slate-400 mb-2&quot;>What kind of impact do you think social media has on mental health? Use the STOP criteria or examples from the lesson above in your answer.</label><textarea id=&quot;inp_media&quot; oninput=&quot;pushData()&quot; class=&quot;w-full h-24 rounded-lg p-3 text-sm&quot; placeholder=&quot;Social media often...&quot;></textarea></div>
+                  <div><label class=&quot;block text-xs font-bold text-slate-400 mb-2&quot;>How might using updated terminology regarding mental health help to resist biases and stereotypes?</label><textarea id=&quot;inp_term_bias&quot; oninput=&quot;pushData()&quot; class=&quot;w-full h-24 rounded-lg p-3 text-sm&quot; placeholder=&quot;Using correct terminology helps because...&quot;></textarea></div>
+               </div>
+               <div class=&quot;mt-8&quot;>
+                  <h3 class=&quot;text-xl font-black uppercase italic tracking-tight text-white mb-6&quot;>10 Common Myths (Debunked)</h3>
+                  <div class=&quot;grid md:grid-cols-2 gap-4 max-h-[300px] overflow-y-auto pr-2 custom-scroll&quot;>
+                     <div class=&quot;bg-slate-950 p-4 rounded-lg myth-card&quot;><p class=&quot;text-[10px] text-rose-500 font-bold uppercase mb-1&quot;>Myth #1</p><p class=&quot;text-white font-bold text-sm mb-2&quot;>&quot;Mental illnesses aren&#39;t real.&quot;</p><p class=&quot;text-xs text-slate-400&quot;><strong>Fact:</strong> They create distress, don&#39;t go away on their own, and are real health problems.</p></div>
+                     <div class=&quot;bg-slate-950 p-4 rounded-lg myth-card&quot;><p class=&quot;text-[10px] text-rose-500 font-bold uppercase mb-1&quot;>Myth #2</p><p class=&quot;text-white font-bold text-sm mb-2&quot;>&quot;It will never affect me.&quot;</p><p class=&quot;text-xs text-slate-400&quot;><strong>Fact:</strong> 1 in 5 Canadians will experience a mental health problem.</p></div>
+                     <div class=&quot;bg-slate-950 p-4 rounded-lg myth-card&quot;><p class=&quot;text-[10px] text-rose-500 font-bold uppercase mb-1&quot;>Myth #3</p><p class=&quot;text-white font-bold text-sm mb-2&quot;>&quot;It&#39;s an excuse for poor behavior.&quot;</p><p class=&quot;text-xs text-slate-400&quot;><strong>Fact:</strong> No one chooses to be ill. The illness is often behind unexpected behaviors.</p></div>
+                     <div class=&quot;bg-slate-950 p-4 rounded-lg myth-card&quot;><p class=&quot;text-[10px] text-rose-500 font-bold uppercase mb-1&quot;>Myth #4</p><p class=&quot;text-white font-bold text-sm mb-2&quot;>&quot;Bad parenting causes it.&quot;</p><p class=&quot;text-xs text-slate-400&quot;><strong>Fact:</strong> It is a complex combination of genetics, biology, environment, and life experiences.</p></div>
+                     <div class=&quot;bg-slate-950 p-4 rounded-lg myth-card&quot;><p class=&quot;text-[10px] text-rose-500 font-bold uppercase mb-1&quot;>Myth #5</p><p class=&quot;text-white font-bold text-sm mb-2&quot;>&quot;People are violent.&quot;</p><p class=&quot;text-xs text-slate-400&quot;><strong>Fact:</strong> People with mental illness are more likely to be victims of violence than perpetrators.</p></div>
+                     <div class=&quot;bg-slate-950 p-4 rounded-lg myth-card&quot;><p class=&quot;text-[10px] text-rose-500 font-bold uppercase mb-1&quot;>Myth #6</p><p class=&quot;text-white font-bold text-sm mb-2&quot;>&quot;People don&#39;t recover.&quot;</p><p class=&quot;text-xs text-slate-400&quot;><strong>Fact:</strong> People can and do recover. There are effective treatments and supports.</p></div>
+                     <div class=&quot;bg-slate-950 p-4 rounded-lg myth-card&quot;><p class=&quot;text-[10px] text-rose-500 font-bold uppercase mb-1&quot;>Myth #7</p><p class=&quot;text-white font-bold text-sm mb-2&quot;>&quot;They are weak/can&#39;t handle stress.&quot;</p><p class=&quot;text-xs text-slate-400&quot;><strong>Fact:</strong> Many are actually better at managing stress because they learn specific skills to stay well.</p></div>
+                     <div class=&quot;bg-slate-950 p-4 rounded-lg myth-card&quot;><p class=&quot;text-[10px] text-rose-500 font-bold uppercase mb-1&quot;>Myth #8</p><p class=&quot;text-white font-bold text-sm mb-2&quot;>&quot;They can&#39;t work.&quot;</p><p class=&quot;text-xs text-slate-400&quot;><strong>Fact:</strong> Workplaces are filled with people with mental illnesses who contribute meaningfully.</p></div>
+                  </div>
+                  <div class=&quot;mt-6 border-t border-slate-700 pt-6&quot;>
+                     <label class=&quot;block text-xs font-bold text-slate-400 mb-2&quot;>Reflection: What is a myth regarding mental health that you see or encounter in your daily life? Why do you think it persists?</label>
+                     <textarea id=&quot;inp_myth_reflect&quot; oninput=&quot;pushData()&quot; class=&quot;w-full h-24 rounded-lg p-3 text-sm&quot; placeholder=&quot;I often hear people say...&quot;></textarea>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div id=&quot;glossary&quot; class=&quot;section-content space-y-8&quot;>
+            <div class=&quot;glass p-8 rounded-2xl&quot;>
+               <div class=&quot;flex items-center gap-3 mb-6&quot;><div class=&quot;w-8 h-8 bg-sky-500 flex items-center justify-center rounded font-bold text-black&quot;>03</div><h2 class=&quot;text-2xl font-black uppercase italic tracking-tight text-white&quot;>Language Matters</h2></div>
+               <p class=&quot;text-sm text-slate-400 mb-6&quot;>Using &quot;Person-First&quot; language reduces stigma. We should separate the person from the illness.</p>
+               <div class=&quot;overflow-x-auto rounded-xl border border-slate-700&quot;>
+                  <table class=&quot;w-full text-left text-sm text-slate-400&quot;>
+                     <thead class=&quot;bg-slate-800 text-white uppercase text-xs font-bold&quot;><tr><th class=&quot;p-4 w-1/2&quot;>Outdated Term (Avoid)</th><th class=&quot;p-4 w-1/2 text-sky-400&quot;>Person-First Language (Use)</th></tr></thead>
+                     <tbody class=&quot;divide-y divide-slate-800 bg-slate-900/50&quot;>
+                        <tr><td class=&quot;p-4&quot;>&quot;Mentally ill person&quot;</td><td class=&quot;p-4 text-white&quot;>Person <strong>living with</strong> a mental illness.</td></tr>
+                        <tr><td class=&quot;p-4&quot;>&quot;Suffering from&quot;</td><td class=&quot;p-4 text-white&quot;>Living with / Having a mental health condition.</td></tr>
+                        <tr><td class=&quot;p-4&quot;>&quot;Committed suicide&quot;</td><td class=&quot;p-4 text-white&quot;>Died by suicide.</td></tr>
+                        <tr><td class=&quot;p-4&quot;>&quot;Is bipolar&quot; / &quot;Is schizophrenic&quot;</td><td class=&quot;p-4 text-white&quot;>Has bipolar disorder / Lives with schizophrenia.</td></tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div>
+            <div class=&quot;glass p-8 rounded-2xl&quot;>
+               <h3 class=&quot;text-xl font-black uppercase italic tracking-tight text-white mb-6&quot;>Course Glossary</h3>
+               <div class=&quot;grid md:grid-cols-2 gap-4&quot;>
+                  <div class=&quot;bg-slate-950 p-4 rounded-lg term-card&quot;><h4 class=&quot;text-sky-400 font-bold text-sm uppercase&quot;>Mental Health vs. Illness</h4><p class=&quot;text-xs text-slate-400 mt-2&quot;><strong>Mental Health:</strong> How well we are mentally (emotions, thoughts, problem solving). <br><strong>Mental Illness:</strong> Diagnosed condition affecting thoughts/behavior.</p></div>
+                  <div class=&quot;bg-slate-950 p-4 rounded-lg term-card&quot;><h4 class=&quot;text-sky-400 font-bold text-sm uppercase&quot;>Anorexia Nervosa</h4><p class=&quot;text-xs text-slate-400 mt-2&quot;>Disorder characterized by deliberate weight loss, refusal to maintain normal body weight, and troubled body image.</p></div>
+                  <div class=&quot;bg-slate-950 p-4 rounded-lg term-card&quot;><h4 class=&quot;text-sky-400 font-bold text-sm uppercase&quot;>Bulimia Nervosa</h4><p class=&quot;text-xs text-slate-400 mt-2&quot;>Eating disorder involving periodic overeating followed by purging (vomiting, laxatives).</p></div>
+                  <div class=&quot;bg-slate-950 p-4 rounded-lg term-card&quot;><h4 class=&quot;text-sky-400 font-bold text-sm uppercase&quot;>Autism</h4><p class=&quot;text-xs text-slate-400 mt-2&quot;>Neurodevelopmental disorder characterized by impaired social interactions and communication.</p></div>
+                  <div class=&quot;bg-slate-950 p-4 rounded-lg term-card&quot;><h4 class=&quot;text-sky-400 font-bold text-sm uppercase&quot;>Bipolar Disorder</h4><p class=&quot;text-xs text-slate-400 mt-2&quot;>Mood disorder where symptoms change from mania (highs) to depression (lows).</p></div>
+                  <div class=&quot;bg-slate-950 p-4 rounded-lg term-card&quot;><h4 class=&quot;text-sky-400 font-bold text-sm uppercase&quot;>Generalized Anxiety Disorder</h4><p class=&quot;text-xs text-slate-400 mt-2&quot;>Excessive anxiety and worrying about a range of topics accompanied by physical anxiety symptoms.</p></div>
+                  <div class=&quot;bg-slate-950 p-4 rounded-lg term-card&quot;><h4 class=&quot;text-sky-400 font-bold text-sm uppercase&quot;>OCD</h4><p class=&quot;text-xs text-slate-400 mt-2&quot;>Intrusive thoughts (obsessions) motivating a person to complete neutralizing rituals (compulsions).</p></div>
+                  <div class=&quot;bg-slate-950 p-4 rounded-lg term-card&quot;><h4 class=&quot;text-sky-400 font-bold text-sm uppercase&quot;>PTSD</h4><p class=&quot;text-xs text-slate-400 mt-2&quot;>Post-traumatic Stress Disorder. Develops after direct/indirect involvement in a traumatic safety threat.</p></div>
+                  <div class=&quot;bg-slate-950 p-4 rounded-lg term-card&quot;><h4 class=&quot;text-sky-400 font-bold text-sm uppercase&quot;>Schizophrenia</h4><p class=&quot;text-xs text-slate-400 mt-2&quot;>Psychotic disorder characterized by disturbances in thinking, emotions, and behavior (hallucinations/delusions).</p></div>
+               </div>
+               <div class=&quot;bg-slate-900 border border-slate-700 p-6 rounded-xl space-y-4 mt-8 shadow-xl&quot;>
+                  <h3 class=&quot;text-sky-400 font-bold font-mono text-xs uppercase tracking-widest border-b border-slate-800 pb-2&quot;>Assignment Task 04</h3>
+                  <label class=&quot;block text-xs font-bold text-slate-400&quot;>Choose TWO terms from above. Research them further online. Write a short summary of your findings for each.</label>
+                  <div class=&quot;grid md:grid-cols-2 gap-4&quot;>
+                     <input type=&quot;text&quot; id=&quot;inp_term1&quot; oninput=&quot;pushData()&quot; placeholder=&quot;Term 1 Name&quot; class=&quot;w-full rounded-lg p-3 text-sm&quot;>
+                     <input type=&quot;text&quot; id=&quot;inp_term2&quot; oninput=&quot;pushData()&quot; placeholder=&quot;Term 2 Name&quot; class=&quot;w-full rounded-lg p-3 text-sm&quot;>
+                     <textarea id=&quot;inp_desc1&quot; oninput=&quot;pushData()&quot; placeholder=&quot;Research for Term 1...&quot; class=&quot;w-full h-24 rounded-lg p-3 text-sm&quot;></textarea>
+                     <textarea id=&quot;inp_desc2&quot; oninput=&quot;pushData()&quot; placeholder=&quot;Research for Term 2...&quot; class=&quot;w-full h-24 rounded-lg p-3 text-sm&quot;></textarea>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div id=&quot;review&quot; class=&quot;section-content space-y-8&quot;>
+            <div class=&quot;glass p-8 rounded-2xl border-emerald-500/30 border&quot;>
+               <div class=&quot;flex items-center gap-3 mb-6&quot;><div class=&quot;w-8 h-8 bg-emerald-500 flex items-center justify-center rounded font-bold text-black&quot;>04</div><h2 class=&quot;text-2xl font-black uppercase italic tracking-tight text-white&quot;>Final Review</h2></div>
+               <p class=&quot;text-sm text-slate-300 mb-8&quot;>Review your work below. When ready, click &quot;Generate Report&quot; to create a printable page for Google Classroom submission.</p>
+               <div class=&quot;bg-slate-900 border border-slate-700 p-6 rounded-xl space-y-6 mb-8&quot;>
+                  <h3 class=&quot;text-white font-bold font-mono text-xs uppercase tracking-widest border-b border-slate-800 pb-2&quot;>Final Reflection</h3>
+                  <p class=&quot;text-xs text-slate-400&quot;>Summarize your biggest takeaway from this unit. How has your perspective on mental health changed?</p>
+                  <textarea id=&quot;inp_reflect&quot; oninput=&quot;pushData()&quot; class=&quot;w-full h-32 rounded-lg p-3 text-sm&quot; placeholder=&quot;My biggest takeaway...&quot;></textarea>
+               </div>
+               <div class=&quot;flex justify-center&quot;><button onclick=&quot;generateReport()&quot; class=&quot;bg-emerald-600 hover:bg-emerald-500 text-white font-black uppercase tracking-widest py-4 px-12 rounded-xl shadow-lg shadow-emerald-900/20 transition-all active:scale-95 transform hover:-translate-y-1&quot;>Generate Final Report</button></div>
+            </div>
+            <footer class=&quot;text-center text-[10px] font-mono text-slate-600 uppercase tracking-widest pb-8&quot;>Content Sources: CMHA & APA Dictionary of Psychology</footer>
+         </div>
+      </main>
+      <script>
+        const UNIT_ID = &#39;unit1&#39;;
+        function switchTab(t){document.querySelectorAll(&#39;.section-content&#39;).forEach(e=>e.classList.remove(&#39;active&#39;));document.getElementById(t).classList.add(&#39;active&#39;);document.querySelectorAll(&#39;.nav-btn&#39;).forEach(b=>{b.classList.remove(&#39;bg-slate-800&#39;,&#39;border-slate-700&#39;,&#39;text-sky-400&#39;,&#39;text-white&#39;,&#39;shadow-sm&#39;,&#39;text-emerald-400&#39;);b.classList.add(&#39;text-slate-500&#39;)});const a=document.getElementById(&#39;btn-&#39;+t);a.classList.remove(&#39;text-slate-500&#39;);a.classList.add(&#39;bg-slate-800&#39;,&#39;border-slate-700&#39;,&#39;text-sky-400&#39;,&#39;shadow-sm&#39;);if(t===&#39;review&#39;){a.classList.remove(&#39;text-sky-400&#39;);a.classList.add(&#39;text-emerald-400&#39;)}window.scrollTo(0,0)}
+        
+        function getFormData() {
+            const data = {};
+            document.querySelectorAll(&#39;input[id], textarea[id]&#39;).forEach(el => data[el.id] = el.value);
+            return data;
+        }
+        function pushData() {
+            if(window.parent && window.parent.updateUnitData) {
+                window.parent.updateUnitData(UNIT_ID, getFormData());
+            }
+        }
+        function populate() {
+            if(window.parent && window.parent.getUnitData) {
+                const d = window.parent.getUnitData(UNIT_ID);
+                if(d) { Object.keys(d).forEach(k => { const el = document.getElementById(k); if(el) el.value = d[k]; }); }
+            }
+        }
+        function generateReport() {
+           const d = getFormData();
+           const html = `<html><head><title>Unit 1 Report</title><style>body{font-family:sans-serif;padding:40px;line-height:1.5}h1{border-bottom:4px solid #333;padding-bottom:10px}.section{margin-bottom:30px;border-left:4px solid #ccc;padding-left:15px}h2{font-size:16px;text-transform:uppercase;font-weight:bold}</style></head><body><h1>Unit 1 Submission</h1><div class=&quot;section&quot;><h2>Definition</h2><p>${d.inp_def}</p></div><div class=&quot;section&quot;><h2>Determinants</h2><p>${d.inp_det}</p></div><div class=&quot;section&quot;><h2>Stigma & Media</h2><p>${d.inp_media}</p><p>${d.inp_term_bias}</p><p>${d.inp_myth_reflect}</p></div><div class=&quot;section&quot;><h2>Research</h2><p><strong>${d.inp_term1}:</strong> ${d.inp_desc1}</p><p><strong>${d.inp_term2}:</strong> ${d.inp_desc2}</p></div><div class=&quot;section&quot;><h2>Reflection</h2><p>${d.inp_reflect}</p></div><script>window.print()<\/script></body></html>`;
+           const win = window.open(&#39;&#39;,&#39;_blank&#39;);win.document.write(html);win.document.close();
+        }
+        window.onload = populate;
+      </script>
+    </body>
+    </html>
+  </template>
+
+  <template id=&quot;unit2&quot;>
+    <!DOCTYPE html>
+    <html lang=&quot;en&quot;>
+    <head>
+       <meta charset=&quot;UTF-8&quot;>
+       <meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;>
+       <title>HSS3020 Unit 2: Stress Master Class</title>
+       <script src=&quot;https://cdn.tailwindcss.com&quot;></script>
+       <link href=&quot;https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&family=JetBrains+Mono:wght@500;700&display=swap&quot; rel=&quot;stylesheet&quot;>
+       <script>tailwind.config = { theme: { extend: { fontFamily: { sans: [&#39;Inter&#39;, &#39;sans-serif&#39;], mono: [&#39;JetBrains Mono&#39;, &#39;monospace&#39;] }, colors: { slate: { 850: &#39;#151e2e&#39;, 950: &#39;#020617&#39; } } } } }</script>
+       <style>
+          body { background-color: #020617; color: #e2e8f0; }
+          .glass { background: rgba(30, 41, 59, 0.4); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.05); }
+          .glass-header { background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+          .section-content { display: none; animation: fadeIn 0.4s ease-out; }
+          .section-content.active { display: block; }
+          input, textarea { background: #0f172a; border: 1px solid #334155; color: white; font-family: &#39;Inter&#39;, sans-serif; transition: all 0.2s; }
+          input:focus, textarea:focus { border-color: #0ea5e9; outline: none; box-shadow: 0 0 0 2px rgba(14, 165, 233, 0.2); background: #1e293b; }
+          .custom-scroll::-webkit-scrollbar { width: 6px; }
+          .custom-scroll::-webkit-scrollbar-track { background: #0f172a; }
+          .custom-scroll::-webkit-scrollbar-thumb { background: #475569; border-radius: 3px; }
+          .custom-scroll::-webkit-scrollbar-thumb:hover { background: #64748b; }
+          @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+          .sys-card { border-left: 3px solid #8b5cf6; transition: transform 0.2s; background: rgba(15, 23, 42, 0.8); }
+          .sys-card:hover { transform: translateX(4px); border-color: #a78bfa; }
+          .tech-card { border-left: 3px solid #0ea5e9; background: rgba(15, 23, 42, 0.6); }
+          .stress-type-card { background: rgba(30, 41, 59, 0.5); border: 1px solid #334155; border-radius: 0.75rem; padding: 1.5rem; }
+       </style>
+    </head>
+    <body class=&quot;min-h-screen flex flex-col&quot;>
+      <header class=&quot;glass-header sticky top-0 z-50 p-4 shadow-lg&quot;>
+         <div class=&quot;max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4&quot;>
+            <div>
+              <h1 class=&quot;text-xl font-black italic tracking-tighter text-white uppercase&quot;>Stress & Coping <span class=&quot;text-purple-500&quot;>Master Class</span></h1>
+              <p class=&quot;text-[10px] font-mono text-slate-400 tracking-widest uppercase&quot;>HSS3020 Unit 2 • Comprehensive Guide</p>
+            </div>
+            <div class=&quot;flex bg-slate-900/50 p-1.5 rounded-lg border border-slate-800 overflow-x-auto max-w-full&quot;>
+               <button onclick=&quot;switchTab(&#39;nature&#39;)&quot; class=&quot;nav-btn active px-4 py-2 rounded text-[10px] font-bold uppercase tracking-widest hover:text-white transition-all text-purple-400 bg-slate-800 border border-slate-700 shadow-sm&quot; id=&quot;btn-nature&quot;>01 The Nature of Stress</button>
+               <button onclick=&quot;switchTab(&#39;body&#39;)&quot; class=&quot;nav-btn px-4 py-2 rounded text-[10px] font-bold uppercase tracking-widest text-slate-500 hover:text-white transition-all&quot; id=&quot;btn-body&quot;>02 Physiology</button>
+               <button onclick=&quot;switchTab(&#39;coping&#39;)&quot; class=&quot;nav-btn px-4 py-2 rounded text-[10px] font-bold uppercase tracking-widest text-slate-500 hover:text-white transition-all&quot; id=&quot;btn-coping&quot;>03 Coping Skills</button>
+               <button onclick=&quot;switchTab(&#39;review&#39;)&quot; class=&quot;nav-btn px-4 py-2 rounded text-[10px] font-bold uppercase tracking-widest text-emerald-500 hover:text-white transition-all&quot; id=&quot;btn-review&quot;>04 Assessment</button>
+            </div>
+         </div>
+      </header>
+      <main class=&quot;flex-grow p-4 md:p-8 max-w-6xl mx-auto w-full&quot;>
+         <div id=&quot;nature&quot; class=&quot;section-content active space-y-8&quot;>
+            <div class=&quot;glass p-8 rounded-2xl&quot;>
+               <div class=&quot;flex items-center gap-3 mb-6&quot;><div class=&quot;w-8 h-8 bg-purple-500 flex items-center justify-center rounded font-bold text-black&quot;>01</div><h2 class=&quot;text-2xl font-black uppercase italic tracking-tight text-white&quot;>What is Stress?</h2></div>
+               <div class=&quot;space-y-6 text-sm text-slate-300 leading-relaxed mb-8&quot;>
+                  <p>The word stress is used to cover a wide range of behavioral reactions and emotions to events that are <strong>beyond the coping abilities of an individual</strong>. When the body starts to feel stress, the brain releases hormones throughout the body. These hormones send alarm signals that make our breathing and heart rate faster, and our muscles tense. This is what is known as the <strong>&quot;fight, flight, or freeze&quot;</strong> response.</p>
+                  <p>Stress can be good in small amounts, helping to motivate and reach potential. Stress is also very individualized; for example, some people find driving in heavy traffic very stressful, but some people do not. Continual stress can negatively affect an individual&#39;s mental health and bodily functions (such as blood pressure). However, it is important to note that <strong>stress is not a mental illness.</strong></p>
+               </div>
+               <div class=&quot;mb-8&quot;>
+                  <h3 class=&quot;text-white font-bold uppercase text-sm mb-4&quot;>4 Factors Influencing Stress</h3>
+                  <div class=&quot;grid md:grid-cols-2 gap-4&quot;>
+                     <div class=&quot;bg-slate-900 p-4 rounded border border-slate-700&quot;><span class=&quot;text-purple-400 font-bold uppercase text-xs block mb-1&quot;>1. Intensity</span><p class=&quot;text-xs text-slate-400&quot;>How strong the stressor is. For example, getting lost in the woods without a phone is much more intense than your phone battery dying at the mall.</p></div>
+                     <div class=&quot;bg-slate-900 p-4 rounded border border-slate-700&quot;><span class=&quot;text-purple-400 font-bold uppercase text-xs block mb-1&quot;>2. Duration</span><p class=&quot;text-xs text-slate-400&quot;>How long the stressor lasts. Short-term stress (like a test) is manageable, but long-term stress (like unemployment) wears you down.</p></div>
+                     <div class=&quot;bg-slate-900 p-4 rounded border border-slate-700&quot;><span class=&quot;text-purple-400 font-bold uppercase text-xs block mb-1&quot;>3. Number of Stressors</span><p class=&quot;text-xs text-slate-400&quot;>How many stressors are happening at one time. A single problem is easier to handle than a pile-up of work, family, and financial issues all at once.</p></div>
+                     <div class=&quot;bg-slate-900 p-4 rounded border border-slate-700&quot;><span class=&quot;text-purple-400 font-bold uppercase text-xs block mb-1&quot;>4. Coping Strategies</span><p class=&quot;text-xs text-slate-400&quot;>The tools you have to solve the issues at hand. People with better coping strategies (like time management or support networks) experience less negative stress.</p></div>
+                  </div>
+               </div>
+               <div class=&quot;bg-slate-900/50 p-6 rounded-xl border border-slate-700 mb-8&quot;>
+                  <h3 class=&quot;text-white font-bold uppercase text-sm mb-2&quot;>Concept: Self-Efficacy</h3>
+                  <p class=&quot;text-xs text-slate-300 mb-4 leading-relaxed&quot;>Albert Bandura, a psychologist, defined self-efficacy as an individual&#39;s belief in their own capabilities to execute a course of action. It significantly affects how people handle stress.</p>
+                  <div class=&quot;grid grid-cols-2 gap-4&quot;>
+                     <div class=&quot;bg-red-900/10 p-4 rounded border border-red-900/50&quot;><span class=&quot;block text-red-400 font-bold text-xs uppercase mb-2&quot;>Low Self-Efficacy</span><p class=&quot;text-[11px] text-slate-400&quot;>People who believe things are &quot;beyond their ability&quot; often view difficult tasks as personal threats. They dwell on personal deficiencies and obstacles rather than focusing on how to perform the task successfully. This leads to higher stress levels.</p></div>
+                     <div class=&quot;bg-emerald-900/10 p-4 rounded border border-emerald-900/50&quot;><span class=&quot;block text-emerald-400 font-bold text-xs uppercase mb-2&quot;>High Self-Efficacy</span><p class=&quot;text-[11px] text-slate-400&quot;>People who have a strong sense of efficacy enhance their personal well-being. They approach difficult tasks as challenges to be mastered rather than as threats to be avoided. This reduces stress and vulnerability to depression.</p></div>
+                  </div>
+               </div>
+               <div class=&quot;grid md:grid-cols-2 gap-6 mb-8&quot;>
+                  <div class=&quot;stress-type-card border-l-4 border-l-emerald-500&quot;><h3 class=&quot;text-emerald-400 font-bold uppercase text-sm mb-2&quot;>Eustress (Positive)</h3><ul class=&quot;list-disc list-inside text-xs text-slate-300 space-y-2&quot;><li>Motivates and focuses energy.</li><li>Is short-term.</li><li>Is perceived as within our coping abilities.</li><li>Feels exciting.</li><li>Improves performance.</li><li class=&quot;italic text-slate-500&quot;>Examples: Job promotion, marriage, starting a new hobby, a vacation, buying a home, having a child.</li></ul></div>
+                  <div class=&quot;stress-type-card border-l-4 border-l-rose-500&quot;><h3 class=&quot;text-rose-400 font-bold uppercase text-sm mb-2&quot;>Distress (Negative)</h3><ul class=&quot;list-disc list-inside text-xs text-slate-300 space-y-2&quot;><li>Causes anxiety or concern.</li><li>Can be short or long-term.</li><li>Is perceived as outside of our coping abilities.</li><li>Feels unpleasant.</li><li>Decreases performance.</li><li>Can lead to mental and physical problems.</li><li class=&quot;italic text-slate-500&quot;>Examples: Death of a loved one, filing for divorce, unemployment, conflict in relationships, chronic illness.</li></ul></div>
+               </div>
+               <div class=&quot;mb-8&quot;>
+                  <h3 class=&quot;text-white font-bold uppercase text-sm mb-4&quot;>5 Categories of Stressors</h3>
+                  <div class=&quot;space-y-3&quot;>
+                     <div class=&quot;p-3 bg-slate-900 rounded border-l-2 border-purple-500&quot;><p class=&quot;text-xs text-slate-300&quot;><strong class=&quot;text-purple-400 uppercase&quot;>1. Physical Environment:</strong> Noise, bright lights, heat, confined spaces, safety concerns.</p></div>
+                     <div class=&quot;p-3 bg-slate-900 rounded border-l-2 border-purple-500&quot;><p class=&quot;text-xs text-slate-300&quot;><strong class=&quot;text-purple-400 uppercase&quot;>2. Social/Relational:</strong> Rudeness, bossiness, aggressive behavior, bullying, conflict with friends/family.</p></div>
+                     <div class=&quot;p-3 bg-slate-900 rounded border-l-2 border-purple-500&quot;><p class=&quot;text-xs text-slate-300&quot;><strong class=&quot;text-purple-400 uppercase&quot;>3. Organizational (School/Work):</strong> Rules, regulations, deadlines, lack of control over work, difficult workload.</p></div>
+                     <div class=&quot;p-3 bg-slate-900 rounded border-l-2 border-purple-500&quot;><p class=&quot;text-xs text-slate-300&quot;><strong class=&quot;text-purple-400 uppercase&quot;>4. Life Events:</strong> Birth, death, marriage, divorce, financial issues, facing discrimination/harassment.</p></div>
+                     <div class=&quot;p-3 bg-slate-900 rounded border-l-2 border-purple-500&quot;><p class=&quot;text-xs text-slate-300&quot;><strong class=&quot;text-purple-400 uppercase&quot;>5. Major Changes:</strong> Moving to a new home/city/country, starting a new job, entering university.</p></div>
+                  </div>
+               </div>
+               <div class=&quot;bg-slate-950 border border-slate-700 p-6 rounded-xl space-y-6 shadow-xl&quot;>
+                  <div class=&quot;flex justify-between items-center border-b border-slate-800 pb-2&quot;><h3 class=&quot;text-purple-400 font-bold font-mono text-xs uppercase tracking-widest&quot;>Assignment Task 01</h3><span class=&quot;text-[10px] text-slate-500 uppercase&quot;>Lesson 1 Review</span></div>
+                  <div class=&quot;grid md:grid-cols-2 gap-6&quot;>
+                     <div><label class=&quot;block text-xs font-bold text-slate-400 mb-2&quot;>Were you surprised at your results from the stress test you took? Explain.</label><textarea id=&quot;ans1_surprised&quot; oninput=&quot;pushData()&quot; class=&quot;w-full h-24 rounded-lg p-3 text-sm&quot; placeholder=&quot;I was surprised because...&quot;></textarea></div>
+                     <div><label class=&quot;block text-xs font-bold text-slate-400 mb-2&quot;>How does stress play a role in your life?</label><textarea id=&quot;ans1_role&quot; oninput=&quot;pushData()&quot; class=&quot;w-full h-24 rounded-lg p-3 text-sm&quot; placeholder=&quot;Stress affects me by...&quot;></textarea></div>
+                  </div>
+                  <div><label class=&quot;block text-xs font-bold text-slate-400 mb-2&quot;>Do you have more eustress or distress in your life? What could you implement to increase eustress?</label><textarea id=&quot;ans1_implement&quot; oninput=&quot;pushData()&quot; class=&quot;w-full h-24 rounded-lg p-3 text-sm&quot; placeholder=&quot;I have more... I could increase eustress by...&quot;></textarea></div>
+                  <div><label class=&quot;block text-xs font-bold text-slate-400 mb-2&quot;>Of the five main stressors (above), which one affects your life the most? Explain with examples.</label><textarea id=&quot;ans1_main&quot; oninput=&quot;pushData()&quot; class=&quot;w-full h-24 rounded-lg p-3 text-sm&quot; placeholder=&quot;The stressor that affects me most is...&quot;></textarea></div>
+               </div>
+            </div>
+         </div>
+         <div id=&quot;body&quot; class=&quot;section-content space-y-8&quot;>
+            <div class=&quot;glass p-8 rounded-2xl&quot;>
+               <div class=&quot;flex items-center gap-3 mb-6&quot;><div class=&quot;w-8 h-8 bg-purple-500 flex items-center justify-center rounded font-bold text-black&quot;>02</div><h2 class=&quot;text-2xl font-black uppercase italic tracking-tight text-white&quot;>Stress & The Body</h2></div>
+               <p class=&quot;text-sm text-slate-300 mb-6&quot;>Your body is a finely tuned machine, but when stress hits, it reacts in complex ways across every major system.</p>
+               <div class=&quot;grid md:grid-cols-2 gap-6 mb-8&quot;>
+                  <div class=&quot;sys-card p-5 rounded-lg&quot;><h4 class=&quot;text-purple-400 font-bold text-sm uppercase mb-2&quot;>Musculoskeletal System</h4><p class=&quot;text-xs text-slate-300 leading-relaxed&quot;>When the body is stressed, muscles tense up to protect themselves from injury. It is a reflex reaction. Muscles return to a relaxed state once the stress passes, but chronic stress causes the muscles to be in a more or less constant state of guardedness. This triggers other reactions like tension headaches, migraines, and severe shoulder/neck/back pain.</p></div>
+                  <div class=&quot;sys-card p-5 rounded-lg&quot;><h4 class=&quot;text-purple-400 font-bold text-sm uppercase mb-2&quot;>Respiratory System</h4><p class=&quot;text-xs text-slate-300 leading-relaxed&quot;>Stress causes the airways to constrict and breathing to become faster (hyperventilation) in an effort to distribute oxygen-rich blood quickly to the core. For those with respiratory diseases like asthma or emphysema, stress can make it harder to breathe. It can also trigger panic attacks.</p></div>
+                  <div class=&quot;sys-card p-5 rounded-lg&quot;><h4 class=&quot;text-purple-400 font-bold text-sm uppercase mb-2&quot;>Cardiovascular System</h4><p class=&quot;text-xs text-slate-300 leading-relaxed&quot;>Acute stress causes heart rate to increase and heart muscle contractions to strengthen. Blood vessels dilate (widen) to push blood to large muscles and the heart. Repeated acute stress leads to inflammation in the coronary arteries, potentially leading to heart attack. Chronic stress leads to long-term high blood pressure (hypertension), damaged arteries, and high cholesterol.</p></div>
+                  <div class=&quot;sys-card p-5 rounded-lg&quot;><h4 class=&quot;text-purple-400 font-bold text-sm uppercase mb-2&quot;>Endocrine System (HPA Axis)</h4><p class=&quot;text-xs text-slate-300 leading-relaxed&quot;>The Hypothalamus signals the Pituitary Gland, which signals the Adrenal Glands (the HPA Axis). The adrenals produce cortisol and epinephrine (&quot;stress hormones&quot;). The liver is also signaled to produce more glucose (blood sugar) for energy. Chronic stress can result in impaired communication between the immune system and the HPA axis, leading to fatigue, metabolic disorders (obesity/diabetes), and immune depression.</p></div>
+                  <div class=&quot;sys-card p-5 rounded-lg&quot;><h4 class=&quot;text-purple-400 font-bold text-sm uppercase mb-2&quot;>Gastrointestinal System</h4><p class=&quot;text-xs text-slate-300 leading-relaxed&quot;>The gut and brain are constantly communicating. Stress can affect this communication, triggering pain, bloating, and gut discomfort (&quot;butterflies&quot;). Stress can cause spasms in the esophagus, induce nausea, or affect how quickly food moves through the body, causing either diarrhea or constipation.</p></div>
+                  <div class=&quot;sys-card p-5 rounded-lg&quot;><h4 class=&quot;text-purple-400 font-bold text-sm uppercase mb-2&quot;>Nervous System</h4><p class=&quot;text-xs text-slate-300 leading-relaxed&quot;>The sympathetic nervous system (SNS) triggers the &quot;fight or flight&quot; response, signaling the adrenal glands. The parasympathetic nervous system (PNS) calms the body down. Chronic stress keeps the SNS active, draining the body&#39;s resources.</p></div>
+               </div>
+               <div class=&quot;bg-slate-900/50 border border-slate-700 p-6 rounded-xl mb-8&quot;>
+                  <h3 class=&quot;text-white font-bold uppercase text-sm mb-4&quot;>50 Common Signs of Stress</h3>
+                  <div class=&quot;max-h-64 overflow-y-auto custom-scroll pr-4 grid grid-cols-2 md:grid-cols-3 gap-x-4 gap-y-1 text-[10px] text-slate-400 font-mono&quot;>
+                     <span>1. Frequent Headaches/Jaw pain</span><span>2. Gritting/Grinding teeth</span><span>3. Stuttering/Stammering</span><span>4. Tremors/Trembling lips</span><span>5. Neck/Back pain/Spasms</span><span>6. Dizziness/Faintness</span><span>7. Ringing/Buzzing ears</span><span>8. Blushing/Sweating</span><span>9. Cold or Sweaty hands/feet</span><span>10. Dry mouth/Swallowing issues</span><span>11. Frequent colds/infections</span><span>12. Rashes/Hives/Itching</span><span>13. Unexplained allergy attacks</span><span>14. Heartburn/Stomach pain/Nausea</span><span>15. Excess belching/flatulence</span><span>16. Constipation/Diarrhea</span><span>17. Difficulty breathing/Sighing</span><span>18. Panic attacks</span><span>19. Chest pain/Palpitations</span><span>20. Frequent urination</span><span>21. Diminished sexual desire/ability</span><span>22. Excess anxiety/Worry/Guilt</span><span>23. Increased anger/Hostility</span><span>24. Depression/Mood swings</span><span>25. Appetite changes (Too much/little)</span><span>26. Insomnia/Nightmares</span><span>27. Racing thoughts</span><span>28. Trouble learning new info</span><span>29. Forgetfulness/Confusion</span><span>30. Difficulty making decisions</span><span>31. Feeling Overwhelmed</span><span>32. Crying spells/Suicidal thoughts</span><span>33. Loneliness/Worthlessness</span><span>34. Little interest in appearance</span><span>35. Nervous habits (Fidgeting)</span><span>36. Irritability/Edginess</span><span>37. Overreaction to petty annoyances</span><span>38. Increased minor accidents</span><span>39. Obsessive/Compulsive behavior</span><span>40. Reduced work efficiency</span><span>41. Lying/Excuses for poor work</span><span>42. Rapid or Mumbled speech</span><span>43. Excessive defensiveness</span><span>44. Communication problems</span><span>45. Social withdrawal/Isolation</span><span>46. Constant fatigue</span><span>47. Frequent use of OTC drugs</span><span>48. Weight gain or loss</span><span>49. Increased smoking/alcohol/drugs</span><span>50. Excessive gambling/impulse buying</span>
+                  </div>
+               </div>
+               <div class=&quot;bg-slate-950 border border-slate-700 p-6 rounded-xl space-y-6 shadow-xl&quot;>
+                  <div class=&quot;flex justify-between items-center border-b border-slate-800 pb-2&quot;><h3 class=&quot;text-purple-400 font-bold font-mono text-xs uppercase tracking-widest&quot;>Assignment Task 03 (Body)</h3><span class=&quot;text-[10px] text-slate-500 uppercase&quot;>Lesson 3 Review</span></div>
+                  <div class=&quot;grid md:grid-cols-2 gap-6&quot;>
+                     <div><label class=&quot;block text-xs font-bold text-slate-400 mb-2&quot;>Look at the 50 signs above. Which ones do you display most often?</label><textarea id=&quot;ans3_signs&quot; oninput=&quot;pushData()&quot; class=&quot;w-full h-24 rounded-lg p-3 text-sm&quot; placeholder=&quot;I often display...&quot;></textarea></div>
+                     <div><label class=&quot;block text-xs font-bold text-slate-400 mb-2&quot;>How do you think stress is affecting your body? Explain.</label><textarea id=&quot;ans3_body&quot; oninput=&quot;pushData()&quot; class=&quot;w-full h-24 rounded-lg p-3 text-sm&quot; placeholder=&quot;I think stress is affecting my...&quot;></textarea></div>
+                  </div>
+                  <div><label class=&quot;block text-xs font-bold text-slate-400 mb-2&quot;>How does stress (both eustress and distress) affect your mental health?</label><textarea id=&quot;ans3_mental&quot; oninput=&quot;pushData()&quot; class=&quot;w-full h-24 rounded-lg p-3 text-sm&quot; placeholder=&quot;Eustress affects me by... Distress affects me by...&quot;></textarea></div>
+               </div>
+            </div>
+         </div>
+         <div id=&quot;coping&quot; class=&quot;section-content space-y-8&quot;>
+            <div class=&quot;glass p-8 rounded-2xl&quot;>
+               <div class=&quot;flex items-center gap-3 mb-6&quot;><div class=&quot;w-8 h-8 bg-purple-500 flex items-center justify-center rounded font-bold text-black&quot;>03</div><h2 class=&quot;text-2xl font-black uppercase italic tracking-tight text-white&quot;>Coping Strategies</h2></div>
+               <div class=&quot;grid md:grid-cols-2 gap-6 mb-8&quot;>
+                  <div class=&quot;tech-card p-5 rounded-lg&quot;><h4 class=&quot;text-white font-bold text-sm uppercase mb-2&quot;>1. Deep Breathing (Belly Breathing)</h4><p class=&quot;text-xs text-slate-300 leading-relaxed&quot;>This involves taking deep breaths from the abdomen rather than short shallow breaths from the chest. This is one of the best ways to lower stress because when you breathe deeply, it sends a message to your brain to calm down and relax. The brain then sends this message to your body. Belly breathing stimulates the <strong>Vagus nerve</strong>, which activates your relaxation response.</p></div>
+                  <div class=&quot;tech-card p-5 rounded-lg&quot;><h4 class=&quot;text-white font-bold text-sm uppercase mb-2&quot;>2. Progressive Muscle Relaxation (PMR)</h4><p class=&quot;text-xs text-slate-300 leading-relaxed&quot;>This is a two-step process. First, you intentionally tense particular muscle groups (like your neck or shoulders) for 5-10 seconds. Then, you release the tension and pay attention to how your muscles feel when you relax them. This helps you recognize the difference between tension and relaxation.</p></div>
+                  <div class=&quot;tech-card p-5 rounded-lg&quot;><h4 class=&quot;text-white font-bold text-sm uppercase mb-2&quot;>3. Body Scan Meditation</h4><p class=&quot;text-xs text-slate-300 leading-relaxed&quot;>This involves blending breath focus with Progressive Muscle Relaxation. Instead of tensing and relaxing muscles, you simply focus on the sensations in each part of your body. You mentally scan yourself from head to toe, noticing where you are holding stress and consciously letting it go.</p></div>
+                  <div class=&quot;tech-card p-5 rounded-lg&quot;><h4 class=&quot;text-white font-bold text-sm uppercase mb-2&quot;>4. Visualization (Guided Imagery)</h4><p class=&quot;text-xs text-slate-300 leading-relaxed&quot;>This is a variation of traditional meditation. You imagine a scene in which you feel at peace and free to let go of all tension and anxiety. You choose whatever setting is most calming to you—a beach, a forest, or a favorite room—and visualize it in detail to trick your body into relaxing.</p></div>
+                  <div class=&quot;tech-card p-5 rounded-lg&quot;><h4 class=&quot;text-white font-bold text-sm uppercase mb-2&quot;>5. Self-Massage</h4><p class=&quot;text-xs text-slate-300 leading-relaxed&quot;>You can relax your muscles quickly by massaging yourself. Techniques include: kneading your neck and shoulders, applying a rhythmic chopping motion to your neck, massaging your scalp with your fingertips, or using your thumbs to massage the tension out of your face.</p></div>
+                  <div class=&quot;tech-card p-5 rounded-lg&quot;><h4 class=&quot;text-white font-bold text-sm uppercase mb-2&quot;>6. Mindfulness</h4><p class=&quot;text-xs text-slate-300 leading-relaxed&quot;>Mindfulness is the ability to be fully present in the moment. It involves staying aware of where you are and what you are doing without being overly reactive. When thoughts wander to the past or future, you gently bring them back to the current moment.</p></div>
+                  <div class=&quot;tech-card p-5 rounded-lg&quot;><h4 class=&quot;text-white font-bold text-sm uppercase mb-2&quot;>7. Rhythmic Movement</h4><p class=&quot;text-xs text-slate-300 leading-relaxed&quot;>This includes exercises like running, walking, swimming, or dancing. The mental benefit comes when you pay attention to the rhythmic repetition of the movement—focusing on the sensation of your feet hitting the ground or the rhythm of your breath—rather than letting your mind wander.</p></div>
+                  <div class=&quot;tech-card p-5 rounded-lg&quot;><h4 class=&quot;text-white font-bold text-sm uppercase mb-2&quot;>8. Yoga & Tai Chi</h4><p class=&quot;text-xs text-slate-300 leading-relaxed&quot;><strong>Yoga:</strong> A series of moving and stationary poses combined with deep breathing. Satyananda (gentle) and Hatha (beginner) are best for stress. Power yoga is more for fitness.<br><strong>Tai Chi:</strong> A self-paced, non-competitive series of slow, flowing body movements. It emphasizes concentration, relaxation, and the conscious circulation of vital energy.</p></div>
+               </div>
+               <div class=&quot;grid md:grid-cols-2 gap-8 mb-8&quot;>
+                  <div class=&quot;bg-slate-900/50 p-6 rounded-xl border border-slate-700&quot;><h3 class=&quot;text-emerald-400 font-bold uppercase text-sm mb-4&quot;>Diet & Cortisol</h3><p class=&quot;text-xs text-slate-300 mb-4&quot;>A balanced diet can support a healthy immune system and repair damaged cells. Some foods help keep cortisol low:</p><ul class=&quot;list-disc list-inside text-xs text-slate-400 space-y-2&quot;><li><strong>Dark Chocolate:</strong> (In moderation) reduces stress hormones.</li><li><strong>Pears and Bananas:</strong> High in key vitamins.</li><li><strong>Tea:</strong> Mainly green or black tea.</li><li><strong>Probiotics:</strong> Found in yogurt; gut health links to mental health.</li><li><strong>Soluble Fiber:</strong> Found in oats and fruits.</li><li><strong>Water:</strong> Dehydration increases cortisol.</li></ul></div>
+                  <div class=&quot;bg-slate-900/50 p-6 rounded-xl border border-slate-700&quot;><h3 class=&quot;text-emerald-400 font-bold uppercase text-sm mb-4&quot;>Sleep Hygiene</h3><p class=&quot;text-xs text-slate-300 mb-4&quot;>Not getting enough sleep increases cortisol, which starts a vicious cycle. Strategies for better sleep:</p><ul class=&quot;list-disc list-inside text-xs text-slate-400 space-y-2&quot;><li><strong>Cut Caffeine/Alcohol:</strong> Avoid soft drinks, energy drinks, and alcohol in the evening as they stimulate the nervous system.</li><li><strong>Bedtime Routine:</strong> A consistent routine lets your body know it is time to sleep.</li><li><strong>Turn off Screens:</strong> No phones/TV at least 30 minutes before bed.</li><li><strong>Limit Fluids:</strong> To avoid waking up in the night.</li></ul></div>
+               </div>
+               <div class=&quot;bg-slate-950 border border-slate-700 p-6 rounded-xl shadow-xl&quot;>
+                  <div class=&quot;flex justify-between items-center border-b border-slate-800 pb-2 mb-4&quot;><h3 class=&quot;text-purple-400 font-bold font-mono text-xs uppercase tracking-widest&quot;>Assignment Task 03 (Management)</h3></div>
+                  <label class=&quot;block text-xs font-bold text-slate-400 mb-2&quot;>Name THREE ways that you manage your stress. Explain how each works for you.</label>
+                  <textarea id=&quot;ans3_manage&quot; oninput=&quot;pushData()&quot; class=&quot;w-full h-32 rounded-lg p-3 text-sm&quot; placeholder=&quot;1. Method: ... How it works: ...&#10;2. Method: ... How it works: ...&#10;3. Method: ... How it works: ...&quot;></textarea>
+               </div>
+            </div>
+         </div>
+         <div id=&quot;review&quot; class=&quot;section-content space-y-8&quot;>
+            <div class=&quot;glass p-8 rounded-2xl border-emerald-500/30 border&quot;>
+               <div class=&quot;flex items-center gap-3 mb-6&quot;><div class=&quot;w-8 h-8 bg-emerald-500 flex items-center justify-center rounded font-bold text-black&quot;>04</div><h2 class=&quot;text-2xl font-black uppercase italic tracking-tight text-white&quot;>Assessment & Review</h2></div>
+               <div class=&quot;mb-8&quot;><p class=&quot;text-sm text-slate-300 mb-4&quot;>In this unit, you reviewed several stress assessment tools. Based on your experience with them (CMHA Stress Index, Ardell Wellness, WebMD, or NYSUT), answer the following:</p></div>
+               <div class=&quot;bg-slate-900 border border-slate-700 p-6 rounded-xl space-y-6 mb-8 shadow-xl&quot;>
+                  <div class=&quot;flex justify-between items-center border-b border-slate-800 pb-2&quot;><h3 class=&quot;text-emerald-500 font-bold font-mono text-xs uppercase tracking-widest&quot;>Assignment Task 02</h3><span class=&quot;text-[10px] text-slate-500 uppercase&quot;>Lesson 2 Review</span></div>
+                  <div><label class=&quot;block text-xs font-bold text-slate-400 mb-2&quot;>Which of the stress tests did you find the easiest to use? Explain.</label><textarea id=&quot;ans2_easiest&quot; oninput=&quot;pushData()&quot; class=&quot;w-full h-24 rounded-lg p-3 text-sm&quot; placeholder=&quot;The easiest one was...&quot;></textarea></div>
+                  <div><label class=&quot;block text-xs font-bold text-slate-400 mb-2&quot;>Which of the stress tests was most beneficial to you? Explain.</label><textarea id=&quot;ans2_beneficial&quot; oninput=&quot;pushData()&quot; class=&quot;w-full h-24 rounded-lg p-3 text-sm&quot; placeholder=&quot;The most beneficial one was...&quot;></textarea></div>
+               </div>
+               <div class=&quot;flex justify-center&quot;><button onclick=&quot;generateReport()&quot; class=&quot;bg-emerald-600 hover:bg-emerald-500 text-white font-black uppercase tracking-widest py-4 px-12 rounded-xl shadow-lg shadow-emerald-900/20 transition-all active:scale-95 transform hover:-translate-y-1&quot;>Generate Final Report</button></div>
+            </div>
+            <footer class=&quot;text-center text-[10px] font-mono text-slate-600 uppercase tracking-widest pb-8&quot;>Content Sources: Mental Help, CMHA, HelpGuide.org</footer>
+         </div>
+      </main>
+      <script>
+        const UNIT_ID = &#39;unit2&#39;;
+        function switchTab(t){document.querySelectorAll(&#39;.section-content&#39;).forEach(e=>e.classList.remove(&#39;active&#39;));document.getElementById(t).classList.add(&#39;active&#39;);document.querySelectorAll(&#39;.nav-btn&#39;).forEach(b=>{b.classList.remove(&#39;bg-slate-800&#39;,&#39;border-slate-700&#39;,&#39;text-purple-400&#39;,&#39;text-white&#39;,&#39;shadow-sm&#39;,&#39;text-emerald-500&#39;);b.classList.add(&#39;text-slate-500&#39;)});const a=document.getElementById(&#39;btn-&#39;+t);a.classList.remove(&#39;text-slate-500&#39;);a.classList.add(&#39;bg-slate-800&#39;,&#39;border-slate-700&#39;,&#39;shadow-sm&#39;);if(t===&#39;review&#39;)a.classList.add(&#39;text-emerald-500&#39;);else a.classList.add(&#39;text-purple-400&#39;);window.scrollTo(0,0)}
+        
+        function getFormData() {
+            const data = {};
+            document.querySelectorAll(&#39;input[id], textarea[id]&#39;).forEach(el => data[el.id] = el.value);
+            return data;
+        }
+        function pushData() {
+            if(window.parent && window.parent.updateUnitData) {
+                window.parent.updateUnitData(UNIT_ID, getFormData());
+            }
+        }
+        function populate() {
+            if(window.parent && window.parent.getUnitData) {
+                const d = window.parent.getUnitData(UNIT_ID);
+                if(d) { Object.keys(d).forEach(k => { const el = document.getElementById(k); if(el) el.value = d[k]; }); }
+            }
+        }
+        function generateReport() {
+           const d = getFormData();
+           const html = `<html><head><title>Unit 2 Report</title><style>body{font-family:sans-serif;padding:40px;line-height:1.5}h1{border-bottom:4px solid #333;padding-bottom:10px}.section{margin-bottom:30px;border-left:4px solid #8b5cf6;padding-left:15px}h2{font-size:16px;text-transform:uppercase;font-weight:bold}</style></head><body><h1>Unit 2 Submission</h1><div class=&quot;section&quot;><h2>Lesson 1: Stress</h2><p><strong>Surprised?</strong> ${d.ans1_surprised}</p><p><strong>Role:</strong> ${d.ans1_role}</p><p><strong>Type:</strong> ${d.ans1_implement}</p><p><strong>Main Stressor:</strong> ${d.ans1_main}</p></div><div class=&quot;section&quot;><h2>Lesson 2: Evaluation</h2><p><strong>Easiest:</strong> ${d.ans2_easiest}</p><p><strong>Beneficial:</strong> ${d.ans2_beneficial}</p></div><div class=&quot;section&quot;><h2>Lesson 3: Body & Coping</h2><p><strong>Management:</strong> ${d.ans3_manage}</p><p><strong>Signs:</strong> ${d.ans3_signs}</p><p><strong>Body:</strong> ${d.ans3_body}</p><p><strong>Mental Health:</strong> ${d.ans3_mental}</p></div><script>window.print()<\/script></body></html>`;
+           const win = window.open(&#39;&#39;,&#39;_blank&#39;);win.document.write(html);win.document.close();
+        }
+        window.onload = populate;
+      </script>
+    </body>
+    </html>
+  </template>
+
+  <template id=&quot;unit3&quot;>
+    <!DOCTYPE html>
+    <html lang=&quot;en&quot;>
+    <head>
+       <meta charset=&quot;UTF-8&quot;>
+       <meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;>
+       <title>HSS3020 Unit 3: Mental Illness Master Class</title>
+       <script src=&quot;https://cdn.tailwindcss.com&quot;></script>
+       <link href=&quot;https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&family=JetBrains+Mono:wght@500;700&display=swap&quot; rel=&quot;stylesheet&quot;>
+       <script>tailwind.config = { theme: { extend: { fontFamily: { sans: [&#39;Inter&#39;, &#39;sans-serif&#39;], mono: [&#39;JetBrains Mono&#39;, &#39;monospace&#39;] }, colors: { slate: { 850: &#39;#151e2e&#39;, 950: &#39;#020617&#39; } } } } }</script>
+       <style>
+          body { background-color: #020617; color: #e2e8f0; }
+          .glass { background: rgba(30, 41, 59, 0.4); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.05); }
+          .glass-header { background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+          .section-content { display: none; animation: fadeIn 0.4s ease-out; }
+          .section-content.active { display: block; }
+          input, textarea { background: #0f172a; border: 1px solid #334155; color: white; font-family: &#39;Inter&#39;, sans-serif; transition: all 0.2s; }
+          input:focus, textarea:focus { border-color: #ec4899; outline: none; box-shadow: 0 0 0 2px rgba(236, 72, 153, 0.2); background: #1e293b; }
+          .custom-scroll::-webkit-scrollbar { width: 8px; }
+          .custom-scroll::-webkit-scrollbar-track { background: #0f172a; }
+          .custom-scroll::-webkit-scrollbar-thumb { background: #475569; border-radius: 4px; }
+          .custom-scroll::-webkit-scrollbar-thumb:hover { background: #64748b; }
+          @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+          .content-block { margin-bottom: 2rem; }
+          .content-block h3 { color: white; font-weight: 800; text-transform: uppercase; font-size: 1.125rem; margin-bottom: 1rem; border-left: 4px solid #ec4899; padding-left: 1rem; }
+          .content-block h4 { color: #f472b6; font-weight: 700; font-size: 0.875rem; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.05em; }
+          .content-block p { color: #cbd5e1; font-size: 0.875rem; line-height: 1.7; margin-bottom: 1rem; }
+          .content-block ul { list-style-type: disc; padding-left: 1.5rem; margin-bottom: 1rem; color: #cbd5e1; font-size: 0.875rem; }
+          .content-block li { margin-bottom: 0.5rem; }
+          .highlight-box { background: rgba(30, 41, 59, 0.5); border: 1px solid #334155; border-radius: 0.5rem; padding: 1.5rem; margin-bottom: 1.5rem; }
+       </style>
+    </head>
+    <body class=&quot;min-h-screen flex flex-col&quot;>
+      <header class=&quot;glass-header sticky top-0 z-50 p-4 shadow-lg&quot;>
+         <div class=&quot;max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4&quot;>
+            <div>
+               <h1 class=&quot;text-xl font-black italic tracking-tighter text-white uppercase&quot;>Mental Illness <span class=&quot;text-pink-500&quot;>Master Class</span></h1>
+               <p class=&quot;text-[10px] font-mono text-slate-400 tracking-widest uppercase&quot;>HSS3020 Unit 3 • Full Course Material</p>
+            </div>
+            <div class=&quot;flex bg-slate-900/50 p-1.5 rounded-lg border border-slate-800 overflow-x-auto max-w-full&quot;>
+               <button onclick=&quot;switchTab(&#39;foundations&#39;)&quot; class=&quot;nav-btn active px-4 py-2 rounded text-[10px] font-bold uppercase tracking-widest hover:text-white transition-all text-pink-400 bg-slate-800 border border-slate-700 shadow-sm&quot; id=&quot;btn-foundations&quot;>01 Foundations</button>
+               <button onclick=&quot;switchTab(&#39;depression&#39;)&quot; class=&quot;nav-btn px-4 py-2 rounded text-[10px] font-bold uppercase tracking-widest text-slate-500 hover:text-white transition-all&quot; id=&quot;btn-depression&quot;>02 Depression</button>
+               <button onclick=&quot;switchTab(&#39;hormones&#39;)&quot; class=&quot;nav-btn px-4 py-2 rounded text-[10px] font-bold uppercase tracking-widest text-slate-500 hover:text-white transition-all&quot; id=&quot;btn-hormones&quot;>03 Hormones</button>
+               <button onclick=&quot;switchTab(&#39;review&#39;)&quot; class=&quot;nav-btn px-4 py-2 rounded text-[10px] font-bold uppercase tracking-widest text-emerald-500 hover:text-white transition-all&quot; id=&quot;btn-review&quot;>04 Assessment</button>
+            </div>
+         </div>
+      </header>
+      <main class=&quot;flex-grow p-4 md:p-8 max-w-6xl mx-auto w-full&quot;>
+         <div id=&quot;foundations&quot; class=&quot;section-content active space-y-8&quot;>
+            <div class=&quot;glass p-8 rounded-2xl&quot;>
+               <div class=&quot;content-block&quot;>
+                  <h3>Defining Mental Health and Mental Illness</h3>
+                  <h4>Mental Health Continuum</h4>
+                  <p>You will recall from the first unit that there is a difference between mental health and mental illness. The Canadian Mental Health Association defines mental health as:</p>
+                  <div class=&quot;highlight-box border-l-4 border-pink-500 bg-pink-900/10&quot;>
+                     <p class=&quot;italic text-white&quot;>&quot;...knowing and accepting yourself, understand[ing] what makes you happy, building meaningful relationships, coping with problems of day-to-day living, and maintaining a sense of humour. It also means striking a balance in all aspects of your life: social, physical, spiritual, economic, and mental. Mental health is [also] about coping with the challenges of life.&quot;</p>
+                  </div>
+                  <p>A mental illness, on the other hand, is something that affects how someone thinks, feels, behaves, or interacts with other people. It is something that a professional needs to diagnose. Remember that it is important to never self-diagnose a mental illness.</p>
+               </div>
+               <div class=&quot;content-block&quot;>
+                  <h3>Common Signs and Symptoms</h3>
+                  <p class=&quot;text-xs italic text-slate-400 mb-4&quot;>*Disclaimer: The following are general signs and symptoms. If you or anyone you know are concerned, please see a professional.</p>
+                  <p>Most mental illnesses seldom just appear. There are usually signs and symptoms that can be very telling that something is affecting a person. Knowing some of these signs can help people realize the early warning signs. Early intervention from a professional may also help lessen the severity.</p>
+                  <div class=&quot;grid md:grid-cols-2 gap-8&quot;>
+                     <ul class=&quot;space-y-3&quot;>
+                        <li><strong>Appetite/Sleep Changes:</strong> Drastic changes (either an increase or decrease).</li>
+                        <li><strong>Emotional Outbursts:</strong> Drastic and/or rapid changes in mood.</li>
+                        <li><strong>Withdrawal:</strong> Pulling away from social activities or activities that the person once found entertaining.</li>
+                        <li><strong>Decrease in Functioning:</strong> Unusually low functioning in most aspects of life (school, work, social activities) and/or having difficulty performing familiar tasks.</li>
+                        <li><strong>Problems Concentrating:</strong> Issues recalling memories or logical thought/speech that is difficult to explain.</li>
+                        <li><strong>Increased Sensitivity:</strong> With all senses; avoiding over-stimulating situations.</li>
+                     </ul>
+                     <ul class=&quot;space-y-3&quot;>
+                        <li><strong>Indifference:</strong> Apathy toward activities.</li>
+                        <li><strong>Feeling Disconnected:</strong> From their support network; having a sense of unreality.</li>
+                        <li><strong>Nervousness:</strong> Fear/suspicious feelings of others.</li>
+                        <li><strong>Unusual Behaviour:</strong> Uncharacteristic behaviour of the person.</li>
+                        <li><strong>Substance Abuse:</strong> Substance use can be a sign of coping with mental illness.</li>
+                     </ul>
+                  </div>
+                  <p><em>It is important to remember that if one of these points describes a person, that is fine as long as they are aware and are working on it. However, if someone is presenting with several of these at one time, there may be cause for concern.</em></p>
+               </div>
+               <div class=&quot;bg-slate-950 border border-slate-700 p-6 rounded-xl space-y-6 shadow-xl mt-8&quot;>
+                  <div class=&quot;flex justify-between items-center border-b border-slate-800 pb-2&quot;><h3 class=&quot;text-pink-400 font-bold font-mono text-xs uppercase tracking-widest&quot;>Assignment Task 01</h3></div>
+                  <label class=&quot;block text-xs font-bold text-slate-400 mb-2&quot;>How do you differentiate between mental health and mental illness? Use examples to support your response.</label>
+                  <textarea id=&quot;ans1_diff&quot; oninput=&quot;pushData()&quot; class=&quot;w-full h-32 rounded-lg p-3 text-sm&quot; placeholder=&quot;Mental health is... whereas Mental illness is... For example...&quot;></textarea>
+               </div>
+            </div>
+         </div>
+         <div id=&quot;depression&quot; class=&quot;section-content space-y-8&quot;>
+            <div class=&quot;glass p-8 rounded-2xl&quot;>
+               <div class=&quot;content-block&quot;>
+                  <h3>Sadness and Depression</h3>
+                  <p>Sadness and depression can sometimes seem very similar. The words are being used interchangeably, but there is a difference. Everyone will feel sadness at some point. Depression is a mental illness that has been diagnosed by a professional.</p>
+                  <div class=&quot;highlight-box&quot;>
+                     <h4>The Weather Analogy</h4>
+                     <p>If sadness and depression were types of weather, <strong>Sadness</strong> would be a light rainfall, while <strong>Depression</strong> would be a hurricane. Sadness is a response to a particular event occurring in your life, while depression has an effect on every aspect of life, happy and sad events included.</p>
+                  </div>
+                  <h4>Primary Symptoms (The Cycle)</h4>
+                  <div class=&quot;grid md:grid-cols-4 gap-4 text-xs&quot;>
+                     <div class=&quot;bg-slate-900 p-4 rounded&quot;><strong>Thoughts:</strong> Negative thoughts about oneself (self-criticism), life experience (pessimism), and the future (hopelessness).</div>
+                     <div class=&quot;bg-slate-900 p-4 rounded&quot;><strong>Moods:</strong> Depressed, sad, irritable, guilty.</div>
+                     <div class=&quot;bg-slate-900 p-4 rounded&quot;><strong>Physical:</strong> Difficulty sleeping, eating less or more, being tired.</div>
+                     <div class=&quot;bg-slate-900 p-4 rounded&quot;><strong>Behaviors:</strong> Withdrawing from people, doing fewer activities, difficulty getting started, low motivation.</div>
+                  </div>
+               </div>
+               <div class=&quot;content-block&quot;>
+                  <h3>What Causes Depression?</h3>
+                  <p>Depression is usually the result of long-term events and personal factors rather than immediate, short-term life events. Factors can have both a biological and a circumstantial basis.</p>
+                  <h4>Biological Causes</h4>
+                  <div class=&quot;pl-4 border-l-2 border-slate-700 mb-6&quot;>
+                     <p><strong>1. Brain Structure:</strong></p>
+                     <ul>
+                        <li><strong>Frontal Lobe:</strong> The part behind your forehead. Evidence shows a less active frontal lobe puts a person at a higher risk of depression.</li>
+                        <li><strong>Hippocampus:</strong> In charge of long-term memory. It is often smaller on average in those with depression, and gets subsequently smaller with each session of depression.</li>
+                        <li><strong>Neurons:</strong> Researchers suggest people with depression do not develop new neurons (cells that &quot;talk&quot; via electrical impulses) as quickly.</li>
+                        <li><strong>Amygdala:</strong> The &quot;emotion&quot; part. Shows increased activity in those that are depressed. This increased activity lasts even after the sadness has passed, making the person more sensitive to emotions.</li>
+                        <li><strong>Neurotransmitters:</strong> Depression is associated with lower levels of serotonin and noradrenaline.</li>
+                     </ul>
+                     <p class=&quot;mt-4&quot;><strong>2. Medical Conditions:</strong></p>
+                     <p>Chronic conditions put a person at higher risk. Linked issues include: Hypothyroidism, Heart Disease, Degenerative conditions (MS, Parkinson&#39;s), Strokes, Nutritional diseases (Lack of B12), Endocrine disorders, Immune system diseases (Lupus), Virus/Infections (HIV, Hepatitis), Cancer, Erectile dysfunction.</p>
+                     <p class=&quot;mt-4&quot;><strong>3. Personality:</strong></p>
+                     <p>Traits that increase risk: Worrying, low self-esteem, perfectionism, sensitivity to criticism, critical of self, pessimistic outlook.</p>
+                  </div>
+                  <h4>Circumstantial Causes</h4>
+                  <div class=&quot;pl-4 border-l-2 border-slate-700&quot;>
+                     <p><strong>1. Family History:</strong> If a person has a family member with depression, they are at an increased risk. However, mental illness is unique to the person.</p>
+                     <p class=&quot;mt-4&quot;><strong>2. Early Childhood Trauma:</strong></p>
+                     <p>Trauma changes the structure of the brain by developing new <strong>neural pathways</strong>. These pathways are how the brain &quot;talks&quot; to itself (e.g., &quot;1+1=2&quot; or &quot;I don&#39;t feel safe&quot;). Trauma creates pathways based on fear. If the trauma occurs early, these pathways can become habits. These changes in brain function may be responsible for depressive symptoms.</p>
+                     <p class=&quot;mt-4&quot;><strong>3. Drug and Alcohol Abuse:</strong> Approx 21% of people with substance abuse issues have experienced depression.</p>
+                     <p class=&quot;mt-4&quot;><strong>4. Depressive Disorder with Seasonal Pattern (SAD):</strong> Related to daylight exposure. Rates increase in fall/winter.</p>
+                  </div>
+               </div>
+               <div class=&quot;bg-slate-950 border border-slate-700 p-6 rounded-xl space-y-6 shadow-xl&quot;>
+                  <div class=&quot;flex justify-between items-center border-b border-slate-800 pb-2&quot;><h3 class=&quot;text-pink-400 font-bold font-mono text-xs uppercase tracking-widest&quot;>Assignment Task 02</h3></div>
+                  <div class=&quot;bg-slate-900 p-4 rounded border border-slate-800&quot;><p class=&quot;text-xs text-slate-300 italic&quot;>&quot;I can&#39;t believe they would say that about me! Ugh!! I&#39;m so depressed now!&quot;</p></div>
+                  <label class=&quot;block text-xs font-bold text-slate-400 mb-2&quot;>After examining the depressive cycle, would you conclude that this person is sad or depressed? Explain using examples from the depressive cycle.</label>
+                  <textarea id=&quot;ans2_scenario&quot; oninput=&quot;pushData()&quot; class=&quot;w-full h-32 rounded-lg p-3 text-sm&quot; placeholder=&quot;I conclude they are... because...&quot;></textarea>
+               </div>
+            </div>
+         </div>
+         <div id=&quot;hormones&quot; class=&quot;section-content space-y-8&quot;>
+            <div class=&quot;glass p-8 rounded-2xl&quot;>
+               <div class=&quot;content-block&quot;>
+                  <h3>Hormonal Influences on Mental Health</h3>
+                  <p>Hormones can have an influence on mental health because of how they fluctuate. The main hormones are Oestrogen (Estrogen), Progesterone, and Testosterone.</p>
+                  <div class=&quot;grid md:grid-cols-2 gap-4 mb-6&quot;>
+                     <div class=&quot;bg-pink-900/10 border border-pink-500/30 p-4 rounded&quot;>
+                        <strong class=&quot;text-pink-400 text-xs uppercase&quot;>Psychological signs of High Estrogen</strong>
+                        <ul class=&quot;text-xs text-slate-300 mt-2 space-y-1&quot;><li>Anxiety & Panic attacks</li><li>Stress</li><li>Depressed mood / lack of energy</li><li>Melancholy & excessive worrying</li><li>Mood swings & Irritability</li><li>Problems concentrating/sleeping</li><li>Confusion</li></ul>
+                     </div>
+                     <div class=&quot;bg-blue-900/10 border border-blue-500/30 p-4 rounded&quot;>
+                        <strong class=&quot;text-blue-400 text-xs uppercase&quot;>Psychological signs of Low Testosterone</strong>
+                        <ul class=&quot;text-xs text-slate-300 mt-2 space-y-1&quot;><li>Low libido</li><li>Signs similar to high estrogen levels: stress, depressive feelings, irritability, mood swings</li></ul>
+                     </div>
+                  </div>
+               </div>
+               <div class=&quot;content-block&quot;>
+                  <h3>Male and Female Hormonal Differences</h3>
+                  <div class=&quot;highlight-box&quot;>
+                     <h4>Male (Andropause)</h4>
+                     <p>Males are not affected as much by monthly fluctuations. However, <strong>Andropause</strong> (ages 45-65) signifies a drop in testosterone and conversion to estrogen. This radically alters hormone balance.</p>
+                     <p class=&quot;mt-2&quot;><strong>Symptoms:</strong> Erectile dysfunction, loss of muscle strength, lowered motivation/self-confidence, issues with concentration/memory, feelings of depression, and sleep issues.</p>
+                  </div>
+                  <div class=&quot;highlight-box&quot;>
+                     <h4>Female (The Weekly Cycle)</h4>
+                     <p>Continual fluctuations determine the monthly cycle.</p>
+                     <ul class=&quot;space-y-4 mt-4&quot;>
+                        <li><strong>Week 1:</strong> Estrogen low but climbs. Lower levels relate to increased memory skills, happier mood, and more energy.</li>
+                        <li><strong>Week 2:</strong> Increases in estrogen and testosterone. Good memory, happier mood, self-confidence. (Note: Too much estrogen here can cause anxiety/stress).</li>
+                        <li><strong>Week 3:</strong> Progesterone rises; Estrogen/Testosterone decrease rapidly. Can lead to irritability, fatigue, sullenness. Progesterone is a &quot;sedating&quot; hormone, causing sadness or crying in sensitive individuals.</li>
+                        <li><strong>Week 4:</strong> Both Estrogen and Progesterone drop quickly. Can lead to negative mood, sadness, irritability, anxiety. <em>Note: Healthy eating, exercise, and sleep help decrease these effects.</em></li>
+                     </ul>
+                  </div>
+               </div>
+               <div class=&quot;content-block&quot;>
+                  <h3>Female Hormonal Influences: Life Stages</h3>
+                  <h4>Pregnancy</h4>
+                  <p>Influx of estrogen and progesterone. Mood fluctuations (crying, irritability, anger, anxiety) are normal, especially during weeks 6-10 and the third trimester. However, if a woman is not sleeping well, has lost interest in living, and is having panic attacks, she may be developing depression. Treating it early reduces Postpartum Depression risk.</p>
+                  <h4>Menopause & Mental Health (Harvard Health)</h4>
+                  <p>The incidence of depression doubles during menopause. Women who have struggled in the past are more likely to see a resurgence.</p>
+                  <ul class=&quot;mt-2 space-y-2&quot;>
+                     <li><strong>Anxiety:</strong> Evidence shows women are more likely to experience panic attacks during this transition. This can be hard to distinguish from &quot;Hot Flashes&quot; (both cause racing heart/sweating). A hot flash is often preceded by an &quot;aura&quot; or sense of doom.</li>
+                     <li><strong>Physical Triggers:</strong> Anxiety may be triggered by an overactive thyroid gland (common with age) or lack of sleep due to hormone shifts/night sweats.</li>
+                     <li><strong>Protection:</strong> Monitor mood, make lifestyle changes (exercise/sleep), reach out to others, and know that it is temporary. Hormone-related risks ease with time after menopause.</li>
+                  </ul>
+               </div>
+               <div class=&quot;content-block&quot;>
+                  <h3>PMDD vs. PMS</h3>
+                  <p><strong>PMS (Premenstrual Syndrome):</strong> Physical symptoms (bloating) and manageable emotional symptoms.</p>
+                  <p><strong>PMDD (Premenstrual Dysphoric Disorder):</strong> Affects 3-8% of women. Severe depression, &quot;brain fog&quot;, and suicidal thinking. Causes significant loss of productivity. Requires treatment.</p>
+               </div>
+               <div class=&quot;content-block&quot;>
+                  <h3>The 5 Factors in Mental Health</h3>
+                  <p>Achieving good mental health involves balancing physical, mental, social, economic, spiritual, and emotional well-being.</p>
+                  <ul class=&quot;space-y-2&quot;>
+                     <li><strong>1. Biological Factors:</strong> Heredity and genetic history. Genetic disorders.</li>
+                     <li><strong>2. Personal Factors:</strong> Childhood experiences, current lifestyle, self-esteem.</li>
+                     <li><strong>3. Physical Environment:</strong> Physical condition of residence/neighborhood. Safety and comfort.</li>
+                     <li><strong>4. Social Environment:</strong> Quality of relationships with friends, family, or community.</li>
+                     <li><strong>5. Economic Environment:</strong> Tied to physical environment. Living conditions, employment status, financial stability.</li>
+                  </ul>
+               </div>
+               <div class=&quot;bg-slate-950 border border-slate-700 p-6 rounded-xl space-y-6 shadow-xl mt-8&quot;>
+                  <div class=&quot;flex justify-between items-center border-b border-slate-800 pb-2&quot;><h3 class=&quot;text-pink-400 font-bold font-mono text-xs uppercase tracking-widest&quot;>Assignment Task 03</h3></div>
+                  <label class=&quot;block text-xs font-bold text-slate-400 mb-2&quot;>Which of the five factors in mental health (Biological, Personal, Physical Env, Social Env, Economic Env) do you feel has affected you the most in the past three months? Explain using examples.</label>
+                  <textarea id=&quot;ans3_factors&quot; oninput=&quot;pushData()&quot; class=&quot;w-full h-32 rounded-lg p-3 text-sm&quot; placeholder=&quot;The factor that affected me most is... because...&quot;></textarea>
+               </div>
+            </div>
+         </div>
+         <div id=&quot;review&quot; class=&quot;section-content space-y-8&quot;>
+            <div class=&quot;glass p-8 rounded-2xl border-emerald-500/30 border&quot;>
+               <div class=&quot;flex items-center gap-3 mb-6&quot;><div class=&quot;w-8 h-8 bg-emerald-500 flex items-center justify-center rounded font-bold text-black&quot;>04</div><h2 class=&quot;text-2xl font-black uppercase italic tracking-tight text-white&quot;>Review & Submit</h2></div>
+               <p class=&quot;text-sm text-slate-300 mb-8&quot;>Review your work below. Ensure you have answered all questions with detail and examples. When ready, generate your report.</p>
+               <div class=&quot;flex justify-center&quot;><button onclick=&quot;generateReport()&quot; class=&quot;bg-emerald-600 hover:bg-emerald-500 text-white font-black uppercase tracking-widest py-4 px-12 rounded-xl shadow-lg shadow-emerald-900/20 transition-all active:scale-95 transform hover:-translate-y-1&quot;>Generate Final Report</button></div>
+            </div>
+            <footer class=&quot;text-center text-[10px] font-mono text-slate-600 uppercase tracking-widest pb-8&quot;>Content Sources: CMHA, Harvard Health, Jean Hailes for Women&#39;s Health</footer>
+         </div>
+      </main>
+      <script>
+        const UNIT_ID = &#39;unit3&#39;;
+        function switchTab(t){document.querySelectorAll(&#39;.section-content&#39;).forEach(e=>e.classList.remove(&#39;active&#39;));document.getElementById(t).classList.add(&#39;active&#39;);document.querySelectorAll(&#39;.nav-btn&#39;).forEach(b=>{b.classList.remove(&#39;bg-slate-800&#39;,&#39;border-slate-700&#39;,&#39;text-pink-400&#39;,&#39;text-white&#39;,&#39;shadow-sm&#39;,&#39;text-emerald-500&#39;);b.classList.add(&#39;text-slate-500&#39;)});const a=document.getElementById(&#39;btn-&#39;+t);a.classList.remove(&#39;text-slate-500&#39;);a.classList.add(&#39;bg-slate-800&#39;,&#39;border-slate-700&#39;,&#39;shadow-sm&#39;);if(t===&#39;review&#39;)a.classList.add(&#39;text-emerald-500&#39;);else a.classList.add(&#39;text-pink-400&#39;);window.scrollTo(0,0)}
+        
+        function getFormData() {
+            const data = {};
+            document.querySelectorAll(&#39;input[id], textarea[id]&#39;).forEach(el => data[el.id] = el.value);
+            return data;
+        }
+        function pushData() {
+            if(window.parent && window.parent.updateUnitData) {
+                window.parent.updateUnitData(UNIT_ID, getFormData());
+            }
+        }
+        function populate() {
+            if(window.parent && window.parent.getUnitData) {
+                const d = window.parent.getUnitData(UNIT_ID);
+                if(d) { Object.keys(d).forEach(k => { const el = document.getElementById(k); if(el) el.value = d[k]; }); }
+            }
+        }
+        function generateReport() {
+           const d = getFormData();
+           const html = `<html><head><title>Unit 3 Report</title><style>body{font-family:sans-serif;padding:40px;line-height:1.5}h1{border-bottom:4px solid #333;padding-bottom:10px}.section{margin-bottom:30px;border-left:4px solid #ec4899;padding-left:15px}h2{font-size:16px;text-transform:uppercase;font-weight:bold}</style></head><body><h1>Unit 3 Submission</h1><div class=&quot;section&quot;><h2>Foundations</h2><p>${d.ans1_diff}</p></div><div class=&quot;section&quot;><h2>Depression</h2><p>${d.ans2_scenario}</p></div><div class=&quot;section&quot;><h2>Factors</h2><p>${d.ans3_factors}</p></div><script>window.print()<\/script></body></html>`;
+           const win = window.open(&#39;&#39;,&#39;_blank&#39;);win.document.write(html);win.document.close();
+        }
+        window.onload = populate;
+      </script>
+    </body>
+    </html>
+  </template>
+
+  <template id=&quot;unit4&quot;>
+    <!DOCTYPE html>
+    <html lang=&quot;en&quot;>
+    <head>
+       <meta charset=&quot;UTF-8&quot;>
+       <meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;>
+       <title>HSS3020 Unit 4: Treatments Master Class</title>
+       <script src=&quot;https://cdn.tailwindcss.com&quot;></script>
+       <link href=&quot;https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&family=JetBrains+Mono:wght@500;700&display=swap&quot; rel=&quot;stylesheet&quot;>
+       <script>tailwind.config = { theme: { extend: { fontFamily: { sans: [&#39;Inter&#39;, &#39;sans-serif&#39;], mono: [&#39;JetBrains Mono&#39;, &#39;monospace&#39;] }, colors: { slate: { 850: &#39;#151e2e&#39;, 950: &#39;#020617&#39; } } } } }</script>
+       <style>
+          body { background-color: #020617; color: #e2e8f0; }
+          .glass { background: rgba(30, 41, 59, 0.4); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.05); }
+          .glass-header { background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+          .section-content { display: none; animation: fadeIn 0.4s ease-out; }
+          .section-content.active { display: block; }
+          input, textarea { background: #0f172a; border: 1px solid #334155; color: white; font-family: &#39;Inter&#39;, sans-serif; transition: all 0.2s; }
+          input:focus, textarea:focus { border-color: #8b5cf6; outline: none; box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2); background: #1e293b; }
+          .custom-scroll::-webkit-scrollbar { width: 6px; }
+          .custom-scroll::-webkit-scrollbar-track { background: #0f172a; }
+          .custom-scroll::-webkit-scrollbar-thumb { background: #475569; border-radius: 3px; }
+          .custom-scroll::-webkit-scrollbar-thumb:hover { background: #64748b; }
+          @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+          .info-card { border-left: 3px solid #8b5cf6; background: rgba(15, 23, 42, 0.6); transition: transform 0.2s; }
+          .info-card:hover { transform: translateX(4px); }
+          .med-card { border-left: 3px solid #3b82f6; background: rgba(15, 23, 42, 0.8); }
+          .warning-box { border-left: 4px solid #ef4444; background: rgba(127, 29, 29, 0.2); padding: 1.5rem; border-radius: 0.5rem; }
+          .read-block { background: #1e293b; padding: 1.5rem; border-radius: 0.5rem; border: 1px solid #334155; font-size: 0.875rem; line-height: 1.7; color: #cbd5e1; }
+       </style>
+    </head>
+    <body class=&quot;min-h-screen flex flex-col&quot;>
+      <header class=&quot;glass-header sticky top-0 z-50 p-4 shadow-lg&quot;>
+        <div class=&quot;max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4&quot;>
+           <div>
+              <h1 class=&quot;text-xl font-black italic tracking-tighter text-white uppercase&quot;>Treatment Strategies <span class=&quot;text-violet-500&quot;>Master Class</span></h1>
+              <p class=&quot;text-[10px] font-mono text-slate-400 tracking-widest uppercase&quot;>HSS3020 Unit 4 • Full Course Material</p>
+           </div>
+           <div class=&quot;flex bg-slate-900/50 p-1.5 rounded-lg border border-slate-800 overflow-x-auto max-w-full&quot;>
+               <button onclick=&quot;switchTab(&#39;psych&#39;)&quot; class=&quot;nav-btn active px-4 py-2 rounded text-[10px] font-bold uppercase tracking-widest hover:text-white transition-all text-violet-400 bg-slate-800 border border-slate-700 shadow-sm&quot; id=&quot;btn-psych&quot;>01 Psychological</button>
+               <button onclick=&quot;switchTab(&#39;medical&#39;)&quot; class=&quot;nav-btn px-4 py-2 rounded text-[10px] font-bold uppercase tracking-widest text-slate-500 hover:text-white transition-all&quot; id=&quot;btn-medical&quot;>02 Medical (Meds)</button>
+               <button onclick=&quot;switchTab(&#39;lifestyle&#39;)&quot; class=&quot;nav-btn px-4 py-2 rounded text-[10px] font-bold uppercase tracking-widest text-slate-500 hover:text-white transition-all&quot; id=&quot;btn-lifestyle&quot;>03 Lifestyle & Team</button>
+               <button onclick=&quot;switchTab(&#39;review&#39;)&quot; class=&quot;nav-btn px-4 py-2 rounded text-[10px] font-bold uppercase tracking-widest text-emerald-500 hover:text-white transition-all&quot; id=&quot;btn-review&quot;>04 Assessment</button>
+           </div>
+        </div>
+      </header>
+      <main class=&quot;flex-grow p-4 md:p-8 max-w-6xl mx-auto w-full&quot;>
+        <div id=&quot;psych&quot; class=&quot;section-content active space-y-8&quot;>
+          <div class=&quot;glass p-8 rounded-2xl&quot;>
+             <h2 class=&quot;text-2xl font-black uppercase italic tracking-tight text-white mb-6&quot;>Psychological Interventions</h2>
+             <div class=&quot;read-block mb-8&quot;>
+                 <p class=&quot;mb-4&quot;>Managing mental health can include a combination of methods. One of the main ways to conquer mental illness and uphold mental health for the long-term is through psychological intervention.</p>
+                 <p class=&quot;mb-4&quot;>This is a type of intervention that is usually provided by <strong>registered psychologists, psychiatrists, counsellors, or social workers</strong>.</p>
+                 <p>It is worth noting that if someone chooses to see a professional, that person needs to feel comfortable discussing personal issues and there needs to be a level of trust. If there is not a connection, another professional should be sought out.</p>
+              </div>
+              <div class=&quot;grid md:grid-cols-2 gap-6&quot;>
+                 <div class=&quot;info-card p-6 rounded-xl&quot;><h4 class=&quot;text-violet-400 font-bold text-sm uppercase mb-2&quot;>Cognitive Behavioural Therapy (CBT)</h4><p class=&quot;text-sm text-slate-300&quot;>There are many different types of psychological interventions, each based on certain beliefs of how people overcome challenges. The most common psychotherapies for mental health are related to Cognitive Behavioural Therapy (CBT), which revolves around changing the way a person thinks and acts.</p></div>
+                 <div class=&quot;info-card p-6 rounded-xl&quot;><h4 class=&quot;text-violet-400 font-bold text-sm uppercase mb-2&quot;>Group Therapy vs. Individual</h4><p class=&quot;text-sm text-slate-300&quot;>Psychotherapies do not always have to be individual, one-on-one sessions. Oftentimes, there are group therapy sessions available. Hearing that others are experiencing similar feelings or struggles can help to validate experiences and build self-esteem.</p></div>
+              </div>
+              <div class=&quot;bg-slate-950 border border-slate-700 p-6 rounded-xl space-y-6 shadow-xl mt-8&quot;>
+                 <div class=&quot;flex justify-between items-center border-b border-slate-800 pb-2&quot;><h3 class=&quot;text-violet-400 font-bold font-mono text-xs uppercase tracking-widest&quot;>Assignment Task 01</h3><span class=&quot;text-[10px] text-slate-500 uppercase&quot;>Lesson 1 Review</span></div>
+                 <label class=&quot;block text-xs font-bold text-slate-400 mb-2&quot;>What are potential advantages and limitations to psychotherapy? You need to list at least one advantage and one limitation, as well as provide an explanation for each.</label>
+                 <textarea id=&quot;ans1_psych&quot; oninput=&quot;pushData()&quot; class=&quot;w-full h-32 rounded-lg p-3 text-sm&quot; placeholder=&quot;Advantage: ... Explanation: ... &#10;Limitation: ... Explanation: ...&quot;></textarea>
+              </div>
+           </div>
+        </div>
+        <div id=&quot;medical&quot; class=&quot;section-content space-y-8&quot;>
+           <div class=&quot;glass p-8 rounded-2xl&quot;>
+               <h2 class=&quot;text-2xl font-black uppercase italic tracking-tight text-white mb-6&quot;>Medical Interventions (Medication)</h2>
+               <div class=&quot;read-block mb-8&quot;>
+                 <p>Medical interventions are most often medications that help people maintain a relative homeostasis with their mental health. There are often risks with taking medications, and these should only be taken when prescribed by a doctor.</p>
+                 <p class=&quot;mt-2&quot;>Medications can be classified into anti-anxiety, anti-depressant, anti-convulsant, stimulants, and more. <strong>Important:</strong> Medication does not treat the underlying issues, and are not usually meant to be a long-term solution.</p>
+               </div>
+               <div class=&quot;bg-blue-900/10 border border-blue-500/30 p-6 rounded-xl mb-8&quot;>
+                 <h3 class=&quot;text-blue-400 font-bold uppercase text-lg mb-4&quot;>Deep Dive: Antidepressants</h3>
+                 <p class=&quot;text-xs text-slate-300 mb-4&quot;>Antidepressants are designed to change chemicals (neurotransmitters) in the brain that affect mood and emotions. They are not a &quot;cure,&quot; but can relieve symptoms.</p>
+                 <div class=&quot;space-y-4&quot;>
+                    <div class=&quot;med-card p-4 rounded&quot;><strong class=&quot;text-white text-xs uppercase block mb-1&quot;>SSRIs (Selective Serotonin Reuptake Inhibitors)</strong><p class=&quot;text-[11px] text-slate-300&quot;>The most widely prescribed. Includes Prozac, Zoloft, Paxil. Acts on serotonin.</p></div>
+                    <div class=&quot;med-card p-4 rounded&quot;><strong class=&quot;text-white text-xs uppercase block mb-1&quot;>SNRIs (Serotonin-Norepinephrine Reuptake Inhibitors)</strong><p class=&quot;text-[11px] text-slate-300&quot;>Includes Cymbalta, Effexor. Acts on norepinephrine and serotonin. Also used for pain.</p></div>
+                    <div class=&quot;med-card p-4 rounded&quot;><strong class=&quot;text-white text-xs uppercase block mb-1&quot;>Atypical Antidepressants</strong><p class=&quot;text-[11px] text-slate-300&quot;>Includes Wellbutrin, Trintellix. Target different neurotransmitters. Side effects vary by specific drug.</p></div>
+                    <div class=&quot;med-card p-4 rounded&quot;><strong class=&quot;text-white text-xs uppercase block mb-1&quot;>Older Drugs (TCAs & MAOIs)</strong><p class=&quot;text-[11px] text-slate-300&quot;>More severe side effects. Usually prescribed as a last resort.</p></div>
+                 </div>
+               </div>
+               <div class=&quot;grid md:grid-cols-2 gap-8 mb-8&quot;>
+                 <div><h4 class=&quot;text-white font-bold text-sm uppercase mb-4&quot;>Common Side Effects (SSRIs & SNRIs)</h4><ul class=&quot;list-disc list-inside text-xs text-slate-300 space-y-1&quot;><li>Nausea</li><li>Insomnia</li><li>Anxiety & Restlessness</li><li>Decreased sex drive</li><li>Dizziness</li><li>Weight gain</li><li>Tremors & Excessive sweating</li><li>Sleepiness or fatigue</li><li>Dry mouth</li><li>Diarrhea / Constipation</li><li>Headaches</li></ul></div>
+                 <div>
+                    <div class=&quot;warning-box mb-4&quot;><h4 class=&quot;text-red-400 font-bold text-sm uppercase mb-2&quot;>FDA Suicide Warning</h4><p class=&quot;text-xs text-red-200&quot;>The FDA requires all depression medications to include a warning label about the <strong>increased risk of suicide</strong> in children and young adults. The risk is greatest during the first month or two of treatment.</p></div>
+                    <strong class=&quot;text-white text-xs uppercase block mb-2&quot;>Suicide Warning Signs:</strong><ul class=&quot;list-disc list-inside text-xs text-slate-300 space-y-1&quot;><li>Suicidal thoughts or attempts</li><li>New or worse depression/anxiety</li><li>Feeling agitated, restless, or irritable</li><li>Difficulty sleeping</li><li>Aggression, anger, or dangerous impulses</li><li>Extreme hyperactivity</li></ul>
+                 </div>
+               </div>
+               <div class=&quot;bg-slate-900 p-6 rounded-xl border border-slate-700 mb-8&quot;>
+                 <h3 class=&quot;text-white font-bold uppercase text-sm mb-4&quot;>Antidepressant Withdrawal</h3>
+                 <p class=&quot;text-xs text-slate-300 mb-4&quot;>Once you start, stopping can be tough. Many people have severe withdrawal symptoms (Discontinuation Syndrome). <strong>Never stop &quot;cold turkey.&quot;</strong> Taper off slowly under doctor supervision.</p>
+                 <strong class=&quot;text-white text-xs uppercase block mb-2&quot;>Withdrawal Symptoms:</strong>
+                 <div class=&quot;grid grid-cols-2 gap-4 text-xs text-slate-400&quot;><ul class=&quot;list-disc list-inside space-y-1&quot;><li>Anxiety, agitation</li><li>Depression, mood swings</li><li>Flu-like symptoms</li><li>Irritability and aggression</li><li>Insomnia, nightmares</li></ul><ul class=&quot;list-disc list-inside space-y-1&quot;><li>Extreme restlessness</li><li>Fatigue</li><li>Nausea and vomiting</li><li>Dizziness, loss of coordination</li><li><strong>Electric shock sensations</strong></li></ul></div>
+               </div>
+               <div class=&quot;bg-slate-950 border border-slate-700 p-6 rounded-xl space-y-6 shadow-xl&quot;>
+                 <div class=&quot;flex justify-between items-center border-b border-slate-800 pb-2&quot;><h3 class=&quot;text-violet-400 font-bold font-mono text-xs uppercase tracking-widest&quot;>Assignment Task 02</h3><span class=&quot;text-[10px] text-slate-500 uppercase&quot;>Lesson 2 Review</span></div>
+                 <label class=&quot;block text-xs font-bold text-slate-400 mb-2&quot;>What are potential advantages and limitations to taking medication for mental illness? Explain your answer.</label>
+                 <textarea id=&quot;ans2_meds&quot; oninput=&quot;pushData()&quot; class=&quot;w-full h-32 rounded-lg p-3 text-sm&quot; placeholder=&quot;Advantages include... Limitations include...&quot;></textarea>
+               </div>
+            </div>
+         </div>
+         <div id=&quot;lifestyle&quot; class=&quot;section-content space-y-8&quot;>
+            <div class=&quot;glass p-8 rounded-2xl&quot;>
+               <h2 class=&quot;text-2xl font-black uppercase italic tracking-tight text-white mb-6&quot;>Complementary & Lifestyle Interventions</h2>
+               <div class=&quot;grid md:grid-cols-2 gap-6 mb-8&quot;>
+                 <div class=&quot;read-block&quot;><h4 class=&quot;text-white font-bold text-sm uppercase mb-2&quot;>Exercise</h4><p>Can be almost as effective as taking medication. Exercising can increase the release of neurotransmitters, which stimulate the growth of new neurons (this is what medication does). Aim for 30-60 minutes a day of aerobic exercise.</p></div>
+                 <div class=&quot;read-block&quot;><h4 class=&quot;text-white font-bold text-sm uppercase mb-2&quot;>Social Support Network</h4><p>A group of trusted people that someone feels they can talk to about serious stuff. Having this support network helps to stave off feelings of isolation.</p></div>
+                 <div class=&quot;read-block&quot;><h4 class=&quot;text-white font-bold text-sm uppercase mb-2&quot;>Eating Healthy</h4><p>Consuming balanced meals throughout the day will help a person to maintain energy and minimize mood swings.</p></div>
+                 <div class=&quot;read-block&quot;><h4 class=&quot;text-white font-bold text-sm uppercase mb-2&quot;>Sleep Habits</h4><p>Having good sleep hygiene can help to reduce stress, irritability, moodiness, and fatigue. Aiming for 7-9 hours of sleep per night is a good target.</p></div>
+               </div>
+               <div class=&quot;border-t border-slate-700 my-8&quot;></div>
+               <h2 class=&quot;text-2xl font-black uppercase italic tracking-tight text-white mb-6&quot;>Team-Based / Collaborative Care</h2>
+               <p class=&quot;text-sm text-slate-300 mb-6&quot;>&quot;Care that is delivered by providers from different specialties, disciplines, or sectors working together to offer complementary services and mutual support.&quot; (Canadian Psychiatric Association).</p>
+               <div class=&quot;bg-slate-900/50 border border-slate-700 p-6 rounded-xl mb-8&quot;>
+                 <h3 class=&quot;text-white font-bold uppercase text-sm mb-4&quot;>Mental Health Commission of Canada: Key Conclusions</h3>
+                 <div class=&quot;space-y-6&quot;>
+                    <div><strong class=&quot;text-violet-400 text-xs uppercase block mb-1&quot;>Intervention 1: Inter-professional Collaboration</strong><p class=&quot;text-xs text-slate-300&quot;>Coordinated care and co-located care appear to be more effective than usual care at improving depression symptoms and treatment adherence. It is more expensive but also more cost-effective. (e.g., seeing a mental health pro down the hall from your family doctor).</p></div>
+                    <div><strong class=&quot;text-violet-400 text-xs uppercase block mb-1&quot;>Intervention 2: Telehealth</strong><p class=&quot;text-xs text-slate-300&quot;>Telehealth with therapist support is effective. <ul class=&quot;list-disc list-inside pl-2 mt-1&quot;><li><strong>Anxiety:</strong> Patients benefit most from psychotherapy via telehealth compared to face-to-face.</li><li><strong>Depression:</strong> Telehealth achieves similar results to face-to-face.</li><li><strong>Computer-based:</strong> Was the most studied modality and found effective.</li></ul></p></div>
+                    <div><strong class=&quot;text-violet-400 text-xs uppercase block mb-1&quot;>Intervention 3: Enhanced Referral Systems</strong><p class=&quot;text-xs text-slate-300&quot;>There is a dearth (lack) of research on this. Although electronic integration is on the rise, benefits for improving referral processes are unknown.</p></div>
+                    <div><strong class=&quot;text-violet-400 text-xs uppercase block mb-1&quot;>Intervention 4: Financial/Payment Methods</strong><p class=&quot;text-xs text-slate-300&quot;>Evidence is inconclusive generally, and insufficient regarding mental health/addictions problems.</p></div>
+                 </div>
+               </div>
+               <div class=&quot;bg-slate-950 border border-slate-700 p-6 rounded-xl space-y-6 shadow-xl&quot;>
+                 <div class=&quot;flex justify-between items-center border-b border-slate-800 pb-2&quot;><h3 class=&quot;text-violet-400 font-bold font-mono text-xs uppercase tracking-widest&quot;>Assignment Task 03</h3><span class=&quot;text-[10px] text-slate-500 uppercase&quot;>Lesson 3 Review</span></div>
+                 <label class=&quot;block text-xs font-bold text-slate-400 mb-2&quot;>Which of the complementary lifestyle interventions fits your life right now? Explain using examples.</label>
+                 <textarea id=&quot;ans3_lifestyle&quot; oninput=&quot;pushData()&quot; class=&quot;w-full h-32 rounded-lg p-3 text-sm&quot; placeholder=&quot;The intervention that fits my life is... because...&quot;></textarea>
+               </div>
+            </div>
+         </div>
+         <div id=&quot;review&quot; class=&quot;section-content space-y-8&quot;>
+            <div class=&quot;glass p-8 rounded-2xl border-emerald-500/30 border&quot;>
+               <div class=&quot;flex items-center gap-3 mb-6&quot;><div class=&quot;w-8 h-8 bg-emerald-500 flex items-center justify-center rounded font-bold text-black&quot;>04</div><h2 class=&quot;text-2xl font-black uppercase italic tracking-tight text-white&quot;>Review & Submit</h2></div>
+               <p class=&quot;text-sm text-slate-300 mb-8&quot;>Review your work below. Ensure you have answered all questions with detail and examples. When ready, generate your report.</p>
+               <div class=&quot;flex justify-center&quot;><button onclick=&quot;generateReport()&quot; class=&quot;bg-emerald-600 hover:bg-emerald-500 text-white font-black uppercase tracking-widest py-4 px-12 rounded-xl shadow-lg shadow-emerald-900/20 transition-all active:scale-95 transform hover:-translate-y-1&quot;>Generate Final Report</button></div>
+            </div>
+            <footer class=&quot;text-center text-[10px] font-mono text-slate-600 uppercase tracking-widest pb-8&quot;>Content Sources: Mental Health Commission of Canada, HelpGuide.org, Canadian Psychiatric Association</footer>
+         </div>
+      </main>
+      <script>
+        const UNIT_ID = &#39;unit4&#39;;
+        function switchTab(t){document.querySelectorAll(&#39;.section-content&#39;).forEach(e=>e.classList.remove(&#39;active&#39;));document.getElementById(t).classList.add(&#39;active&#39;);document.querySelectorAll(&#39;.nav-btn&#39;).forEach(b=>{b.classList.remove(&#39;bg-slate-800&#39;,&#39;border-slate-700&#39;,&#39;text-violet-400&#39;,&#39;text-white&#39;,&#39;shadow-sm&#39;,&#39;text-emerald-500&#39;);b.classList.add(&#39;text-slate-500&#39;)});const a=document.getElementById(&#39;btn-&#39;+t);a.classList.remove(&#39;text-slate-500&#39;);a.classList.add(&#39;bg-slate-800&#39;,&#39;border-slate-700&#39;,&#39;shadow-sm&#39;);if(t===&#39;review&#39;)a.classList.add(&#39;text-emerald-500&#39;);else a.classList.add(&#39;text-violet-400&#39;);window.scrollTo(0,0)}
+        
+        function getFormData() {
+            const data = {};
+            document.querySelectorAll(&#39;input[id], textarea[id]&#39;).forEach(el => data[el.id] = el.value);
+            return data;
+        }
+        function pushData() {
+            if(window.parent && window.parent.updateUnitData) {
+                window.parent.updateUnitData(UNIT_ID, getFormData());
+            }
+        }
+        function populate() {
+            if(window.parent && window.parent.getUnitData) {
+                const d = window.parent.getUnitData(UNIT_ID);
+                if(d) { Object.keys(d).forEach(k => { const el = document.getElementById(k); if(el) el.value = d[k]; }); }
+            }
+        }
+        function generateReport() {
+           const d = getFormData();
+           const html = `<html><head><title>Unit 4 Report</title><style>body{font-family:sans-serif;padding:40px;line-height:1.5}h1{border-bottom:4px solid #333;padding-bottom:10px}.section{margin-bottom:30px;border-left:4px solid #8b5cf6;padding-left:15px}h2{font-size:16px;text-transform:uppercase;font-weight:bold}</style></head><body><h1>Unit 4 Submission</h1><div class=&quot;section&quot;><h2>Lesson 1: Psychological</h2><p>${d.ans1_psych}</p></div><div class=&quot;section&quot;><h2>Lesson 2: Medical</h2><p>${d.ans2_meds}</p></div><div class=&quot;section&quot;><h2>Lesson 3: Lifestyle</h2><p>${d.ans3_lifestyle}</p></div><script>window.print()<\/script></body></html>`;
+           const win = window.open(&#39;&#39;,&#39;_blank&#39;);win.document.write(html);win.document.close();
+        }
+        window.onload = populate;
+      </script>
+    </body>
+    </html>
+  </template>
+
+  <template id=&quot;unit5&quot;>
+    <!DOCTYPE html>
+    <html lang=&quot;en&quot;>
+    <head>
+       <meta charset=&quot;UTF-8&quot;>
+       <meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;>
+       <title>HSS3020 Unit 5: Community Resources Master Class</title>
+       <script src=&quot;https://cdn.tailwindcss.com&quot;></script>
+       <link href=&quot;https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&family=JetBrains+Mono:wght@500;700&display=swap&quot; rel=&quot;stylesheet&quot;>
+       <script>tailwind.config = { theme: { extend: { fontFamily: { sans: [&#39;Inter&#39;, &#39;sans-serif&#39;], mono: [&#39;JetBrains Mono&#39;, &#39;monospace&#39;] }, colors: { slate: { 850: &#39;#151e2e&#39;, 950: &#39;#020617&#39; } } } } }</script>
+       <style>
+          body { background-color: #020617; color: #e2e8f0; }
+          .glass { background: rgba(30, 41, 59, 0.4); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.05); }
+          .glass-header { background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+          .section-content { display: none; animation: fadeIn 0.4s ease-out; }
+          .section-content.active { display: block; }
+          input, textarea { background: #0f172a; border: 1px solid #334155; color: white; font-family: &#39;Inter&#39;, sans-serif; transition: all 0.2s; }
+          input:focus, textarea:focus { border-color: #14b8a6; outline: none; box-shadow: 0 0 0 2px rgba(20, 184, 166, 0.2); background: #1e293b; }
+          .custom-scroll::-webkit-scrollbar { width: 6px; }
+          .custom-scroll::-webkit-scrollbar-track { background: #0f172a; }
+          .custom-scroll::-webkit-scrollbar-thumb { background: #475569; border-radius: 3px; }
+          .custom-scroll::-webkit-scrollbar-thumb:hover { background: #64748b; }
+          @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+          .res-card { border-left: 3px solid #14b8a6; background: rgba(15, 23, 42, 0.6); transition: transform 0.2s; }
+          .res-card:hover { transform: translateX(4px); }
+          .crisis-card { border-left: 3px solid #ef4444; background: rgba(15, 23, 42, 0.8); }
+          .social-card { border-left: 3px solid #f59e0b; background: rgba(15, 23, 42, 0.8); }
+          .env-card { border-left: 3px solid #3b82f6; background: rgba(15, 23, 42, 0.8); }
+          .read-block { background: #1e293b; padding: 1.5rem; border-radius: 0.5rem; border: 1px solid #334155; font-size: 0.875rem; line-height: 1.7; color: #cbd5e1; }
+          .external-link { display: inline-flex; align-items: center; gap: 0.5rem; color: #2dd4bf; font-size: 0.75rem; text-transform: uppercase; font-weight: 700; letter-spacing: 0.05em; margin-top: 1rem; transition: color 0.2s; }
+          .external-link:hover { color: #5eead4; text-decoration: underline; }
+       </style>
+    </head>
+    <body class=&quot;min-h-screen flex flex-col&quot;>
+      <header class=&quot;glass-header sticky top-0 z-50 p-4 shadow-lg&quot;>
+         <div class=&quot;max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4&quot;>
+            <div>
+               <h1 class=&quot;text-xl font-black italic tracking-tighter text-white uppercase&quot;>Community Resources <span class=&quot;text-teal-500&quot;>Master Class</span></h1>
+               <p class=&quot;text-[10px] font-mono text-slate-400 tracking-widest uppercase&quot;>HSS3020 Unit 5 • Full Course Material</p>
+            </div>
+            <div class=&quot;flex bg-slate-900/50 p-1.5 rounded-lg border border-slate-800 overflow-x-auto max-w-full&quot;>
+               <button onclick=&quot;switchTab(&#39;resiliency&#39;)&quot; class=&quot;nav-btn active px-4 py-2 rounded text-[10px] font-bold uppercase tracking-widest hover:text-white transition-all text-teal-400 bg-slate-800 border border-slate-700 shadow-sm&quot; id=&quot;btn-resiliency&quot;>01 Resiliency & Crisis</button>
+               <button onclick=&quot;switchTab(&#39;impacts&#39;)&quot; class=&quot;nav-btn px-4 py-2 rounded text-[10px] font-bold uppercase tracking-widest text-slate-500 hover:text-white transition-all&quot; id=&quot;btn-impacts&quot;>02 Impacts & Media</button>
+               <button onclick=&quot;switchTab(&#39;environments&#39;)&quot; class=&quot;nav-btn px-4 py-2 rounded text-[10px] font-bold uppercase tracking-widest text-slate-500 hover:text-white transition-all&quot; id=&quot;btn-environments&quot;>03 Environments</button>
+               <button onclick=&quot;switchTab(&#39;review&#39;)&quot; class=&quot;nav-btn px-4 py-2 rounded text-[10px] font-bold uppercase tracking-widest text-emerald-500 hover:text-white transition-all&quot; id=&quot;btn-review&quot;>04 Assessment</button>
+            </div>
+         </div>
+      </header>
+      <main class=&quot;flex-grow p-4 md:p-8 max-w-6xl mx-auto w-full&quot;>
+         <div id=&quot;resiliency&quot; class=&quot;section-content active space-y-8&quot;>
+            <div class=&quot;glass p-8 rounded-2xl&quot;>
+               <h2 class=&quot;text-2xl font-black uppercase italic tracking-tight text-white mb-6&quot;>Resiliency & Finding Support</h2>
+               <div class=&quot;bg-teal-900/10 border-l-4 border-teal-500 p-6 rounded-r-lg mb-8&quot;>
+                  <h4 class=&quot;text-teal-400 font-bold text-sm uppercase mb-2&quot;>Definition: Resiliency</h4>
+                  <p class=&quot;mb-4 text-white text-sm leading-relaxed&quot;>The American Psychological Association (APA) defines resiliency as: <br><br><em>&quot;The process of adapting well in the face of adversity, trauma, tragedy, threats, or significant sources of stress. Resilience involves behaviours, thoughts, and actions that anyone can learn and develop.&quot;</em></p>
+                  <p class=&quot;text-xs text-slate-400&quot;>Resiliency often is referred to as being able to &quot;bounce back&quot; from something, but it also involves any personal growth and being able to look within to find internal strength.</p>
+               </div>
+               <div class=&quot;grid md:grid-cols-2 gap-6 mb-8&quot;>
+                  <div class=&quot;res-card p-6 rounded-xl relative group&quot;>
+                     <h4 class=&quot;text-white font-bold text-sm uppercase mb-2&quot;>Alberta Health Services (AHS)</h4>
+                     <p class=&quot;text-xs text-slate-300 mb-2&quot;>Knowing what is available in your community is a critical first step. AHS is divided into <strong>Zones</strong>.</p>
+                     <strong class=&quot;text-teal-400 text-xs uppercase block mb-1&quot;>How to find help:</strong>
+                     <ul class=&quot;list-disc list-inside text-xs text-slate-300 space-y-1 mb-2&quot;><li>Check the AHS Zones Map to find where you live.</li><li>Go to &quot;Find Healthcare&quot; > &quot;Programs & Services&quot;.</li><li>Select &quot;Mental health and wellness&quot;.</li></ul>
+                     <p class=&quot;text-xs text-slate-300&quot;>You can also call <strong>811</strong> (Health Link) to speak to someone about services in your community.</p>
+                     <a href=&quot;https://www.albertahealthservices.ca/amh/amh.aspx&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;>Visit AHS Mental Health ↗</a>
+                  </div>
+                  <div class=&quot;res-card p-6 rounded-xl&quot;>
+                     <h4 class=&quot;text-white font-bold text-sm uppercase mb-2&quot;>Kids Help Phone</h4>
+                     <p class=&quot;text-xs text-slate-300 mb-2&quot;>This is more than just a hotline. Their website includes a tool to search for programs to attend within your community (e.g., counseling, housing, legal support).</p>
+                     <div class=&quot;bg-slate-900 p-3 rounded text-center mb-2&quot;><p class=&quot;text-sm font-bold text-white&quot;>Call: 1-800-668-6868</p><p class=&quot;text-sm font-bold text-teal-400&quot;>Text: CONNECT to 686868</p></div>
+                     <a href=&quot;https://kidshelpphone.ca/find-support/&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;>Search Kids Help Phone Resources ↗</a>
+                  </div>
+               </div>
+               <div class=&quot;crisis-card p-6 rounded-xl border-l-4 border-red-500 mb-8&quot;>
+                  <h3 class=&quot;text-red-400 font-bold uppercase text-lg mb-4&quot;>Understanding Crisis</h3>
+                  <p class=&quot;text-xs text-slate-300 mb-4&quot;>The APA defines a crisis as &quot;a situation (e.g., a traumatic change) that produces significant cognitive or emotional stress in those involved in it.&quot;</p>
+                  <div class=&quot;grid md:grid-cols-3 gap-4 mb-6&quot;>
+                     <div class=&quot;bg-slate-900 p-3 rounded&quot;><strong class=&quot;text-red-400 text-xs block mb-1&quot;>1. Developmental Crisis</strong><p class=&quot;text-[10px] text-slate-400&quot;>Anything to do with the different stages of life and growing (e.g., leaving home, aging).</p></div>
+                     <div class=&quot;bg-slate-900 p-3 rounded&quot;><strong class=&quot;text-red-400 text-xs block mb-1&quot;>2. Situational Crisis</strong><p class=&quot;text-[10px] text-slate-400&quot;>Sudden and unexpected life events including personal tragedies (accidents) or natural disasters.</p></div>
+                     <div class=&quot;bg-slate-900 p-3 rounded&quot;><strong class=&quot;text-red-400 text-xs block mb-1&quot;>3. Existential Crisis</strong><p class=&quot;text-[10px] text-slate-400&quot;>Inner conflict dealing with spirituality, meaning of life, or direction (e.g., midlife crisis).</p></div>
+                  </div>
+                  <h4 class=&quot;text-white font-bold text-sm uppercase mb-2&quot;>What To Do In A Crisis?</h4>
+                  <div class=&quot;grid md:grid-cols-2 gap-6&quot;>
+                     <div><strong class=&quot;text-white text-xs block mb-2 underline&quot;>If YOU are experiencing it:</strong><ul class=&quot;list-disc list-inside text-xs text-slate-300 space-y-2&quot;><li><strong>Prioritize:</strong> Focus only on basic necessities to function (eating, sleeping, hygiene). Do not take on too much.</li><li><strong>Reach out:</strong> Connect with your support system (friends, family, professionals).</li><li><strong>Self Care:</strong> Find what works for you to manage stress (walks, reading, bath).</li></ul></div>
+                     <div><strong class=&quot;text-white text-xs block mb-2 underline&quot;>If you are HELPING someone:</strong><ul class=&quot;list-disc list-inside text-xs text-slate-300 space-y-2&quot;><li><strong>Active Listener:</strong> Listen without giving simplistic advice (&quot;It&#39;ll be okay&quot;). Be supportive.</li><li><strong>Help:</strong> Offer assistance in basic areas (helping them prioritize necessities).</li><li><strong>Encourage Professional Support:</strong> Offer to look for a pro, make the call, or arrange transport.</li></ul></div>
+                  </div>
+               </div>
+               <div class=&quot;bg-slate-950 border border-slate-700 p-6 rounded-xl space-y-6 shadow-xl mt-8&quot;>
+                  <div class=&quot;flex justify-between items-center border-b border-slate-800 pb-2&quot;><h3 class=&quot;text-teal-400 font-bold font-mono text-xs uppercase tracking-widest&quot;>Assignment Task 01</h3><span class=&quot;text-[10px] text-slate-500 uppercase&quot;>Lesson 1 Review</span></div>
+                  <div><label class=&quot;block text-xs font-bold text-slate-400 mb-2&quot;>Give an example from the last three months that demonstrates your internal resiliency.</label><textarea id=&quot;ans1_resiliency&quot; oninput=&quot;pushData()&quot; class=&quot;w-full h-24 rounded-lg p-3 text-sm&quot; placeholder=&quot;An example of my resiliency is...&quot;></textarea></div>
+                  <div><label class=&quot;block text-xs font-bold text-slate-400 mb-2&quot;>Which AHS Zone are you in? If you needed the closest community resource, where would it be? (Name, Address, Phone)</label><textarea id=&quot;ans1_ahs&quot; oninput=&quot;pushData()&quot; class=&quot;w-full h-24 rounded-lg p-3 text-sm&quot; placeholder=&quot;Zone: ... Resource Name: ... Address: ... Phone: ...&quot;></textarea></div>
+                  <div><label class=&quot;block text-xs font-bold text-slate-400 mb-2&quot;>Use the KidsHelpPhone resource tool. Describe any differences you noticed from the AHS results.</label><textarea id=&quot;ans1_khp&quot; oninput=&quot;pushData()&quot; class=&quot;w-full h-24 rounded-lg p-3 text-sm&quot; placeholder=&quot;The differences I noticed were...&quot;></textarea></div>
+                  <div class=&quot;bg-slate-900 p-4 rounded border border-slate-800 mb-4&quot;><strong class=&quot;text-white text-xs block mb-2&quot;>The Scenario:</strong><p class=&quot;text-xs text-slate-300 italic&quot;>&quot;You notice a good friend has gained weight, is walking slower, and doesn&#39;t want to meet up. They are wearing the same shirt as yesterday. You overhear them say: &#39;I was put on the waitlist. That was the only university I applied to.&#39;&quot;</p></div>
+                  <div><label class=&quot;block text-xs font-bold text-slate-400 mb-2&quot;>What might your friend be experiencing? Be specific using examples.</label><textarea id=&quot;ans1_scenario_exp&quot; oninput=&quot;pushData()&quot; class=&quot;w-full h-24 rounded-lg p-3 text-sm&quot; placeholder=&quot;My friend might be experiencing... because...&quot;></textarea></div>
+                  <div class=&quot;mt-4&quot;><label class=&quot;block text-xs font-bold text-slate-400 mb-2&quot;>What steps could you take to potentially help your friend?</label><textarea id=&quot;ans1_scenario_help&quot; oninput=&quot;pushData()&quot; class=&quot;w-full h-24 rounded-lg p-3 text-sm&quot; placeholder=&quot;I could help by...&quot;></textarea></div>
+               </div>
+            </div>
+         </div>
+         <div id=&quot;impacts&quot; class=&quot;section-content space-y-8&quot;>
+            <div class=&quot;glass p-8 rounded-2xl&quot;>
+               <h2 class=&quot;text-2xl font-black uppercase italic tracking-tight text-white mb-6&quot;>Impacts on Mental Health</h2>
+               <div class=&quot;grid md:grid-cols-2 gap-6 mb-8&quot;>
+                  <div class=&quot;social-card p-6 rounded-xl&quot;><h4 class=&quot;text-white font-bold text-sm uppercase mb-2&quot;>Economic Impact</h4><p class=&quot;text-xs text-slate-300 mb-4&quot;>Mental illness in Canada costs approximately <strong>$51 billion per year</strong>. This includes health care costs, lost productivity, and reductions in quality of life.</p><ul class=&quot;list-disc list-inside text-xs text-slate-300 space-y-2&quot;><li><strong>Unemployment:</strong> 70-90% of people with severe mental illness are unemployed.</li><li><strong>Lost Work:</strong> Approx 500,000 Canadians per week are not working due to mental illness.</li><li><strong>Disability Costs:</strong> The cost of disability leave for mental illness is double the cost of leave due to physical injury.</li></ul></div>
+                  <div class=&quot;social-card p-6 rounded-xl&quot;><h4 class=&quot;text-white font-bold text-sm uppercase mb-2&quot;>Social Support Networks</h4><p class=&quot;text-xs text-slate-300 mb-4&quot;>Social isolation is damaging. Research has found gender differences in how we seek support:</p><ul class=&quot;list-disc list-inside text-xs text-slate-300 space-y-2&quot;><li><strong>Females:</strong> Prefer a support network composed of friends rather than family. This is because there is less sense of obligation with friends, and they feel they receive more support.</li><li><strong>Males:</strong> Did not seem to have a preference between friends or family for their support network.</li></ul></div>
+               </div>
+               <div class=&quot;border-t border-slate-700 my-8&quot;></div>
+               <h2 class=&quot;text-2xl font-black uppercase italic tracking-tight text-white mb-6&quot;>Social Media</h2>
+               <div class=&quot;read-block mb-8&quot;>
+                  <h4 class=&quot;text-white font-bold text-sm uppercase mb-2&quot;>Facebook Depression</h4>
+                  <p>The American Academy of Pediatrics defines this as: &quot;depression that develops when preteens and teens spend a great deal of time on social media sites, such as Facebook, and then begin to exhibit classic symptoms of depression.&quot;</p>
+                  <p class=&quot;mt-2 text-xs italic&quot;>Factors include: intensity of the online world, cyberbullying, sleep deprivation, and self-objectification.</p>
+               </div>
+               <div class=&quot;grid md:grid-cols-2 gap-6 mb-8&quot;>
+                  <div><strong class=&quot;text-emerald-400 text-xs uppercase block mb-2&quot;>The Benefits</strong><ul class=&quot;list-disc list-inside text-xs text-slate-300 space-y-1&quot;><li>Improves communication skills.</li><li>Allows making new friends and sharing ideas.</li><li>Develops basic social/technical skills.</li><li>Enriches offline friendships.</li></ul></div>
+                  <div><strong class=&quot;text-red-400 text-xs uppercase block mb-2&quot;>The Disadvantages (Stats)</strong><ul class=&quot;list-disc list-inside text-xs text-slate-300 space-y-1&quot;><li>Youth visiting <strong>>58 times/week</strong> are 3x more likely to feel socially isolated than those visiting <strong><9 times/week</strong>.</li><li><strong>Body Image:</strong> Associated with self-objectification (especially image-based sites like Instagram).</li><li><strong>Cyberbullying:</strong> Persistent and public nature magnifies harm.</li></ul></div>
+               </div>
+               <div class=&quot;bg-slate-900/50 p-6 rounded-xl border border-slate-700 mb-8&quot;>
+                  <h4 class=&quot;text-white font-bold text-sm uppercase mb-2&quot;>Well-Adjusted vs. At-Risk Youth</h4>
+                  <p class=&quot;text-xs text-slate-300 mb-2&quot;>How youth process positive posts (people showing off happy lives) determines the impact:</p>
+                  <div class=&quot;grid md:grid-cols-2 gap-4&quot;>
+                     <div class=&quot;bg-slate-950 p-3 rounded&quot;><strong class=&quot;text-teal-400 text-xs block&quot;>Well-Adjusted</strong><p class=&quot;text-[10px] text-slate-400&quot;>Can process positive posts. They understand online friends don&#39;t always have the positive life presented. They take positive comments as a boost.</p></div>
+                     <div class=&quot;bg-slate-950 p-3 rounded&quot;><strong class=&quot;text-red-400 text-xs block&quot;>At-Risk</strong><p class=&quot;text-[10px] text-slate-400&quot;>Have difficulty with the constant positivity of others. They feel a disconnect between seeing the positivity online and knowing the reality. This disconnect leads to higher risk of depression.</p></div>
+                  </div>
+               </div>
+               <div class=&quot;bg-slate-950 border border-slate-700 p-6 rounded-xl space-y-6 shadow-xl&quot;>
+                  <div class=&quot;flex justify-between items-center border-b border-slate-800 pb-2&quot;><h3 class=&quot;text-amber-400 font-bold font-mono text-xs uppercase tracking-widest&quot;>Assignment Task 02</h3><span class=&quot;text-[10px] text-slate-500 uppercase&quot;>Lesson 2 Review</span></div>
+                  <div><label class=&quot;block text-xs font-bold text-slate-400 mb-2&quot;>In your experience, is social media more of a positive or negative influence on mental health? Explain with examples.</label><textarea id=&quot;ans2_social_media&quot; oninput=&quot;pushData()&quot; class=&quot;w-full h-24 rounded-lg p-3 text-sm&quot; placeholder=&quot;I believe it is... because...&quot;></textarea></div>
+                  <div><label class=&quot;block text-xs font-bold text-slate-400 mb-2&quot;>Does your preference match the gender norms presented in the course as they pertain to the social support network? Explain.</label><textarea id=&quot;ans2_gender&quot; oninput=&quot;pushData()&quot; class=&quot;w-full h-24 rounded-lg p-3 text-sm&quot; placeholder=&quot;My preference matches/differs because...&quot;></textarea></div>
+               </div>
+            </div>
+         </div>
+         <div id=&quot;environments&quot; class=&quot;section-content space-y-8&quot;>
+            <div class=&quot;glass p-8 rounded-2xl&quot;>
+               <h2 class=&quot;text-2xl font-black uppercase italic tracking-tight text-white mb-6&quot;>Types of Therapeutic Environments</h2>
+               <p class=&quot;text-sm text-slate-300 mb-6&quot;>There are different options for care depending on the severity and type of mental illness. Each provides a different level of support and independence.</p>
+               <div class=&quot;space-y-6&quot;>
+                  <div class=&quot;env-card p-6 rounded-xl&quot;>
+                     <h4 class=&quot;text-white font-bold text-sm uppercase mb-2&quot;>1. Active / Acute Therapy</h4>
+                     <p class=&quot;text-xs text-slate-300 mb-4&quot;>The most extreme form of therapy. Available in private or public facilities. Public facilities usually require a referral from a physician or other professional.</p>
+                     <div class=&quot;grid grid-cols-2 gap-4 text-[10px] text-slate-400 bg-slate-900 p-4 rounded&quot;>
+                        <div><strong class=&quot;text-blue-400 block mb-1&quot;>Central Zone:</strong> Red Deer Regional Hospital, Centennial Centre for Mental Health (Ponoka).</div>
+                        <div><strong class=&quot;text-blue-400 block mb-1&quot;>Calgary Zone:</strong> Alberta Children&#39;s Hospital, Foothills Medical Centre, South Health Campus.</div>
+                        <div><strong class=&quot;text-blue-400 block mb-1&quot;>Edmonton Zone:</strong> Adult in-patient services (mainly for those who have committed violent crimes but are not criminally responsible due to mental illness).</div>
+                        <div><strong class=&quot;text-blue-400 block mb-1&quot;>South Zone:</strong> Chinook Regional Hospital (Lethbridge), Medicine Hat Regional Hospital.</div>
+                     </div>
+                  </div>
+                  <div class=&quot;env-card p-6 rounded-xl&quot;><h4 class=&quot;text-white font-bold text-sm uppercase mb-2&quot;>2. Rehabilitation Centres</h4><p class=&quot;text-xs text-slate-300 mb-2&quot;><strong>APA Definition:</strong> &quot;A facility devoted to restoring individuals with mental or physical disorders... to an adequate level of functioning.&quot;</p><p class=&quot;text-xs text-slate-300&quot;>People here often have an injury or illness that has affected their mental state. It can be an internal injury (mental illness) or external (substance abuse). Services include: vocational training, occupational training, physical training, educational therapy, recreational therapy, and psychological therapy.</p></div>
+                  <div class=&quot;env-card p-6 rounded-xl&quot;><h4 class=&quot;text-white font-bold text-sm uppercase mb-2&quot;>3. Community Mental Health</h4><p class=&quot;text-xs text-slate-300 mb-2&quot;><strong>APA Definition:</strong> &quot;Activities undertaken in the community, rather than in institutional settings, to promote mental health.&quot;</p><ul class=&quot;list-disc list-inside text-xs text-slate-300 space-y-1&quot;><li>Focusing on the entire population of a geographic area.</li><li>Emphasizing preventative services.</li><li>Approaching mental health indirectly through consultation and education.</li><li>Crisis intervention.</li></ul></div>
+                  <div class=&quot;env-card p-6 rounded-xl&quot;><h4 class=&quot;text-white font-bold text-sm uppercase mb-2&quot;>4. Community Group Home</h4><p class=&quot;text-xs text-slate-300 mb-2&quot;><strong>APA Definition:</strong> &quot;A residential facility that offers housing and personal care services, such as meals, supervision, and transportation.&quot;</p><p class=&quot;text-xs text-slate-300&quot;>This is an environment where someone can live and have their psychological and physical needs met. It is more intensive than community mental health centres because supervision is required. There is often a maximum number of people allowed in the house at one time (usually six) so each person gets care. Can be utilized for youth or senior citizens.</p><a href=&quot;https://www.ementalhealth.ca/Alberta/Group-Homes-Residential-Care-and-Support-ed-Housing/index.php?m=heading&ID=210&quot; target=&quot;_blank&quot; class=&quot;external-link&quot;>View Alberta Group Homes ↗</a></div>
+               </div>
+               <div class=&quot;bg-slate-950 border border-slate-700 p-6 rounded-xl space-y-6 shadow-xl mt-8&quot;>
+                  <div class=&quot;flex justify-between items-center border-b border-slate-800 pb-2&quot;><h3 class=&quot;text-amber-400 font-bold font-mono text-xs uppercase tracking-widest&quot;>Assignment Task 03</h3><span class=&quot;text-[10px] text-slate-500 uppercase&quot;>Lesson 3 Review</span></div>
+                  <label class=&quot;block text-xs font-bold text-slate-400 mb-2&quot;>In your own words, explain the difference in treatment between active/acute care, rehabilitation centres, community mental health, and community group homes. Remember to also give examples of the clientele at each facility.</label>
+                  <textarea id=&quot;ans3_treatment&quot; oninput=&quot;pushData()&quot; class=&quot;w-full h-48 rounded-lg p-3 text-sm&quot; placeholder=&quot;Active/Acute: ... Rehab: ... Community MH: ... Group Homes: ...&quot;></textarea>
+               </div>
+            </div>
+         </div>
+         <div id=&quot;review&quot; class=&quot;section-content space-y-8&quot;>
+            <div class=&quot;glass p-8 rounded-2xl border-emerald-500/30 border&quot;>
+               <div class=&quot;flex items-center gap-3 mb-6&quot;><div class=&quot;w-8 h-8 bg-emerald-500 flex items-center justify-center rounded font-bold text-black&quot;>04</div><h2 class=&quot;text-2xl font-black uppercase italic tracking-tight text-white&quot;>Review & Submit</h2></div>
+               <p class=&quot;text-sm text-slate-300 mb-8&quot;>Review your work below. Ensure you have answered all questions, especially the detailed scenarios regarding the friend and the hospital types. When ready, generate your report.</p>
+               <div class=&quot;flex justify-center&quot;><button onclick=&quot;generateReport()&quot; class=&quot;bg-emerald-600 hover:bg-emerald-500 text-white font-black uppercase tracking-widest py-4 px-12 rounded-xl shadow-lg shadow-emerald-900/20 transition-all active:scale-95 transform hover:-translate-y-1&quot;>Generate Final Report</button></div>
+            </div>
+            <footer class=&quot;text-center text-[10px] font-mono text-slate-600 uppercase tracking-widest pb-8&quot;>Content Sources: Alberta Health Services, APA, Mental Health Commission of Canada</footer>
+         </div>
+      </main>
+      <script>
+        const UNIT_ID = &#39;unit5&#39;;
+        function switchTab(t){document.querySelectorAll(&#39;.section-content&#39;).forEach(e=>e.classList.remove(&#39;active&#39;));document.getElementById(t).classList.add(&#39;active&#39;);document.querySelectorAll(&#39;.nav-btn&#39;).forEach(b=>{b.classList.remove(&#39;bg-slate-800&#39;,&#39;border-slate-700&#39;,&#39;text-teal-400&#39;,&#39;text-white&#39;,&#39;shadow-sm&#39;,&#39;text-emerald-500&#39;);b.classList.add(&#39;text-slate-500&#39;)});const a=document.getElementById(&#39;btn-&#39;+t);a.classList.remove(&#39;text-slate-500&#39;);a.classList.add(&#39;bg-slate-800&#39;,&#39;border-slate-700&#39;,&#39;shadow-sm&#39;);if(t===&#39;review&#39;)a.classList.add(&#39;text-emerald-500&#39;);else a.classList.add(&#39;text-teal-400&#39;);window.scrollTo(0,0)}
+        
+        function getFormData() {
+            const data = {};
+            document.querySelectorAll(&#39;input[id], textarea[id]&#39;).forEach(el => data[el.id] = el.value);
+            return data;
+        }
+        function pushData() {
+            if(window.parent && window.parent.updateUnitData) {
+                window.parent.updateUnitData(UNIT_ID, getFormData());
+            }
+        }
+        function populate() {
+            if(window.parent && window.parent.getUnitData) {
+                const d = window.parent.getUnitData(UNIT_ID);
+                if(d) { Object.keys(d).forEach(k => { const el = document.getElementById(k); if(el) el.value = d[k]; }); }
+            }
+        }
+        function generateReport() {
+           const d = getFormData();
+           const html = `<html><head><title>Unit 5 Report</title><style>body{font-family:sans-serif;padding:40px;line-height:1.5}h1{border-bottom:4px solid #333;padding-bottom:10px}.section{margin-bottom:30px;border-left:4px solid #14b8a6;padding-left:15px}h2{font-size:16px;text-transform:uppercase;font-weight:bold}</style></head><body><h1>Unit 5 Submission</h1><div class=&quot;section&quot;><h2>Resiliency</h2><p>${d.ans1_resiliency}</p><p>${d.ans1_ahs}</p><p>${d.ans1_khp}</p><p>${d.ans1_scenario_exp}</p><p>${d.ans1_scenario_help}</p></div><div class=&quot;section&quot;><h2>Impacts</h2><p>${d.ans2_social_media}</p><p>${d.ans2_gender}</p></div><div class=&quot;section&quot;><h2>Environments</h2><p>${d.ans3_treatment}</p></div><script>window.print()<\/script></body></html>`;
+           const win = window.open(&#39;&#39;,&#39;_blank&#39;);win.document.write(html);win.document.close();
+        }
+        window.onload = populate;
+      </script>
+    </body>
+    </html>
+  </template>
+
+  <template id=&quot;unit6&quot;>
+    <!DOCTYPE html>
+    <html lang=&quot;en&quot;>
+    <head>
+       <meta charset=&quot;UTF-8&quot;>
+       <meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;>
+       <title>HSS3020 Unit 6: Self Care Master Class</title>
+       <script src=&quot;https://cdn.tailwindcss.com&quot;></script>
+       <link href=&quot;https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800;900&family=JetBrains+Mono:wght@500;700&display=swap&quot; rel=&quot;stylesheet&quot;>
+       <script>tailwind.config = { theme: { extend: { fontFamily: { sans: [&#39;Inter&#39;, &#39;sans-serif&#39;], mono: [&#39;JetBrains Mono&#39;, &#39;monospace&#39;] }, colors: { slate: { 850: &#39;#151e2e&#39;, 950: &#39;#020617&#39; } } } } }</script>
+       <style>
+          body { background-color: #020617; color: #e2e8f0; }
+          .glass { background: rgba(30, 41, 59, 0.4); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.05); }
+          .glass-header { background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+          .section-content { display: none; animation: fadeIn 0.4s ease-out; }
+          .section-content.active { display: block; }
+          input, textarea { background: #0f172a; border: 1px solid #334155; color: white; font-family: &#39;Inter&#39;, sans-serif; transition: all 0.2s; }
+          input:focus, textarea:focus { border-color: #06b6d4; outline: none; box-shadow: 0 0 0 2px rgba(6, 182, 212, 0.2); background: #1e293b; }
+          .custom-scroll::-webkit-scrollbar { width: 6px; }
+          .custom-scroll::-webkit-scrollbar-track { background: #0f172a; }
+          .custom-scroll::-webkit-scrollbar-thumb { background: #475569; border-radius: 3px; }
+          .custom-scroll::-webkit-scrollbar-thumb:hover { background: #64748b; }
+          @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+          .res-card { border-left: 3px solid #06b6d4; background: rgba(15, 23, 42, 0.6); transition: transform 0.2s; }
+          .res-card:hover { transform: translateX(4px); }
+          .life-card { border-left: 3px solid #10b981; background: rgba(15, 23, 42, 0.8); }
+          .risk-card { border-left: 3px solid #ef4444; background: rgba(15, 23, 42, 0.8); }
+          .wrap-section { background: rgba(30, 41, 59, 0.3); border: 1px solid #334155; padding: 1.5rem; border-radius: 0.5rem; margin-bottom: 2rem; }
+          .read-block { background: #1e293b; padding: 1.5rem; border-radius: 0.5rem; border: 1px solid #334155; font-size: 0.875rem; line-height: 1.7; color: #cbd5e1; }
+          .video-link { display: block; color: #22d3ee; margin-bottom: 0.5rem; font-size: 0.8rem; text-decoration: none; }
+          .video-link:hover { text-decoration: underline; color: white; }
+       </style>
+    </head>
+    <body class=&quot;min-h-screen flex flex-col&quot;>
+      <header class=&quot;glass-header sticky top-0 z-50 p-4 shadow-lg&quot;>
+         <div class=&quot;max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4&quot;>
+            <div>
+               <h1 class=&quot;text-xl font-black italic tracking-tighter text-white uppercase&quot;>Self Care & Resilience <span class=&quot;text-cyan-500&quot;>Master Class</span></h1>
+               <p class=&quot;text-[10px] font-mono text-slate-400 tracking-widest uppercase&quot;>HSS3020 Unit 6 • Full Course Material</p>
+            </div>
+            <div class=&quot;flex bg-slate-900/50 p-1.5 rounded-lg border border-slate-800 overflow-x-auto max-w-full&quot;>
+               <button onclick=&quot;switchTab(&#39;resilience&#39;)&quot; class=&quot;nav-btn active px-4 py-2 rounded text-[10px] font-bold uppercase tracking-widest hover:text-white transition-all text-cyan-400 bg-slate-800 border border-slate-700 shadow-sm&quot; id=&quot;btn-resilience&quot;>01 Resilience</button>
+               <button onclick=&quot;switchTab(&#39;prevention&#39;)&quot; class=&quot;nav-btn px-4 py-2 rounded text-[10px] font-bold uppercase tracking-widest text-slate-500 hover:text-white transition-all&quot; id=&quot;btn-prevention&quot;>02 Prevention</button>
+               <button onclick=&quot;switchTab(&#39;risk&#39;)&quot; class=&quot;nav-btn px-4 py-2 rounded text-[10px] font-bold uppercase tracking-widest text-slate-500 hover:text-white transition-all&quot; id=&quot;btn-risk&quot;>03 Risk</button>
+               <button onclick=&quot;switchTab(&#39;review&#39;)&quot; class=&quot;nav-btn px-4 py-2 rounded text-[10px] font-bold uppercase tracking-widest text-emerald-500 hover:text-white transition-all&quot; id=&quot;btn-review&quot;>04 WRAP</button>
+            </div>
+         </div>
+      </header>
+      <main class=&quot;flex-grow p-4 md:p-8 max-w-6xl mx-auto w-full&quot;>
+         <div id=&quot;resilience&quot; class=&quot;section-content active space-y-8&quot;>
+            <div class=&quot;glass p-8 rounded-2xl&quot;>
+               <h2 class=&quot;text-2xl font-black uppercase italic tracking-tight text-white mb-6&quot;>Building Resilience</h2>
+               <div class=&quot;read-block mb-8&quot;>
+                  <h4 class=&quot;text-cyan-400 font-bold text-sm uppercase mb-2&quot;>The 5 Pillars (Bounce Back Project)</h4>
+                  <p class=&quot;text-xs mb-4 text-slate-400&quot;>These work together to help people cope efficiently with difficult times.</p>
+                  <ul class=&quot;list-disc list-inside text-sm text-slate-300 space-y-4&quot;>
+                     <li><strong>1. Self-Awareness:</strong> Having a clear picture of who the individual is as a person. Objectively acknowledging strengths, weaknesses, beliefs, motivations, and emotions. Being honest with oneself helps understand how we are viewed by others.</li>
+                     <li><strong>2. Self-Care:</strong> Something tailored uniquely to you that helps maintain your mental health. It changes with the person and needs to be engaged in often.</li>
+                     <li><strong>3. Mindfulness:</strong> Focusing solely on the present. Not dwelling on the past or worrying about the future. Acknowledging emotions in the moment without judging them as positive or negative.</li>
+                     <li><strong>4. Positive Relationships (Social Support Network):</strong> We are built to be connected. This network is very important to positive mental health and helps us become more supportive ourselves.</li>
+                     <li><strong>5. Purpose:</strong> Recognizing something more than the individual. Shapes mindset and guides actions (e.g., family, religion, political party, green initiative).</li>
+                  </ul>
+               </div>
+               <div class=&quot;bg-slate-900/50 border border-slate-700 p-6 rounded-xl mb-8&quot;>
+                  <h4 class=&quot;text-white font-bold text-sm uppercase mb-2&quot;>10 Ways to Build Resilience (APA)</h4>
+                  <div class=&quot;grid md:grid-cols-2 gap-4 text-xs text-slate-300&quot;>
+                     <ol class=&quot;list-decimal list-inside space-y-1&quot;><li>Make connections</li><li>Avoid seeing crisis as insurmountable problems</li><li>Accept that change is part of living</li><li>Move toward your goals</li><li>Take decisive actions</li></ol>
+                     <ol class=&quot;list-decimal list-inside space-y-1&quot; start=&quot;6&quot;><li>Look for opportunities for self-discovery</li><li>Nurture a positive view of yourself</li><li>Keep things in perspective</li><li>Maintain a hopeful outlook</li><li>Take care of yourself</li></ol>
+                  </div>
+               </div>
+               <div class=&quot;bg-slate-900/50 border border-slate-700 p-6 rounded-xl mb-8&quot;>
+                  <h4 class=&quot;text-white font-bold text-sm uppercase mb-2&quot;>What Inhibits Resilience?</h4>
+                  <p class=&quot;text-xs text-slate-300 mb-2&quot;><strong>Perception:</strong> If a person perceives they have no control or influence, resilience is impacted. This perception does not necessarily reflect reality.</p>
+                  <p class=&quot;text-xs text-slate-300&quot;><strong>Unsupportive Network:</strong> Individuals who receive (or perceive) unsupportive or critical responses from their network are less likely to be resilient.</p>
+               </div>
+               <div class=&quot;bg-slate-900 p-6 rounded-xl border border-slate-700 mb-8&quot;>
+                  <h3 class=&quot;text-red-400 font-bold uppercase text-lg mb-4&quot;>Maladaptive Coping Skills</h3>
+                  <p class=&quot;text-xs text-slate-300 mb-6&quot;>Coping responses that are more destructive than helpful.</p>
+                  <div class=&quot;space-y-6&quot;>
+                     <div><strong class=&quot;text-white text-xs uppercase block mb-2 border-b border-slate-600 pb-1&quot;>General Types</strong><ul class=&quot;text-xs text-slate-400 space-y-2&quot;><li><strong>Escape/Avoidance:</strong> Ignoring the problem. Works temporarily but exhausts mental energy.</li><li><strong>Unhealthy Comfort Zone:</strong> Immediate gratification like binge-eating or binge-watching TV. An error in perception that leads to distress.</li><li><strong>Emotional Numbing:</strong> Distancing oneself from relationships to avoid hurt. Reinforces risky behavior like substance abuse.</li></ul></div>
+                     <div><strong class=&quot;text-white text-xs uppercase block mb-2 border-b border-slate-600 pb-1&quot;>Schema Theory: Overcompensation</strong><ul class=&quot;text-xs text-slate-400 space-y-1&quot;><li><strong>Aggression/Hostility:</strong> Defying, blaming, criticizing, or attacking others.</li><li><strong>Dominance:</strong> Excessive self-assertion to control others.</li><li><strong>Recognition-seeking:</strong> Impressing others with high achievements/status.</li><li><strong>Manipulation:</strong> Seducing, being dishonest, or conning others.</li><li><strong>Passive-aggressiveness:</strong> Appearing compliant but rebelling covertly (procrastination, pouting, tardiness).</li><li><strong>Excessive Orderliness:</strong> Strict order, self-control, and predictability. Spending too much time finding the &quot;best&quot; way to avoid a certain outcome.</li></ul></div>
+                     <div><strong class=&quot;text-white text-xs uppercase block mb-2 border-b border-slate-600 pb-1&quot;>Schema Theory: Surrender & Avoidance</strong><ul class=&quot;text-xs text-slate-400 space-y-1&quot;><li><strong>Surrender:</strong> Compliance, dependence, submissive, clinging, people-pleasing.</li><li><strong>Social Withdrawal:</strong> Isolating self; exaggerated focus on independence to avoid looking like they need help.</li><li><strong>Compulsive Stimulation Seeking:</strong> Seeking excitement via shopping, gambling, risk-taking.</li><li><strong>Addictive Self-Soothing:</strong> Drugs, alcohol, overeating.</li><li><strong>Psychological Withdrawal:</strong> Dissociation, denial, engaging in fantasy.</li></ul></div>
+                  </div>
+               </div>
+               <div class=&quot;bg-cyan-900/20 border border-cyan-500/30 p-4 rounded-lg&quot;>
+                  <h4 class=&quot;text-cyan-400 font-bold text-xs uppercase mb-2&quot;>Resilience Videos (Required for Assignment)</h4>
+                  <a href=&quot;https://youtu.be/cqO7YoMsccU&quot; target=&quot;_blank&quot; class=&quot;video-link&quot;>1. Building Resilience</a><a href=&quot;https://youtu.be/xSf7pRpOqu8&quot; target=&quot;_blank&quot; class=&quot;video-link&quot;>2. The Three Secrets of Resilient People</a><a href=&quot;https://youtu.be/1r8hj72bfGo&quot; target=&quot;_blank&quot; class=&quot;video-link&quot;>3. Resilience in Kids</a><a href=&quot;https://youtu.be/GZZ0zpUQhBQ&quot; target=&quot;_blank&quot; class=&quot;video-link&quot;>4. Resilience Animation</a>
+               </div>
+            </div>
+         </div>
+         <div id=&quot;prevention&quot; class=&quot;section-content space-y-8&quot;>
+            <div class=&quot;glass p-8 rounded-2xl&quot;>
+               <h2 class=&quot;text-2xl font-black uppercase italic tracking-tight text-white mb-6&quot;>Preventative Lifestyles</h2>
+               <div class=&quot;grid md:grid-cols-2 gap-6 mb-8&quot;>
+                  <div class=&quot;life-card p-6 rounded-xl&quot;>
+                     <h4 class=&quot;text-white font-bold text-sm uppercase mb-2&quot;>Nutrition & Stress</h4>
+                     <ul class=&quot;list-disc list-inside text-xs text-slate-300 space-y-2&quot;><li><strong>Indigestion:</strong> Caused by eating quickly or while stressed. Sit down and chew slowly.</li><li><strong>Caffeine:</strong> Raises stress hormones, leads to insomnia/dehydration. Dependence is not a good idea.</li><li><strong>Cravings:</strong> Limit to small portions. Cutting completely leads to overeating later. Keep healthy snacks near.</li><li><strong>Sugar Highs/Lows:</strong> The brain needs glucose but refined sugar causes spikes/drops leading to fatigue. <strong>Complex carbohydrates</strong> keep blood sugar stable.</li></ul>
+                  </div>
+                  <div class=&quot;life-card p-6 rounded-xl&quot;><h4 class=&quot;text-white font-bold text-sm uppercase mb-2&quot;>Active Living</h4><p class=&quot;text-xs text-slate-300&quot;>Helps body produce <strong>endorphins</strong> (natural painkillers). Improves sleep, decreases tension, increases mood and self-esteem.</p></div>
+               </div>
+               <div class=&quot;bg-slate-900/50 border border-slate-700 p-6 rounded-xl mb-8&quot;>
+                  <h4 class=&quot;text-white font-bold text-sm uppercase mb-2&quot;>Time Management (Oxford Learning)</h4>
+                  <p class=&quot;text-xs text-slate-400 mb-2&quot;>Placing emphasis on priority rather than values leads to burnout. A balanced approach includes:</p>
+                  <ul class=&quot;list-disc list-inside text-xs text-slate-300 space-y-2&quot;><li><strong>Regular Breaks:</strong> Alarm every 20-30 mins. Get up and move.</li><li><strong>Movement:</strong> Don&#39;t just switch browser tabs. Stretch or walk.</li><li><strong>Nutritious Snack:</strong> Food gives energy for learning; water keeps mind focused.</li><li><strong>Routine:</strong> Work at the same time daily (avoid late nights).</li><li><strong>Music:</strong> Listen to music instead of TV during breaks to keep energy up.</li><li><strong>No Social Media:</strong> Stay off it during breaks!</li></ul>
+               </div>
+               <div class=&quot;bg-slate-900/50 border border-slate-700 p-6 rounded-xl mb-8&quot;>
+                  <h3 class=&quot;text-emerald-400 font-bold uppercase text-sm mb-4&quot;>Teen Sleep Statistics (APA)</h3>
+                  <div class=&quot;grid md:grid-cols-2 gap-4 text-xs text-slate-300&quot;>
+                     <ul class=&quot;list-disc list-inside space-y-1&quot;><li><strong>24%</strong> of teens report that their sleep is poor to fair.</li><li><strong>35%</strong> report that stress keeps them awake at night.</li><li><strong>42%</strong> of teens getting <8 hours report their stress has increased.</li><li><strong>36%</strong> report feeling tired because of stress.</li><li><strong>39%</strong> report feeling more stressed at school without sleep.</li></ul>
+                     <ul class=&quot;list-disc list-inside space-y-1&quot;><li><strong>Recommended:</strong> 8.5 - 9.25 hours.</li><li><strong>Average Actual:</strong> 7.4 hours (school night).</li><li><strong>23%</strong> feel unmotivated when sleep-deprived.</li><li><strong>61%</strong> of stressed teens report feeling lethargic or lazy.</li><li><strong>54%</strong> of highly stressed teens admit to being irritable.</li></ul>
+                  </div>
+               </div>
+               <div class=&quot;bg-slate-900 border border-slate-700 p-6 rounded-xl&quot;>
+                  <h3 class=&quot;text-white font-bold uppercase text-sm mb-4&quot;>Reducing Anxiety (ADAA Suggestions)</h3>
+                  <div class=&quot;columns-2 gap-8 text-xs text-slate-300&quot;><p class=&quot;mb-2&quot;>• Take a time-out (massage, yoga).</p><p class=&quot;mb-2&quot;>• Eat healthy balanced meals.</p><p class=&quot;mb-2&quot;>• Limit alcohol and caffeine (triggers panic).</p><p class=&quot;mb-2&quot;>• Get adequate sleep and exercise.</p><p class=&quot;mb-2&quot;>• Accept you cannot control everything.</p><p class=&quot;mb-2&quot;>• Welcome humour (laughter reduces anxiety).</p><p class=&quot;mb-2&quot;>• Volunteer (expands support network).</p><p class=&quot;mb-2&quot;>• Learn your triggers (look for patterns).</p><p class=&quot;mb-2&quot;>• Lean on your social support network.</p></div>
+               </div>
+            </div>
+         </div>
+         <div id=&quot;risk&quot; class=&quot;section-content space-y-8&quot;>
+            <div class=&quot;glass p-8 rounded-2xl&quot;>
+               <h2 class=&quot;text-2xl font-black uppercase italic tracking-tight text-white mb-6&quot;>Risk & Crisis Management</h2>
+               <div class=&quot;risk-card p-6 rounded-xl mb-8&quot;>
+                  <h4 class=&quot;text-white font-bold text-sm uppercase mb-2&quot;>Signs of Being At-Risk</h4>
+                  <div class=&quot;columns-2 gap-8 text-[10px] text-slate-300&quot;>
+                     <ul class=&quot;list-disc list-inside space-y-1&quot;><li>Anxiety, depression, tearful, irritable.</li><li>Helpless, hopeless, low self-esteem.</li><li>Withdrawing from social situations.</li><li>Sleeping too much/little.</li><li>Poor hygiene.</li><li>Difficulty focusing.</li><li>Feeling constantly drained.</li><li>Lack of interest in activities.</li><li>Unexplained aches and pains.</li><li>Thoughts of harming self/suicide.</li><li>Moving/speaking slower.</li><li>Substance abuse (increased frequency/volume).</li><li>Change in outlook (pessimistic).</li></ul>
+                  </div>
+               </div>
+               <div class=&quot;bg-slate-900/50 border border-slate-700 p-6 rounded-xl mb-8&quot;>
+                  <h4 class=&quot;text-white font-bold text-sm uppercase mb-4&quot;>How to Help Those At-Risk</h4>
+                  <ul class=&quot;list-disc list-inside text-xs text-slate-300 space-y-2&quot;><li><strong>Approach:</strong> Remain non-judgmental. Let them know you are concerned.</li><li><strong>Input:</strong> Ensure they have input on how you help. What works for one may not work for another.</li><li><strong>Emotions:</strong> Be prepared for shame or anger. Shame is a common indicator of distress.</li><li><strong>Team Up:</strong> Get another friend/family member to help show them a network cares.</li><li><strong>Listen:</strong> Let them talk without interrupting. Do not guide the conversation.</li><li><strong>Paraphrase:</strong> Repeat back what they said to convey empathy.</li></ul>
+                  <div class=&quot;mt-4 bg-slate-800 p-4 rounded border-l-4 border-red-500&quot;>
+                     <strong class=&quot;text-red-400 text-xs uppercase block mb-1&quot;>What if they REFUSE help? (WebMD)</strong>
+                     <ul class=&quot;list-disc list-inside text-xs text-slate-300 space-y-1&quot;><li>Be patient (if no immediate risk).</li><li>Continue to be part of their support system.</li><li>Stay calm. Matching anger with anger pushes them away.</li><li>Take a step back. The decision is theirs, not yours.</li><li>Care for your own mental health.</li></ul>
+                  </div>
+               </div>
+               <div class=&quot;bg-red-900/20 border border-red-500/30 p-6 rounded-xl mb-8&quot;>
+                  <h3 class=&quot;text-red-400 font-bold uppercase text-lg mb-4&quot;>What To Do In A Crisis (Self)</h3>
+                  <div class=&quot;space-y-4 text-xs text-slate-300&quot;><p><strong>1. Immediate Safety:</strong> Do you feel like harming yourself? Do you have a plan? If YES, call 911 or go to the hospital immediately.</p><p><strong>2. Hesitation:</strong> If you are hesitating, call a trusted friend or family member to stay with you.</p><p><strong>3. Hotline:</strong> Call Crisis Services Canada (1-833-456-4566) or AHS (1-877-303-2642).</p><p><strong>4. Touch Base:</strong> Let professionals and supporters know what is happening.</p><p><strong>5. WRAP:</strong> Create a Wellness Recovery Action Plan before a crisis occurs.</p><p><strong>6. Be Nice:</strong> Remember you are going through a crisis. Be kind to yourself.</p></div>
+               </div>
+               <div class=&quot;read-block&quot;>
+                  <h4 class=&quot;text-white font-bold text-sm uppercase mb-2&quot;>When to Seek a Professional</h4>
+                  <ul class=&quot;list-disc list-inside text-xs text-slate-300 columns-2 mb-4&quot;><li>Substance abuse interfering with life.</li><li>Inability to cope with daily activities.</li><li>Drastic eating/sleeping changes.</li><li>Defiance of authority/theft/vandalism.</li><li>Intense fear of weight gain.</li><li>Lengthened negative outlook.</li><li>Recurrent anger outbursts.</li><li>Thoughts feel &quot;out of control&quot;.</li><li>Feeling suicidal.</li></ul>
+                  <h4 class=&quot;text-white font-bold text-sm uppercase mb-2&quot;>Who is a Professional?</h4>
+                  <p class=&quot;text-xs text-slate-300&quot;>Psychiatrists, Clinical Psychologists, Social Workers, Licensed Counselors, Family Doctors, EAPs, University Clinics, Local Hospitals, Community Centres.</p>
+               </div>
+            </div>
+         </div>
+         <div id=&quot;review&quot; class=&quot;section-content space-y-8&quot;>
+            <div class=&quot;glass p-8 rounded-2xl border-emerald-500/30 border&quot;>
+               <div class=&quot;flex items-center gap-3 mb-6&quot;><div class=&quot;w-8 h-8 bg-emerald-500 flex items-center justify-center rounded font-bold text-black&quot;>04</div><h2 class=&quot;text-2xl font-black uppercase italic tracking-tight text-white&quot;>Assessment & WRAP Builder</h2></div>
+               <div class=&quot;bg-slate-900 border border-slate-700 p-6 rounded-xl space-y-6 mb-8&quot;>
+                  <h3 class=&quot;text-cyan-400 font-bold font-mono text-xs uppercase tracking-widest border-b border-slate-800 pb-2&quot;>Part A: Short Answer</h3>
+                  <div><label class=&quot;block text-xs font-bold text-slate-400 mb-2&quot;>Which of the 5 pillars of resilience is your strongest right now? Explain with examples.</label><textarea id=&quot;ans_strongest&quot; oninput=&quot;pushData()&quot; class=&quot;w-full h-20 rounded-lg p-3 text-sm&quot;></textarea></div>
+                  <div><label class=&quot;block text-xs font-bold text-slate-400 mb-2&quot;>Which pillar would you like to work on? Give 2 realistic examples of how (next 2 weeks).</label><textarea id=&quot;ans_workon&quot; oninput=&quot;pushData()&quot; class=&quot;w-full h-20 rounded-lg p-3 text-sm&quot;></textarea></div>
+                  <div><label class=&quot;block text-xs font-bold text-slate-400 mb-2&quot;>Out of the 5 videos, which was most helpful? Explain.</label><textarea id=&quot;ans_video&quot; oninput=&quot;pushData()&quot; class=&quot;w-full h-20 rounded-lg p-3 text-sm&quot;></textarea></div>
+                  <div><label class=&quot;block text-xs font-bold text-slate-400 mb-2&quot;>Identify a maladaptive coping skill you have used. What category does it fit into?</label><textarea id=&quot;ans_maladaptive&quot; oninput=&quot;pushData()&quot; class=&quot;w-full h-20 rounded-lg p-3 text-sm&quot;></textarea></div>
+                  <div><label class=&quot;block text-xs font-bold text-slate-400 mb-2&quot;>What are two ways you positively manage stress? Use examples.</label><textarea id=&quot;ans_pos_manage&quot; oninput=&quot;pushData()&quot; class=&quot;w-full h-20 rounded-lg p-3 text-sm&quot;></textarea></div>
+                  <div><label class=&quot;block text-xs font-bold text-slate-400 mb-2&quot;>What is an area you&#39;d like to develop for stress management? Give 2 examples.</label><textarea id=&quot;ans_develop&quot; oninput=&quot;pushData()&quot; class=&quot;w-full h-20 rounded-lg p-3 text-sm&quot;></textarea></div>
+               </div>
+               <div class=&quot;bg-slate-900 border border-slate-700 p-6 rounded-xl&quot;>
+                  <h3 class=&quot;text-emerald-400 font-bold font-mono text-lg uppercase tracking-widest mb-4&quot;>Wellness Recovery Action Plan (WRAP)</h3>
+                  <p class=&quot;text-xs text-slate-400 mb-6&quot;>Develop your 40-mark Action Plan here. Fill out all sections.</p>
+                  <div class=&quot;wrap-section&quot;><strong class=&quot;text-white text-xs block mb-2&quot;>Part 1: Feeling Well</strong><textarea id=&quot;wrap_feel&quot; oninput=&quot;pushData()&quot; class=&quot;w-full mb-2 p-2 rounded text-sm h-16&quot; placeholder=&quot;This is what I feel like when I am feeling well...&quot;></textarea><textarea id=&quot;wrap_behave&quot; oninput=&quot;pushData()&quot; class=&quot;w-full p-2 rounded text-sm h-16&quot; placeholder=&quot;This is what I behave like when I am feeling well...&quot;></textarea></div>
+                  <div class=&quot;wrap-section&quot;><strong class=&quot;text-white text-xs block mb-2&quot;>Part 2: Signs of Crisis</strong><textarea id=&quot;wrap_signs&quot; oninput=&quot;pushData()&quot; class=&quot;w-full h-20 rounded p-2 text-sm&quot; placeholder=&quot;If I exhibit these signs/symptoms... (List them)&quot;></textarea><textarea id=&quot;wrap_crisis_action&quot; oninput=&quot;pushData()&quot; class=&quot;w-full h-20 rounded p-2 text-sm mt-2&quot; placeholder=&quot;When I exhibit these signs, contact X, treatment Y is needed...&quot;></textarea></div>
+                  <div class=&quot;wrap-section&quot;><strong class=&quot;text-white text-xs block mb-2&quot;>Part 3: Social Support Network (List 3 Supporters)</strong><textarea id=&quot;wrap_supporters&quot; oninput=&quot;pushData()&quot; class=&quot;w-full h-32 rounded p-2 text-sm&quot; placeholder=&quot;1. Name, Role, Task...&#10;2. Name, Role, Task...&#10;3. Name, Role, Task...&quot;></textarea><strong class=&quot;text-white text-xs block mt-4 mb-2&quot;>People NOT allowed to help:</strong><textarea id=&quot;wrap_not_allowed&quot; oninput=&quot;pushData()&quot; class=&quot;w-full h-20 rounded p-2 text-sm&quot; placeholder=&quot;Names and Reasons...&quot;></textarea><strong class=&quot;text-white text-xs block mt-4 mb-2&quot;>Dispute Resolution:</strong><input type=&quot;text&quot; id=&quot;wrap_dispute&quot; oninput=&quot;pushData()&quot; class=&quot;w-full p-2 rounded text-sm&quot; placeholder=&quot;If supporters disagree, settle it by...&quot;></div>
+                  <div class=&quot;wrap-section&quot;><strong class=&quot;text-white text-xs block mb-2&quot;>Part 4: Medications</strong><textarea id=&quot;wrap_meds&quot; oninput=&quot;pushData()&quot; class=&quot;w-full h-24 rounded p-2 text-sm&quot; placeholder=&quot;Medication, Dosage, Purpose...&quot;></textarea><textarea id=&quot;wrap_meds_avoid&quot; oninput=&quot;pushData()&quot; class=&quot;w-full h-16 rounded p-2 text-sm mt-2&quot; placeholder=&quot;Medications to AVOID...&quot;></textarea></div>
+                  <div class=&quot;wrap-section&quot;><strong class=&quot;text-white text-xs block mb-2&quot;>Part 5: Therapies</strong><textarea id=&quot;wrap_therapies&quot; oninput=&quot;pushData()&quot; class=&quot;w-full h-24 rounded p-2 text-sm&quot; placeholder=&quot;Therapy, When to use, How to use...&quot;></textarea></div>
+                  <div class=&quot;wrap-section&quot;><strong class=&quot;text-white text-xs block mb-2&quot;>Part 6: Hospitalization Facilities</strong><textarea id=&quot;wrap_facilities_good&quot; oninput=&quot;pushData()&quot; class=&quot;w-full h-20 rounded p-2 text-sm mb-2&quot; placeholder=&quot;Preferred Facilities & Reasons...&quot;></textarea><textarea id=&quot;wrap_facilities_bad&quot; oninput=&quot;pushData()&quot; class=&quot;w-full h-20 rounded p-2 text-sm&quot; placeholder=&quot;Facilities to AVOID & Reasons...&quot;></textarea></div>
+                  <div class=&quot;wrap-section&quot;><strong class=&quot;text-white text-xs block mb-2&quot;>Part 7: Reducing Stress (Dos and Don&#39;ts)</strong><textarea id=&quot;wrap_stress_do&quot; oninput=&quot;pushData()&quot; class=&quot;w-full h-20 rounded p-2 text-sm mb-2&quot; placeholder=&quot;DO this to reduce stress/keep me safe...&quot;></textarea><textarea id=&quot;wrap_stress_dont&quot; oninput=&quot;pushData()&quot; class=&quot;w-full h-20 rounded p-2 text-sm&quot; placeholder=&quot;Do NOT do this (increases stress)...&quot;></textarea></div>
+                  <div class=&quot;wrap-section&quot;><strong class=&quot;text-white text-xs block mb-2&quot;>Part 8: Inactivating Plan</strong><input type=&quot;text&quot; id=&quot;wrap_inactive&quot; oninput=&quot;pushData()&quot; class=&quot;w-full p-2 rounded text-sm&quot; placeholder=&quot;Signs the plan is no longer needed...&quot;></div>
+               </div>
+               <div class=&quot;flex justify-center mt-8&quot;><button onclick=&quot;generateReport()&quot; class=&quot;bg-emerald-600 hover:bg-emerald-500 text-white font-black uppercase tracking-widest py-4 px-12 rounded-xl shadow-lg shadow-emerald-900/20 transition-all active:scale-95 transform hover:-translate-y-1&quot;>Generate Complete Report (Assignment + WRAP)</button></div>
+            </div>
+            <footer class=&quot;text-center text-[10px] font-mono text-slate-600 uppercase tracking-widest pb-8&quot;>Content Sources: Bounce Back Project, APA, Oxford Learning, WebMD, Mental Health America</footer>
+         </div>
+      </main>
+      <script>
+        const UNIT_ID = &#39;unit6&#39;;
+        function switchTab(t){document.querySelectorAll(&#39;.section-content&#39;).forEach(e=>e.classList.remove(&#39;active&#39;));document.getElementById(t).classList.add(&#39;active&#39;);document.querySelectorAll(&#39;.nav-btn&#39;).forEach(b=>{b.classList.remove(&#39;bg-slate-800&#39;,&#39;border-slate-700&#39;,&#39;text-cyan-400&#39;,&#39;text-white&#39;,&#39;shadow-sm&#39;,&#39;text-emerald-500&#39;);b.classList.add(&#39;text-slate-500&#39;)});const a=document.getElementById(&#39;btn-&#39;+t);a.classList.remove(&#39;text-slate-500&#39;);a.classList.add(&#39;bg-slate-800&#39;,&#39;border-slate-700&#39;,&#39;shadow-sm&#39;);if(t===&#39;review&#39;)a.classList.add(&#39;text-emerald-500&#39;);else a.classList.add(&#39;text-cyan-400&#39;);window.scrollTo(0,0)}
+        
+        function getFormData() {
+            const data = {};
+            document.querySelectorAll(&#39;input[id], textarea[id]&#39;).forEach(el => data[el.id] = el.value);
+            return data;
+        }
+        function pushData() {
+            if(window.parent && window.parent.updateUnitData) {
+                window.parent.updateUnitData(UNIT_ID, getFormData());
+            }
+        }
+        function populate() {
+            if(window.parent && window.parent.getUnitData) {
+                const d = window.parent.getUnitData(UNIT_ID);
+                if(d) { Object.keys(d).forEach(k => { const el = document.getElementById(k); if(el) el.value = d[k]; }); }
+            }
+        }
+        function generateReport() {
+           const d = getFormData();
+           const html = `<html><head><title>Unit 6 WRAP</title><style>body{font-family:sans-serif;padding:40px}h2{background:#eee;padding:10px}h3{border-bottom:1px solid #ccc}</style></head><body><h1>Unit 6 & WRAP</h1><h2>Short Answer</h2><p>${d.ans_strongest}</p><p>${d.ans_workon}</p><p>${d.ans_video}</p><p>${d.ans_maladaptive}</p><p>${d.ans_pos_manage}</p><p>${d.ans_develop}</p><h2>WRAP</h2><h3>Feeling Well</h3><p>${d.wrap_feel}</p><p>${d.wrap_behave}</p><h3>Crisis Signs</h3><p>${d.wrap_signs}</p><p>${d.wrap_crisis_action}</p><h3>Support</h3><p>${d.wrap_supporters}</p><p>${d.wrap_not_allowed}</p><p>${d.wrap_dispute}</p><h3>Medical</h3><p>${d.wrap_meds}</p><p>${d.wrap_meds_avoid}</p><h3>Therapies</h3><p>${d.wrap_therapies}</p><h3>Facilities</h3><p>${d.wrap_facilities_good}</p><p>${d.wrap_facilities_bad}</p><h3>Stress Plan</h3><p>${d.wrap_stress_do}</p><p>${d.wrap_stress_dont}</p><h3>Inactivating</h3><p>${d.wrap_inactive}</p><script>window.print()<\/script></body></html>`;
+           const win = window.open(&#39;&#39;,&#39;_blank&#39;);win.document.write(html);win.document.close();
+        }
+        window.onload = populate;
+      </script>
+    </body>
+    </html>
+  </template>
+</body>
+</html>" class="w-full border-0" style="min-height: 80vh; height: 100%;" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-modals allow-downloads allow-top-navigation-by-user-activation"></iframe>
+    </div>
+  </main>
+
+  
+
+  <script>
+    window.CF_ASSET_BASE_URL = "";
+    
+    
+    
+(function() {
+  var MODULE_KEY = 'CF_Module_HSS3020_v1';
+  var saveTimeout = null;
+  function getAllInputState() {
+    var state = {};
+    document.querySelectorAll('input, textarea, select').forEach(function(el, i) {
+      var key = el.id || el.name || ('field_' + i);
+      if (el.type === 'checkbox' || el.type === 'radio') {
+        if (el.checked) state[key] = el.type === 'radio' ? el.value : true;
+      } else {
+        if (el.value) state[key] = el.value;
+      }
+    });
+    return state;
+  }
+  function restoreInputState(state) {
+    if (!state || typeof state !== 'object') return;
+    document.querySelectorAll('input, textarea, select').forEach(function(el, i) {
+      var key = el.id || el.name || ('field_' + i);
+      var savedValue = state[key];
+      if (savedValue !== undefined) {
+        if (el.type === 'checkbox') {
+          el.checked = !!savedValue;
+        } else if (el.type === 'radio') {
+          el.checked = (el.value === savedValue);
+        } else {
+          el.value = savedValue;
+        }
+      }
+    });
+  }
+  function saveNow() {
+    try {
+      var state = getAllInputState();
+      if (Object.keys(state).length > 0) {
+        localStorage.setItem(MODULE_KEY, JSON.stringify({
+          timestamp: Date.now(),
+          state: state
+        }));
+      }
+    } catch (e) {}
+  }
+  function debouncedSave() {
+    clearTimeout(saveTimeout);
+    saveTimeout = setTimeout(saveNow, 800);
+  }
+  function loadSaved() {
+    try {
+      var raw = localStorage.getItem(MODULE_KEY);
+      if (raw) {
+        var parsed = JSON.parse(raw);
+        if (parsed && parsed.state) restoreInputState(parsed.state);
+      }
+    } catch (e) {}
+  }
+  function init() {
+    loadSaved();
+    document.addEventListener('input', debouncedSave);
+    document.addEventListener('change', debouncedSave);
+    window.addEventListener('pagehide', saveNow);
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+  </script>
+</body>
+</html>

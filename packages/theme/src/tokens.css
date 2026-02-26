@@ -1,0 +1,35 @@
+:root {
+  --font-sans: "Segoe UI", "Avenir Next", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-mono: "JetBrains Mono", "Consolas", "SFMono-Regular", Menlo, monospace;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --radius-sm: 0.5rem;
+  --radius-md: 0.875rem;
+  --radius-lg: 1.25rem;
+  --shadow-sm: 0 2px 10px rgb(13 28 38 / 8%);
+  --shadow-md: 0 16px 40px rgb(13 28 38 / 10%);
+  --surface-bg: #f6f8fb;
+  --surface-card: #ffffff;
+  --surface-soft: #ecf2fb;
+  --surface-border: #d6dfec;
+  --text-strong: #0d1c26;
+  --text-body: #243a4a;
+  --text-muted: #4f6675;
+  --accent: #0f8a9d;
+  --accent-strong: #0a6c7c;
+  --accent-soft: #d7f3f7;
+  --warning-soft: #fff4e5;
+  --warning-strong: #8a4b08;
+  --info-soft: #e7f5ff;
+  --info-strong: #0d4f75;
+  --example-soft: #f0ecff;
+  --example-strong: #47308a;
+  --focus-ring: 0 0 0 3px rgb(15 138 157 / 25%);
+  --motion-fast: 120ms;
+  --motion-base: 200ms;
+}

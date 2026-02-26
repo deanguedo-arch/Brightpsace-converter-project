@@ -1,0 +1,9 @@
+{
+  "name": "@cf/scorm",
+  "version": "0.1.0",
+  "type": "module",
+  "main": "src/index.js",
+  "dependencies": {
+    "jszip": "^3.10.1"
+  }
+}

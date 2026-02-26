@@ -1,0 +1,76 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: radial-gradient(circle at top right, #d9eefb 0%, var(--surface-bg) 28rem);
+  color: var(--text-body);
+  font-family: var(--font-sans);
+}
+
+body {
+  line-height: 1.6;
+}
+
+a {
+  color: var(--accent-strong);
+  text-decoration-thickness: 0.1em;
+  text-underline-offset: 0.15em;
+}
+
+a:hover {
+  color: var(--accent);
+}
+
+:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+p,
+ul,
+ol {
+  margin: 0 0 var(--space-4);
+}
+
+ul,
+ol {
+  padding-left: var(--space-5);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  color: var(--text-strong);
+  margin-top: 0;
+  line-height: 1.2;
+}
+
+pre,
+code {
+  font-family: var(--font-mono);
+  background: var(--surface-soft);
+}
+
+code {
+  padding: 0.1rem 0.3rem;
+  border-radius: 0.35rem;
+}
+
+pre {
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  overflow-x: auto;
+}
+
+img,
+video {
+  max-width: 100%;
+  border-radius: var(--radius-md);
+}

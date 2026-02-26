@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=Roboto:wght@400;700;900&family=Open+Sans:wght@400;700;800&family=Lato:wght@400;700;900&family=Montserrat:wght@400;700;900&family=Poppins:wght@400;700;900&family=Raleway:wght@400;700;900&family=Nunito:wght@400;700;900&family=Playfair+Display:wght@400;700;900&family=Merriweather:wght@400;700;900&family=Oswald:wght@400;700&family=Bebas+Neue&display=swap');
+
+.cf-rich-editor p {
+  margin: 0.6rem 0;
+}
+
+.cf-rich-editor ul {
+  list-style: disc;
+  margin: 0.75rem 0;
+  padding-left: 1.5rem;
+}
+
+.cf-rich-editor ol {
+  list-style: decimal;
+  margin: 0.75rem 0;
+  padding-left: 1.5rem;
+}
+
+.cf-rich-editor li {
+  margin: 0.35rem 0;
+}
+
+.cf-rich-editor h1 {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  font-weight: 700;
+  margin: 1rem 0 0.5rem;
+}
+
+.cf-rich-editor h2 {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 700;
+  margin: 0.9rem 0 0.45rem;
+}
+
+.cf-rich-editor h3 {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 700;
+  margin: 0.8rem 0 0.4rem;
+}
+
+.cf-rich-editor a {
+  color: #7dd3fc;
+  text-decoration: underline;
+}
+
+.cf-rich-editor blockquote {
+  border-left: 3px solid #475569;
+  margin: 0.9rem 0;
+  opacity: 0.95;
+  padding-left: 0.8rem;
+}
+
+.cf-rich-editor div {
+  margin: 0.45rem 0;
+}
+
+.cf-rich-editor font[size='1'] {
+  font-size: 0.75rem;
+}
+
+.cf-rich-editor font[size='2'] {
+  font-size: 0.875rem;
+}
+
+.cf-rich-editor font[size='3'] {
+  font-size: 1rem;
+}
+
+.cf-rich-editor font[size='4'] {
+  font-size: 1.125rem;
+}
+
+.cf-rich-editor font[size='5'] {
+  font-size: 1.25rem;
+}
+
+.cf-rich-editor font[size='6'] {
+  font-size: 1.5rem;
+}
+
+.cf-rich-editor font[size='7'] {
+  font-size: 1.875rem;
+}

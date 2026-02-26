@@ -1,0 +1,19 @@
+{
+  "legacyHash": "95f0154829d9cf43a12e4f3286a797f94d1a9ffaf2c0d87f374feb5ba13b6be9",
+  "betaAggregateHash": "1a406d2ad6f9157426e2daa350a125446a58a60de2a08c365875b295b1b5970e",
+  "perFile": {
+    "beta/index.html": "9ef86cb2ba779b89c10f3617b73a55c5f1388498471b9d3cf0690d16cc0ef5fe",
+    "beta/manifest.json": "2d522519265e8032f6ba42e97805f49c75adb67230816c016a07ff13ef6e50e3",
+    "beta/modules/item-1768749223001.html": "06974197260eb83b01653843a1d3520a7baa1e0d3f63a6ab3a7a58c6e7e22755",
+    "beta/modules/item-assessments.html": "9bd33d31b9f8312720fcd57e824a931be42d947380ff365d71052f6d0ef49c01",
+    "beta/modules/view-1.html": "048cb3bb368f03c17ef18d2ad53eb80a1a1cea30484d34c83ba72fb5175dfaec",
+    "beta/modules/view-BASE.html": "d8d14e37927d43fad6eb1bd733219c1e9f6e4b1b7362ad290d237f1b6125dc61",
+    "beta/modules/view-CONFIDENCE.html": "bd95bca0621ccfdd63e236dd981d635a9f970b7d3ff7d350023bf65d2c39dd5e",
+    "beta/modules/view-FINAL.html": "419dc25ed510354d1c02fb30016ed8a21ecaf5761217485b70cf01cb94bb1765",
+    "beta/modules/view-FOCUS.html": "5ed92975695b92b3e2c5181c98b8213b4158176eda80e2287a66fa21ef1327eb",
+    "beta/modules/view-GOALS.html": "20351dffa84041d9974952ebf86fb4d8a9c819cd343b3900334fd09d4a0a9790",
+    "beta/modules/view-VALUES.html": "4266d68df024ced89ee5c046aa24e821e7517ff4e6c54cc2470659dffc1b2666",
+    "beta/modules/view-VISUAL.html": "9daaacd45d04e7bab654d94c2828c264a9fa5f12c464501f4fabc3d035d0195f",
+    "beta/modules/view-arousal.html": "df9c6937cd17d848ff566cd3b6449c5ac544804a923fb3c442490c572bac6f4c"
+  }
+}
