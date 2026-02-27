@@ -21,6 +21,7 @@
 - `test-driven-development`: use for feature-level red/green/refactor loops.
 - `systematic-debugging`: use for bug triage and root-cause workflows.
 - `verification-before-completion`: use before declaring tasks complete.
+- `curriculum-quality-rubric`: use to score unit quality/readiness and produce prioritized improvement actions.
 
 ## Core Technical Constraints
 - SCORM version: 1.2 only.

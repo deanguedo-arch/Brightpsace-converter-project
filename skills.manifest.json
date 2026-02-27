@@ -14,8 +14,24 @@
       "skill": "web-design-guidelines"
     },
     {
+      "repo": "vercel-labs/agent-skills",
+      "skill": "vercel-composition-patterns"
+    },
+    {
       "repo": "anthropics/skills",
       "skill": "frontend-design"
+    },
+    {
+      "repo": "anthropics/skills",
+      "skill": "skill-creator"
+    },
+    {
+      "repo": "anthropics/skills",
+      "skill": "docx"
+    },
+    {
+      "repo": "anthropics/skills",
+      "skill": "pdf"
     },
     {
       "repo": "anthropics/skills",
