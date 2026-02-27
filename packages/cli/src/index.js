@@ -7,9 +7,11 @@ import { spawn, spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import {
   buildPreviewUnit,
+  compileUnitFromSource,
   importUnitFromFolder,
   initCourseScaffold,
   initUnitScaffold,
+  scoreBuiltUnit,
   resolveDefaultCourseSlug,
   listCourseSlugs,
   listUnitSlugs,
@@ -30,12 +32,20 @@ Commands:
   cf init course <courseSlug> [--title <title>] [--default]
   cf init unit <courseSlug> <unitSlug> [--title <title>]
   cf import <sourcePath> --course <courseSlug> --unit <unitSlug> [--extract]
+  cf compile <sourcePath> --course <courseSlug> --unit <unitSlug> [--extract]
   cf preview <unitSlug> [--mode=sandbox] [--open] [--watch]
   cf preview <courseSlug> <unitSlug> [--mode=sandbox] [--open] [--watch]
   cf build <unitSlug> --scorm
   cf build <courseSlug> <unitSlug> --scorm
   cf build --all --scorm
   cf build <courseSlug> --all --scorm
+    [--gate] [--min-overall 4] [--min-dimension 3]
+  cf score [<courseSlug> <unitSlug>] [--min-overall 4] [--min-dimension 3] [--json]
+  cf release <unitSlug> --scorm
+  cf release <courseSlug> <unitSlug> --scorm
+  cf release --all --scorm
+  cf release <courseSlug> --all --scorm
+    [--min-overall 4] [--min-dimension 3] [--skip-browser-check]
   cf validate --brightspace [<courseSlug> <unitSlug>]
 `);
 }
@@ -43,7 +53,7 @@ Commands:
 function parseArgs(argv) {
   const flags = {};
   const positional = [];
-  const booleanFlags = new Set(["all", "brightspace", "scorm", "watch", "open", "extract", "default"]);
+  const booleanFlags = new Set(["all", "brightspace", "scorm", "watch", "open", "extract", "default", "json", "skip-browser-check", "gate"]);
   for (let index = 0; index < argv.length; index += 1) {
     const arg = argv[index];
     if (arg.startsWith("--")) {
@@ -315,6 +325,95 @@ function printValidationResult(unitSlug, result) {
   }
 }
 
+function parseThresholds(flags) {
+  const minOverall = Number(flags["min-overall"] ?? 4);
+  const minDimension = Number(flags["min-dimension"] ?? 3);
+  if (!Number.isFinite(minOverall) || !Number.isFinite(minDimension)) {
+    throw new Error("--min-overall and --min-dimension must be numbers.");
+  }
+  return { minOverall, minDimension };
+}
+
+function scorePassesThresholds(score, thresholds) {
+  return score.overall >= thresholds.minOverall && score.minDimensionScore >= thresholds.minDimension;
+}
+
+function printScoreResult(target, score) {
+  console.log(`\nScore for ${target}: ${score.overall.toFixed(2)} / 5 (${score.verdict})`);
+  const labels = [
+    ["pedagogyClarity", "Pedagogy"],
+    ["activityRichness", "Activity"],
+    ["assessmentQuality", "Assessment"],
+    ["accessibilityReadability", "Accessibility"],
+    ["productionSafety", "Production"],
+    ["uiHierarchy", "UI"]
+  ];
+  for (const [key, label] of labels) {
+    const value = score.dimensions[key];
+    console.log(`  - ${label}: ${value.score.toFixed(2)} / ${value.max}`);
+  }
+  if (score.recommendations.length > 0) {
+    console.log("  Recommendations:");
+    for (const item of score.recommendations.slice(0, 4)) {
+      console.log(`    - ${item}`);
+    }
+  }
+}
+
+async function runNpmTest() {
+  const command = process.platform === "win32" ? "cmd.exe" : "npm";
+  const args = process.platform === "win32"
+    ? ["/d", "/s", "/c", "npm test"]
+    : ["test"];
+  await new Promise((resolve, reject) => {
+    const child = spawn(command, args, {
+      cwd: REPO_ROOT,
+      stdio: "inherit"
+    });
+    child.once("error", reject);
+    child.once("exit", (code) => {
+      if (code === 0) resolve();
+      else reject(new Error("npm test failed."));
+    });
+  });
+}
+
+async function runPlaywrightSmoke(previewDir, targetName) {
+  const scriptPath = path.join(REPO_ROOT, "scripts", "playwright-smoke.mjs");
+  await new Promise((resolve, reject) => {
+    const child = spawn(process.execPath, [scriptPath, previewDir], {
+      cwd: REPO_ROOT,
+      stdio: "inherit"
+    });
+    child.once("error", reject);
+    child.once("exit", (code) => {
+      if (code === 0) resolve();
+      else reject(new Error(`Playwright smoke failed for ${targetName}.`));
+    });
+  });
+}
+
+async function resolveScoreTargets(positional) {
+  const targets = [];
+  if (positional.length === 0) {
+    const courseSlug = await resolveDefaultCourseSlug(REPO_ROOT);
+    const units = await listUnitSlugs(REPO_ROOT, courseSlug);
+    for (const unitSlug of units) targets.push({ courseSlug, unitSlug });
+  } else if (positional.length === 1) {
+    const courseSlug = positional[0];
+    const units = await listUnitSlugs(REPO_ROOT, courseSlug);
+    for (const unitSlug of units) targets.push({ courseSlug, unitSlug });
+  } else if (positional.length === 2) {
+    targets.push({ courseSlug: positional[0], unitSlug: positional[1] });
+  } else {
+    throw new Error("Too many arguments for score.");
+  }
+  if (targets.length === 0) {
+    throw new Error("No units found for scoring.");
+  }
+  return targets;
+}
+
 async function runInit(positional, flags) {
   const target = positional[0];
   if (!target) {
@@ -439,6 +538,7 @@ async function runBuild(positional, flags) {
   if (!flags.scorm) {
     throw new Error("Build requires --scorm.");
   }
+  const thresholds = flags.gate ? parseThresholds(flags) : null;
   const allMode = Boolean(flags.all);
   const { courseSlug, unitSlug } = await resolveCourseAndUnit(positional, allMode);
   const units = allMode ? await listUnitSlugs(REPO_ROOT, courseSlug) : [unitSlug];
@@ -476,6 +576,20 @@ async function runBuild(positional, flags) {
       title: built.unitModel.title
     });
     console.log(`SCORM zip: ${outZipPath}`);
+
+    if (flags.gate && thresholds) {
+      const scored = await scoreBuiltUnit({
+        repoRoot: REPO_ROOT,
+        courseSlug,
+        unitSlug: currentUnitSlug
+      });
+      printScoreResult(`${courseSlug}/${currentUnitSlug}`, scored);
+      if (!scorePassesThresholds(scored, thresholds)) {
+        throw new Error(
+          `Build gate failed for ${courseSlug}/${currentUnitSlug} (overall ${scored.overall.toFixed(2)}, minimum ${scored.minDimensionScore.toFixed(2)}).`
+        );
+      }
+    }
   }
 }
 
@@ -529,6 +643,101 @@ async function runValidate(positional, flags) {
   console.log("Brightspace validation passed.");
 }
 
+async function runScore(positional, flags) {
+  const thresholds = parseThresholds(flags);
+  const targets = await resolveScoreTargets(positional);
+  const results = [];
+  let hasGateFailure = false;
+
+  for (const target of targets) {
+    const scored = await scoreBuiltUnit({
+      repoRoot: REPO_ROOT,
+      courseSlug: target.courseSlug,
+      unitSlug: target.unitSlug
+    });
+    const name = `${target.courseSlug}/${target.unitSlug}`;
+    printValidationResult(name, scored.validation);
+    printScoreResult(name, scored);
+    const pass = scorePassesThresholds(scored, thresholds);
+    if (!pass) {
+      hasGateFailure = true;
+      console.error(
+        `  Gate failed: overall ${scored.overall.toFixed(2)} < ${thresholds.minOverall} or min dimension ${scored.minDimensionScore.toFixed(2)} < ${thresholds.minDimension}`
+      );
+    }
+    results.push({
+      courseSlug: target.courseSlug,
+      unitSlug: target.unitSlug,
+      score: scored.overall,
+      minDimensionScore: scored.minDimensionScore,
+      verdict: scored.verdict,
+      pass,
+      dimensions: scored.dimensions,
+      recommendations: scored.recommendations,
+      validation: scored.validation
+    });
+  }
+
+  if (flags.json) {
+    console.log(JSON.stringify({ thresholds, results }, null, 2));
+  }
+
+  if (hasGateFailure) {
+    throw new Error("Score gate failed.");
+  }
+}
+
+async function runCompile(positional, flags) {
+  const sourcePath = positional[0];
+  if (!sourcePath) {
+    throw new Error("Usage: cf compile <sourcePath> --course <courseSlug> --unit <unitSlug> [--extract]");
+  }
+  if (!flags.course || !flags.unit) {
+    throw new Error("Compile requires --course and --unit.");
+  }
+  const compiled = await compileUnitFromSource({
+    repoRoot: REPO_ROOT,
+    sourcePath,
+    courseSlug: String(flags.course),
+    unitSlug: String(flags.unit),
+    extract: Boolean(flags.extract)
+  });
+  console.log(`Compiled unit blueprint: courses/${compiled.courseSlug}/units/${compiled.unitSlug}`);
+  console.log(`Blueprint: ${compiled.blueprintPath}`);
+  console.log(`Draft content: ${compiled.contentPath}`);
+  if (compiled.extractedMaterials.length > 0) {
+    console.log(`Extracted/loaded ${compiled.extractedMaterials.length} source file(s):`);
+    for (const file of compiled.extractedMaterials) {
+      console.log(`  - ${file}`);
+    }
+  }
+}
+
+async function runRelease(positional, flags) {
+  if (!flags.scorm) {
+    throw new Error("Release requires --scorm.");
+  }
+  console.log("Running release gate: npm test -> build -> validate -> score");
+  await runNpmTest();
+  await runBuild(positional, { ...flags, scorm: true });
+  await runValidate(positional, { brightspace: true });
+  if (!flags["skip-browser-check"]) {
+    const targets = await resolveScoreTargets(positional);
+    for (const target of targets) {
+      const scored = await scoreBuiltUnit({
+        repoRoot: REPO_ROOT,
+        courseSlug: target.courseSlug,
+        unitSlug: target.unitSlug
+      });
+      const name = `${target.courseSlug}/${target.unitSlug}`;
+      console.log(`Running Playwright smoke for ${name}`);
+      await runPlaywrightSmoke(scored.built.outputDir, name);
+    }
+  }
+  await runScore(positional, flags);
+  console.log("Release gate passed.");
+}
+
 async function main() {
   const [command, ...rest] = process.argv.slice(2);
   if (!command) {
@@ -547,6 +756,9 @@ async function main() {
     case "import":
       await runImport(positional, flags);
       break;
+    case "compile":
+      await runCompile(positional, flags);
+      break;
     case "preview":
       await runPreview(positional, flags);
       break;
@@ -555,6 +767,12 @@ async function main() {
       break;
     case "validate":
       await runValidate(positional, flags);
+      break;
+    case "score":
+      await runScore(positional, flags);
+      break;
+    case "release":
+      await runRelease(positional, flags);
       break;
     case "help":
     case "--help":

@@ -2,6 +2,64 @@
 
 ## 2026-02-27
 
+### Completed (Release + Compiler Hardening)
+- Added quality scoring and release gates:
+  - `cf score`
+  - `cf build --gate --min-overall --min-dimension`
+  - `cf release --scorm --min-overall --min-dimension`
+- Added source-to-blueprint compiler command:
+  - `cf compile <sourcePath> --course <courseSlug> --unit <unitSlug> --extract`
+  - Supports both source directories and single source files.
+- Added interactive directives end-to-end:
+  - `:::scenario`
+  - `:::ranking`
+  - `:::decision-tree`
+- Added Playwright smoke gate for release:
+  - `scripts/playwright-smoke.mjs`
+  - Exercises completion button + interactive controls.
+- Fixed production/runtime blockers found during release verification:
+  - compiler now filters code-like extracted text so launch summaries avoid code/linkified garbage
+  - added missing `.scenario__outcome` class to theme CSS to satisfy unknown-class guardrail
+  - hardened runtime state parsing so empty localStorage does not crash initialization
+  - made CLI `release` test step Windows-safe (`cmd /c npm test`) to avoid spawn errors
+
+### Verification Status (Release + Compiler Hardening)
+- `cmd /c cf.cmd compile "C:\Users\dean.guedo\Downloads\CODE FOR CALM MODULE 1.docx" --course calm-course --unit module-1 --extract`: pass
+- `cmd /c cf.cmd score calm-course module-1 --min-overall 4 --min-dimension 3`: pass
+- `cmd /c cf.cmd release calm-course module-1 --scorm --min-overall 4 --min-dimension 3`: pass
+- `cmd /c cf.cmd build calm-course module-1 --scorm --gate --min-overall 4 --min-dimension 3`: pass
+- `cmd /c cf.cmd validate --brightspace calm-course module-1`: pass
+- `npm test` (inside release): pass (13/13)
+
+### Completed (Workbook Upgrade)
+- Added a new `:::workbook` directive for high-interactivity, SCORM-safe activities in unit content.
+- Implemented workbook parsing with YAML config support for:
+  - `text`
+  - `textarea`
+  - `radio`
+  - `checklist`
+- Implemented workbook rendering in production output with:
+  - structured form fields
+  - per-workbook completion progress
+  - semantic, accessible field wrappers
+- Added runtime behavior for workbook fields:
+  - persisted state via localStorage/SCORM state bridge
+  - restore on reload
+  - live completion progress updates
+- Added workbook styling in theme CSS with responsive layout and completion states.
+- Updated authoring scaffolds/import hints to include workbook usage.
+- Upgraded `calm-course/module-1` with workbook activities:
+  - Self-Inventory Snapshot
+  - SMART Goal Builder
+  - Support Plan Check-In
+
+### Verification Status (Workbook Upgrade)
+- `npm test`: pass
+- `npm run cf:build -- calm-course module-1 --scorm`: pass
+- `npm run cf:validate -- calm-course module-1`: pass
+- Preview HTML confirms workbook blocks and field bindings:
+  - `dist/preview/calm-course/module-1/index.html`
+
 ### Completed
 - Built a one-shot PDF-to-unit conversion using only:
   - `EXAMPLES/CALM Module 1 - Personal Choices.pdf`

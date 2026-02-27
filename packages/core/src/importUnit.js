@@ -126,7 +126,7 @@ export async function importUnitFromFolder({
       ? contentRaw
       : `## Imported Content\n\n${contentRaw.replace(/\r\n/g, "\n")}\n`;
   } else {
-    contentOutput = "## Imported Content\n\nAdd learning content here. Use `:::info` / `:::warning` / `:::example` blocks and `:::accordion` sections.\n";
+    contentOutput = "## Imported Content\n\nAdd learning content here. Use `:::info` / `:::warning` / `:::example` blocks, `:::accordion` sections, and `:::workbook` activities.\n";
   }
 
   const extractedDocs = [];

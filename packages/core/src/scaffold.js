@@ -37,11 +37,25 @@ Add context that helps learners understand why this unit matters.
 
 ## Core Content
 
-Use markdown for narrative content and directives for callouts and accordions.
+Use markdown for narrative content and directives for callouts, accordions, and workbook fields.
 
 :::accordion
 - Prompt 1: Add the first expandable content block.
 - Prompt 2: Add the second expandable content block.
+:::
+
+:::workbook
+title: Quick Practice
+description: Capture short answers before moving on.
+fields:
+  - type: text
+    label: What is one decision you will make differently this week?
+  - type: radio
+    label: Confidence level
+    options:
+      - Low
+      - Medium
+      - High
 :::
 
 ## Reflection

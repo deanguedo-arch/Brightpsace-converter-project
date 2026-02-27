@@ -66,6 +66,250 @@ function renderBlock(block, sectionId, blockIndex) {
       .join("");
     return `<section class="accordion card" data-accordion>${items}</section>`;
   }
+  if (block.type === "workbook") {
+    const workbookId = `${sectionId}-workbook-${blockIndex + 1}`;
+    const total = block.fields.length;
+    const fields = block.fields
+      .map((field, fieldIndex) => {
+        const fieldId = `${workbookId}-field-${fieldIndex + 1}-${slugify(field.id) || "item"}`;
+        const fieldKey = fieldId;
+
+        if (field.kind === "text") {
+          return `
+            <div class="workbook__field" data-workbook-field-wrap data-workbook-key="${escapeHtml(fieldKey)}" data-workbook-kind="text">
+              <label class="workbook__label" for="${escapeHtml(fieldId)}">${escapeHtml(field.label)}</label>
+              <input
+                id="${escapeHtml(fieldId)}"
+                class="workbook__input"
+                type="text"
+                placeholder="${escapeHtml(field.placeholder || "")}"
+                data-workbook-field
+                data-workbook-kind="text"
+                data-workbook-key="${escapeHtml(fieldKey)}"
+              >
+            </div>
+          `;
+        }
+
+        if (field.kind === "textarea") {
+          return `
+            <div class="workbook__field" data-workbook-field-wrap data-workbook-key="${escapeHtml(fieldKey)}" data-workbook-kind="textarea">
+              <label class="workbook__label" for="${escapeHtml(fieldId)}">${escapeHtml(field.label)}</label>
+              <textarea
+                id="${escapeHtml(fieldId)}"
+                class="workbook__textarea"
+                rows="${escapeHtml(field.rows || 4)}"
+                placeholder="${escapeHtml(field.placeholder || "")}"
+                data-workbook-field
+                data-workbook-kind="textarea"
+                data-workbook-key="${escapeHtml(fieldKey)}"
+              ></textarea>
+            </div>
+          `;
+        }
+
+        if (field.kind === "radio") {
+          const options = field.options
+            .map((option, optionIndex) => {
+              const optionId = `${fieldId}-option-${optionIndex + 1}`;
+              return `
+                <label class="workbook__choice" for="${escapeHtml(optionId)}">
+                  <input
+                    id="${escapeHtml(optionId)}"
+                    type="radio"
+                    name="${escapeHtml(fieldId)}"
+                    value="${escapeHtml(option.value)}"
+                    data-workbook-field
+                    data-workbook-kind="radio"
+                    data-workbook-key="${escapeHtml(fieldKey)}"
+                  >
+                  <span>${escapeHtml(option.label)}</span>
+                </label>
+              `;
+            })
+            .join("");
+          return `
+            <fieldset class="workbook__field workbook__field--options" data-workbook-field-wrap data-workbook-key="${escapeHtml(fieldKey)}" data-workbook-kind="radio">
+              <legend class="workbook__label">${escapeHtml(field.label)}</legend>
+              <div class="workbook__options">${options}</div>
+            </fieldset>
+          `;
+        }
+
+        if (field.kind === "checklist") {
+          const options = field.options
+            .map((option, optionIndex) => {
+              const optionId = `${fieldId}-check-${optionIndex + 1}`;
+              return `
+                <label class="workbook__choice" for="${escapeHtml(optionId)}">
+                  <input
+                    id="${escapeHtml(optionId)}"
+                    type="checkbox"
+                    value="${escapeHtml(option.value)}"
+                    data-workbook-field
+                    data-workbook-kind="checklist"
+                    data-workbook-key="${escapeHtml(fieldKey)}"
+                  >
+                  <span>${escapeHtml(option.label)}</span>
+                </label>
+              `;
+            })
+            .join("");
+          return `
+            <fieldset class="workbook__field workbook__field--options" data-workbook-field-wrap data-workbook-key="${escapeHtml(fieldKey)}" data-workbook-kind="checklist">
+              <legend class="workbook__label">${escapeHtml(field.label)}</legend>
+              <div class="workbook__options">${options}</div>
+            </fieldset>
+          `;
+        }
+
+        return "";
+      })
+      .join("");
+
+    return `
+      <section class="workbook card" data-workbook data-workbook-id="${escapeHtml(workbookId)}" data-workbook-total="${escapeHtml(total)}">
+        <div class="workbook__header">
+          <h3 class="workbook__title">${escapeHtml(block.title || "Workbook")}</h3>
+          <p class="workbook__progress" data-workbook-progress>0 / ${escapeHtml(total)} complete</p>
+        </div>
+        ${block.descriptionHtml ? `<div class="workbook__description">${block.descriptionHtml}</div>` : ""}
+        <div class="workbook__grid">${fields}</div>
+      </section>
+    `;
+  }
+  if (block.type === "scenario") {
+    const scenarioId = `${sectionId}-scenario-${blockIndex + 1}`;
+    const prompts = (block.prompts || [])
+      .map((prompt, promptIndex) => {
+        const promptKey = `${scenarioId}-prompt-${promptIndex + 1}-${slugify(prompt.id) || "item"}`;
+        const options = (prompt.options || [])
+          .map((option, optionIndex) => {
+            const optionId = `${promptKey}-choice-${optionIndex + 1}`;
+            return `
+              <label class="scenario__choice" for="${escapeHtml(optionId)}">
+                <input
+                  id="${escapeHtml(optionId)}"
+                  type="radio"
+                  name="${escapeHtml(promptKey)}"
+                  value="${escapeHtml(option.value)}"
+                  data-scenario-choice
+                  data-scenario-key="${escapeHtml(promptKey)}"
+                >
+                <span>${escapeHtml(option.label)}</span>
+              </label>
+            `;
+          })
+          .join("");
+        const outcomes = (prompt.options || [])
+          .map((option) => {
+            if (!option.outcomeHtml) return "";
+            return `
+              <div class="scenario__outcome-item" data-scenario-outcome-option="${escapeHtml(option.value)}" hidden>
+                ${option.outcomeHtml}
+              </div>
+            `;
+          })
+          .join("");
+        return `
+          <article class="scenario__prompt" data-scenario-prompt data-scenario-key="${escapeHtml(promptKey)}">
+            <h4 class="scenario__question">${escapeHtml(prompt.question)}</h4>
+            <div class="scenario__choices">${options}</div>
+            <div class="scenario__outcome" data-scenario-outcome="${escapeHtml(promptKey)}">${outcomes}</div>
+          </article>
+        `;
+      })
+      .join("");
+    return `
+      <section class="scenario card" data-scenario data-scenario-id="${escapeHtml(scenarioId)}" data-scenario-total="${escapeHtml((block.prompts || []).length)}">
+        <div class="scenario__header">
+          <h3 class="scenario__title">${escapeHtml(block.title || "Scenario")}</h3>
+          <p class="scenario__progress" data-scenario-progress>0 / ${escapeHtml((block.prompts || []).length)} complete</p>
+        </div>
+        ${block.descriptionHtml ? `<div class="scenario__description">${block.descriptionHtml}</div>` : ""}
+        <div class="scenario__grid">${prompts}</div>
+      </section>
+    `;
+  }
+  if (block.type === "ranking") {
+    const rankingId = `${sectionId}-ranking-${blockIndex + 1}`;
+    const total = (block.items || []).length;
+    const rows = (block.items || [])
+      .map((item, itemIndex) => {
+        const key = `${rankingId}-item-${itemIndex + 1}-${slugify(item.id) || "item"}`;
+        const options = Array.from({ length: total }, (_, rankIndex) => {
+          const rank = rankIndex + 1;
+          return `<option value="${rank}">${rank}</option>`;
+        }).join("");
+        return `
+          <div class="ranking__row" data-ranking-row data-ranking-key="${escapeHtml(key)}">
+            <label class="ranking__label" for="${escapeHtml(key)}">${escapeHtml(item.label)}</label>
+            <select id="${escapeHtml(key)}" class="ranking__select" data-ranking-field data-ranking-key="${escapeHtml(key)}">
+              <option value="">Select rank</option>
+              ${options}
+            </select>
+          </div>
+        `;
+      })
+      .join("");
+    return `
+      <section class="ranking card" data-ranking data-ranking-id="${escapeHtml(rankingId)}" data-ranking-total="${escapeHtml(total)}">
+        <div class="ranking__header">
+          <h3 class="ranking__title">${escapeHtml(block.title || "Ranking")}</h3>
+          <p class="ranking__progress" data-ranking-progress>0 / ${escapeHtml(total)} ranked</p>
+        </div>
+        ${block.descriptionHtml ? `<div class="ranking__description">${block.descriptionHtml}</div>` : ""}
+        <div class="ranking__grid">${rows}</div>
+      </section>
+    `;
+  }
+  if (block.type === "decision-tree") {
+    const treeId = `${sectionId}-decision-tree-${blockIndex + 1}`;
+    const startNode = block.nodes?.[0]?.id || "";
+    const nodeMarkup = (block.nodes || [])
+      .map((node) => {
+        const choices = (node.choices || [])
+          .map((choice) => {
+            return `
+              <button
+                type="button"
+                class="decision-tree__choice"
+                data-decision-choice
+                data-next-node="${escapeHtml(choice.next)}"
+              >
+                ${escapeHtml(choice.label)}
+              </button>
+            `;
+          })
+          .join("");
+        return `
+          <article class="decision-tree__node" data-decision-node data-node-id="${escapeHtml(node.id)}" ${node.id === startNode ? "" : "hidden"}>
+            <p class="decision-tree__prompt">${escapeHtml(node.prompt)}</p>
+            ${node.end ? "<p class=\"decision-tree__end\">End of path.</p>" : `<div class="decision-tree__choices">${choices}</div>`}
+          </article>
+        `;
+      })
+      .join("");
+    return `
+      <section
+        class="decision-tree card"
+        data-decision-tree
+        data-decision-tree-id="${escapeHtml(treeId)}"
+        data-start-node="${escapeHtml(startNode)}"
+        data-decision-total="${escapeHtml((block.nodes || []).length)}"
+      >
+        <div class="decision-tree__header">
+          <h3 class="decision-tree__title">${escapeHtml(block.title || "Decision Tree")}</h3>
+          <p class="decision-tree__progress" data-decision-progress>1 / ${escapeHtml((block.nodes || []).length)} visited</p>
+        </div>
+        ${block.descriptionHtml ? `<div class="decision-tree__description">${block.descriptionHtml}</div>` : ""}
+        <div class="decision-tree__canvas">${nodeMarkup}</div>
+        <div class="decision-tree__controls">
+          <button type="button" class="button button--ghost" data-decision-restart>Restart path</button>
+        </div>
+      </section>
+    `;
+  }
   return "";
 }
 

@@ -1,7 +1,15 @@
 (() => {
+  function isPlainObject(value) {
+    return Boolean(value) && typeof value === "object" && !Array.isArray(value);
+  }
+
   function readJsonSafe(value, fallback) {
+    if (typeof value !== "string" || value.trim().length === 0) {
+      return fallback;
+    }
     try {
-      return JSON.parse(value);
+      const parsed = JSON.parse(value);
+      return isPlainObject(parsed) ? parsed : fallback;
     } catch {
       return fallback;
     }
@@ -17,7 +25,7 @@
   function loadState(key) {
     if (window.CF_SCORM && typeof window.CF_SCORM.loadState === "function") {
       const scormState = window.CF_SCORM.loadState();
-      if (scormState && typeof scormState === "object") return scormState;
+      if (isPlainObject(scormState)) return scormState;
     }
     const raw = window.localStorage.getItem(key);
     return readJsonSafe(raw, {});
@@ -69,6 +77,260 @@
       if (back && !back.hidden) showingBack.push(id);
     });
     return { reviewed, showingBack };
+  }
+
+  function collectWorkbookState() {
+    const state = {};
+    document.querySelectorAll("[data-workbook-field]").forEach((field) => {
+      const key = field.getAttribute("data-workbook-key");
+      const kind = field.getAttribute("data-workbook-kind");
+      if (!key || !kind) return;
+
+      if (kind === "radio") {
+        if (field.checked) {
+          state[key] = field.value;
+        }
+        return;
+      }
+
+      if (kind === "checklist") {
+        if (!Array.isArray(state[key])) {
+          state[key] = [];
+        }
+        if (field.checked) {
+          state[key].push(field.value);
+        }
+        return;
+      }
+
+      state[key] = field.value;
+    });
+    return state;
+  }
+
+  function collectScenarioState() {
+    const state = {};
+    document.querySelectorAll("[data-scenario]").forEach((scenario) => {
+      const scenarioId = scenario.getAttribute("data-scenario-id");
+      if (!scenarioId) return;
+      const answers = {};
+      scenario.querySelectorAll("[data-scenario-prompt]").forEach((prompt) => {
+        const key = prompt.getAttribute("data-scenario-key");
+        if (!key) return;
+        const selected = Array.from(
+          prompt.querySelectorAll("[data-scenario-choice]")
+        ).find((choice) => choice.checked);
+        if (selected) {
+          answers[key] = selected.value;
+        }
+      });
+      state[scenarioId] = { answers };
+    });
+    return state;
+  }
+
+  function collectRankingState() {
+    const state = {};
+    document.querySelectorAll("[data-ranking]").forEach((ranking) => {
+      const rankingId = ranking.getAttribute("data-ranking-id");
+      if (!rankingId) return;
+      const values = {};
+      ranking.querySelectorAll("[data-ranking-field]").forEach((field) => {
+        const key = field.getAttribute("data-ranking-key");
+        if (!key) return;
+        values[key] = field.value || "";
+      });
+      state[rankingId] = { values };
+    });
+    return state;
+  }
+
+  function collectDecisionTreeState() {
+    const state = {};
+    document.querySelectorAll("[data-decision-tree]").forEach((tree) => {
+      const treeId = tree.getAttribute("data-decision-tree-id");
+      if (!treeId) return;
+      const currentNode = tree.getAttribute("data-current-node") || tree.getAttribute("data-start-node") || "";
+      const visited = String(tree.getAttribute("data-visited") || "")
+        .split(",")
+        .map((item) => item.trim())
+        .filter(Boolean);
+      state[treeId] = { currentNode, visited };
+    });
+    return state;
+  }
+
+  function restoreWorkbookState(state) {
+    document.querySelectorAll("[data-workbook-field]").forEach((field) => {
+      const key = field.getAttribute("data-workbook-key");
+      const kind = field.getAttribute("data-workbook-kind");
+      if (!key || !kind) return;
+      const saved = state?.[key];
+
+      if (kind === "radio") {
+        field.checked = saved === field.value;
+        return;
+      }
+
+      if (kind === "checklist") {
+        const selected = Array.isArray(saved) ? saved : [];
+        field.checked = selected.includes(field.value);
+        return;
+      }
+
+      field.value = typeof saved === "string" ? saved : "";
+    });
+  }
+
+  function updateWorkbookProgress() {
+    document.querySelectorAll("[data-workbook]").forEach((workbook) => {
+      const wrappers = Array.from(workbook.querySelectorAll("[data-workbook-field-wrap]"));
+      const total = wrappers.length;
+      let completed = 0;
+
+      wrappers.forEach((wrapper) => {
+        const key = wrapper.getAttribute("data-workbook-key");
+        const kind = wrapper.getAttribute("data-workbook-kind");
+        if (!key || !kind) return;
+
+        const controls = Array.from(workbook.querySelectorAll(`[data-workbook-key="${key}"]`));
+        if (kind === "radio") {
+          if (controls.some((control) => control.checked)) completed += 1;
+          return;
+        }
+        if (kind === "checklist") {
+          if (controls.some((control) => control.checked)) completed += 1;
+          return;
+        }
+
+        const input = controls[0];
+        if (input && typeof input.value === "string" && input.value.trim()) {
+          completed += 1;
+        }
+      });
+
+      const progress = workbook.querySelector("[data-workbook-progress]");
+      if (progress) {
+        progress.textContent = `${completed} / ${total} complete`;
+      }
+      workbook.classList.toggle("is-complete", total > 0 && completed === total);
+    });
+  }
+
+  function showScenarioOutcome(prompt, selectedValue) {
+    prompt.querySelectorAll("[data-scenario-outcome-option]").forEach((item) => {
+      item.hidden = item.getAttribute("data-scenario-outcome-option") !== selectedValue;
+    });
+  }
+
+  function restoreScenarioState(state) {
+    document.querySelectorAll("[data-scenario]").forEach((scenario) => {
+      const scenarioId = scenario.getAttribute("data-scenario-id");
+      const answers = state?.[scenarioId]?.answers || {};
+      scenario.querySelectorAll("[data-scenario-prompt]").forEach((prompt) => {
+        const key = prompt.getAttribute("data-scenario-key");
+        if (!key) return;
+        const selectedValue = answers[key];
+        prompt.querySelectorAll("[data-scenario-choice]").forEach((choice) => {
+          choice.checked = selectedValue === choice.value;
+        });
+        if (selectedValue) {
+          showScenarioOutcome(prompt, selectedValue);
+        } else {
+          showScenarioOutcome(prompt, "__none__");
+        }
+      });
+    });
+  }
+
+  function updateScenarioProgress() {
+    document.querySelectorAll("[data-scenario]").forEach((scenario) => {
+      const prompts = Array.from(scenario.querySelectorAll("[data-scenario-prompt]"));
+      const total = prompts.length;
+      const completed = prompts.filter((prompt) => {
+        return Array.from(prompt.querySelectorAll("[data-scenario-choice]")).some((choice) => choice.checked);
+      }).length;
+      const output = scenario.querySelector("[data-scenario-progress]");
+      if (output) {
+        output.textContent = `${completed} / ${total} complete`;
+      }
+      scenario.classList.toggle("is-complete", total > 0 && completed === total);
+    });
+  }
+
+  function restoreRankingState(state) {
+    document.querySelectorAll("[data-ranking]").forEach((ranking) => {
+      const rankingId = ranking.getAttribute("data-ranking-id");
+      const values = state?.[rankingId]?.values || {};
+      ranking.querySelectorAll("[data-ranking-field]").forEach((field) => {
+        const key = field.getAttribute("data-ranking-key");
+        if (!key) return;
+        field.value = values[key] || "";
+      });
+    });
+  }
+
+  function updateRankingProgress() {
+    document.querySelectorAll("[data-ranking]").forEach((ranking) => {
+      const fields = Array.from(ranking.querySelectorAll("[data-ranking-field]"));
+      const total = fields.length;
+      const completed = fields.filter((field) => String(field.value || "").trim().length > 0).length;
+      const output = ranking.querySelector("[data-ranking-progress]");
+      if (output) {
+        output.textContent = `${completed} / ${total} ranked`;
+      }
+      ranking.classList.toggle("is-complete", total > 0 && completed === total);
+    });
+  }
+
+  function showDecisionNode(tree, nodeId, visited = null) {
+    const fallbackStart = tree.getAttribute("data-start-node") || "";
+    const nextNodeId = nodeId || fallbackStart;
+    const nodeExists = tree.querySelector(`[data-decision-node][data-node-id="${nextNodeId}"]`);
+    if (!nodeExists) return;
+
+    tree.querySelectorAll("[data-decision-node]").forEach((node) => {
+      node.hidden = node.getAttribute("data-node-id") !== nextNodeId;
+    });
+    tree.setAttribute("data-current-node", nextNodeId);
+
+    const visitedSet = visited
+      ? new Set(Array.from(visited))
+      : new Set(
+          String(tree.getAttribute("data-visited") || "")
+            .split(",")
+            .map((item) => item.trim())
+            .filter(Boolean)
+        );
+    visitedSet.add(nextNodeId);
+    tree.setAttribute("data-visited", Array.from(visitedSet).join(","));
+  }
+
+  function restoreDecisionTreeState(state) {
+    document.querySelectorAll("[data-decision-tree]").forEach((tree) => {
+      const treeId = tree.getAttribute("data-decision-tree-id");
+      const startNode = tree.getAttribute("data-start-node") || "";
+      const saved = state?.[treeId];
+      const currentNode = saved?.currentNode || startNode;
+      const visited = new Set(Array.isArray(saved?.visited) ? saved.visited : [startNode].filter(Boolean));
+      showDecisionNode(tree, currentNode, visited);
+    });
+  }
+
+  function updateDecisionTreeProgress() {
+    document.querySelectorAll("[data-decision-tree]").forEach((tree) => {
+      const total = Number(tree.getAttribute("data-decision-total") || 0);
+      const visited = String(tree.getAttribute("data-visited") || "")
+        .split(",")
+        .map((item) => item.trim())
+        .filter(Boolean);
+      const count = new Set(visited).size;
+      const output = tree.querySelector("[data-decision-progress]");
+      if (output) {
+        output.textContent = `${count} / ${total} visited`;
+      }
+      tree.classList.toggle("is-complete", total > 0 && count >= total);
+    });
   }
 
   function restoreFlashcardState(state) {
@@ -133,6 +395,62 @@
     });
   }
 
+  function initWorkbookHandlers(onChange) {
+    document.querySelectorAll("[data-workbook-field]").forEach((field) => {
+      const kind = field.getAttribute("data-workbook-kind");
+      const eventName = kind === "text" || kind === "textarea" ? "input" : "change";
+      field.addEventListener(eventName, () => {
+        updateWorkbookProgress();
+        onChange();
+      });
+    });
+  }
+
+  function initScenarioHandlers(onChange) {
+    document.querySelectorAll("[data-scenario-choice]").forEach((choice) => {
+      choice.addEventListener("change", () => {
+        const prompt = choice.closest("[data-scenario-prompt]");
+        if (prompt) {
+          showScenarioOutcome(prompt, choice.value);
+        }
+        updateScenarioProgress();
+        onChange();
+      });
+    });
+  }
+
+  function initRankingHandlers(onChange) {
+    document.querySelectorAll("[data-ranking-field]").forEach((field) => {
+      field.addEventListener("change", () => {
+        updateRankingProgress();
+        onChange();
+      });
+    });
+  }
+
+  function initDecisionTreeHandlers(onChange) {
+    document.querySelectorAll("[data-decision-tree]").forEach((tree) => {
+      tree.querySelectorAll("[data-decision-choice]").forEach((button) => {
+        button.addEventListener("click", () => {
+          const next = button.getAttribute("data-next-node");
+          if (!next) return;
+          showDecisionNode(tree, next);
+          updateDecisionTreeProgress();
+          onChange();
+        });
+      });
+      const restart = tree.querySelector("[data-decision-restart]");
+      if (restart) {
+        restart.addEventListener("click", () => {
+          const startNode = tree.getAttribute("data-start-node") || "";
+          showDecisionNode(tree, startNode, new Set(startNode ? [startNode] : []));
+          updateDecisionTreeProgress();
+          onChange();
+        });
+      }
+    });
+  }
+
   function initStickyNav() {
     const links = new Map();
     document.querySelectorAll("[data-nav-link]").forEach((link) => {
@@ -181,7 +499,7 @@
 
   function initSectionReveal() {
     const targets = Array.from(
-      document.querySelectorAll(".objectives, .unit-section, .resources, .flashcards")
+      document.querySelectorAll(".objectives, .unit-section, .resources, .flashcards, .workbook, .scenario, .ranking, .decision-tree")
     );
     if (targets.length === 0) return;
 
@@ -222,7 +540,15 @@
 
     restoreAccordionState(state.accordion || {});
     restoreFlashcardState(state.flashcards || {});
+    restoreWorkbookState(state.workbook || {});
+    restoreScenarioState(state.scenario || {});
+    restoreRankingState(state.ranking || {});
+    restoreDecisionTreeState(state.decisionTree || {});
     updateFlashcardProgress();
+    updateWorkbookProgress();
+    updateScenarioProgress();
+    updateRankingProgress();
+    updateDecisionTreeProgress();
 
     if (typeof state.scrollY === "number") {
       window.scrollTo({ top: state.scrollY, behavior: "auto" });
@@ -248,13 +574,21 @@
         ...extra,
         scrollY: window.scrollY || 0,
         accordion: collectAccordionState(),
-        flashcards: collectFlashcardState()
+        flashcards: collectFlashcardState(),
+        workbook: collectWorkbookState(),
+        scenario: collectScenarioState(),
+        ranking: collectRankingState(),
+        decisionTree: collectDecisionTreeState()
       };
       saveState(stateKey, state);
     }
 
     initAccordionHandlers(() => persist());
     initFlashcardHandlers(() => persist());
+    initWorkbookHandlers(() => persist());
+    initScenarioHandlers(() => persist());
+    initRankingHandlers(() => persist());
+    initDecisionTreeHandlers(() => persist());
     initStickyNav();
     initCompletion((button) => {
       button.setAttribute("aria-pressed", "true");

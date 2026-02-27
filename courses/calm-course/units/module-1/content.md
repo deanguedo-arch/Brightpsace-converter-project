@@ -1,281 +1,541 @@
 ﻿## Module Launch
 
-Welcome to **CALM Module 1: Personal Choices**. This interactive page converts the original workbook into a guided, single-scroll learning experience focused on practical decision-making.
-
-You will move through self-awareness, goal setting, relationships, substance awareness, risk, addiction literacy, and mental health support strategies.
+Welcome to **CALM Module 1: Personal Choices**. This unit is designed to help you make decisions that protect your health, relationships, and long-term goals.
 
 :::info
-How to use this page:
-- Open accordions to reveal prompts and frameworks.
-- Work through flashcards to rehearse key language.
-- Use the PDF resource at the end when you want the original worksheet format.
-:::
-
-### Essential Question
-
-How do informed personal choices protect your wellbeing now and strengthen your future options?
-
-## Part 1: Self-Knowledge Inventory
-
-Personal choices improve when you understand your own patterns first.
-
-### Checkpoint: What Works for Me
-
-Use the prompts below as a live self-audit. Capture your answers in your notebook, assignment sheet, or LMS submission.
-
-:::accordion
-- Sleep and recovery: How much sleep do you need to stay focused and emotionally steady?
-- Energy and nutrition: What foods and timing patterns keep your energy stable through the school day?
-- Peak focus window: What time of day are you at your best, and what usually drains that focus?
-- Learning tools: Do you work better with paper, typing, visuals, spoken instruction, or examples?
-- Attention design: Do devices and music improve your focus or split your attention?
-- Classroom setup: Which seat, text style, and pacing help you learn fastest?
-- Goal ownership: Do you perform better with self-set goals, teacher-set goals, or a blend of both?
-:::
-
-### Learning Supports
-
-From the original inventory, rate or reflect on which directions help you most:
-
-1. Teacher explains out loud.
-2. Teacher models an example.
-3. Written directions are provided.
-4. You try independently, then verify.
-5. You compare process/results with a peer.
-
-:::example
-Micro-practice: Choose one strategy to test this week. Keep it if it works, replace it if it does not.
-:::
-
-## Part 2: Goal Design Lab
-
-The source module uses a clear goal model: your goal must be **specific, measurable, attainable, realistic, and timed**.
-
-### Build a Goal Statement
-
-Use this sentence frame:
-
-`(Who) + (How) + (What) + (When)`
-
-| Prompt | Your Draft |
-| --- | --- |
-| Who is responsible? | |
-| How will you do it? | |
-| What exactly will be completed? | |
-| When is the deadline? | |
-
-:::accordion
-- Measure: What evidence proves success (something you can see, hear, count, or verify)?
-- Attainable: Is this mostly under your control?
-- Realistic: Is the challenge level ambitious but believable?
-- Timed: Is there a clear deadline or milestone date?
-- Revision loop: If one answer is "no", rewrite the goal until all are "yes".
-:::
-
-### Reflection Prompts
-
-1. Why is goal setting important for young adults?
-2. What obstacles could interfere with your goal?
-3. What support or habit would make completion more likely?
-
-## Part 3: Relationship Literacy
-
-Relationships in adolescence and adulthood are complex. Healthy relationships grow through communication, trust, boundaries, and respect.
-
-### Relationship Progression Activity
-
-The original workbook includes 16 relationship steps. Instead of one "correct order," think in clusters:
-
-1. Initial connection:
-   eye contact, flirting, basic conversation, messaging.
-2. Trust and emotional closeness:
-   sharing, consistency, care, non-sexual intimacy.
-3. Commitment and responsibility:
-   exclusivity, long-term planning, clear boundaries, consent.
-4. Physical/sexual choices:
-   should only happen when communication, consent, and protection are established.
-
-:::warning
-Healthy relationships require mutual consent, respect, and safety. Pressure, control, fear, or secrecy are warning signs.
-:::
-
-### Healthy vs Unhealthy Relationship Signals
-
-| Healthy Signals | Unhealthy Signals |
-| --- | --- |
-| Honest communication | Manipulation or guilt pressure |
-| Trust and privacy respect | Monitoring, jealousy, control |
-| Shared decision-making | One-sided power |
-| Emotional safety | Fear, shame, intimidation |
-| Boundary respect | Repeated boundary violations |
-
-:::accordion
-- Debrief 1: What part of relationship progression felt easiest to reason through?
-- Debrief 2: What part felt most difficult, and why?
-- Debrief 3: Where do your ideas of "normal relationships" come from?
-- Debrief 4: What can happen when a relationship progresses in an unhealthy way?
-:::
-
-## Part 4: Substance Awareness
-
-This section combines alcohol and tobacco awareness from the source module.
-
-### Alcohol Decision Matrix
-
-| Choice | Possible Positives | Possible Negatives |
-| --- | --- | --- |
-| Not drinking | Clear judgment, legal safety, better control | Social pressure in some settings |
-| Drinking moderately | Temporary social ease for some people | Impaired judgment, health/legal risk |
-| Drinking too much | Short-term "escape" feeling | Injury, regret, conflict, dependence risk |
-
-Ask yourself:
-
-1. Why do people drink in social settings?
-2. What would you say if offered a drink?
-3. Who are two trusted resources you could ask for support?
-
-### Tobacco Awareness
-
-Nicotine is addictive. Quitting is difficult but possible with support and a plan.
-
-:::accordion
-- Why people start: Curiosity, social influence, stress coping, or identity signaling.
-- Why it escalates: Tolerance builds, and occasional use can become routine dependence.
-- Refusal script: "No thanks, that is not for me." plus change topic and move away from pressure.
-- Support option from source material: Smokers' Helpline 1-866-332-2322.
-:::
-
-## Part 5: Risk Intelligence
-
-Risk is part of life. The key skill is separating **healthy calculated risk** from **unhealthy avoidable risk**.
-
-### Healthy Risk vs Unhealthy Risk
-
-| Healthy Risk | Unhealthy Risk |
-| --- | --- |
-| Has growth value | Has low upside and high harm potential |
-| Informed and planned | Impulsive or peer-pressure driven |
-| Safety controls are used | Safety controls are ignored |
-| Builds skill or confidence | Damages health, trust, or future options |
-
-### Scenario Drill (From Source Themes)
-
-Rate each as low, medium, or high risk based on context:
-
-1. Performing in front of a crowd.
-2. Driving over the speed limit.
-3. Trying cannabis at a party.
-4. Drinking before more drinking.
-5. Sharing needles.
-6. Occasional smoking that could become daily use.
-
-:::example
-Risk filter: What is the upside, what is the worst-case cost, and what is one safer alternative?
-:::
-
-## Part 6: Addiction Continuum
-
-The workbook presents addiction as a progression, not a single event.
-
-### Continuum Overview
-
-| Stage | Description |
-| --- | --- |
-| No Use | No involvement with substances/gambling. |
-| Use | Experimental or social exposure. |
-| Misuse | Harm begins (regret, school/family problems, poor decisions). |
-| Abuse | Problems become regular and affect major life areas. |
-| Dependency | Loss of control, ongoing use despite consequences, cravings/withdrawal. |
-
-### Scenario Analysis
-
-Classify each scenario to a likely stage and justify your reasoning:
-
-1. Rachel drinks heavily every day and struggles to sleep without alcohol.
-2. Antoine refuses cigarettes after losing a parent to lung cancer.
-3. Bailey craves cigarettes and steals one when she cannot access her own.
-
-:::accordion
-- Lens for Rachel: Daily heavy use, consequences ignored, and sleep reliance suggest dependency.
-- Lens for Antoine: Clear refusal and no use aligns with no use.
-- Lens for Bailey: Strong cravings and compulsive behavior suggest dependency risk.
-:::
-
-:::info
-Support contact listed in source material: AADAC/Help Line 1-866-332-2322.
-:::
-
-## Part 7: Mental Health Awareness
-
-The original module emphasizes that depression and emotional distress are real, common, and treatable with support.
-
-### Common Warning Signs (Teen Context)
-
-1. Persistent sadness, irritability, or anger.
-2. Loss of interest in usual activities.
-3. Sleep or appetite changes.
-4. Concentration drop and falling school performance.
-5. Hopeless thinking or talk about death/self-harm.
-
-### Protective Habits
-
-1. Stay connected to supportive people.
-2. Keep body routines stable (sleep, movement, nutrition).
-3. Avoid using alcohol or drugs to cope.
-4. Ask for trusted adult/professional support early.
-
-:::accordion
-- If you are struggling: Talk to a trusted adult, counselor, or health professional as soon as possible.
-- If a friend is struggling: Listen, take concerns seriously, and help connect them to support.
-- If stress is overwhelming: Break tasks into small steps and ask for academic support promptly.
+How to succeed in this module:
+- Move section by section and complete each interactive task.
+- Write concrete answers, not one-word responses.
+- Use the final exit ticket to identify your top next steps.
 :::
 
 :::warning
-If someone talks about suicide or self-harm, treat it as urgent and involve a trusted adult or emergency support immediately.
+Safety note: If a topic in this module connects to immediate harm, abuse, self-harm, or unsafe substance use, stop and contact a trusted adult, school support staff, or local emergency services.
 :::
 
-## Summative Task Studio
+## Personal Inventory
 
-For the module summative, choose one of two pathways from the source packet.
+### Habits and Learning Patterns
 
-### Option A: Life Map
+Before changing behavior, identify your current patterns.
 
-Build a visual map of your life journey to date.
+:::workbook
+title: Personal Inventory Snapshot
+description: Capture what currently helps or hurts your performance and wellbeing.
+fields:
+  - type: textarea
+    label: What daily habits currently support your learning, mood, and energy?
+    rows: 4
+  - type: textarea
+    label: What habits regularly create stress, low focus, or conflict?
+    rows: 4
+  - type: checklist
+    label: Which supports are available to you right now?
+    options:
+      - Consistent sleep schedule
+      - Meal/snack routine
+      - Quiet study space
+      - Trusted adult mentor
+      - Positive peer support
+      - Structured planner/calendar
+  - type: textarea
+    label: When do you feel most focused during a normal week?
+    rows: 3
+  - type: textarea
+    label: When are you most likely to get distracted or make impulsive choices?
+    rows: 3
+:::
 
-1. Start at birth and move chronologically.
-2. Include at least 10 significant events.
-3. Show transitions between events and what helped you adapt.
-4. Include dates, places, symbols, and explanations.
-5. Reflect on your proudest accomplishment, biggest obstacle, and strategies used.
+:::ranking
+title: Rank Your Current Supports
+instructions: Rank these from most impactful (1) to least impactful for your week.
+items:
+  - Sleep and recovery routine
+  - Time planning and deadlines
+  - Supportive relationships
+  - Healthy stress outlets
+  - Academic help and check-ins
+:::
 
-### Option B: Inside Out Film Study
+:::accordion
+- Why inventory first?: Strong decisions come from accurate self-awareness, not guesswork.
+- What makes a useful answer?: Specific examples, realistic constraints, and clear next actions.
+- What to avoid: Vague statements like "I just need to do better" without concrete steps.
+:::
 
-Analyze emotions and decision-making while watching *Inside Out*.
+## SMART Goal Builder
 
-Use the original question set to reflect on:
-
-1. Dominant emotions.
-2. Transition experiences.
-3. Core memories and personality.
-4. Mood effects on memory.
-5. Social expectations around emotional expression.
-6. Why sadness and other emotions matter.
+### Build One Goal You Can Actually Execute
 
 :::example
-Presentation quality checklist:
-- Clear examples from your own life or the film.
-- Honest reflection, not one-word answers.
-- Strong connection to personal choices and wellbeing.
+A strong goal includes: **specific outcome, measurable indicator, realistic scope, and timeline**.
 :::
 
-## Exit Reflection
+:::workbook
+title: SMART Goal Construction
+description: Build one personal or academic goal that you can track over the next 2-4 weeks.
+fields:
+  - type: text
+    label: Goal statement (Specific)
+    placeholder: "I will..."
+  - type: text
+    label: Success measure (Measurable)
+    placeholder: "I can prove progress by..."
+  - type: text
+    label: Why this matters (Relevant)
+    placeholder: "This matters because..."
+  - type: text
+    label: Timeline (Timed)
+    placeholder: "By [date], I will..."
+  - type: checklist
+    label: Which supports will you use to stay on track?
+    options:
+      - Weekly check-in with a trusted adult
+      - Daily planner reminders
+      - Study/work block schedule
+      - Accountability with a peer
+  - type: textarea
+    label: First 3 actions you will complete this week
+    rows: 4
+:::
 
-Complete these before you mark the unit complete:
+:::scenario
+title: Goal Quality Check
+description: Choose the stronger goal response in each prompt.
+prompts:
+  - question: Which goal is more effective?
+    options:
+      - label: "Get better at school this semester."
+        outcome: This is too broad. Add a specific target, timeline, and measurement.
+      - label: "Raise math test average from 68% to 75% by April 30 using two study blocks per week."
+        outcome: Strong SMART structure with measurable evidence and timeline.
+  - question: You miss one planned action. What is the best response?
+    options:
+      - label: Quit the goal because momentum is gone.
+        outcome: One setback does not define outcome; this response collapses progress.
+      - label: Adjust the weekly plan, keep the goal, and restart with one next action.
+        outcome: This preserves accountability and keeps the system functioning.
+  - question: Which support strategy is strongest?
+    options:
+      - label: Keep the goal private and rely only on motivation.
+        outcome: Motivation fluctuates; no external supports increases failure risk.
+      - label: Set recurring reminders and report progress to a trusted adult weekly.
+        outcome: External structure and accountability improves completion rates.
+:::
 
-1. What is one personal choice habit you will improve this month?
-2. Which risk scenario from this module challenged your thinking most?
-3. Who is one trusted person you can go to when decisions feel heavy?
+:::decision-tree
+title: Setback Recovery Path
+description: Practice what to do when progress drops.
+nodes:
+  - id: start
+    prompt: You miss your weekly target and feel discouraged.
+    choices:
+      - label: Review why it slipped and reset next week's plan.
+        next: reset
+      - label: Ignore the setback and hope next week is better.
+        next: drift
+  - id: reset
+    prompt: You identify one bottleneck, reduce scope, and restart with a realistic action.
+    choices:
+      - label: Confirm support check-in date.
+        next: support
+  - id: drift
+    prompt: No plan update means the same barriers continue.
+    end: true
+  - id: support
+    prompt: Support + revision restores momentum and raises completion odds.
+    end: true
+:::
+
+## Relationships and Consent
+
+### Healthy vs Unhealthy Patterns
 
 :::info
-After finishing your reflection work, use the **Mark complete** button at the top of this page.
+Healthy relationships include respect, boundaries, consent, trust, and accountability.
+:::
+
+:::workbook
+title: Relationship Reflection
+description: Apply relationship criteria to real-life patterns.
+fields:
+  - type: checklist
+    label: Signals of a healthy relationship
+    options:
+      - Mutual respect
+      - Honest communication
+      - Boundary acceptance
+      - Shared responsibility
+      - Emotional safety
+  - type: checklist
+    label: Warning signs of an unhealthy relationship
+    options:
+      - Control or intimidation
+      - Repeated boundary violations
+      - Isolation from supports
+      - Manipulation or guilt pressure
+      - Dishonesty and blame shifting
+  - type: textarea
+    label: Write one clear boundary statement you could use in a pressure moment
+    rows: 3
+  - type: textarea
+    label: Who can you contact if a relationship becomes unsafe?
+    rows: 3
+:::
+
+:::ranking
+title: Consent and Boundary Priorities
+instructions: Rank from highest priority (1) to lowest when making relationship decisions.
+items:
+  - Clear consent every time
+  - Physical and emotional safety
+  - Respect for stated boundaries
+  - Honest communication
+  - Long-term wellbeing over short-term approval
+:::
+
+:::scenario
+title: Consent Pressure Simulation
+description: Choose the safest, most respectful response.
+prompts:
+  - question: A partner dismisses your boundary as "not a big deal." What is the best response?
+    options:
+      - label: Stay silent to avoid conflict.
+        outcome: Silence can normalize boundary violations and increase risk.
+      - label: Restate the boundary clearly and step away if it is not respected.
+        outcome: Clear boundaries and action protect safety and self-respect.
+  - question: Friends pressure you to share private relationship details.
+    options:
+      - label: Share everything so they stop asking.
+        outcome: This can violate trust and escalate conflict.
+      - label: Decline to share and protect privacy.
+        outcome: Protecting privacy supports trust and emotional safety.
+:::
+
+:::decision-tree
+title: Relationship Risk Path
+nodes:
+  - id: start
+    prompt: You notice repeated disrespect for boundaries.
+    choices:
+      - label: Name the concern and seek support.
+        next: support
+      - label: Minimize it and continue.
+        next: escalate
+  - id: support
+    prompt: Trusted support helps you evaluate options and protect safety.
+    end: true
+  - id: escalate
+    prompt: Ignoring the pattern increases emotional and physical risk over time.
+    end: true
+:::
+
+## Substance Use Decision-Making
+
+### Alcohol, Nicotine, and Cannabis
+
+:::accordion
+- Reality check: Short-term social payoff can hide long-term academic, legal, and health consequences.
+- High-risk factors: Isolation, unresolved stress, unsafe peers, and no exit plan.
+- Protective factors: Refusal scripts, ride plan, trusted check-in, and clear boundaries.
+:::
+
+:::scenario
+title: Party Choice Simulator
+description: Apply harm-reduction and refusal strategies.
+prompts:
+  - question: You are offered alcohol and need to drive later.
+    options:
+      - label: Have one drink and "be careful."
+        outcome: Any impairment raises risk for you and others.
+      - label: Decline alcohol and keep your transportation plan safe.
+        outcome: Safety-first decision protects legal, physical, and academic outcomes.
+  - question: A friend says vaping is harmless because "everyone does it."
+    options:
+      - label: Try it once to fit in.
+        outcome: Nicotine dependence risk can start quickly, especially with repeat exposure.
+      - label: Refuse and redirect the conversation/activity.
+        outcome: Refusal plus redirection reduces pressure escalation.
+  - question: You feel stressed and consider substance use as your coping strategy.
+    options:
+      - label: Use first, think later.
+        outcome: Avoidance coping tends to increase long-term stress and consequences.
+      - label: Use a non-substance coping plan and contact support.
+        outcome: This builds long-term resilience and safer outcomes.
+:::
+
+:::ranking
+title: Protective Actions Under Pressure
+instructions: Rank which actions you should do first in a high-pressure substance-use situation.
+items:
+  - Leave unsafe context
+  - Contact trusted support
+  - Use a clear refusal line
+  - Rejoin safe peers/activities
+  - Review transportation and home safety
+:::
+
+:::workbook
+title: Refusal and Safety Plan
+description: Build scripts you can use immediately in real life.
+fields:
+  - type: textarea
+    label: Write 2 refusal lines that sound natural in your voice
+    rows: 3
+  - type: textarea
+    label: What is your exit plan if a situation becomes unsafe?
+    rows: 3
+  - type: checklist
+    label: Which backup safety steps will you commit to?
+    options:
+      - Always secure a safe ride plan
+      - Keep one trusted contact informed
+      - Leave at the first red flag
+      - Avoid being isolated in pressure settings
+  - type: textarea
+    label: If a friend is in danger, what are your first 2 actions?
+    rows: 3
+:::
+
+## Risk Intelligence
+
+### Healthy Risk vs Harmful Risk
+
+:::info
+Healthy risk has growth value and safety controls. Harmful risk has low upside and high potential harm.
+:::
+
+:::ranking
+title: Risk Ladder
+instructions: Rank these from lowest risk (1) to highest risk in typical teen contexts.
+items:
+  - Presenting in class
+  - Joining a new activity team
+  - Driving while tired
+  - Driving after substance use
+  - Posting private conflict online
+  - Trying nicotine products
+  - Speaking up against unsafe peer behavior
+:::
+
+:::decision-tree
+title: High-Risk Moment Decision Path
+description: Choose responses when social pressure conflicts with safety.
+nodes:
+  - id: start
+    prompt: Your group plans an unsafe activity and expects your participation.
+    choices:
+      - label: Pause, assess consequences, and refuse.
+        next: assess
+      - label: Join to avoid being left out.
+        next: conform
+  - id: assess
+    prompt: You protect safety, preserve long-term options, and model leadership.
+    choices:
+      - label: Offer a safer alternative.
+        next: leadership
+  - id: conform
+    prompt: Immediate approval increases chance of harm and future regret.
+    end: true
+  - id: leadership
+    prompt: You reduce group risk and strengthen trust with responsible peers/adults.
+    end: true
+:::
+
+:::workbook
+title: Personal Risk Filter
+description: Use this filter before major decisions this month.
+fields:
+  - type: text
+    label: What is the actual upside of this choice?
+  - type: text
+    label: What is the most likely downside if it goes badly?
+  - type: text
+    label: Who could be affected besides me?
+  - type: text
+    label: What safer alternative gives similar benefit?
+  - type: textarea
+    label: Final decision rule you will use under pressure
+    rows: 3
+:::
+
+## Addiction Continuum and Recovery Support
+
+### From Experimentation to Dependency
+
+:::example
+Continuum model: **No use -> Use -> Misuse -> Abuse -> Dependency**. Early intervention reduces long-term harm.
+:::
+
+:::scenario
+title: Continuum Classification Practice
+prompts:
+  - question: A student uses occasionally, no pattern, no major consequences yet.
+    options:
+      - label: Dependency stage
+        outcome: Not accurate; dependency includes loss of control and persistent consequences.
+      - label: Use/early misuse stage
+        outcome: Better fit. Monitoring and support are important to prevent escalation.
+  - question: A student continues despite major academic, family, and health consequences.
+    options:
+      - label: High-risk dependency pattern
+        outcome: Correct. Intensive support and professional intervention are likely needed.
+      - label: Low-risk experimentation
+        outcome: This underestimates severity and delays intervention.
+:::
+
+:::workbook
+title: Help-Seeking Activation Plan
+description: Define exactly how you would ask for help for yourself or a friend.
+fields:
+  - type: textarea
+    label: What are 3 warning signs that would trigger immediate help-seeking?
+    rows: 3
+  - type: textarea
+    label: Who are your top 3 support contacts and why?
+    rows: 3
+  - type: text
+    label: One sentence you can use to start a help conversation
+  - type: checklist
+    label: Which support systems will you use if risk escalates?
+    options:
+      - School counselor
+      - Parent/guardian or trusted adult
+      - Community health professional
+      - Crisis hotline/emergency response
+:::
+
+## Mental Wellness and Crisis Response
+
+### Recognize, Respond, Refer
+
+:::warning
+If someone talks about self-harm, suicide, or immediate danger, treat it as urgent. Stay with the person and involve a trusted adult/emergency services right away.
+:::
+
+:::scenario
+title: Friend Disclosure Response
+description: Choose the most responsible response.
+prompts:
+  - question: A friend says they feel hopeless and does not want to be here anymore.
+    options:
+      - label: Promise secrecy and keep it between you.
+        outcome: Secrecy can increase danger. Immediate adult/professional support is required.
+      - label: Stay with them, listen, and contact a trusted adult/emergency support now.
+        outcome: This is the safest and most ethical response.
+  - question: A peer shows ongoing warning signs (withdrawal, major mood shift, no sleep).
+    options:
+      - label: Wait and hope it improves.
+        outcome: Delay can increase risk.
+      - label: Document concerns and involve support early.
+        outcome: Early intervention improves outcomes.
+:::
+
+:::decision-tree
+title: Urgent Support Path
+nodes:
+  - id: start
+    prompt: You observe a serious mental health red flag.
+    choices:
+      - label: Act now and notify support.
+        next: action
+      - label: Keep silent to avoid conflict.
+        next: delay
+  - id: action
+    prompt: You connect the person to immediate support and reduce harm risk.
+    end: true
+  - id: delay
+    prompt: Delayed action can increase risk and remove safe intervention windows.
+    end: true
+:::
+
+:::workbook
+title: Personal Wellness Maintenance Plan
+description: Build a practical weekly plan that prevents burnout.
+fields:
+  - type: checklist
+    label: Weekly protective habits
+    options:
+      - Sleep target and consistent bedtime
+      - Daily movement/physical activity
+      - Screen boundaries at night
+      - Peer/family connection time
+      - Stress reset routine
+  - type: textarea
+    label: Your early warning signs that stress is becoming unmanageable
+    rows: 3
+  - type: textarea
+    label: What support action will you take within 24 hours when warnings appear?
+    rows: 3
+:::
+
+## Summative Application
+
+### Choose and Build Your Final Artifact
+
+:::info
+Choose one summative path:
+- **Path A: Life Map** (identity, transitions, growth strategy)
+- **Path B: Emotion and Decision Analysis** (film-based reflection)
+:::
+
+:::workbook
+title: Summative Path Selection and Evidence
+description: Select your path and build the evidence now.
+fields:
+  - type: radio
+    label: Which summative path are you choosing?
+    options:
+      - Path A: Life Map
+      - Path B: Emotion and Decision Analysis
+  - type: textarea
+    label: Key insight 1 (what you learned about your decision patterns)
+    rows: 3
+  - type: textarea
+    label: Key insight 2 (what you will change moving forward)
+    rows: 3
+  - type: textarea
+    label: Evidence you will submit to Brightspace
+    rows: 3
+:::
+
+:::ranking
+title: Final Submission Quality Check
+instructions: Rank what matters most for a high-quality submission.
+items:
+  - Clear evidence from your own reflections
+  - Specific actions and next steps
+  - Honest analysis of risks and consequences
+  - Practical support plan
+  - Professional formatting and completion
+:::
+
+## Exit Ticket and Commitments
+
+### Lock in Next Steps
+
+:::workbook
+title: 7-Day Commitment Plan
+description: Make this module actionable immediately.
+fields:
+  - type: text
+    label: One decision habit I will improve this week
+  - type: text
+    label: One relationship boundary I will enforce this week
+  - type: text
+    label: One support person I will check in with this week
+  - type: textarea
+    label: My 7-day action timeline
+    rows: 4
+  - type: checklist
+    label: Submission readiness checklist
+    options:
+      - I completed every required section
+      - My responses are specific and evidence-based
+      - My summative artifact is ready to upload
+      - I reviewed my safety and support plan
+:::
+
+:::example
+Before submitting: read your answers once for specificity. Replace vague statements with actions, timelines, and support contacts.
 :::

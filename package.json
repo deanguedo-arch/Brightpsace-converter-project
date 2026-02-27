@@ -13,13 +13,20 @@
     "cf": "node packages/cli/src/index.js",
     "cf:preview": "node packages/cli/src/index.js preview",
     "cf:build": "node packages/cli/src/index.js build",
+    "cf:score": "node packages/cli/src/index.js score",
+    "cf:release": "node packages/cli/src/index.js release",
     "cf:validate": "node packages/cli/src/index.js validate --brightspace",
     "cf:import": "node packages/cli/src/index.js import",
+    "cf:compile": "node packages/cli/src/index.js compile",
     "cf:init": "node packages/cli/src/index.js init",
     "cf:doctor": "node packages/cli/src/index.js doctor",
     "skills:bootstrap": "node scripts/skills-bootstrap.mjs",
     "skills:list": "node scripts/skills-list.mjs",
     "skills:check": "node scripts/skills-check.mjs",
+    "test:ui-smoke": "node scripts/playwright-smoke.mjs",
     "test": "node --test packages/core/test/*.test.js"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.55.0"
   }
 }

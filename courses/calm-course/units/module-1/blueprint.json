@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "generatedAt": "2026-02-27T17:16:55.615Z",
+  "courseSlug": "calm-course",
+  "unitSlug": "module-1",
+  "title": "Module 1",
+  "focusTerms": [
+    "completed",
+    "getcompletedcount",
+    "total",
+    "violet",
+    "rate",
+    "risk",
+    "teacher",
+    "border"
+  ],
+  "keySentences": [
+    "Rate the risk of singing in a choir in front of the entire school.\",\n\"2",
+    "What if there is a long solo part where you have to sing by yourself?\",\n\"3",
+    "How would you rate the risk of trying cannabis at a party for the first time?\",\n\"4",
+    "What if you know people who are dependent on using cannabis on a regular basis?\",\n\"5",
+    "How would you rate driving 15 km over the speed limit on the highway?\",\n\"6",
+    "What if the road is dry and there is hardly any traffic?\",\n\"7"
+  ],
+  "sourceFiles": [
+    "CODE FOR CALM MODULE 1.docx"
+  ],
+  "sections": [
+    {
+      "id": "module-launch",
+      "title": "Module Launch",
+      "goal": "Context and objectives"
+    },
+    {
+      "id": "scenario-lab",
+      "title": "Scenario Lab",
+      "goal": "Practice safe decision-making"
+    },
+    {
+      "id": "priority-ranking",
+      "title": "Priority Ranking",
+      "goal": "Rank supports and actions"
+    },
+    {
+      "id": "decision-path",
+      "title": "Decision Path",
+      "goal": "Trace short and long-term outcomes"
+    },
+    {
+      "id": "action-plan",
+      "title": "Action Plan",
+      "goal": "Commit to specific next steps"
+    }
+  ]
+}

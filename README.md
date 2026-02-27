@@ -54,6 +54,7 @@ courses/<courseSlug>/
   - `npm run cf:init -- unit my-course unit-01 --title "Unit 01"`
 - `npm run cf:import -- <sourcePath> --course example-course --unit unit-01`
 - `npm run cf:import -- <sourcePath> --course example-course --unit unit-01 --extract`
+- `npm run cf:compile -- <sourcePath> --course example-course --unit unit-01 --extract`
 - `npm run cf:preview -- unit-01`
 - `npm run cf:preview -- unit-01 --open --watch`
 - `npm run cf:preview -- example-course unit-01 --mode=sandbox`
@@ -61,16 +62,19 @@ courses/<courseSlug>/
 - `npm run cf:build -- example-course unit-01 --scorm`
 - `npm run cf:build -- --all --scorm`
 - `npm run cf:build -- example-course --all --scorm`
+- `npm run cf:build -- example-course unit-01 --scorm --gate --min-overall 4 --min-dimension 3`
+- `npm run cf:score -- example-course unit-01 --min-overall 4 --min-dimension 3`
+- `npm run cf:release -- example-course unit-01 --scorm --min-overall 4 --min-dimension 3`
 - `npm run cf:validate -- example-course unit-01`
 
 ## User-Friendly Workflow
 1. `npm run cf:doctor`
 2. `npm run cf:init -- course my-course --default`
-3. `npm run cf:import -- <raw-folder> --course my-course --unit unit-01 --extract`
+3. `npm run cf:compile -- <raw-folder-or-file> --course my-course --unit unit-01 --extract`
 4. `npm run cf:preview -- my-course unit-01 --open --watch`
-5. `npm run cf:build -- my-course unit-01 --scorm`
+5. `npm run cf:release -- my-course unit-01 --scorm --min-overall 4 --min-dimension 3`
 
-`--extract` currently ingests text from `.docx` and `.pdf` files when present.
+`--extract` currently ingests text from `.docx` and `.pdf` files when present, and `cf compile` accepts either a folder path or a single file path.
 
 ## Output Paths
 - Preview:
