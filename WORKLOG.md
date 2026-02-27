@@ -1,5 +1,37 @@
 # WORKLOG
 
+## 2026-02-27
+
+### Completed
+- Built a one-shot PDF-to-unit conversion using only:
+  - `EXAMPLES/CALM Module 1 - Personal Choices.pdf`
+- Created new course/unit scaffold and authored premium interactive output:
+  - `courses/calm-course/units/module-1/unit.yml`
+  - `courses/calm-course/units/module-1/content.md`
+  - `courses/calm-course/units/module-1/flashcards.csv`
+  - `courses/calm-course/units/module-1/resources/CALM Module 1 - Personal Choices.pdf`
+- Upgraded production theme quality for all units:
+  - `packages/theme/src/tokens.css`
+  - `packages/theme/src/base.css`
+  - `packages/theme/src/components.css`
+  - `packages/theme/src/runtime.js`
+- Added runtime polish:
+  - scroll progress bar
+  - section reveal animations
+  - retained SCORM/local state behavior
+
+### Verification Status
+- `npm test`: pass
+- `npm run cf:build -- calm-course module-1 --scorm`: pass
+- `npm run cf:validate -- calm-course module-1`: pass
+- Preview served successfully at `http://localhost:4173`
+
+### Output
+- Preview:
+  - `dist/preview/calm-course/module-1/index.html`
+- SCORM:
+  - `dist/scorm/calm-course/module-1.zip`
+
 ## 2026-02-26
 
 ### Completed

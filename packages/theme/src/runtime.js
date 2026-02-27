@@ -160,6 +160,52 @@
     sections.forEach((section) => observer.observe(section));
   }
 
+  function initScrollProgress() {
+    const container = document.createElement("div");
+    container.className = "scroll-progress";
+    const bar = document.createElement("div");
+    bar.className = "scroll-progress__bar";
+    container.appendChild(bar);
+    document.body.prepend(container);
+
+    const update = () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      const pct = max > 0 ? (window.scrollY / max) * 100 : 0;
+      bar.style.width = `${Math.min(100, Math.max(0, pct)).toFixed(2)}%`;
+    };
+
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+  }
+
+  function initSectionReveal() {
+    const targets = Array.from(
+      document.querySelectorAll(".objectives, .unit-section, .resources, .flashcards")
+    );
+    if (targets.length === 0) return;
+
+    if (!("IntersectionObserver" in window)) {
+      targets.forEach((target) => target.classList.add("is-visible"));
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      },
+      {
+        rootMargin: "0px 0px -12% 0px",
+        threshold: 0.15
+      }
+    );
+    targets.forEach((target) => observer.observe(target));
+  }
+
   function initCompletion(onComplete) {
     const button = document.querySelector("[data-mark-complete]");
     if (!button) return;
@@ -169,6 +215,10 @@
   function mount() {
     const stateKey = createStorageKey();
     let state = loadState(stateKey);
+
+    document.body.classList.add("js-animate");
+    initScrollProgress();
+    initSectionReveal();
 
     restoreAccordionState(state.accordion || {});
     restoreFlashcardState(state.flashcards || {});
