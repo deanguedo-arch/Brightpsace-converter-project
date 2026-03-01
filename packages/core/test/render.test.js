@@ -116,3 +116,93 @@ nodes:
   assert.match(html, /data-ranking/);
   assert.match(html, /data-decision-tree/);
 });
+
+test("renderUnitToPreview includes learning dashboard hooks", async () => {
+  const tempRoot = await fs.mkdtemp(path.join(os.tmpdir(), "cf-render-"));
+  const outputDir = path.join(tempRoot, "preview");
+  const sourceDir = path.join(tempRoot, "unit");
+  await fs.mkdir(sourceDir, { recursive: true });
+
+  const parsed = parseMarkdownToUnitBlocks(`
+## Practice
+
+:::workbook
+title: Reflection
+fields:
+  - type: text
+    id: one
+    label: First prompt
+:::
+`);
+
+  await renderUnitToPreview({
+    repoRoot: path.resolve(process.cwd()),
+    outputDir,
+    unit: {
+      courseSlug: "demo-course",
+      unitSlug: "demo-unit",
+      sourceDir,
+      title: "Demo Unit",
+      subtitle: "",
+      estimatedMinutes: 10,
+      objectives: [],
+      sections: parsed.sections,
+      nav: parsed.nav,
+      resources: [],
+      flashcards: []
+    }
+  });
+
+  const html = await fs.readFile(path.join(outputDir, "index.html"), "utf8");
+  assert.match(html, /id="progress-dashboard"/);
+  assert.match(html, /data-learning-dashboard/);
+  assert.match(html, /data-dashboard-workbook/);
+  assert.match(html, /data-dashboard-fill/);
+});
+
+test("renderUnitToPreview includes section stage controls for paced navigation", async () => {
+  const tempRoot = await fs.mkdtemp(path.join(os.tmpdir(), "cf-render-"));
+  const outputDir = path.join(tempRoot, "preview");
+  const sourceDir = path.join(tempRoot, "unit");
+  await fs.mkdir(sourceDir, { recursive: true });
+
+  const parsed = parseMarkdownToUnitBlocks(`
+## Topic A
+Alpha
+
+## Topic B
+Beta
+`);
+
+  await renderUnitToPreview({
+    repoRoot: path.resolve(process.cwd()),
+    outputDir,
+    unit: {
+      courseSlug: "demo-course",
+      unitSlug: "demo-unit",
+      sourceDir,
+      title: "Demo Unit",
+      subtitle: "",
+      estimatedMinutes: 10,
+      objectives: [],
+      sections: parsed.sections,
+      nav: parsed.nav,
+      resources: [],
+      flashcards: []
+    }
+  });
+
+  const html = await fs.readFile(path.join(outputDir, "index.html"), "utf8");
+  assert.match(html, /data-section-stage/);
+  assert.match(html, /data-stage-title/);
+  assert.match(html, /data-stage-prev/);
+  assert.match(html, /data-stage-next/);
+  assert.match(html, /data-stepper-list/);
+  assert.match(html, /data-stepper-item/);
+  assert.match(html, /data-stepper-target="topic-a"/);
+  assert.match(html, /data-stepper-target="topic-b"/);
+  assert.match(html, /data-section-role="core"/);
+  assert.match(html, /data-section-index="1"/);
+  assert.match(html, /data-section-tone="tone-1"/);
+  assert.match(html, /data-section-icon=/);
+});

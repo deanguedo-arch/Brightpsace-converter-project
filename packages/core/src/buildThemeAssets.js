@@ -26,7 +26,12 @@ export async function buildThemeAssets({
     outfile: cssOutPath,
     minify: false,
     legalComments: "none",
-    loader: { ".css": "css" }
+    loader: {
+      ".css": "css",
+      ".woff2": "file",
+      ".woff": "file",
+      ".ttf": "file"
+    }
   });
 
   await esbuild({

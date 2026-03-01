@@ -160,6 +160,81 @@
     return state;
   }
 
+  function collectActiveSectionId() {
+    const active = document.querySelector('.content-column > [data-section-role="core"].is-active-section');
+    return active?.getAttribute("id") || "";
+  }
+
+  function listCoreSections() {
+    return Array.from(document.querySelectorAll('.content-column > [data-section-role="core"]'));
+  }
+
+  function evaluateSectionCompletion(section) {
+    let total = 0;
+    let completed = 0;
+
+    const workbookFields = Array.from(section.querySelectorAll("[data-workbook-field-wrap]"));
+    workbookFields.forEach((wrapper) => {
+      const key = wrapper.getAttribute("data-workbook-key");
+      const kind = wrapper.getAttribute("data-workbook-kind");
+      if (!key || !kind) return;
+      const controls = Array.from(section.querySelectorAll(`[data-workbook-key="${key}"]`));
+      total += 1;
+      if (kind === "radio" || kind === "checklist") {
+        if (controls.some((control) => control.checked)) completed += 1;
+        return;
+      }
+      const input = controls[0];
+      if (input && typeof input.value === "string" && input.value.trim()) completed += 1;
+    });
+
+    const scenarioPrompts = Array.from(section.querySelectorAll("[data-scenario-prompt]"));
+    scenarioPrompts.forEach((prompt) => {
+      total += 1;
+      const answered = Array.from(prompt.querySelectorAll("[data-scenario-choice]")).some((choice) => choice.checked);
+      if (answered) completed += 1;
+    });
+
+    const rankingFields = Array.from(section.querySelectorAll("[data-ranking-field]"));
+    rankingFields.forEach((field) => {
+      total += 1;
+      if (String(field.value || "").trim()) completed += 1;
+    });
+
+    const treeBlocks = Array.from(section.querySelectorAll("[data-decision-tree]"));
+    treeBlocks.forEach((tree) => {
+      const treeTotal = Number(tree.getAttribute("data-decision-total") || 0);
+      const visited = String(tree.getAttribute("data-visited") || "")
+        .split(",")
+        .map((item) => item.trim())
+        .filter(Boolean);
+      total += treeTotal;
+      completed += new Set(visited).size;
+    });
+
+    if (total === 0) {
+      total = 1;
+      if (section.classList.contains("is-visited-section")) completed = 1;
+    }
+
+    return {
+      id: section.getAttribute("id") || "",
+      total,
+      completed,
+      isComplete: completed >= total
+    };
+  }
+
+  function collectSectionCompletionFlags() {
+    const flags = {};
+    listCoreSections().forEach((section) => {
+      const id = section.getAttribute("id");
+      if (!id) return;
+      flags[id] = section.classList.contains("is-complete-section");
+    });
+    return flags;
+  }
+
   function restoreWorkbookState(state) {
     document.querySelectorAll("[data-workbook-field]").forEach((field) => {
       const key = field.getAttribute("data-workbook-key");
@@ -183,6 +258,8 @@
   }
 
   function updateWorkbookProgress() {
+    let totalOverall = 0;
+    let completedOverall = 0;
     document.querySelectorAll("[data-workbook]").forEach((workbook) => {
       const wrappers = Array.from(workbook.querySelectorAll("[data-workbook-field-wrap]"));
       const total = wrappers.length;
@@ -214,7 +291,10 @@
         progress.textContent = `${completed} / ${total} complete`;
       }
       workbook.classList.toggle("is-complete", total > 0 && completed === total);
+      totalOverall += total;
+      completedOverall += completed;
     });
+    return { total: totalOverall, completed: completedOverall };
   }
 
   function showScenarioOutcome(prompt, selectedValue) {
@@ -244,6 +324,8 @@
   }
 
   function updateScenarioProgress() {
+    let totalOverall = 0;
+    let completedOverall = 0;
     document.querySelectorAll("[data-scenario]").forEach((scenario) => {
       const prompts = Array.from(scenario.querySelectorAll("[data-scenario-prompt]"));
       const total = prompts.length;
@@ -255,7 +337,10 @@
         output.textContent = `${completed} / ${total} complete`;
       }
       scenario.classList.toggle("is-complete", total > 0 && completed === total);
+      totalOverall += total;
+      completedOverall += completed;
     });
+    return { total: totalOverall, completed: completedOverall };
   }
 
   function restoreRankingState(state) {
@@ -271,6 +356,8 @@
   }
 
   function updateRankingProgress() {
+    let totalOverall = 0;
+    let completedOverall = 0;
     document.querySelectorAll("[data-ranking]").forEach((ranking) => {
       const fields = Array.from(ranking.querySelectorAll("[data-ranking-field]"));
       const total = fields.length;
@@ -280,7 +367,10 @@
         output.textContent = `${completed} / ${total} ranked`;
       }
       ranking.classList.toggle("is-complete", total > 0 && completed === total);
+      totalOverall += total;
+      completedOverall += completed;
     });
+    return { total: totalOverall, completed: completedOverall };
   }
 
   function showDecisionNode(tree, nodeId, visited = null) {
@@ -318,6 +408,8 @@
   }
 
   function updateDecisionTreeProgress() {
+    let totalOverall = 0;
+    let completedOverall = 0;
     document.querySelectorAll("[data-decision-tree]").forEach((tree) => {
       const total = Number(tree.getAttribute("data-decision-total") || 0);
       const visited = String(tree.getAttribute("data-visited") || "")
@@ -330,7 +422,10 @@
         output.textContent = `${count} / ${total} visited`;
       }
       tree.classList.toggle("is-complete", total > 0 && count >= total);
+      totalOverall += total;
+      completedOverall += count;
     });
+    return { total: totalOverall, completed: completedOverall };
   }
 
   function restoreFlashcardState(state) {
@@ -356,6 +451,103 @@
     if (output) {
       output.textContent = `${reviewed} / ${total} reviewed`;
     }
+    return { total, completed: reviewed };
+  }
+
+  function setDashboardMetric(selector, metric) {
+    const target = document.querySelector(selector);
+    if (!target) return;
+    target.textContent = `${metric.completed} / ${metric.total}`;
+  }
+
+  function updateLearningDashboard(metrics) {
+    const workbook = metrics.workbook || { total: 0, completed: 0 };
+    const scenario = metrics.scenario || { total: 0, completed: 0 };
+    const ranking = metrics.ranking || { total: 0, completed: 0 };
+    const decisionTree = metrics.decisionTree || { total: 0, completed: 0 };
+    const flashcards = metrics.flashcards || { total: 0, completed: 0 };
+
+    setDashboardMetric("[data-dashboard-workbook]", workbook);
+    setDashboardMetric("[data-dashboard-scenario]", scenario);
+    setDashboardMetric("[data-dashboard-ranking]", ranking);
+    setDashboardMetric("[data-dashboard-decision-tree]", decisionTree);
+    setDashboardMetric("[data-dashboard-flashcards]", flashcards);
+
+    const total = workbook.total + scenario.total + ranking.total + decisionTree.total + flashcards.total;
+    const completed = workbook.completed + scenario.completed + ranking.completed + decisionTree.completed + flashcards.completed;
+    const pct = total > 0 ? Math.min(100, Math.max(0, (completed / total) * 100)) : 0;
+
+    const completedNode = document.querySelector("[data-dashboard-completed]");
+    if (completedNode) completedNode.textContent = String(completed);
+    const totalNode = document.querySelector("[data-dashboard-total]");
+    if (totalNode) totalNode.textContent = String(total);
+
+    const fill = document.querySelector("[data-dashboard-fill]");
+    if (fill) fill.style.width = `${pct.toFixed(2)}%`;
+
+    const shell = document.querySelector("[data-learning-dashboard]");
+    if (shell) {
+      shell.classList.toggle("is-complete", total > 0 && completed >= total);
+    }
+  }
+
+  function updateSectionCompletionUi() {
+    const completion = {};
+    listCoreSections().forEach((section) => {
+      const details = evaluateSectionCompletion(section);
+      if (!details.id) return;
+      completion[details.id] = details.isComplete;
+      section.classList.toggle("is-complete-section", details.isComplete);
+      section.setAttribute("data-section-checkpoints", `${details.completed}/${details.total}`);
+    });
+
+    const activeSectionId = collectActiveSectionId();
+    document.querySelectorAll("[data-stepper-item]").forEach((button) => {
+      const targetId = button.getAttribute("data-stepper-target");
+      if (!targetId) return;
+      const stateNode = document.querySelector(`[data-stepper-state-for="${targetId}"]`);
+      const isComplete = Boolean(completion[targetId]);
+      const isActive = targetId === activeSectionId;
+      const section = document.getElementById(targetId);
+      const isVisited = Boolean(section?.classList.contains("is-visited-section"));
+      button.classList.toggle("is-complete", isComplete);
+      button.classList.toggle("is-in-progress", !isComplete && (isActive || isVisited));
+      button.setAttribute("aria-current", isActive ? "step" : "false");
+      if (stateNode) {
+        if (isComplete) {
+          stateNode.textContent = "Complete";
+        } else if (isActive || isVisited) {
+          stateNode.textContent = "In Progress";
+        } else {
+          stateNode.textContent = "Not Started";
+        }
+      }
+    });
+
+    return completion;
+  }
+
+  function refreshProgressUi() {
+    const metrics = {
+      flashcards: updateFlashcardProgress(),
+      workbook: updateWorkbookProgress(),
+      scenario: updateScenarioProgress(),
+      ranking: updateRankingProgress(),
+      decisionTree: updateDecisionTreeProgress()
+    };
+    updateLearningDashboard(metrics);
+    return updateSectionCompletionUi();
+  }
+
+  function restoreSectionCompletionFlags(flags) {
+    if (!isPlainObject(flags)) return;
+    listCoreSections().forEach((section) => {
+      const id = section.getAttribute("id");
+      if (!id) return;
+      if (flags[id]) {
+        section.classList.add("is-complete-section", "is-visited-section");
+      }
+    });
   }
 
   function initAccordionHandlers(onChange) {
@@ -383,7 +575,6 @@
         front.hidden = true;
         back.hidden = false;
         card.classList.add("is-reviewed");
-        updateFlashcardProgress();
         onChange();
       });
 
@@ -400,7 +591,6 @@
       const kind = field.getAttribute("data-workbook-kind");
       const eventName = kind === "text" || kind === "textarea" ? "input" : "change";
       field.addEventListener(eventName, () => {
-        updateWorkbookProgress();
         onChange();
       });
     });
@@ -413,7 +603,6 @@
         if (prompt) {
           showScenarioOutcome(prompt, choice.value);
         }
-        updateScenarioProgress();
         onChange();
       });
     });
@@ -422,7 +611,6 @@
   function initRankingHandlers(onChange) {
     document.querySelectorAll("[data-ranking-field]").forEach((field) => {
       field.addEventListener("change", () => {
-        updateRankingProgress();
         onChange();
       });
     });
@@ -435,7 +623,6 @@
           const next = button.getAttribute("data-next-node");
           if (!next) return;
           showDecisionNode(tree, next);
-          updateDecisionTreeProgress();
           onChange();
         });
       });
@@ -444,17 +631,162 @@
         restart.addEventListener("click", () => {
           const startNode = tree.getAttribute("data-start-node") || "";
           showDecisionNode(tree, startNode, new Set(startNode ? [startNode] : []));
-          updateDecisionTreeProgress();
           onChange();
         });
       }
     });
   }
 
+  function sectionTitle(section) {
+    const heading = section.querySelector(".section-header");
+    const index = section.getAttribute("data-section-index");
+    if (heading && heading.textContent) {
+      return index ? `Section ${index}: ${heading.textContent.trim()}` : heading.textContent.trim();
+    }
+    return section.getAttribute("id") || "Section";
+  }
+
+  function initSectionStage(initialSectionId = "", reducedMotion = false, onSectionChange = null) {
+    const stage = document.querySelector("[data-section-stage]");
+    const contentColumn = document.querySelector(".content-column");
+    if (!stage || !contentColumn) return false;
+
+    const sections = listCoreSections();
+    if (sections.length <= 1) {
+      stage.hidden = true;
+      return false;
+    }
+
+    const titleNode = stage.querySelector("[data-stage-title]");
+    const prevButton = stage.querySelector("[data-stage-prev]");
+    const nextButton = stage.querySelector("[data-stage-next]");
+    if (!titleNode || !prevButton || !nextButton) return false;
+
+    document.body.classList.add("js-paged");
+
+    const stepperButtons = Array.from(stage.querySelectorAll("[data-stepper-item]"));
+
+    const links = new Map();
+    document.querySelectorAll("[data-nav-link]").forEach((link) => {
+      const key = link.getAttribute("data-nav-link");
+      if (!key) return;
+      links.set(key, link);
+    });
+
+    const targetSectionIndexById = new Map();
+    links.forEach((_, id) => {
+      const target = document.getElementById(id);
+      const parentSection = target?.closest("[data-section]");
+      if (!parentSection) return;
+      const index = sections.indexOf(parentSection);
+      if (index >= 0) {
+        targetSectionIndexById.set(id, index);
+      }
+    });
+
+    let currentIndex = 0;
+    const hashId = decodeURIComponent(window.location.hash.replace(/^#/, ""));
+    if (hashId && targetSectionIndexById.has(hashId)) {
+      currentIndex = targetSectionIndexById.get(hashId) || 0;
+    } else if (initialSectionId && targetSectionIndexById.has(initialSectionId)) {
+      currentIndex = targetSectionIndexById.get(initialSectionId) || 0;
+    }
+
+    function setActive(nextIndex, { updateHash = true, hashIdOverride = "" } = {}) {
+      currentIndex = Math.max(0, Math.min(sections.length - 1, nextIndex));
+      const activeSection = sections[currentIndex];
+      const activeId = activeSection.getAttribute("id") || "";
+
+      sections.forEach((section, index) => {
+        const isActive = index === currentIndex;
+        section.hidden = !isActive;
+        section.classList.toggle("is-active-section", isActive);
+        if (isActive) section.classList.add("is-visible", "is-visited-section");
+      });
+
+      titleNode.textContent = sectionTitle(activeSection);
+      prevButton.disabled = currentIndex === 0;
+      const atEnd = currentIndex === sections.length - 1;
+      nextButton.disabled = atEnd;
+      nextButton.textContent = atEnd ? "Finish Core Sections" : "Next Section";
+
+      stepperButtons.forEach((button) => {
+        const targetId = button.getAttribute("data-stepper-target");
+        if (!targetId) return;
+        button.setAttribute("aria-current", targetId === activeId ? "step" : "false");
+      });
+
+      links.forEach((link, id) => {
+        link.classList.toggle("is-active", id === activeId);
+      });
+
+      const hashId = hashIdOverride || activeId;
+      if (updateHash && hashId) {
+        window.history.replaceState(null, "", `#${encodeURIComponent(hashId)}`);
+      }
+      if (typeof onSectionChange === "function") {
+        onSectionChange(activeId);
+      }
+    }
+
+    prevButton.addEventListener("click", () => {
+      setActive(currentIndex - 1);
+      updateSectionCompletionUi();
+      stage.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "start" });
+    });
+
+    nextButton.addEventListener("click", () => {
+      setActive(currentIndex + 1);
+      updateSectionCompletionUi();
+      stage.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "start" });
+    });
+
+    links.forEach((link, id) => {
+      const index = targetSectionIndexById.get(id);
+      if (index === undefined) return;
+      link.addEventListener("click", (event) => {
+        event.preventDefault();
+        setActive(index, { hashIdOverride: id });
+        const target = document.getElementById(id);
+        if (target) {
+          window.setTimeout(() => {
+            target.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "start" });
+          }, 20);
+        }
+        updateSectionCompletionUi();
+      });
+    });
+
+    stepperButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const targetId = button.getAttribute("data-stepper-target");
+        const index = targetId ? targetSectionIndexById.get(targetId) : undefined;
+        if (index === undefined) return;
+        setActive(index);
+        updateSectionCompletionUi();
+        stage.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "start" });
+      });
+    });
+
+    window.addEventListener("hashchange", () => {
+      const nextHash = decodeURIComponent(window.location.hash.replace(/^#/, ""));
+      const mappedIndex = targetSectionIndexById.get(nextHash);
+      if (mappedIndex === undefined) return;
+      setActive(mappedIndex, { updateHash: false });
+      updateSectionCompletionUi();
+    });
+
+    setActive(currentIndex, { updateHash: false });
+    updateSectionCompletionUi();
+    return true;
+  }
+
   function initStickyNav() {
     const links = new Map();
     document.querySelectorAll("[data-nav-link]").forEach((link) => {
-      links.set(link.getAttribute("data-nav-link"), link);
+      const key = link.getAttribute("data-nav-link");
+      if (!key) return;
+      links.set(key, link);
     });
     const sections = Array.from(document.querySelectorAll("[data-section], .section-subheading[id]"));
     if (sections.length === 0 || links.size === 0) return;
@@ -497,16 +829,23 @@
     window.addEventListener("resize", update);
   }
 
-  function initSectionReveal() {
+  function initSectionReveal(reducedMotion = false) {
     const targets = Array.from(
-      document.querySelectorAll(".objectives, .unit-section, .resources, .flashcards, .workbook, .scenario, .ranking, .decision-tree")
+      document.querySelectorAll(".objectives, .learning-dashboard, .section-stage, .unit-section, .resources, .flashcards, .workbook, .scenario, .ranking, .decision-tree")
     );
     if (targets.length === 0) return;
 
-    if (!("IntersectionObserver" in window)) {
+    if (reducedMotion || !("IntersectionObserver" in window)) {
       targets.forEach((target) => target.classList.add("is-visible"));
       return;
     }
+
+    const foldBottom = window.innerHeight * 1.18;
+    targets.forEach((target) => {
+      if (target.getBoundingClientRect().top <= foldBottom) {
+        target.classList.add("is-visible");
+      }
+    });
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -521,7 +860,41 @@
         threshold: 0.15
       }
     );
-    targets.forEach((target) => observer.observe(target));
+    targets.forEach((target) => {
+      if (!target.classList.contains("is-visible")) {
+        observer.observe(target);
+      }
+    });
+  }
+
+  function initMissionBrief() {
+    const toggle = document.querySelector("[data-mission-toggle]");
+    const list = document.querySelector("[data-mission-list]");
+    if (!toggle || !list) return;
+    toggle.addEventListener("click", () => {
+      const expanded = toggle.getAttribute("aria-expanded") === "true";
+      const next = !expanded;
+      toggle.setAttribute("aria-expanded", next ? "true" : "false");
+      toggle.textContent = next ? "Hide Objectives" : "Show Objectives";
+      list.hidden = !next;
+    });
+  }
+
+  function triggerCelebration(anchor, reducedMotion = false) {
+    if (reducedMotion || !anchor || !anchor.parentElement) return;
+    const burst = document.createElement("div");
+    burst.className = "celebration-burst";
+    for (let index = 0; index < 12; index += 1) {
+      const dot = document.createElement("span");
+      dot.className = "celebration-burst__dot";
+      const angle = (Math.PI * 2 * index) / 12;
+      const distance = 12 + (index % 4) * 6;
+      dot.style.setProperty("--dx", `${Math.round(Math.cos(angle) * distance)}px`);
+      dot.style.setProperty("--dy", `${Math.round(Math.sin(angle) * distance)}px`);
+      burst.appendChild(dot);
+    }
+    anchor.parentElement.appendChild(burst);
+    window.setTimeout(() => burst.remove(), 760);
   }
 
   function initCompletion(onComplete) {
@@ -533,10 +906,15 @@
   function mount() {
     const stateKey = createStorageKey();
     let state = loadState(stateKey);
+    const reducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches === true;
 
     document.body.classList.add("js-animate");
+    if (reducedMotion) {
+      document.body.classList.add("js-reduced-motion");
+    }
     initScrollProgress();
-    initSectionReveal();
+    initSectionReveal(reducedMotion);
+    initMissionBrief();
 
     restoreAccordionState(state.accordion || {});
     restoreFlashcardState(state.flashcards || {});
@@ -544,15 +922,8 @@
     restoreScenarioState(state.scenario || {});
     restoreRankingState(state.ranking || {});
     restoreDecisionTreeState(state.decisionTree || {});
-    updateFlashcardProgress();
-    updateWorkbookProgress();
-    updateScenarioProgress();
-    updateRankingProgress();
-    updateDecisionTreeProgress();
-
-    if (typeof state.scrollY === "number") {
-      window.scrollTo({ top: state.scrollY, behavior: "auto" });
-    }
+    restoreSectionCompletionFlags(state.sectionCompletion || {});
+    refreshProgressUi();
 
     if (state.completed) {
       const completeBtn = document.querySelector("[data-mark-complete]");
@@ -578,18 +949,35 @@
         workbook: collectWorkbookState(),
         scenario: collectScenarioState(),
         ranking: collectRankingState(),
-        decisionTree: collectDecisionTreeState()
+        decisionTree: collectDecisionTreeState(),
+        activeSection: collectActiveSectionId(),
+        sectionCompletion: collectSectionCompletionFlags()
       };
       saveState(stateKey, state);
     }
 
+    function handleInteractionChange() {
+      const sectionCompletion = refreshProgressUi();
+      state = {
+        ...state,
+        sectionCompletion
+      };
+      persist();
+    }
+
     initAccordionHandlers(() => persist());
-    initFlashcardHandlers(() => persist());
-    initWorkbookHandlers(() => persist());
-    initScenarioHandlers(() => persist());
-    initRankingHandlers(() => persist());
-    initDecisionTreeHandlers(() => persist());
-    initStickyNav();
+    initFlashcardHandlers(handleInteractionChange);
+    initWorkbookHandlers(handleInteractionChange);
+    initScenarioHandlers(handleInteractionChange);
+    initRankingHandlers(handleInteractionChange);
+    initDecisionTreeHandlers(handleInteractionChange);
+    const isPaged = initSectionStage(String(state.activeSection || ""), reducedMotion, () => persist());
+    if (!isPaged) {
+      initStickyNav();
+      if (typeof state.scrollY === "number") {
+        window.scrollTo({ top: state.scrollY, behavior: "auto" });
+      }
+    }
     initCompletion((button) => {
       button.setAttribute("aria-pressed", "true");
       let marker = button.parentElement?.querySelector(".completion-state");
@@ -602,6 +990,7 @@
       if (window.CF_SCORM && typeof window.CF_SCORM.markComplete === "function") {
         window.CF_SCORM.markComplete();
       }
+      triggerCelebration(button, reducedMotion);
       persist({ completed: true });
     });
 

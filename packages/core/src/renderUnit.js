@@ -4,13 +4,120 @@ import { buildThemeAssets } from "./buildThemeAssets.js";
 import { escapeHtml, slugify } from "./utils.js";
 import { ensureDir, writeFileEnsuringDir, copyDirRecursive } from "./fs.js";
 
+const SECTION_TONES = ["tone-1", "tone-2", "tone-3", "tone-4", "tone-5", "tone-6"];
+const SECTION_ICONS = [
+  { key: "spark", glyph: "SP" },
+  { key: "focus", glyph: "FC" },
+  { key: "growth", glyph: "GR" },
+  { key: "balance", glyph: "BL" },
+  { key: "strategy", glyph: "ST" },
+  { key: "mastery", glyph: "MS" }
+];
+
+function sectionMetaForIndex(index) {
+  return {
+    index: index + 1,
+    tone: SECTION_TONES[index % SECTION_TONES.length],
+    icon: SECTION_ICONS[index % SECTION_ICONS.length]
+  };
+}
+
 function renderObjectives(objectives) {
   if (!objectives || objectives.length === 0) return "";
   const items = objectives.map((item) => `<li class="objectives__item">${escapeHtml(item)}</li>`).join("");
   return `
-    <section class="objectives card" aria-labelledby="objectives-heading">
-      <h2 id="objectives-heading" class="section-header">Objectives</h2>
-      <ul class="objectives__list">${items}</ul>
+    <section id="mission-brief" class="objectives mission-brief card" aria-labelledby="mission-brief-heading">
+      <div class="mission-brief__header">
+        <h2 id="mission-brief-heading" class="section-header">Mission Brief</h2>
+        <button
+          class="button button--ghost mission-brief__toggle"
+          type="button"
+          data-mission-toggle
+          aria-expanded="false"
+          aria-controls="mission-brief-list"
+        >
+          Show Objectives
+        </button>
+      </div>
+      <p class="mission-brief__summary">Track your choices, practice safer decisions, and finish with a usable action plan.</p>
+      <ul id="mission-brief-list" class="objectives__list" data-mission-list hidden>${items}</ul>
+    </section>
+  `;
+}
+
+function renderLearningDashboard() {
+  return `
+    <section id="progress-dashboard" class="learning-dashboard card" data-learning-dashboard data-section>
+      <div class="learning-dashboard__header">
+        <h2 class="section-header">Progress Dashboard</h2>
+        <p class="learning-dashboard__summary"><span data-dashboard-completed>0</span> / <span data-dashboard-total>0</span> checkpoints complete</p>
+      </div>
+      <div class="learning-dashboard__bar" aria-hidden="true">
+        <div class="learning-dashboard__fill" data-dashboard-fill></div>
+      </div>
+      <div class="learning-dashboard__grid">
+        <article class="dashboard-metric">
+          <p class="dashboard-metric__label">Workbook Fields</p>
+          <p class="dashboard-metric__value" data-dashboard-workbook>0 / 0</p>
+        </article>
+        <article class="dashboard-metric">
+          <p class="dashboard-metric__label">Scenario Choices</p>
+          <p class="dashboard-metric__value" data-dashboard-scenario>0 / 0</p>
+        </article>
+        <article class="dashboard-metric">
+          <p class="dashboard-metric__label">Ranking Inputs</p>
+          <p class="dashboard-metric__value" data-dashboard-ranking>0 / 0</p>
+        </article>
+        <article class="dashboard-metric">
+          <p class="dashboard-metric__label">Decision Paths</p>
+          <p class="dashboard-metric__value" data-dashboard-decision-tree>0 / 0</p>
+        </article>
+        <article class="dashboard-metric">
+          <p class="dashboard-metric__label">Flashcards Reviewed</p>
+          <p class="dashboard-metric__value" data-dashboard-flashcards>0 / 0</p>
+        </article>
+      </div>
+    </section>
+  `;
+}
+
+function renderSectionStage(coreSections) {
+  const stepperItems = coreSections
+    .map((section) => {
+      return `
+        <li class="section-stepper__item">
+          <button
+            class="section-stepper__button"
+            type="button"
+            data-stepper-item
+            data-stepper-target="${escapeHtml(section.id)}"
+            aria-label="Jump to ${escapeHtml(section.title)}"
+          >
+            <span class="section-stepper__badge" aria-hidden="true">${escapeHtml(section.index)}</span>
+            <span class="section-stepper__label">
+              <span class="section-stepper__icon-chip" data-stepper-icon="${escapeHtml(section.icon.key)}" aria-hidden="true">${escapeHtml(section.icon.glyph)}</span>
+              <span>${escapeHtml(section.title)}</span>
+            </span>
+            <span class="section-stepper__state" data-stepper-state-for="${escapeHtml(section.id)}">Not Started</span>
+          </button>
+        </li>
+      `;
+    })
+    .join("");
+
+  return `
+    <section class="section-stage card" data-section-stage aria-live="polite">
+      <div class="section-stage__meta">
+        <p class="section-stage__eyebrow">Learning Path</p>
+        <h2 class="section-stage__title" data-stage-title>Section</h2>
+      </div>
+      <ul class="section-stepper" data-stepper-list>
+        ${stepperItems}
+      </ul>
+      <div class="section-stage__actions">
+        <button class="button button--ghost" type="button" data-stage-prev>Previous</button>
+        <button class="button button--primary" type="button" data-stage-next>Next Section</button>
+      </div>
     </section>
   `;
 }
@@ -315,13 +422,28 @@ function renderBlock(block, sectionId, blockIndex) {
 
 function renderSections(sections) {
   return sections
-    .map((section) => {
+    .map((section, index) => {
+      const meta = sectionMetaForIndex(index);
       const blocks = section.blocks
         .map((block, blockIndex) => renderBlock(block, section.id, blockIndex))
         .join("");
       return `
-        <section id="${escapeHtml(section.id)}" class="unit-section card" data-section>
-          <h2 class="section-header">${escapeHtml(section.title)}</h2>
+        <section
+          id="${escapeHtml(section.id)}"
+          class="unit-section card"
+          data-section
+          data-section-role="core"
+          data-section-index="${escapeHtml(meta.index)}"
+          data-section-tone="${escapeHtml(meta.tone)}"
+          data-section-icon="${escapeHtml(meta.icon.key)}"
+        >
+          <header class="unit-section__header">
+            <span class="unit-section__chip" aria-hidden="true">${escapeHtml(meta.icon.glyph)}</span>
+            <div class="unit-section__heading-wrap">
+              <p class="unit-section__kicker">Section ${escapeHtml(meta.index)}</p>
+              <h2 class="section-header">${escapeHtml(section.title)}</h2>
+            </div>
+          </header>
           ${blocks}
         </section>
       `;
@@ -343,7 +465,7 @@ function renderResources(resources) {
     })
     .join("");
   return `
-    <section id="resources" class="resources card" data-section>
+    <section id="resources" class="resources card" data-section data-section-role="aux">
       <h2 class="section-header">Resources</h2>
       <div class="resource-grid">${cards}</div>
     </section>
@@ -372,7 +494,7 @@ function renderFlashcards(flashcards) {
     })
     .join("");
   return `
-    <section id="flashcards" class="flashcards card" data-section>
+    <section id="flashcards" class="flashcards card" data-section data-section-role="aux">
       <div class="flashcards__header">
         <h2 class="section-header">Flashcards</h2>
         <p class="flashcards__progress" data-flashcards-progress>0 / ${flashcards.length} reviewed</p>
@@ -383,7 +505,11 @@ function renderFlashcards(flashcards) {
 }
 
 function renderUnitHtml({ unit, cssPath, runtimePath, sandbox }) {
-  const nav = [...unit.nav];
+  const coreSections = unit.sections.map((section, index) => ({
+    ...section,
+    ...sectionMetaForIndex(index)
+  }));
+  const nav = [{ id: "progress-dashboard", title: "Progress Dashboard", depth: 2 }, ...unit.nav];
   if (unit.resources.length) nav.push({ id: "resources", title: "Resources", depth: 2 });
   if (unit.flashcards.length) nav.push({ id: "flashcards", title: "Flashcards", depth: 2 });
 
@@ -392,10 +518,12 @@ function renderUnitHtml({ unit, cssPath, runtimePath, sandbox }) {
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f5f1ea">
     <title>${escapeHtml(unit.title)}</title>
     <link rel="stylesheet" href="${escapeHtml(cssPath)}">
   </head>
   <body data-course="${escapeHtml(unit.courseSlug)}" data-unit="${escapeHtml(unit.unitSlug)}" data-mode="${sandbox ? "sandbox" : "production"}">
+    <a class="skip-link" href="#main-content">Skip to Main Content</a>
     <div class="page-shell">
       <header class="unit-header card">
         <p class="unit-header__eyebrow">${escapeHtml(unit.courseSlug)}</p>
@@ -407,10 +535,12 @@ function renderUnitHtml({ unit, cssPath, runtimePath, sandbox }) {
         </div>
       </header>
       ${renderObjectives(unit.objectives)}
+      ${renderLearningDashboard()}
       <div class="layout">
         ${renderNav(nav)}
-        <main class="content-column">
-          ${renderSections(unit.sections)}
+        <main id="main-content" class="content-column">
+          ${renderSectionStage(coreSections)}
+          ${renderSections(coreSections)}
           ${renderResources(unit.resources)}
           ${renderFlashcards(unit.flashcards)}
         </main>
