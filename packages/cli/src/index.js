@@ -11,6 +11,8 @@ import {
   importUnitFromFolder,
   initCourseScaffold,
   initUnitScaffold,
+  listTemplatePresets,
+  listThemePresets,
   scoreBuiltUnit,
   resolveDefaultCourseSlug,
   listCourseSlugs,
@@ -29,8 +31,10 @@ function usage() {
 
 Commands:
   cf doctor
-  cf init course <courseSlug> [--title <title>] [--default]
-  cf init unit <courseSlug> <unitSlug> [--title <title>]
+  cf templates [--json]
+  cf themes [--json]
+  cf init course <courseSlug> [--title <title>] [--theme <theme>] [--default]
+  cf init unit <courseSlug> <unitSlug> [--title <title>] [--template <template>] [--theme <theme>]
   cf import <sourcePath> --course <courseSlug> --unit <unitSlug> [--extract]
   cf compile <sourcePath> --course <courseSlug> --unit <unitSlug> [--extract]
   cf preview <unitSlug> [--mode=sandbox] [--open] [--watch]
@@ -423,13 +427,14 @@ async function runInit(positional, flags) {
   if (target === "course") {
     const courseSlug = positional[1];
     if (!courseSlug) {
-      throw new Error("Usage: cf init course <courseSlug> [--title <title>] [--default]");
+      throw new Error("Usage: cf init course <courseSlug> [--title <title>] [--theme <theme>] [--default]");
     }
     const created = await initCourseScaffold({
       repoRoot: REPO_ROOT,
       courseSlug,
       title: String(flags.title || ""),
-      makeDefault: Boolean(flags.default)
+      makeDefault: Boolean(flags.default),
+      theme: String(flags.theme || "")
     });
     console.log(
       created.created
@@ -443,7 +448,7 @@ async function runInit(positional, flags) {
     let courseSlug = positional[1];
     let unitSlug = positional[2];
     if (!courseSlug) {
-      throw new Error("Usage: cf init unit <courseSlug> <unitSlug> [--title <title>]");
+      throw new Error("Usage: cf init unit <courseSlug> <unitSlug> [--title <title>] [--template <template>] [--theme <theme>]");
     }
     if (!unitSlug) {
       unitSlug = courseSlug;
@@ -453,7 +458,9 @@ async function runInit(positional, flags) {
       repoRoot: REPO_ROOT,
       courseSlug,
       unitSlug,
-      title: String(flags.title || "")
+      title: String(flags.title || ""),
+      template: String(flags.template || ""),
+      theme: String(flags.theme || "")
     });
     console.log(
       created.created
@@ -464,6 +471,21 @@ async function runInit(positional, flags) {
   }
 
   throw new Error(`Unknown init target: ${target}`);
+}
+
+async function runPresetCatalog(command, flags) {
+  const presets = command === "templates" ? listTemplatePresets() : listThemePresets();
+  if (flags.json) {
+    console.log(JSON.stringify({ [command]: presets }, null, 2));
+    return;
+  }
+
+  const heading = command === "templates" ? "Available templates" : "Available themes";
+  console.log(heading);
+  for (const preset of presets) {
+    console.log(`- ${preset.slug}: ${preset.name}`);
+    console.log(`  ${preset.description}`);
+  }
 }
 
 async function runImport(positional, flags) {
@@ -749,6 +771,10 @@ async function main() {
   switch (command) {
     case "doctor":
       await runDoctor();
+      break;
+    case "templates":
+    case "themes":
+      await runPresetCatalog(command, flags);
       break;
     case "init":
       await runInit(positional, flags);

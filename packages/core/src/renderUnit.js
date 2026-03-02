@@ -1,6 +1,7 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import { buildThemeAssets } from "./buildThemeAssets.js";
+import { resolveTemplatePreset, resolveThemePreset } from "./presets.js";
 import { escapeHtml, slugify } from "./utils.js";
 import { ensureDir, writeFileEnsuringDir, copyDirRecursive } from "./fs.js";
 
@@ -505,6 +506,8 @@ function renderFlashcards(flashcards) {
 }
 
 function renderUnitHtml({ unit, cssPath, runtimePath, sandbox }) {
+  const templatePreset = resolveTemplatePreset(unit.template || "");
+  const themePreset = resolveThemePreset(unit.theme || "");
   const coreSections = unit.sections.map((section, index) => ({
     ...section,
     ...sectionMetaForIndex(index)
@@ -522,7 +525,13 @@ function renderUnitHtml({ unit, cssPath, runtimePath, sandbox }) {
     <title>${escapeHtml(unit.title)}</title>
     <link rel="stylesheet" href="${escapeHtml(cssPath)}">
   </head>
-  <body data-course="${escapeHtml(unit.courseSlug)}" data-unit="${escapeHtml(unit.unitSlug)}" data-mode="${sandbox ? "sandbox" : "production"}">
+  <body
+    data-course="${escapeHtml(unit.courseSlug)}"
+    data-unit="${escapeHtml(unit.unitSlug)}"
+    data-mode="${sandbox ? "sandbox" : "production"}"
+    data-template="${escapeHtml(templatePreset.slug)}"
+    data-theme="${escapeHtml(themePreset.slug)}"
+  >
     <a class="skip-link" href="#main-content">Skip to Main Content</a>
     <div class="page-shell">
       <header class="unit-header card">

@@ -50,8 +50,10 @@ courses/<courseSlug>/
   - `npm run cf:doctor`
   - or `.\cf.ps1 doctor`
 - Scaffold:
-  - `npm run cf:init -- course my-course --title "My Course" --default`
-  - `npm run cf:init -- unit my-course unit-01 --title "Unit 01"`
+  - `npm run cf -- templates`
+  - `npm run cf -- themes`
+  - `npm run cf:init -- course my-course --title "My Course" --theme cupertino-light --default`
+  - `npm run cf:init -- unit my-course unit-01 --title "Unit 01" --template case-studio --theme obsidian-pro`
 - `npm run cf:import -- <sourcePath> --course example-course --unit unit-01`
 - `npm run cf:import -- <sourcePath> --course example-course --unit unit-01 --extract`
 - `npm run cf:compile -- <sourcePath> --course example-course --unit unit-01 --extract`
@@ -69,10 +71,13 @@ courses/<courseSlug>/
 
 ## User-Friendly Workflow
 1. `npm run cf:doctor`
-2. `npm run cf:init -- course my-course --default`
-3. `npm run cf:compile -- <raw-folder-or-file> --course my-course --unit unit-01 --extract`
-4. `npm run cf:preview -- my-course unit-01 --open --watch`
-5. `npm run cf:release -- my-course unit-01 --scorm --min-overall 4 --min-dimension 3`
+2. `npm run cf -- templates`
+3. `npm run cf -- themes`
+4. `npm run cf:init -- course my-course --theme cupertino-light --default`
+5. `npm run cf:init -- unit my-course unit-01 --template case-studio --theme obsidian-pro`
+6. `npm run cf:compile -- <raw-folder-or-file> --course my-course --unit unit-01 --extract`
+7. `npm run cf:preview -- my-course unit-01 --open --watch`
+8. `npm run cf:release -- my-course unit-01 --scorm --min-overall 4 --min-dimension 3`
 
 `--extract` currently ingests text from `.docx` and `.pdf` files when present, and `cf compile` accepts either a folder path or a single file path.
 
@@ -91,3 +96,24 @@ See:
 - `BRIGHTSPACE_IMPORT.md`
 - `PROMOTION_CHECKLIST.md`
 - `DEV_NOTES.md`
+
+## Preset System (Simple by Default)
+- Course-level visual preset:
+  - `course.yml` supports `theme: <slug>` (default `bold-clay`)
+- Unit-level authoring preset:
+  - `unit.yml` supports `template: <slug>` (default `premium-core`)
+  - optional `theme: <slug>` overrides course theme for that unit only
+
+### Included Templates
+- `premium-core`: balanced narrative + interaction structure
+- `case-studio`: case-driven scenario + ranking + debrief
+- `workshop-sprint`: fast practice rounds + coaching checkpoints
+- `reflection-coach`: journaling and personal behavior-change pacing
+- `capstone-assessment`: assessment-heavy end-of-unit structure
+
+### Included Themes
+- `bold-clay`: warm premium tactile look (default)
+- `cupertino-light`: clean product-style neutral aesthetic
+- `obsidian-pro`: dark cinematic premium contrast
+- `linen-editorial`: warm editorial paper aesthetic
+- `neon-signal`: high-energy modern contrast

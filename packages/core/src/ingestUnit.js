@@ -6,6 +6,7 @@ import { parseMarkdownToUnitBlocks } from "./markdown.js";
 import { getUnitDir } from "./course.js";
 import { listFilesRecursive } from "./fs.js";
 import { slugify, titleFromSlug } from "./utils.js";
+import { resolveTemplatePreset, resolveThemePreset } from "./presets.js";
 
 function parseObjectives(config) {
   if (!Array.isArray(config?.objectives)) return [];
@@ -52,17 +53,22 @@ function parseFlashcards(rawCsv) {
 
 export async function ingestUnit(repoRoot, courseSlug, unitSlug) {
   const unitDir = getUnitDir(repoRoot, courseSlug, unitSlug);
+  const courseConfigPath = path.join(repoRoot, "courses", courseSlug, "course.yml");
   const unitConfigPath = path.join(unitDir, "unit.yml");
   const contentPath = path.join(unitDir, "content.md");
   const flashcardsPath = path.join(unitDir, "flashcards.csv");
   const resourcesRoot = path.join(unitDir, "resources");
 
-  const [unitConfigRaw, contentRaw] = await Promise.all([
+  const [courseConfigRaw, unitConfigRaw, contentRaw] = await Promise.all([
+    fs.readFile(courseConfigPath, "utf8").catch(() => ""),
     fs.readFile(unitConfigPath, "utf8"),
     fs.readFile(contentPath, "utf8")
   ]);
+  const courseConfig = courseConfigRaw ? yaml.load(courseConfigRaw) || {} : {};
   const unitConfig = yaml.load(unitConfigRaw) || {};
   const parsed = parseMarkdownToUnitBlocks(contentRaw);
+  const templatePreset = resolveTemplatePreset(String(unitConfig.template || ""));
+  const themePreset = resolveThemePreset(String(unitConfig.theme || courseConfig.theme || ""));
 
   const flashcardsRaw = await fs.readFile(flashcardsPath, "utf8").catch(() => "");
   const flashcards = flashcardsRaw ? parseFlashcards(flashcardsRaw) : [];
@@ -81,6 +87,8 @@ export async function ingestUnit(repoRoot, courseSlug, unitSlug) {
     subtitle: String(unitConfig.subtitle || ""),
     estimatedMinutes: Number(unitConfig.estimatedMinutes || 0) || null,
     objectives: parseObjectives(unitConfig),
+    template: templatePreset.slug,
+    theme: themePreset.slug,
     sections: parsed.sections,
     nav: parsed.nav,
     resources,

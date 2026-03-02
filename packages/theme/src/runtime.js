@@ -161,12 +161,16 @@
   }
 
   function collectActiveSectionId() {
-    const active = document.querySelector('.content-column > [data-section-role="core"].is-active-section');
+    const active = document.querySelector('.content-column > [data-section].is-active-section');
     return active?.getAttribute("id") || "";
   }
 
   function listCoreSections() {
     return Array.from(document.querySelectorAll('.content-column > [data-section-role="core"]'));
+  }
+
+  function listAuxSections() {
+    return Array.from(document.querySelectorAll('.content-column > [data-section-role="aux"]'));
   }
 
   function evaluateSectionCompletion(section) {
@@ -652,6 +656,7 @@
     if (!stage || !contentColumn) return false;
 
     const sections = listCoreSections();
+    const auxSections = listAuxSections();
     if (sections.length <= 1) {
       stage.hidden = true;
       return false;
@@ -674,6 +679,12 @@
     });
 
     const targetSectionIndexById = new Map();
+    const auxSectionById = new Map();
+    auxSections.forEach((section) => {
+      const id = section.getAttribute("id");
+      if (!id) return;
+      auxSectionById.set(id, section);
+    });
     links.forEach((_, id) => {
       const target = document.getElementById(id);
       const parentSection = target?.closest("[data-section]");
@@ -692,11 +703,19 @@
       currentIndex = targetSectionIndexById.get(initialSectionId) || 0;
     }
 
+    function hideAuxSections() {
+      auxSections.forEach((section) => {
+        section.hidden = true;
+        section.classList.remove("is-active-section");
+      });
+    }
+
     function setActive(nextIndex, { updateHash = true, hashIdOverride = "" } = {}) {
       currentIndex = Math.max(0, Math.min(sections.length - 1, nextIndex));
       const activeSection = sections[currentIndex];
       const activeId = activeSection.getAttribute("id") || "";
 
+      hideAuxSections();
       sections.forEach((section, index) => {
         const isActive = index === currentIndex;
         section.hidden = !isActive;
@@ -729,6 +748,40 @@
       }
     }
 
+    function showAuxSection(sectionId, { updateHash = true } = {}) {
+      const target = auxSectionById.get(sectionId);
+      if (!target) return false;
+
+      sections.forEach((section) => {
+        section.hidden = true;
+        section.classList.remove("is-active-section");
+      });
+      hideAuxSections();
+      target.hidden = false;
+      target.classList.add("is-active-section", "is-visible", "is-visited-section");
+
+      const header = target.querySelector(".section-header");
+      titleNode.textContent = header?.textContent?.trim() || sectionId;
+      prevButton.disabled = currentIndex === 0;
+      nextButton.disabled = currentIndex === sections.length - 1;
+      nextButton.textContent = currentIndex === sections.length - 1 ? "Finish Core Sections" : "Next Section";
+
+      stepperButtons.forEach((button) => {
+        button.setAttribute("aria-current", "false");
+      });
+      links.forEach((link, id) => {
+        link.classList.toggle("is-active", id === sectionId);
+      });
+
+      if (updateHash) {
+        window.history.replaceState(null, "", `#${encodeURIComponent(sectionId)}`);
+      }
+      if (typeof onSectionChange === "function") {
+        onSectionChange(sectionId);
+      }
+      return true;
+    }
+
     prevButton.addEventListener("click", () => {
       setActive(currentIndex - 1);
       updateSectionCompletionUi();
@@ -743,10 +796,15 @@
 
     links.forEach((link, id) => {
       const index = targetSectionIndexById.get(id);
-      if (index === undefined) return;
+      const isAuxTarget = auxSectionById.has(id);
+      if (index === undefined && !isAuxTarget) return;
       link.addEventListener("click", (event) => {
         event.preventDefault();
-        setActive(index, { hashIdOverride: id });
+        if (index !== undefined) {
+          setActive(index, { hashIdOverride: id });
+        } else {
+          showAuxSection(id);
+        }
         const target = document.getElementById(id);
         if (target) {
           window.setTimeout(() => {
@@ -771,12 +829,21 @@
     window.addEventListener("hashchange", () => {
       const nextHash = decodeURIComponent(window.location.hash.replace(/^#/, ""));
       const mappedIndex = targetSectionIndexById.get(nextHash);
-      if (mappedIndex === undefined) return;
-      setActive(mappedIndex, { updateHash: false });
+      if (mappedIndex !== undefined) {
+        setActive(mappedIndex, { updateHash: false });
+      } else if (auxSectionById.has(nextHash)) {
+        showAuxSection(nextHash, { updateHash: false });
+      } else {
+        return;
+      }
       updateSectionCompletionUi();
     });
 
-    setActive(currentIndex, { updateHash: false });
+    if ((hashId && auxSectionById.has(hashId)) || (initialSectionId && auxSectionById.has(initialSectionId))) {
+      showAuxSection(hashId && auxSectionById.has(hashId) ? hashId : initialSectionId, { updateHash: false });
+    } else {
+      setActive(currentIndex, { updateHash: false });
+    }
     updateSectionCompletionUi();
     return true;
   }

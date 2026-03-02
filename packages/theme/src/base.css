@@ -27,6 +27,10 @@ body {
   min-height: 100%;
 }
 
+[hidden] {
+  display: none !important;
+}
+
 html {
   scroll-behavior: smooth;
   text-size-adjust: 100%;
@@ -37,13 +41,14 @@ body {
   color: var(--text-body);
   font-family: var(--font-sans);
   line-height: 1.58;
-  background:
-    radial-gradient(circle at 12% -3%, rgb(255 255 255 / 83%) 0%, rgb(255 255 255 / 0%) 42%),
-    radial-gradient(circle at 93% 16%, rgb(91 142 193 / 19%) 0%, rgb(91 142 193 / 0%) 47%),
-    radial-gradient(circle at 78% 92%, rgb(21 104 90 / 14%) 0%, rgb(21 104 90 / 0%) 38%),
-    linear-gradient(148deg, var(--surface-bg) 0%, var(--surface-bg-2) 100%);
+  background: var(--page-bg);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+}
+
+body[data-theme="obsidian-pro"],
+body[data-theme="neon-signal"] {
+  color-scheme: dark;
 }
 
 body::before {
@@ -51,11 +56,9 @@ body::before {
   position: fixed;
   inset: 0;
   pointer-events: none;
-  background-image:
-    linear-gradient(to right, rgb(19 34 58 / 5%) 1px, transparent 1px),
-    linear-gradient(to bottom, rgb(19 34 58 / 5%) 1px, transparent 1px);
-  background-size: 42px 42px;
-  opacity: 0.12;
+  background-image: var(--page-grid);
+  background-size: var(--page-grid-size);
+  opacity: var(--page-grid-opacity);
   z-index: -2;
 }
 
@@ -64,9 +67,7 @@ body::after {
   position: fixed;
   inset: 0;
   pointer-events: none;
-  background:
-    radial-gradient(circle at 84% 82%, rgb(31 122 106 / 11%), transparent 38%),
-    radial-gradient(circle at 20% 20%, rgb(58 92 140 / 8%), transparent 35%);
+  background: var(--page-overlay);
   z-index: -1;
 }
 

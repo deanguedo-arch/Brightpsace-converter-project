@@ -1,4 +1,5 @@
-﻿:root {
+:root,
+body[data-theme="bold-clay"] {
   --font-sans: "Manrope", "Avenir Next", "Segoe UI", "Trebuchet MS", sans-serif;
   --font-display: "Sora", "Manrope", "Avenir Next", "Segoe UI", sans-serif;
   --font-mono: "JetBrains Mono", "Cascadia Mono", "Consolas", "SFMono-Regular", Menlo, monospace;
@@ -57,4 +58,276 @@
   --motion-fast: 120ms;
   --motion-base: 220ms;
   --motion-slow: 420ms;
+  --page-bg:
+    radial-gradient(circle at 12% -3%, rgb(255 255 255 / 83%) 0%, rgb(255 255 255 / 0%) 42%),
+    radial-gradient(circle at 93% 16%, rgb(91 142 193 / 19%) 0%, rgb(91 142 193 / 0%) 47%),
+    radial-gradient(circle at 78% 92%, rgb(21 104 90 / 14%) 0%, rgb(21 104 90 / 0%) 38%),
+    linear-gradient(148deg, var(--surface-bg) 0%, var(--surface-bg-2) 100%);
+  --page-grid:
+    linear-gradient(to right, rgb(19 34 58 / 5%) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(19 34 58 / 5%) 1px, transparent 1px);
+  --page-grid-size: 42px 42px;
+  --page-grid-opacity: 0.12;
+  --page-overlay:
+    radial-gradient(circle at 84% 82%, rgb(31 122 106 / 11%), transparent 38%),
+    radial-gradient(circle at 20% 20%, rgb(58 92 140 / 8%), transparent 35%);
+  --card-bg: linear-gradient(160deg, rgb(255 255 255 / 95%) 0%, rgb(255 255 255 / 80%) 100%);
+  --stage-bg: linear-gradient(132deg, rgb(255 255 255 / 96%) 0%, rgb(233 246 249 / 90%) 50%, rgb(233 248 243 / 88%) 100%);
+  --header-bg: linear-gradient(136deg, rgb(255 255 255 / 95%) 0%, rgb(233 246 250 / 88%) 55%, rgb(230 248 242 / 91%) 100%);
+  --header-orb-1: radial-gradient(circle, rgb(31 122 106 / 24%) 0%, rgb(31 122 106 / 0%) 66%);
+  --header-orb-2: linear-gradient(125deg, rgb(47 76 124 / 16%) 0%, rgb(47 76 124 / 0%) 80%);
+  --header-title-gradient: linear-gradient(102deg, #1a2f49 0%, #145547 62%, #1f7a6a 100%);
+  --stepper-button-bg: rgb(255 255 255 / 88%);
+  --stepper-active-bg: linear-gradient(145deg, #ffffff 0%, color-mix(in srgb, var(--accent-soft) 36%, #ffffff 64%) 100%);
+  --stepper-complete-bg: linear-gradient(145deg, #ffffff 0%, color-mix(in srgb, var(--success-soft) 58%, #ffffff 42%) 100%);
+  --button-primary-bg: linear-gradient(132deg, var(--accent) 0%, var(--accent-strong) 100%);
+  --button-primary-border: #0d4c41;
+  --button-primary-shadow: 0 4px 0 0 #0b3d34, 0 12px 24px rgb(12 93 79 / 22%);
+  --button-primary-shadow-hover: 0 5px 0 0 #0b3d34, 0 16px 28px rgb(12 93 79 / 28%);
+  --button-primary-complete-bg: linear-gradient(130deg, #2f9e63 0%, #237a4d 100%);
+  --button-primary-complete-border: #1b5f3b;
+  --button-primary-complete-shadow: 0 4px 0 0 #154e31, 0 12px 24px rgb(24 96 56 / 24%);
+  --button-ghost-bg: rgb(255 255 255 / 94%);
+}
+
+body[data-theme="cupertino-light"] {
+  --surface-bg: #f6f8fb;
+  --surface-bg-2: #e9edf5;
+  --surface-card: rgb(255 255 255 / 90%);
+  --surface-soft: #eef3fa;
+  --surface-border: #c9d5e6;
+  --text-strong: #101828;
+  --text-body: #1f2e44;
+  --text-muted: #51627a;
+  --accent: #0a84ff;
+  --accent-strong: #085db3;
+  --accent-soft: #dcecff;
+  --success-soft: #e1f6eb;
+  --success-strong: #16794f;
+  --warning-soft: #fff4e5;
+  --warning-strong: #89510e;
+  --info-soft: #e9f4ff;
+  --info-strong: #14507c;
+  --example-soft: #edf3ff;
+  --example-strong: #325b8f;
+  --tone-1-bg: #edf6ff;
+  --tone-1-accent: #2f75d8;
+  --tone-2-bg: #edf9f5;
+  --tone-2-accent: #18866b;
+  --tone-3-bg: #f5f2ff;
+  --tone-3-accent: #5f48ac;
+  --tone-4-bg: #fff4ec;
+  --tone-4-accent: #b15a1a;
+  --tone-5-bg: #edfaff;
+  --tone-5-accent: #24738b;
+  --tone-6-bg: #f5f8ec;
+  --tone-6-accent: #5f7f20;
+  --focus-ring: 0 0 0 3px rgb(10 132 255 / 30%);
+  --page-bg:
+    radial-gradient(circle at 8% -4%, rgb(255 255 255 / 88%) 0%, rgb(255 255 255 / 0%) 45%),
+    radial-gradient(circle at 90% 12%, rgb(56 128 223 / 14%) 0%, rgb(56 128 223 / 0%) 45%),
+    radial-gradient(circle at 72% 88%, rgb(15 166 133 / 11%) 0%, rgb(15 166 133 / 0%) 38%),
+    linear-gradient(146deg, var(--surface-bg) 0%, var(--surface-bg-2) 100%);
+  --page-grid:
+    linear-gradient(to right, rgb(18 33 58 / 4%) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(18 33 58 / 4%) 1px, transparent 1px);
+  --page-overlay:
+    radial-gradient(circle at 80% 82%, rgb(10 132 255 / 9%), transparent 40%),
+    radial-gradient(circle at 18% 16%, rgb(22 167 142 / 7%), transparent 36%);
+  --card-bg: linear-gradient(160deg, rgb(255 255 255 / 96%) 0%, rgb(246 250 255 / 84%) 100%);
+  --stage-bg: linear-gradient(135deg, rgb(255 255 255 / 96%) 0%, rgb(235 243 255 / 92%) 56%, rgb(236 248 246 / 88%) 100%);
+  --header-bg: linear-gradient(136deg, rgb(255 255 255 / 96%) 0%, rgb(237 244 255 / 92%) 54%, rgb(238 250 247 / 90%) 100%);
+  --header-orb-1: radial-gradient(circle, rgb(10 132 255 / 18%) 0%, rgb(10 132 255 / 0%) 66%);
+  --header-orb-2: linear-gradient(125deg, rgb(22 140 123 / 16%) 0%, rgb(22 140 123 / 0%) 80%);
+  --header-title-gradient: linear-gradient(102deg, #17253b 0%, #1f4b86 62%, #188f75 100%);
+  --stepper-button-bg: rgb(255 255 255 / 92%);
+  --button-primary-border: #084f99;
+  --button-primary-shadow: 0 4px 0 0 #0b4a8f, 0 12px 24px rgb(8 93 179 / 22%);
+  --button-primary-shadow-hover: 0 5px 0 0 #0b4a8f, 0 16px 28px rgb(8 93 179 / 28%);
+}
+
+body[data-theme="obsidian-pro"] {
+  --surface-bg: #0b1119;
+  --surface-bg-2: #121b28;
+  --surface-card: rgb(16 24 36 / 90%);
+  --surface-soft: #1b2637;
+  --surface-border: #34485f;
+  --text-strong: #edf3ff;
+  --text-body: #c8d3e8;
+  --text-muted: #9cadc8;
+  --accent: #50c7ff;
+  --accent-strong: #329fd8;
+  --accent-soft: #1f3349;
+  --success-soft: #173a2d;
+  --success-strong: #4dd79d;
+  --warning-soft: #3f2b18;
+  --warning-strong: #ffb870;
+  --info-soft: #1f3346;
+  --info-strong: #70c4ff;
+  --example-soft: #2a2846;
+  --example-strong: #b2a4ff;
+  --tone-1-bg: #182736;
+  --tone-1-accent: #69c8ff;
+  --tone-2-bg: #192f2f;
+  --tone-2-accent: #56d2b8;
+  --tone-3-bg: #27233c;
+  --tone-3-accent: #b6a2ff;
+  --tone-4-bg: #36241f;
+  --tone-4-accent: #f6b16f;
+  --tone-5-bg: #1d2f3a;
+  --tone-5-accent: #7fd4ff;
+  --tone-6-bg: #25311f;
+  --tone-6-accent: #a7d86b;
+  --focus-ring: 0 0 0 3px rgb(80 199 255 / 36%);
+  --page-bg:
+    radial-gradient(circle at 14% -8%, rgb(80 199 255 / 13%) 0%, rgb(80 199 255 / 0%) 46%),
+    radial-gradient(circle at 88% 18%, rgb(41 227 169 / 10%) 0%, rgb(41 227 169 / 0%) 44%),
+    radial-gradient(circle at 62% 92%, rgb(226 170 102 / 10%) 0%, rgb(226 170 102 / 0%) 42%),
+    linear-gradient(148deg, var(--surface-bg) 0%, var(--surface-bg-2) 100%);
+  --page-grid:
+    linear-gradient(to right, rgb(170 198 232 / 10%) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(170 198 232 / 10%) 1px, transparent 1px);
+  --page-grid-opacity: 0.2;
+  --page-overlay:
+    radial-gradient(circle at 84% 80%, rgb(80 199 255 / 12%), transparent 40%),
+    radial-gradient(circle at 18% 22%, rgb(41 227 169 / 9%), transparent 36%);
+  --card-bg: linear-gradient(155deg, rgb(16 24 36 / 95%) 0%, rgb(20 31 46 / 84%) 100%);
+  --stage-bg: linear-gradient(134deg, rgb(16 25 38 / 95%) 0%, rgb(24 37 53 / 92%) 54%, rgb(24 46 44 / 88%) 100%);
+  --header-bg: linear-gradient(136deg, rgb(15 24 36 / 95%) 0%, rgb(21 35 54 / 92%) 56%, rgb(17 44 45 / 90%) 100%);
+  --header-orb-1: radial-gradient(circle, rgb(80 199 255 / 23%) 0%, rgb(80 199 255 / 0%) 66%);
+  --header-orb-2: linear-gradient(125deg, rgb(39 227 169 / 16%) 0%, rgb(39 227 169 / 0%) 80%);
+  --header-title-gradient: linear-gradient(102deg, #ecf3ff 0%, #9bd4ff 62%, #84f2d8 100%);
+  --stepper-button-bg: rgb(17 28 43 / 88%);
+  --stepper-active-bg: linear-gradient(145deg, rgb(20 32 47 / 100%) 0%, rgb(35 58 83 / 90%) 100%);
+  --stepper-complete-bg: linear-gradient(145deg, rgb(19 31 44 / 100%) 0%, rgb(25 67 57 / 90%) 100%);
+  --button-primary-bg: linear-gradient(132deg, #3cb6ef 0%, #2789bd 100%);
+  --button-primary-border: #1e729f;
+  --button-primary-shadow: 0 4px 0 0 #1b5b7d, 0 12px 24px rgb(49 155 214 / 24%);
+  --button-primary-shadow-hover: 0 5px 0 0 #1b5b7d, 0 16px 28px rgb(49 155 214 / 30%);
+  --button-primary-complete-bg: linear-gradient(130deg, #38cb86 0%, #1a935b 100%);
+  --button-primary-complete-border: #157146;
+  --button-primary-complete-shadow: 0 4px 0 0 #0f5834, 0 12px 24px rgb(26 147 91 / 27%);
+  --button-ghost-bg: rgb(17 30 45 / 92%);
+}
+
+body[data-theme="linen-editorial"] {
+  --surface-bg: #f6f0e7;
+  --surface-bg-2: #ebdfcf;
+  --surface-card: rgb(255 252 247 / 88%);
+  --surface-soft: #f5ebde;
+  --surface-border: #ceb9a1;
+  --text-strong: #2c1e14;
+  --text-body: #473125;
+  --text-muted: #775f4d;
+  --accent: #9f4e2e;
+  --accent-strong: #7a3921;
+  --accent-soft: #f4ddcf;
+  --success-soft: #e7f2de;
+  --success-strong: #4f7a36;
+  --warning-soft: #fce8d8;
+  --warning-strong: #995520;
+  --info-soft: #e8eff7;
+  --info-strong: #355774;
+  --example-soft: #f2e8ef;
+  --example-strong: #7b4662;
+  --tone-1-bg: #f6ece2;
+  --tone-1-accent: #9d562c;
+  --tone-2-bg: #f3f0e7;
+  --tone-2-accent: #677a2f;
+  --tone-3-bg: #efe7f3;
+  --tone-3-accent: #7f4c9a;
+  --tone-4-bg: #fbe7dd;
+  --tone-4-accent: #ac5a25;
+  --tone-5-bg: #e9f1f7;
+  --tone-5-accent: #3a6b88;
+  --tone-6-bg: #f2eee1;
+  --tone-6-accent: #80732f;
+  --focus-ring: 0 0 0 3px rgb(159 78 46 / 28%);
+  --page-bg:
+    radial-gradient(circle at 9% -6%, rgb(255 255 255 / 70%) 0%, rgb(255 255 255 / 0%) 43%),
+    radial-gradient(circle at 86% 14%, rgb(159 78 46 / 14%) 0%, rgb(159 78 46 / 0%) 45%),
+    radial-gradient(circle at 68% 88%, rgb(70 95 43 / 10%) 0%, rgb(70 95 43 / 0%) 40%),
+    linear-gradient(148deg, var(--surface-bg) 0%, var(--surface-bg-2) 100%);
+  --page-grid:
+    linear-gradient(to right, rgb(74 48 31 / 6%) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(74 48 31 / 6%) 1px, transparent 1px);
+  --page-overlay:
+    radial-gradient(circle at 82% 80%, rgb(159 78 46 / 10%), transparent 40%),
+    radial-gradient(circle at 18% 18%, rgb(76 103 52 / 8%), transparent 36%);
+  --card-bg: linear-gradient(160deg, rgb(255 253 249 / 94%) 0%, rgb(249 243 234 / 84%) 100%);
+  --stage-bg: linear-gradient(132deg, rgb(255 253 249 / 94%) 0%, rgb(251 245 237 / 90%) 52%, rgb(246 239 226 / 88%) 100%);
+  --header-bg: linear-gradient(136deg, rgb(255 252 248 / 95%) 0%, rgb(250 243 235 / 90%) 54%, rgb(244 235 221 / 90%) 100%);
+  --header-orb-1: radial-gradient(circle, rgb(159 78 46 / 19%) 0%, rgb(159 78 46 / 0%) 66%);
+  --header-orb-2: linear-gradient(125deg, rgb(74 104 47 / 16%) 0%, rgb(74 104 47 / 0%) 80%);
+  --header-title-gradient: linear-gradient(102deg, #3a2719 0%, #7a3921 62%, #5e6f31 100%);
+  --stepper-button-bg: rgb(255 252 247 / 90%);
+  --button-primary-bg: linear-gradient(132deg, #a75735 0%, #7a3921 100%);
+  --button-primary-border: #6a311c;
+  --button-primary-shadow: 0 4px 0 0 #562716, 0 12px 24px rgb(122 57 33 / 24%);
+  --button-primary-shadow-hover: 0 5px 0 0 #562716, 0 16px 28px rgb(122 57 33 / 30%);
+  --button-ghost-bg: rgb(255 252 248 / 94%);
+}
+
+body[data-theme="neon-signal"] {
+  --surface-bg: #090f17;
+  --surface-bg-2: #111b2a;
+  --surface-card: rgb(18 28 42 / 88%);
+  --surface-soft: #1a273a;
+  --surface-border: #355077;
+  --text-strong: #f2f9ff;
+  --text-body: #cbdbef;
+  --text-muted: #9eb7d5;
+  --accent: #1be38c;
+  --accent-strong: #11b66f;
+  --accent-soft: #1d3a34;
+  --success-soft: #203f2f;
+  --success-strong: #6ce6af;
+  --warning-soft: #40311d;
+  --warning-strong: #ffca6d;
+  --info-soft: #1c3249;
+  --info-strong: #73c8ff;
+  --example-soft: #2e2747;
+  --example-strong: #ba9fff;
+  --tone-1-bg: #163038;
+  --tone-1-accent: #34e3c2;
+  --tone-2-bg: #1a2d44;
+  --tone-2-accent: #62b7ff;
+  --tone-3-bg: #2a2445;
+  --tone-3-accent: #bda8ff;
+  --tone-4-bg: #3e281f;
+  --tone-4-accent: #ffb775;
+  --tone-5-bg: #1f3349;
+  --tone-5-accent: #8bd8ff;
+  --tone-6-bg: #233520;
+  --tone-6-accent: #b8df75;
+  --focus-ring: 0 0 0 3px rgb(27 227 140 / 36%);
+  --page-bg:
+    radial-gradient(circle at 10% -6%, rgb(27 227 140 / 13%) 0%, rgb(27 227 140 / 0%) 44%),
+    radial-gradient(circle at 88% 14%, rgb(89 179 255 / 11%) 0%, rgb(89 179 255 / 0%) 45%),
+    radial-gradient(circle at 70% 88%, rgb(255 179 71 / 11%) 0%, rgb(255 179 71 / 0%) 40%),
+    linear-gradient(148deg, var(--surface-bg) 0%, var(--surface-bg-2) 100%);
+  --page-grid:
+    linear-gradient(to right, rgb(150 190 235 / 10%) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(150 190 235 / 10%) 1px, transparent 1px);
+  --page-grid-opacity: 0.2;
+  --page-overlay:
+    radial-gradient(circle at 83% 80%, rgb(27 227 140 / 13%), transparent 40%),
+    radial-gradient(circle at 18% 20%, rgb(98 183 255 / 10%), transparent 36%);
+  --card-bg: linear-gradient(158deg, rgb(18 28 42 / 94%) 0%, rgb(22 38 57 / 86%) 100%);
+  --stage-bg: linear-gradient(132deg, rgb(18 29 45 / 95%) 0%, rgb(26 45 69 / 90%) 54%, rgb(25 52 45 / 88%) 100%);
+  --header-bg: linear-gradient(136deg, rgb(17 28 43 / 95%) 0%, rgb(24 44 67 / 90%) 55%, rgb(21 52 47 / 90%) 100%);
+  --header-orb-1: radial-gradient(circle, rgb(27 227 140 / 24%) 0%, rgb(27 227 140 / 0%) 66%);
+  --header-orb-2: linear-gradient(125deg, rgb(89 179 255 / 18%) 0%, rgb(89 179 255 / 0%) 80%);
+  --header-title-gradient: linear-gradient(102deg, #f2f9ff 0%, #96d2ff 60%, #74f1bf 100%);
+  --stepper-button-bg: rgb(19 32 48 / 88%);
+  --stepper-active-bg: linear-gradient(145deg, rgb(19 32 48 / 100%) 0%, rgb(30 58 88 / 90%) 100%);
+  --stepper-complete-bg: linear-gradient(145deg, rgb(19 32 48 / 100%) 0%, rgb(24 68 53 / 90%) 100%);
+  --button-primary-bg: linear-gradient(132deg, #21d98a 0%, #109e62 100%);
+  --button-primary-border: #0e8a56;
+  --button-primary-shadow: 0 4px 0 0 #0b7045, 0 12px 24px rgb(17 182 111 / 24%);
+  --button-primary-shadow-hover: 0 5px 0 0 #0b7045, 0 16px 28px rgb(17 182 111 / 30%);
+  --button-primary-complete-bg: linear-gradient(130deg, #60c4ff 0%, #2e8cc9 100%);
+  --button-primary-complete-border: #256f9e;
+  --button-primary-complete-shadow: 0 4px 0 0 #1d5b80, 0 12px 24px rgb(46 140 201 / 28%);
+  --button-ghost-bg: rgb(19 32 48 / 92%);
 }

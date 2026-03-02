@@ -206,3 +206,39 @@ Beta
   assert.match(html, /data-section-tone="tone-1"/);
   assert.match(html, /data-section-icon=/);
 });
+
+test("renderUnitToPreview exposes selected template and theme on body dataset", async () => {
+  const tempRoot = await fs.mkdtemp(path.join(os.tmpdir(), "cf-render-"));
+  const outputDir = path.join(tempRoot, "preview");
+  const sourceDir = path.join(tempRoot, "unit");
+  await fs.mkdir(sourceDir, { recursive: true });
+
+  const parsed = parseMarkdownToUnitBlocks(`
+## Topic A
+Alpha
+`);
+
+  await renderUnitToPreview({
+    repoRoot: path.resolve(process.cwd()),
+    outputDir,
+    unit: {
+      courseSlug: "demo-course",
+      unitSlug: "demo-unit",
+      sourceDir,
+      title: "Demo Unit",
+      subtitle: "",
+      estimatedMinutes: 10,
+      objectives: [],
+      sections: parsed.sections,
+      nav: parsed.nav,
+      resources: [],
+      flashcards: [],
+      template: "case-studio",
+      theme: "cupertino-light"
+    }
+  });
+
+  const html = await fs.readFile(path.join(outputDir, "index.html"), "utf8");
+  assert.match(html, /data-template="case-studio"/);
+  assert.match(html, /data-theme="cupertino-light"/);
+});

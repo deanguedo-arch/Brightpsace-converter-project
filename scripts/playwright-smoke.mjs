@@ -101,6 +101,11 @@ async function main() {
           .filter((section) => !section.hidden).length;
       });
       assert(visibleCoreCount === 1, `Expected exactly 1 visible core section, got ${visibleCoreCount}`);
+      const visibleAuxCount = await page.evaluate(() => {
+        return Array.from(document.querySelectorAll('.content-column > [data-section-role="aux"]'))
+          .filter((section) => !section.hidden).length;
+      });
+      assert(visibleAuxCount === 0, `Expected 0 visible aux sections in paged mode, got ${visibleAuxCount}`);
 
       const initialActiveId = await page.evaluate(() => {
         return document.querySelector('.content-column > [data-section-role="core"].is-active-section')?.id || "";
@@ -139,6 +144,31 @@ async function main() {
           return document.querySelector('.content-column > [data-section-role="core"].is-active-section')?.id || "";
         });
         assert(activeAfterReload === jumpTarget, "Active section was not restored after reload.");
+      }
+
+      const auxLink = page.locator('[data-nav-link="resources"], [data-nav-link="flashcards"]').first();
+      if (await auxLink.count()) {
+        const auxTarget = await auxLink.getAttribute("data-nav-link");
+        await auxLink.click();
+        await page.waitForTimeout(100);
+        const auxState = await page.evaluate((targetId) => {
+          const visibleCore = Array.from(document.querySelectorAll('.content-column > [data-section-role="core"]'))
+            .filter((section) => !section.hidden).length;
+          const visibleAux = Array.from(document.querySelectorAll('.content-column > [data-section-role="aux"]'))
+            .filter((section) => !section.hidden)
+            .map((section) => section.id);
+          return {
+            visibleCore,
+            visibleAux,
+            hash: window.location.hash
+          };
+        }, auxTarget);
+        assert(auxState.visibleCore === 0, `Expected core sections hidden when aux is active, got ${auxState.visibleCore}`);
+        assert(auxState.visibleAux.includes(auxTarget), `Expected aux section "${auxTarget}" to be visible.`);
+        assert(auxState.hash === `#${auxTarget}`, "Hash did not update for aux section.");
+
+        await page.locator("[data-stepper-item]").first().click();
+        await page.waitForTimeout(100);
       }
     } else if (coreCount === 1) {
       const stageVisible = await page.evaluate(() => {
