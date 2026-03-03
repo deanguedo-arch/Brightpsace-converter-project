@@ -24,7 +24,9 @@ function levelRank(level) {
 }
 
 function requiredVisualLevel(courseSlug, unitSlug) {
-  if (String(courseSlug || "").trim() === "calm-course" && String(unitSlug || "").trim() === "module-2-v2") {
+  const course = String(courseSlug || "").trim();
+  const unit = String(unitSlug || "").trim();
+  if (course === "calm-course" && (unit === "module-2-v2" || unit === "module-1-v2")) {
     return "L4";
   }
   return "L3";
@@ -151,4 +153,3 @@ export function evaluateVisualQuality({
     violations
   };
 }
-

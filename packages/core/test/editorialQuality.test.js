@@ -36,6 +36,22 @@ test("evaluateEditorialQuality enforces L3 requirement for calm module 2", () =>
   assert.ok(["L1", "L2", "L3"].includes(report.achievedLevel));
 });
 
+test("evaluateEditorialQuality enforces L3 requirement for calm module 1 v2", () => {
+  const unit = minimalUnit([
+    { label: "Define conflict in your own words.", hint: "" },
+    { label: "Describe one communication habit you want to improve.", hint: "" },
+    { label: "Explain why this change matters.", hint: "" }
+  ]);
+  const report = evaluateEditorialQuality({
+    unit,
+    courseSlug: "calm-course",
+    unitSlug: "module-1-v2"
+  });
+
+  assert.equal(report.requiredLevel, "L3");
+  assert.ok(["L1", "L2", "L3"].includes(report.achievedLevel));
+});
+
 test("evaluateEditorialQuality flags orphan and duplicate prompt issues", () => {
   const unit = minimalUnit([
     { label: ":", hint: "" },

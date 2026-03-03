@@ -67,3 +67,35 @@ test("evaluateVisualQuality passes when L4 visual rules are satisfied", () => {
   assert.equal(result.passed, true);
 });
 
+test("evaluateVisualQuality enforces L4 for calm module 1 v2", () => {
+  const unit = {
+    sections: [
+      {
+        id: "knowledge",
+        blocks: [
+          {
+            type: "knowledge",
+            bodyHtml: "<p>Short readable paragraph.</p><ul><li>First point.</li><li>Second point.</li></ul>"
+          }
+        ]
+      }
+    ]
+  };
+  const css = `
+    .knowledge__content { max-width: 75ch; }
+    .knowledge__content p + p { margin-top: 0.82rem; }
+    .knowledge__content ul { padding-left: 1.28rem; }
+    .knowledge__content li + li { margin-top: 0.1rem; }
+  `;
+
+  const result = evaluateVisualQuality({
+    unit,
+    courseSlug: "calm-course",
+    unitSlug: "module-1-v2",
+    componentsCss: css
+  });
+
+  assert.equal(result.requiredLevel, "L4");
+  assert.equal(result.achievedLevel, "L4");
+  assert.equal(result.passed, true);
+});
