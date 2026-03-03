@@ -123,7 +123,13 @@ function renderSectionStage(coreSections) {
   `;
 }
 
-function renderNav(nav) {
+function renderNav(nav, unit) {
+  const titleParts = String(unit.title || "").split(":");
+  const brandTitle = escapeHtml((titleParts.shift() || unit.title || "Unit").trim());
+  const brandSubtitleSource = titleParts.join(":").trim() || String(unit.subtitle || "").trim();
+  const brandSubtitle = brandSubtitleSource
+    ? `<p class="sticky-nav__brand-subtitle">${escapeHtml(brandSubtitleSource)}</p>`
+    : "";
   const items = nav
     .map((item) => {
       const itemClass = item.depth === 3 ? "sticky-nav__item sticky-nav__item--child" : "sticky-nav__item";
@@ -136,9 +142,40 @@ function renderNav(nav) {
     .join("");
   return `
     <aside class="sticky-nav card" aria-label="Section navigation">
-      <h2 class="section-header">On this page</h2>
+      <div class="sticky-nav__brand">
+        <h2 class="sticky-nav__brand-title">${brandTitle}</h2>
+        ${brandSubtitle}
+      </div>
+      <p class="sticky-nav__eyebrow">On this page</p>
       <ul class="sticky-nav__list">${items}</ul>
     </aside>
+  `;
+}
+
+function renderWorkbookHint(fieldId, field) {
+  const hint = String(field.hint || "").trim();
+  if (!hint) return "";
+  const hintId = `${fieldId}-hint`;
+  return `
+    <div class="workbook__hint">
+      <button
+        class="workbook__hint-toggle"
+        type="button"
+        data-workbook-hint-toggle
+        aria-expanded="false"
+        aria-controls="${escapeHtml(hintId)}"
+      >
+        Show Hint
+      </button>
+      <div
+        id="${escapeHtml(hintId)}"
+        class="workbook__hint-panel"
+        data-workbook-hint-panel
+        hidden
+      >
+        <p>${escapeHtml(hint)}</p>
+      </div>
+    </div>
   `;
 }
 
@@ -154,6 +191,39 @@ function renderBlock(block, sectionId, blockIndex) {
       <aside class="callout callout--${escapeHtml(block.kind)}">
         <div class="callout__body">${block.html}</div>
       </aside>
+    `;
+  }
+  if (block.type === "knowledge") {
+    const knowledgeId = `${sectionId}-knowledge-${blockIndex + 1}`;
+    const title = escapeHtml(block.title || "Knowledge Drop");
+    const description = block.descriptionHtml
+      ? `<div class="knowledge__description">${block.descriptionHtml}</div>`
+      : "";
+    const expanded = block.open === true;
+    return `
+      <section class="knowledge card" data-knowledge>
+        <div class="knowledge__item">
+          <button
+            class="knowledge__trigger"
+            type="button"
+            data-knowledge-toggle
+            aria-expanded="${expanded ? "true" : "false"}"
+            aria-controls="${escapeHtml(knowledgeId)}"
+          >
+            <span class="knowledge__label">Knowledge Drop</span>
+            <span class="knowledge__title">${title}</span>
+          </button>
+          <div
+            id="${escapeHtml(knowledgeId)}"
+            class="knowledge__panel"
+            data-knowledge-panel
+            ${expanded ? "" : "hidden"}
+          >
+            ${description}
+            <div class="knowledge__content">${block.bodyHtml}</div>
+          </div>
+        </div>
+      </section>
     `;
   }
   if (block.type === "accordion") {
@@ -177,10 +247,12 @@ function renderBlock(block, sectionId, blockIndex) {
   if (block.type === "workbook") {
     const workbookId = `${sectionId}-workbook-${blockIndex + 1}`;
     const total = block.fields.length;
+    const layout = escapeHtml(block.layout || "default");
     const fields = block.fields
       .map((field, fieldIndex) => {
         const fieldId = `${workbookId}-field-${fieldIndex + 1}-${slugify(field.id) || "item"}`;
         const fieldKey = fieldId;
+        const hint = renderWorkbookHint(fieldId, field);
 
         if (field.kind === "text") {
           return `
@@ -195,6 +267,7 @@ function renderBlock(block, sectionId, blockIndex) {
                 data-workbook-kind="text"
                 data-workbook-key="${escapeHtml(fieldKey)}"
               >
+              ${hint}
             </div>
           `;
         }
@@ -211,7 +284,9 @@ function renderBlock(block, sectionId, blockIndex) {
                 data-workbook-field
                 data-workbook-kind="textarea"
                 data-workbook-key="${escapeHtml(fieldKey)}"
+                data-autosize="${field.autosize === false ? "false" : "true"}"
               ></textarea>
+              ${hint}
             </div>
           `;
         }
@@ -240,6 +315,7 @@ function renderBlock(block, sectionId, blockIndex) {
             <fieldset class="workbook__field workbook__field--options" data-workbook-field-wrap data-workbook-key="${escapeHtml(fieldKey)}" data-workbook-kind="radio">
               <legend class="workbook__label">${escapeHtml(field.label)}</legend>
               <div class="workbook__options">${options}</div>
+              ${hint}
             </fieldset>
           `;
         }
@@ -267,6 +343,7 @@ function renderBlock(block, sectionId, blockIndex) {
             <fieldset class="workbook__field workbook__field--options" data-workbook-field-wrap data-workbook-key="${escapeHtml(fieldKey)}" data-workbook-kind="checklist">
               <legend class="workbook__label">${escapeHtml(field.label)}</legend>
               <div class="workbook__options">${options}</div>
+              ${hint}
             </fieldset>
           `;
         }
@@ -276,7 +353,7 @@ function renderBlock(block, sectionId, blockIndex) {
       .join("");
 
     return `
-      <section class="workbook card" data-workbook data-workbook-id="${escapeHtml(workbookId)}" data-workbook-total="${escapeHtml(total)}">
+      <section class="workbook card" data-workbook data-workbook-id="${escapeHtml(workbookId)}" data-workbook-total="${escapeHtml(total)}" data-workbook-layout="${layout}">
         <div class="workbook__header">
           <h3 class="workbook__title">${escapeHtml(block.title || "Workbook")}</h3>
           <p class="workbook__progress" data-workbook-progress>0 / ${escapeHtml(total)} complete</p>
@@ -418,6 +495,30 @@ function renderBlock(block, sectionId, blockIndex) {
       </section>
     `;
   }
+  if (block.type === "submission") {
+    const checklist = block.showChecklist
+      ? `<div class="submission__checklist" data-completion-checklist aria-live="polite"></div>`
+      : "";
+    const exportButton = block.showExport
+      ? `
+        <div class="submission__export">
+          <button class="button button--primary" type="button" data-teacher-export>Export Teacher View (.txt)</button>
+          <p class="submission__hint">Downloads a text file with your responses for teacher review.</p>
+        </div>
+      `
+      : "";
+
+    return `
+      <section class="submission card" data-submission>
+        <div class="submission__header">
+          <h3 class="submission__title">${escapeHtml(block.title || "Review & Submit")}</h3>
+        </div>
+        ${block.descriptionHtml ? `<div class="submission__description">${block.descriptionHtml}</div>` : ""}
+        ${checklist}
+        ${exportButton}
+      </section>
+    `;
+  }
   return "";
 }
 
@@ -531,6 +632,7 @@ function renderUnitHtml({ unit, cssPath, runtimePath, sandbox }) {
     data-mode="${sandbox ? "sandbox" : "production"}"
     data-template="${escapeHtml(templatePreset.slug)}"
     data-theme="${escapeHtml(themePreset.slug)}"
+    data-completion-feedback="burst"
   >
     <a class="skip-link" href="#main-content">Skip to Main Content</a>
     <div class="page-shell">
@@ -546,7 +648,7 @@ function renderUnitHtml({ unit, cssPath, runtimePath, sandbox }) {
       ${renderObjectives(unit.objectives)}
       ${renderLearningDashboard()}
       <div class="layout">
-        ${renderNav(nav)}
+        ${renderNav(nav, unit)}
         <main id="main-content" class="content-column">
           ${renderSectionStage(coreSections)}
           ${renderSections(coreSections)}

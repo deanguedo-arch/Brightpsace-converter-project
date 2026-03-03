@@ -1,5 +1,84 @@
 # WORKLOG
 
+## 2026-03-03
+
+### Completed (Reference-Driven Compare + Audit Loop)
+- Implemented a repo-native reference workflow aimed at closing the gap to the Canvas/Gemini artifact in `EXAMPLES/calmmodule1.md`.
+- Added CLI commands:
+  - `cf compare <courseSlug> <unitSlug> --reference <profileOrFile> [--open]`
+  - `cf audit <courseSlug> <unitSlug> --reference <profileOrFile> [--json]`
+- Added reference profile support:
+  - `references/calm-canvas-clay/reference.yml`
+  - `packages/core/src/referenceProfiles.js`
+- Added compare workspace generation:
+  - `packages/core/src/compare.js`
+- Added reference-specific audit scoring:
+  - `packages/core/src/audit.js`
+- Added new authoring/runtime vocabulary:
+  - `:::knowledge`
+  - workbook `layout`
+  - workbook field `hint`
+  - workbook field `autosize`
+- Added new presets:
+  - template: `guided-workbook`
+  - theme: `clay-workbook`
+- Upgraded theme/runtime to support:
+  - collapsible knowledge cards
+  - field-level hint toggles
+  - autosizing textareas
+  - workbook layout markers
+  - completion feedback marker
+- Upgraded `convertUnitFromSource()` for CALM Module 2 so one-pass generation now emits:
+  - student setup
+  - knowledge drops
+  - hint-enabled workbook prompts
+  - `budget-grid` budget section
+  - `case-stack` conflict/case-study sections
+  - `guided-workbook` + `clay-workbook` in generated `unit.yml`
+
+### Real Output State
+- Regenerated from:
+  - `MATERIALS FROM COURSE FACTORY/public/materials/CALM/CALM Module 2 - Resourse Choices.pdf`
+  - `MATERIALS FROM COURSE FACTORY/public/materials/CALM/CALM Module 2 - Resource Choices.docx`
+- Current generated unit:
+  - `courses/calm-course/units/module-2-v2/unit.yml`
+  - `courses/calm-course/units/module-2-v2/content.md`
+- Current compare workspace:
+  - `dist/preview/_compare/calm-canvas-clay/calm-course/module-2-v2/compare.html`
+- Current SCORM zip:
+  - `dist/scorm/calm-course/module-2-v2.zip`
+
+### Verification Status (Reference Loop + Module 2)
+- `npm test`: pass (`28/28`)
+- `npm run cf:validate -- calm-course module-2-v2`: pass
+- `npm run cf:build -- calm-course module-2-v2 --scorm --gate`: pass
+- `npm run cf:compare -- calm-course module-2-v2 --reference calm-canvas-clay`: pass
+- `npm run cf:compare -- calm-course module-2-v2 --reference calm-canvas-clay --open`: pass
+- `npm run cf:audit -- calm-course module-2-v2 --reference calm-canvas-clay`: pass
+- Audit result on real unit:
+  - overall `100 / 100`
+  - next slice: `Manual compare review`
+
+### Important Operational Note
+- `compare`, `audit`, `build`, and `validate` all rebuild preview output under `dist/preview/...`.
+- Do not run them in parallel against the same unit. Sequential runs are required.
+
+### Useful Resume Commands
+- Regenerate Module 2:
+  - `npm run cf -- convert tmp/calm-module-2-source --course calm-course --unit module-2-v2 --extract`
+- Open compare:
+  - `npm run cf:compare -- calm-course module-2-v2 --reference calm-canvas-clay --open`
+- Re-run audit:
+  - `npm run cf:audit -- calm-course module-2-v2 --reference calm-canvas-clay`
+
+### Recommended Next Chat Prompt
+- `Read WORKLOG.md and continue from the 2026-03-03 reference-driven compare/audit implementation. Open the Module 2 compare page and do a strict visual gap audit between the left reference and the right generated unit, then start closing the remaining design gap without breaking Brightspace guardrails.`
+
+### Current Worktree Note
+- There are uncommitted project changes related to this implementation, plus pre-existing user edits in:
+  - `EXAMPLES/calmmodule1.md`
+- Do not revert that file when continuing.
+
 ## 2026-02-27
 
 ### Completed (Release + Compiler Hardening)

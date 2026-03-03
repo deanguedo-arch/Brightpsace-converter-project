@@ -77,6 +77,47 @@ fields:
   );
 });
 
+test("parses knowledge directive and workbook layout or field enhancements", () => {
+  const markdown = `
+## Launch
+
+:::knowledge
+title: Why This Matters
+description: Read this before you start.
+body: |
+  Marketing and social pressure shape choices.
+:::
+
+:::workbook
+title: Student Setup
+layout: split
+fields:
+  - type: text
+    id: student-name
+    label: Student Name
+  - type: textarea
+    id: reflection
+    label: What influence affects you most?
+    hint: Think about ads, friends, habit, or convenience.
+    autosize: true
+    rows: 5
+:::
+`;
+
+  const parsed = parseMarkdownToUnitBlocks(markdown);
+  const knowledge = parsed.sections[0].blocks.find((block) => block.type === "knowledge");
+  const workbook = parsed.sections[0].blocks.find((block) => block.type === "workbook");
+
+  assert.ok(knowledge);
+  assert.equal(knowledge.title, "Why This Matters");
+  assert.match(knowledge.bodyHtml, /Marketing and social pressure/i);
+
+  assert.ok(workbook);
+  assert.equal(workbook.layout, "split");
+  assert.equal(workbook.fields[1].hint, "Think about ads, friends, habit, or convenience.");
+  assert.equal(workbook.fields[1].autosize, true);
+});
+
 test("parses scenario, ranking, and decision-tree directives", () => {
   const markdown = `
 ## Activities

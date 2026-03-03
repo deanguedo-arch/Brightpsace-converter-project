@@ -81,8 +81,12 @@ function normalizeWorkbookField(rawField, index) {
 
   const id = slugify(rawField.id || rawField.key || label) || `field-${index + 1}`;
   const placeholder = String(rawField.placeholder || "").trim();
+  const hint = String(rawField.hint || rawField.help || "").trim();
   const rowsRaw = Number(rawField.rows);
   const rows = Number.isFinite(rowsRaw) ? Math.max(2, Math.min(12, Math.round(rowsRaw))) : 4;
+  const autosize = kind === "textarea"
+    ? rawField.autosize === false ? false : true
+    : false;
   const optionsRaw = Array.isArray(rawField.options) ? rawField.options : [];
   const options = optionsRaw
     .map((option, optionIndex) => normalizeWorkbookOption(option, optionIndex))
@@ -96,6 +100,8 @@ function normalizeWorkbookField(rawField, index) {
     label,
     placeholder,
     rows,
+    hint,
+    autosize,
     options
   };
 }
@@ -109,6 +115,9 @@ function parseWorkbook(bodyLines) {
 
   const title = String(config.title || config.heading || "Workbook").trim() || "Workbook";
   const description = String(config.description || config.instructions || "").trim();
+  const rawLayout = String(config.layout || "default").trim().toLowerCase();
+  const allowedLayouts = new Set(["default", "split", "budget-grid", "case-stack"]);
+  const layout = allowedLayouts.has(rawLayout) ? rawLayout : "default";
   const fieldsRaw = Array.isArray(config.fields) ? config.fields : [];
   const fields = fieldsRaw
     .map((field, index) => normalizeWorkbookField(field, index))
@@ -119,8 +128,36 @@ function parseWorkbook(bodyLines) {
   return {
     type: "workbook",
     title,
+    layout,
     descriptionHtml: description ? md.render(description) : "",
     fields
+  };
+}
+
+function parseKnowledge(bodyLines) {
+  const source = bodyLines.join("\n").trim();
+  if (!source) return null;
+
+  const parsed = yaml.load(source);
+  if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) {
+    return {
+      type: "knowledge",
+      title: "Knowledge Drop",
+      descriptionHtml: "",
+      bodyHtml: md.render(source),
+      open: false
+    };
+  }
+
+  const title = String(parsed.title || "Knowledge Drop").trim() || "Knowledge Drop";
+  const description = String(parsed.description || "").trim();
+  const body = String(parsed.body || parsed.content || parsed.copy || "").trim();
+  return {
+    type: "knowledge",
+    title,
+    descriptionHtml: description ? md.render(description) : "",
+    bodyHtml: md.render(body || description || ""),
+    open: parsed.open === true
   };
 }
 
@@ -262,6 +299,35 @@ function parseDecisionTree(bodyLines) {
   };
 }
 
+function parseSubmission(bodyLines) {
+  const source = bodyLines.join("\n").trim();
+  if (!source) {
+    return {
+      type: "submission",
+      title: "Review & Submit",
+      descriptionHtml: "",
+      showChecklist: true,
+      showExport: true
+    };
+  }
+
+  const config = yaml.load(source);
+  if (!config || typeof config !== "object" || Array.isArray(config)) return null;
+
+  const title = String(config.title || "Review & Submit").trim() || "Review & Submit";
+  const description = String(config.description || "").trim();
+  const showChecklist = config.checklist === false ? false : true;
+  const showExport = config.export === false ? false : true;
+
+  return {
+    type: "submission",
+    title,
+    descriptionHtml: description ? md.render(description) : "",
+    showChecklist,
+    showExport
+  };
+}
+
 function createSection(title, idsInUse) {
   const base = slugify(title || "section") || "section";
   let id = base;
@@ -297,7 +363,7 @@ export function parseMarkdownToUnitBlocks(content) {
   for (let index = 0; index < lines.length; index += 1) {
     const line = lines[index];
 
-    const directiveStart = line.match(/^:::(info|warning|example|accordion|workbook|scenario|ranking|decision-tree)\s*$/);
+    const directiveStart = line.match(/^:::(info|warning|example|accordion|knowledge|workbook|scenario|ranking|decision-tree|submission)\s*$/);
     if (directiveStart) {
       pushMarkdownBlock(buffer, currentSection);
       const kind = directiveStart[1];
@@ -313,6 +379,9 @@ export function parseMarkdownToUnitBlocks(content) {
           type: "accordion",
           items: parseAccordion(bodyLines)
         });
+      } else if (kind === "knowledge") {
+        const knowledge = parseKnowledge(bodyLines);
+        if (knowledge) currentSection.blocks.push(knowledge);
       } else if (kind === "workbook") {
         const workbook = parseWorkbook(bodyLines);
         if (workbook) {
@@ -332,6 +401,9 @@ export function parseMarkdownToUnitBlocks(content) {
       } else if (kind === "decision-tree") {
         const tree = parseDecisionTree(bodyLines);
         if (tree) currentSection.blocks.push(tree);
+      } else if (kind === "submission") {
+        const submission = parseSubmission(bodyLines);
+        if (submission) currentSection.blocks.push(submission);
       } else {
         currentSection.blocks.push({
           type: "callout",

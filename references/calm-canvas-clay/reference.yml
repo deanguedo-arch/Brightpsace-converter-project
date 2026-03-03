@@ -1,0 +1,58 @@
+id: calm-canvas-clay
+title: CALM Workbook Clay Reference
+referenceFile: EXAMPLES/calmmodule1.md
+targetTheme: clay-workbook
+targetTemplate: guided-workbook
+mandatoryFeatures:
+  - launch-student-name
+  - top-progress-shell
+  - collapsible-knowledge
+  - field-level-hints
+  - autosize-textareas
+  - teacher-export
+  - section-completion-feedback
+  - budget-workbook-layout
+  - case-study-layout
+weights:
+  visualShell: 30
+  interactionParity: 25
+  sourceCoverage: 20
+  learnerFlow: 15
+  completionFlow: 10
+sectionMap:
+  - sourceLabel: Advertising and Consumerism
+    targetId: spending-influences
+    requiredElements:
+      - workbook
+      - knowledge
+      - ranking
+  - sourceLabel: What Are You Waiting For
+    targetId: joe-vs-sally
+    requiredElements:
+      - knowledge
+      - workbook
+  - sourceLabel: Managing your Money
+    targetId: budget-builder
+    requiredElements:
+      - workbook
+  - sourceLabel: Honesty Quiz
+    targetId: honesty-and-relationship-cases
+    requiredElements:
+      - scenario
+      - workbook
+  - sourceLabel: Maintaining Positive Relationships
+    targetId: conflict-and-communication
+    requiredElements:
+      - knowledge
+      - workbook
+  - sourceLabel: Case Studies
+    targetId: review-submit
+    requiredElements:
+      - submission
+threshold:
+  overall: 85
+  visualShell: 24
+  interactionParity: 18
+  sourceCoverage: 16
+  learnerFlow: 12
+  completionFlow: 8

@@ -41,6 +41,51 @@ Add a short reflection, checklist, or action prompt for the learner.
 `;
 }
 
+function guidedWorkbookTemplate(unitTitle) {
+  return `## Module Launch
+
+Welcome to ${unitTitle}. Use this guided workbook to move section by section and capture your answers as you go.
+
+:::workbook
+title: Student Setup
+layout: split
+fields:
+  - type: text
+    id: student-name
+    label: Student Name
+  - type: textarea
+    id: launch-goal
+    label: What is one decision pattern you want to improve in this unit?
+    hint: Name one habit, spending choice, or communication move you want to handle better.
+    autosize: true
+:::
+
+## Learn The Pattern
+
+:::knowledge
+title: Why This Matters
+body: |
+  Add a short instructional drop that explains the core pattern before the learner starts writing.
+:::
+
+:::workbook
+title: Guided Notes
+fields:
+  - type: textarea
+    label: What idea stands out most so far?
+    hint: Write one clear sentence before moving on.
+    autosize: true
+:::
+
+## Review & Submit
+
+:::submission
+title: Review & Submit
+description: Confirm your sections are complete, then export your teacher-view text file.
+:::
+`;
+}
+
 function caseStudioTemplate(unitTitle) {
   return `## Case Brief
 
@@ -222,6 +267,12 @@ fields:
 
 const TEMPLATE_PRESETS = [
   {
+    slug: "guided-workbook",
+    name: "Guided Workbook",
+    description: "Workbook-first pacing with launch setup, knowledge drops, and stronger review flow.",
+    buildContent: guidedWorkbookTemplate
+  },
+  {
     slug: "premium-core",
     name: "Premium Core",
     description: "Balanced narrative, interaction, and reflection flow.",
@@ -254,6 +305,11 @@ const TEMPLATE_PRESETS = [
 ];
 
 const THEME_PRESETS = [
+  {
+    slug: "clay-workbook",
+    name: "Clay Workbook",
+    description: "Reference-driven soft slate clay cards with tactile workbook controls."
+  },
   {
     slug: "bold-clay",
     name: "Bold Clay",

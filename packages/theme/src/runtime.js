@@ -3,6 +3,37 @@
     return Boolean(value) && typeof value === "object" && !Array.isArray(value);
   }
 
+  function normalizeInlineText(value) {
+    return String(value || "").replace(/\s+/g, " ").trim();
+  }
+
+  function safeFilenamePart(value, fallback) {
+    const base = normalizeInlineText(value)
+      .replace(/[^\w\s-]+/g, "")
+      .trim()
+      .replace(/\s+/g, "_")
+      .slice(0, 64);
+    return base || fallback;
+  }
+
+  function downloadTextFile(filename, content) {
+    const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+
+  function autoResizeTextarea(textarea) {
+    if (!textarea || textarea.tagName !== "TEXTAREA") return;
+    textarea.style.height = "auto";
+    textarea.style.height = `${textarea.scrollHeight}px`;
+  }
+
   function readJsonSafe(value, fallback) {
     if (typeof value !== "string" || value.trim().length === 0) {
       return fallback;
@@ -53,6 +84,17 @@
     return map;
   }
 
+  function collectKnowledgeState() {
+    const map = {};
+    document.querySelectorAll("[data-knowledge]").forEach((item) => {
+      const button = item.querySelector("[data-knowledge-toggle]");
+      const panelId = button?.getAttribute("aria-controls");
+      if (!panelId) return;
+      map[panelId] = button.getAttribute("aria-expanded") === "true";
+    });
+    return map;
+  }
+
   function restoreAccordionState(state) {
     document.querySelectorAll("[data-accordion-item]").forEach((item) => {
       const button = item.querySelector(".accordion__trigger");
@@ -60,6 +102,21 @@
       const panelId = button?.getAttribute("aria-controls");
       if (!button || !panel || !panelId) return;
       const open = Boolean(state?.[panelId]);
+      button.setAttribute("aria-expanded", open ? "true" : "false");
+      button.classList.toggle("is-open", open);
+      panel.hidden = !open;
+    });
+  }
+
+  function restoreKnowledgeState(state) {
+    document.querySelectorAll("[data-knowledge]").forEach((item) => {
+      const button = item.querySelector("[data-knowledge-toggle]");
+      const panel = item.querySelector("[data-knowledge-panel]");
+      const panelId = button?.getAttribute("aria-controls");
+      if (!button || !panel || !panelId) return;
+      const open = state?.[panelId] === undefined
+        ? button.getAttribute("aria-expanded") === "true"
+        : Boolean(state?.[panelId]);
       button.setAttribute("aria-expanded", open ? "true" : "false");
       button.classList.toggle("is-open", open);
       panel.hidden = !open;
@@ -258,6 +315,9 @@
       }
 
       field.value = typeof saved === "string" ? saved : "";
+      if (kind === "textarea" && field.getAttribute("data-autosize") !== "false") {
+        autoResizeTextarea(field);
+      }
     });
   }
 
@@ -503,6 +563,13 @@
       completion[details.id] = details.isComplete;
       section.classList.toggle("is-complete-section", details.isComplete);
       section.setAttribute("data-section-checkpoints", `${details.completed}/${details.total}`);
+      const navLink = document.querySelector(`[data-nav-link="${details.id}"]`);
+      if (navLink) {
+        const count = `${details.completed}/${details.total}`;
+        navLink.setAttribute("data-nav-count", count);
+        navLink.classList.toggle("is-complete", details.isComplete);
+        navLink.classList.toggle("is-in-progress", !details.isComplete && details.completed > 0);
+      }
     });
 
     const activeSectionId = collectActiveSectionId();
@@ -540,7 +607,166 @@
       decisionTree: updateDecisionTreeProgress()
     };
     updateLearningDashboard(metrics);
-    return updateSectionCompletionUi();
+    const completion = updateSectionCompletionUi();
+    updateCompletionChecklist(completion);
+    return completion;
+  }
+
+  function updateCompletionChecklist(completion = {}) {
+    const container = document.querySelector("[data-completion-checklist]");
+    if (!container) return;
+
+    const sections = listCoreSections();
+    const items = sections
+      .map((section) => {
+        const id = section.getAttribute("id") || "";
+        if (!id) return "";
+        const title = normalizeInlineText(section.querySelector(".section-header")?.textContent) || id;
+        const checkpoints = section.getAttribute("data-section-checkpoints") || "";
+        const isComplete = Boolean(completion[id]);
+        const status = isComplete ? "✓" : "·";
+        const klass = isComplete ? "completion-checklist__item is-complete" : "completion-checklist__item";
+        return `
+          <li class="${klass}">
+            <span class="completion-checklist__status" aria-hidden="true">${status}</span>
+            <span class="completion-checklist__label">${title}</span>
+            <span class="completion-checklist__count">${checkpoints}</span>
+          </li>
+        `;
+      })
+      .join("");
+
+    container.innerHTML = `
+      <div class="completion-checklist">
+        <ul class="completion-checklist__list">${items}</ul>
+      </div>
+    `;
+  }
+
+  function collectWorkbookAnswer(wrapper) {
+    const kind = wrapper.getAttribute("data-workbook-kind") || "";
+    const label = normalizeInlineText(wrapper.querySelector(".workbook__label")?.textContent) || "Workbook field";
+    const controls = Array.from(wrapper.querySelectorAll("[data-workbook-field]"));
+
+    if (kind === "radio") {
+      const selected = controls.find((control) => control.checked);
+      const choiceLabel = normalizeInlineText(selected?.closest("label")?.querySelector("span")?.textContent) || selected?.value || "";
+      return { label, value: choiceLabel };
+    }
+
+    if (kind === "checklist") {
+      const selected = controls
+        .filter((control) => control.checked)
+        .map((control) => normalizeInlineText(control?.closest("label")?.querySelector("span")?.textContent) || control.value)
+        .filter(Boolean);
+      return { label, value: selected.join(", ") };
+    }
+
+    const control = controls[0];
+    const value = normalizeInlineText(control?.value || "");
+    return { label, value };
+  }
+
+  function collectScenarioAnswer(prompt) {
+    const question = normalizeInlineText(prompt.querySelector(".scenario__question")?.textContent) || "Scenario prompt";
+    const selected = Array.from(prompt.querySelectorAll("[data-scenario-choice]")).find((choice) => choice.checked);
+    const choiceLabel = normalizeInlineText(selected?.closest("label")?.querySelector("span")?.textContent) || selected?.value || "";
+    const outcome = normalizeInlineText(prompt.querySelector(`[data-scenario-outcome-option="${selected?.value || ""}"]`)?.textContent) || "";
+    return {
+      question,
+      answer: choiceLabel,
+      outcome
+    };
+  }
+
+  function collectDecisionTreeExport(tree) {
+    const visitedIds = String(tree.getAttribute("data-visited") || "")
+      .split(",")
+      .map((item) => item.trim())
+      .filter(Boolean);
+    const nodeLabels = new Map();
+    tree.querySelectorAll("[data-decision-node]").forEach((node) => {
+      const nodeId = node.getAttribute("data-node-id");
+      const prompt = normalizeInlineText(node.querySelector(".decision-tree__prompt")?.textContent);
+      if (nodeId && prompt) nodeLabels.set(nodeId, prompt);
+    });
+    return visitedIds.map((id) => nodeLabels.get(id) || id).filter(Boolean);
+  }
+
+  function collectStudentName() {
+    const wrappers = Array.from(document.querySelectorAll("[data-workbook-field-wrap]"));
+    const hit = wrappers.find((wrapper) => {
+      const key = wrapper.getAttribute("data-workbook-key") || "";
+      const label = normalizeInlineText(wrapper.querySelector(".workbook__label")?.textContent).toLowerCase();
+      return key.endsWith("-student-name") || label.includes("student name") || label === "name";
+    });
+    if (!hit) return "";
+    const answer = collectWorkbookAnswer(hit);
+    return answer.value || "";
+  }
+
+  function buildTeacherExport() {
+    const course = document.body?.dataset?.course || "";
+    const unit = document.body?.dataset?.unit || "";
+    const title = normalizeInlineText(document.querySelector(".unit-header__title")?.textContent) || "Unit Export";
+    const studentName = collectStudentName();
+
+    const header = [];
+    header.push("========================================================");
+    header.push(`  ${title.toUpperCase()} - STUDENT SUBMISSION`);
+    header.push("========================================================");
+    header.push(`Course: ${course}`);
+    header.push(`Unit: ${unit}`);
+    header.push(`Student Name: ${studentName || "Not provided"}`);
+    header.push(`Exported: ${new Date().toLocaleString()}`);
+    header.push("");
+
+    const lines = [];
+    listCoreSections().forEach((section) => {
+      const title = sectionTitle(section);
+      const checkpoints = section.getAttribute("data-section-checkpoints") || "";
+      lines.push(`--- ${title}${checkpoints ? ` (${checkpoints})` : ""} ---`);
+
+      const workbookFields = Array.from(section.querySelectorAll("[data-workbook-field-wrap]"));
+      workbookFields.forEach((wrapper) => {
+        const { label, value } = collectWorkbookAnswer(wrapper);
+        if (!value) return;
+        lines.push(`${label}: ${value}`);
+      });
+
+      const scenarioPrompts = Array.from(section.querySelectorAll("[data-scenario-prompt]"));
+      scenarioPrompts.forEach((prompt) => {
+        const { question, answer, outcome } = collectScenarioAnswer(prompt);
+        if (!answer) return;
+        lines.push(`${question}: ${answer}`);
+        if (outcome) {
+          lines.push(`Outcome: ${outcome}`);
+        }
+      });
+
+      const rankingRows = Array.from(section.querySelectorAll("[data-ranking-row]"));
+      rankingRows.forEach((row) => {
+        const label = normalizeInlineText(row.querySelector(".ranking__label")?.textContent) || "Ranking item";
+        const value = normalizeInlineText(row.querySelector("[data-ranking-field]")?.value) || "";
+        if (!value) return;
+        lines.push(`${label}: ${value}`);
+      });
+
+      const trees = Array.from(section.querySelectorAll("[data-decision-tree]"));
+      trees.forEach((tree, index) => {
+        const visited = collectDecisionTreeExport(tree);
+        if (visited.length === 0) return;
+        const label = trees.length > 1 ? `Decision Path ${index + 1}` : "Decision Path";
+        lines.push(`${label}: ${visited.join(" -> ")}`);
+      });
+
+      lines.push("");
+    });
+
+    return {
+      filename: `${safeFilenamePart(title, "Unit")}_${safeFilenamePart(studentName, "Student")}.txt`,
+      text: [...header, ...lines].join("\n")
+    };
   }
 
   function restoreSectionCompletionFlags(flags) {
@@ -565,6 +791,37 @@
         button.classList.toggle("is-open", !open);
         panel.hidden = open;
         onChange();
+      });
+    });
+  }
+
+  function initKnowledgeHandlers(onChange) {
+    document.querySelectorAll("[data-knowledge]").forEach((item) => {
+      const button = item.querySelector("[data-knowledge-toggle]");
+      const panel = item.querySelector("[data-knowledge-panel]");
+      if (!button || !panel) return;
+      button.addEventListener("click", () => {
+        const open = button.getAttribute("aria-expanded") === "true";
+        button.setAttribute("aria-expanded", open ? "false" : "true");
+        button.classList.toggle("is-open", !open);
+        panel.hidden = open;
+        onChange();
+      });
+    });
+  }
+
+  function initWorkbookHintHandlers() {
+    document.querySelectorAll("[data-workbook-hint-toggle]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const panelId = button.getAttribute("aria-controls");
+        if (!panelId) return;
+        const panel = document.getElementById(panelId);
+        if (!panel) return;
+        const expanded = button.getAttribute("aria-expanded") === "true";
+        const next = !expanded;
+        button.setAttribute("aria-expanded", next ? "true" : "false");
+        button.textContent = next ? "Hide Hint" : "Show Hint";
+        panel.hidden = !next;
       });
     });
   }
@@ -595,6 +852,9 @@
       const kind = field.getAttribute("data-workbook-kind");
       const eventName = kind === "text" || kind === "textarea" ? "input" : "change";
       field.addEventListener(eventName, () => {
+        if (kind === "textarea" && field.getAttribute("data-autosize") !== "false") {
+          autoResizeTextarea(field);
+        }
         onChange();
       });
     });
@@ -970,6 +1230,15 @@
     button.addEventListener("click", () => onComplete(button));
   }
 
+  function initTeacherExport() {
+    document.querySelectorAll("[data-teacher-export]").forEach((button) => {
+      button.addEventListener("click", () => {
+        const payload = buildTeacherExport();
+        downloadTextFile(payload.filename, payload.text);
+      });
+    });
+  }
+
   function mount() {
     const stateKey = createStorageKey();
     let state = loadState(stateKey);
@@ -984,6 +1253,7 @@
     initMissionBrief();
 
     restoreAccordionState(state.accordion || {});
+    restoreKnowledgeState(state.knowledge || {});
     restoreFlashcardState(state.flashcards || {});
     restoreWorkbookState(state.workbook || {});
     restoreScenarioState(state.scenario || {});
@@ -1012,6 +1282,7 @@
         ...extra,
         scrollY: window.scrollY || 0,
         accordion: collectAccordionState(),
+        knowledge: collectKnowledgeState(),
         flashcards: collectFlashcardState(),
         workbook: collectWorkbookState(),
         scenario: collectScenarioState(),
@@ -1024,25 +1295,43 @@
     }
 
     function handleInteractionChange() {
+      const prevCompletion = state.sectionCompletion || {};
       const sectionCompletion = refreshProgressUi();
       state = {
         ...state,
         sectionCompletion
       };
+      Object.entries(sectionCompletion).forEach(([id, isComplete]) => {
+        if (!isComplete) return;
+        if (prevCompletion[id]) return;
+        const button = document.querySelector(`[data-stepper-item][data-stepper-target="${id}"]`);
+        triggerCelebration(button, reducedMotion);
+      });
       persist();
     }
 
     initAccordionHandlers(() => persist());
+    initKnowledgeHandlers(() => persist());
+    initWorkbookHintHandlers();
     initFlashcardHandlers(handleInteractionChange);
     initWorkbookHandlers(handleInteractionChange);
     initScenarioHandlers(handleInteractionChange);
     initRankingHandlers(handleInteractionChange);
     initDecisionTreeHandlers(handleInteractionChange);
+    initTeacherExport();
     const isPaged = initSectionStage(String(state.activeSection || ""), reducedMotion, () => persist());
     if (!isPaged) {
       initStickyNav();
       if (typeof state.scrollY === "number") {
         window.scrollTo({ top: state.scrollY, behavior: "auto" });
+      }
+    } else {
+      const stage = document.querySelector("[data-section-stage]");
+      if (stage) {
+        window.requestAnimationFrame(() => {
+          const offsetTop = Math.max(0, window.scrollY + stage.getBoundingClientRect().top - 16);
+          window.scrollTo({ top: offsetTop, behavior: "auto" });
+        });
       }
     }
     initCompletion((button) => {

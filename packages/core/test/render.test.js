@@ -242,3 +242,62 @@ Alpha
   assert.match(html, /data-template="case-studio"/);
   assert.match(html, /data-theme="cupertino-light"/);
 });
+
+test("renderUnitToPreview includes knowledge blocks and workbook hint or layout hooks", async () => {
+  const tempRoot = await fs.mkdtemp(path.join(os.tmpdir(), "cf-render-"));
+  const outputDir = path.join(tempRoot, "preview");
+  const sourceDir = path.join(tempRoot, "unit");
+  await fs.mkdir(sourceDir, { recursive: true });
+
+  const parsed = parseMarkdownToUnitBlocks(`
+## Launch
+
+:::knowledge
+title: Before you start
+body: |
+  Read this first.
+:::
+
+:::workbook
+title: Start
+layout: budget-grid
+fields:
+  - type: text
+    id: student-name
+    label: Student Name
+  - type: textarea
+    id: reflection
+    label: Reflection
+    hint: Think about one pattern you want to change.
+    autosize: true
+:::
+`);
+
+  await renderUnitToPreview({
+    repoRoot: path.resolve(process.cwd()),
+    outputDir,
+    unit: {
+      courseSlug: "demo-course",
+      unitSlug: "demo-unit",
+      sourceDir,
+      title: "Demo Unit",
+      subtitle: "",
+      estimatedMinutes: 10,
+      objectives: [],
+      sections: parsed.sections,
+      nav: parsed.nav,
+      resources: [],
+      flashcards: [],
+      template: "guided-workbook",
+      theme: "clay-workbook"
+    }
+  });
+
+  const html = await fs.readFile(path.join(outputDir, "index.html"), "utf8");
+  assert.match(html, /data-knowledge/);
+  assert.match(html, /data-workbook-layout="budget-grid"/);
+  assert.match(html, /data-workbook-hint-toggle/);
+  assert.match(html, /data-autosize="true"/);
+  assert.match(html, /data-template="guided-workbook"/);
+  assert.match(html, /data-theme="clay-workbook"/);
+});

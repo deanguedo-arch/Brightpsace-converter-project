@@ -6,8 +6,11 @@ import http from "node:http";
 import { spawn, spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import {
+  auditUnitAgainstReference,
   buildPreviewUnit,
   compileUnitFromSource,
+  convertUnitFromSource,
+  createReferenceCompareWorkspace,
   importUnitFromFolder,
   initCourseScaffold,
   initUnitScaffold,
@@ -37,6 +40,7 @@ Commands:
   cf init unit <courseSlug> <unitSlug> [--title <title>] [--template <template>] [--theme <theme>]
   cf import <sourcePath> --course <courseSlug> --unit <unitSlug> [--extract]
   cf compile <sourcePath> --course <courseSlug> --unit <unitSlug> [--extract]
+  cf convert <sourcePath> --course <courseSlug> --unit <unitSlug> [--extract]
   cf preview <unitSlug> [--mode=sandbox] [--open] [--watch]
   cf preview <courseSlug> <unitSlug> [--mode=sandbox] [--open] [--watch]
   cf build <unitSlug> --scorm
@@ -45,6 +49,8 @@ Commands:
   cf build <courseSlug> --all --scorm
     [--gate] [--min-overall 4] [--min-dimension 3]
   cf score [<courseSlug> <unitSlug>] [--min-overall 4] [--min-dimension 3] [--json]
+  cf compare <courseSlug> <unitSlug> --reference <profileOrFile> [--open]
+  cf audit <courseSlug> <unitSlug> --reference <profileOrFile> [--json]
   cf release <unitSlug> --scorm
   cf release <courseSlug> <unitSlug> --scorm
   cf release --all --scorm
@@ -709,6 +715,109 @@ async function runScore(positional, flags) {
   }
 }
 
+function printAuditResult(target, report) {
+  console.log(`\nReference audit for ${target} against ${report.profile.id}`);
+  console.log(`  Passed: ${report.passed ? "yes" : "no"}`);
+  console.log(`  Overall: ${report.scores.overall} / 100 (threshold ${report.threshold.overall})`);
+  console.log(`  - Visual shell: ${report.scores.visualShell} / ${report.profile.weights.visualShell}`);
+  console.log(`  - Interaction parity: ${report.scores.interactionParity} / ${report.profile.weights.interactionParity}`);
+  console.log(`  - Source coverage: ${report.scores.sourceCoverage} / ${report.profile.weights.sourceCoverage}`);
+  console.log(`  - Learner flow: ${report.scores.learnerFlow} / ${report.profile.weights.learnerFlow}`);
+  console.log(`  - Completion flow: ${report.scores.completionFlow} / ${report.profile.weights.completionFlow}`);
+  if (report.missingMandatory.length > 0) {
+    console.log("  Missing mandatory features:");
+    for (const feature of report.missingMandatory) {
+      console.log(`    - ${feature}`);
+    }
+  }
+  const failedSections = report.sectionCoverage.filter((entry) => !entry.passed);
+  if (failedSections.length > 0) {
+    console.log("  Section coverage gaps:");
+    for (const entry of failedSections) {
+      const detail = entry.found
+        ? `missing ${entry.missingElements.join(", ")}`
+        : "missing section";
+      console.log(`    - ${entry.targetId}: ${detail}`);
+    }
+  }
+  console.log(`  Next slice: ${report.nextSlice}`);
+}
+
+async function runConvert(positional, flags) {
+  const sourcePath = positional[0];
+  if (!sourcePath) {
+    throw new Error("Usage: cf convert <sourcePath> --course <courseSlug> --unit <unitSlug> [--extract]");
+  }
+  if (!flags.course || !flags.unit) {
+    throw new Error("Convert requires --course and --unit.");
+  }
+  const converted = await convertUnitFromSource({
+    repoRoot: REPO_ROOT,
+    sourcePath,
+    courseSlug: String(flags.course),
+    unitSlug: String(flags.unit),
+    extract: Boolean(flags.extract)
+  });
+  console.log(`Converted unit: courses/${converted.courseSlug}/units/${converted.unitSlug}`);
+  if (converted.blueprintPath) {
+    console.log(`Blueprint: ${converted.blueprintPath}`);
+  }
+  if (converted.contentPath) {
+    console.log(`Draft content: ${converted.contentPath}`);
+  }
+  if (Array.isArray(converted.extractedMaterials) && converted.extractedMaterials.length > 0) {
+    console.log(`Extracted/loaded ${converted.extractedMaterials.length} source file(s):`);
+    for (const file of converted.extractedMaterials) {
+      console.log(`  - ${file}`);
+    }
+  }
+}
+
+async function runCompare(positional, flags) {
+  if (positional.length !== 2) {
+    throw new Error("Usage: cf compare <courseSlug> <unitSlug> --reference <profileOrFile> [--open]");
+  }
+  if (!flags.reference) {
+    throw new Error("Compare requires --reference <profileOrFile>.");
+  }
+  const result = await createReferenceCompareWorkspace({
+    repoRoot: REPO_ROOT,
+    courseSlug: positional[0],
+    unitSlug: positional[1],
+    reference: String(flags.reference)
+  });
+  console.log(`Compare workspace: ${result.compareDir}`);
+  console.log(`Compare page: ${result.compareHtmlPath}`);
+  if (flags.open) {
+    openBrowser(result.compareHtmlPath);
+  }
+}
+
+async function runAudit(positional, flags) {
+  if (positional.length !== 2) {
+    throw new Error("Usage: cf audit <courseSlug> <unitSlug> --reference <profileOrFile> [--json]");
+  }
+  if (!flags.reference) {
+    throw new Error("Audit requires --reference <profileOrFile>.");
+  }
+  const report = await auditUnitAgainstReference({
+    repoRoot: REPO_ROOT,
+    courseSlug: positional[0],
+    unitSlug: positional[1],
+    reference: String(flags.reference)
+  });
+
+  if (flags.json) {
+    console.log(JSON.stringify(report, null, 2));
+  } else {
+    printAuditResult(`${positional[0]}/${positional[1]}`, report);
+  }
+
+  if (!report.passed) {
+    throw new Error("Reference audit failed.");
+  }
+}
+
 async function runCompile(positional, flags) {
   const sourcePath = positional[0];
   if (!sourcePath) {
@@ -784,6 +893,15 @@ async function main() {
       break;
     case "compile":
       await runCompile(positional, flags);
+      break;
+    case "convert":
+      await runConvert(positional, flags);
+      break;
+    case "compare":
+      await runCompare(positional, flags);
+      break;
+    case "audit":
+      await runAudit(positional, flags);
       break;
     case "preview":
       await runPreview(positional, flags);
