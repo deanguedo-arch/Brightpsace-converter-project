@@ -4,6 +4,7 @@ import fs from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import { convertUnitFromSource } from "../src/convert.js";
+import { CALM_MODULE_2_CORPUS } from "./fixtures/calmModule2Corpus.js";
 
 test("convertUnitFromSource converts CALM Module 1 sources into a premium unit draft", async () => {
   const root = await fs.mkdtemp(path.join(os.tmpdir(), "cf-convert-"));
@@ -90,32 +91,7 @@ test("convertUnitFromSource converts CALM Module 2 sources into a resource choic
   await fs.mkdir(sourceDir, { recursive: true });
 
   const sourceFile = path.join(sourceDir, "calm-module-2.txt");
-  await fs.writeFile(
-    sourceFile,
-    [
-      "Career and Life Management",
-      "Module 2",
-      "Resource Choices",
-      "",
-      "Resources: Who Decides What You Buy",
-      "Advertising and Consumerism",
-      "How might friends or family influence what you spend your money on?",
-      "Identify one store you like to shop from or brand you like to buy.",
-      "",
-      "Resources: What are you Waiting For?",
-      "Joe gets a job as a clerk at Wal-Mart.",
-      "Sally bought a used Ford Escort.",
-      "",
-      "Resources: Managing your Money",
-      "Where does your money come from?",
-      "At the end of the month, are you saving money or going into debt?",
-      "",
-      "Resources: Maintaining Positive Relationships",
-      "Norma sees a wealthy person drop money while exiting a limousine.",
-      "Joe lent Craig, his best friend, $100 six weeks ago."
-    ].join("\n"),
-    "utf8"
-  );
+  await fs.writeFile(sourceFile, CALM_MODULE_2_CORPUS, "utf8");
 
   const result = await convertUnitFromSource({
     repoRoot: root,
@@ -127,7 +103,9 @@ test("convertUnitFromSource converts CALM Module 2 sources into a resource choic
 
   const unitDir = path.join(root, "courses", "calm-course", "units", "module-2-v2");
   const contentPath = path.join(unitDir, "content.md");
+  const blueprintPath = path.join(unitDir, "blueprint.convert.json");
   const content = await fs.readFile(contentPath, "utf8");
+  const blueprint = JSON.parse(await fs.readFile(blueprintPath, "utf8"));
 
   assert.equal(result.courseSlug, "calm-course");
   assert.equal(result.unitSlug, "module-2-v2");
@@ -136,12 +114,26 @@ test("convertUnitFromSource converts CALM Module 2 sources into a resource choic
   assert.match(content, /Joe vs\. Sally/i);
   assert.match(content, /Budget Builder/i);
   assert.match(content, /Honesty and Relationship Cases/i);
+  assert.match(content, /Joe gets a job as a clerk at Wal-Mart/i);
+  assert.match(content, /Gertrude sees her friend Ethyl tagging the wall/i);
+  assert.match(content, /What if Joanne told Amanda that her family would kick her out/i);
   assert.match(content, /Student Name/i);
   assert.match(content, /:::knowledge/);
-  assert.match(content, /layout:\s+budget-grid/i);
-  assert.match(content, /layout:\s+case-stack/i);
+  assert.match(content, /layout:\s+stack/i);
+  assert.match(content, /layout:\s+paired-rows/i);
   assert.match(content, /hint:/i);
-  assert.match(content, /:::ranking/);
-  assert.match(content, /:::scenario/);
+  assert.doesNotMatch(content, /:::ranking/);
+  assert.doesNotMatch(content, /:::scenario/);
+  assert.doesNotMatch(content, /:::decision-tree/);
+  assert.doesNotMatch(content, /Item purchased or item you are considering/i);
+  assert.match(content, /The Price of Cool: Joe vs\. Sally/i);
+  assert.match(content, /:::simulator/);
   assert.match(content, /:::submission/);
+  assert.equal(blueprint.target, "brightspace-embed");
+  assert.ok(Array.isArray(blueprint.patternDecisions));
+  assert.equal(
+    blueprint.patternDecisions.find((entry) => entry.sectionId === "budget-builder")?.patternId,
+    "mini-simulator"
+  );
+  assert.equal(blueprint.sourceCoverage.sectionsCovered, 1);
 });

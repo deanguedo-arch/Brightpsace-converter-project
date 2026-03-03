@@ -247,8 +247,8 @@ function renderBlock(block, sectionId, blockIndex) {
   if (block.type === "workbook") {
     const workbookId = `${sectionId}-workbook-${blockIndex + 1}`;
     const total = block.fields.length;
-    const layout = escapeHtml(block.layout || "default");
-    const fields = block.fields
+    const layout = block.layout || "stack";
+    const fieldMarkup = block.fields
       .map((field, fieldIndex) => {
         const fieldId = `${workbookId}-field-${fieldIndex + 1}-${slugify(field.id) || "item"}`;
         const fieldKey = fieldId;
@@ -349,11 +349,16 @@ function renderBlock(block, sectionId, blockIndex) {
         }
 
         return "";
-      })
-      .join("");
+      });
+    const fields = ["paired-rows", "split"].includes(layout)
+      ? Array.from({ length: Math.ceil(fieldMarkup.length / 2) }, (_, rowIndex) => {
+          const start = rowIndex * 2;
+          return `<div class="workbook__pair-row">${fieldMarkup.slice(start, start + 2).join("")}</div>`;
+        }).join("")
+      : fieldMarkup.join("");
 
     return `
-      <section class="workbook card" data-workbook data-workbook-id="${escapeHtml(workbookId)}" data-workbook-total="${escapeHtml(total)}" data-workbook-layout="${layout}">
+      <section class="workbook card" data-workbook data-workbook-id="${escapeHtml(workbookId)}" data-workbook-total="${escapeHtml(total)}" data-workbook-layout="${escapeHtml(layout)}">
         <div class="workbook__header">
           <h3 class="workbook__title">${escapeHtml(block.title || "Workbook")}</h3>
           <p class="workbook__progress" data-workbook-progress>0 / ${escapeHtml(total)} complete</p>
@@ -491,6 +496,145 @@ function renderBlock(block, sectionId, blockIndex) {
         <div class="decision-tree__canvas">${nodeMarkup}</div>
         <div class="decision-tree__controls">
           <button type="button" class="button button--ghost" data-decision-restart>Restart path</button>
+        </div>
+      </section>
+    `;
+  }
+  if (block.type === "simulator") {
+    const simulatorId = `${sectionId}-simulator-${blockIndex + 1}`;
+    const isBudgetSheet = (block.simulatorKind || "") === "budget";
+    const renderSimulatorField = (field, fieldIndex, group) => {
+      const inputId = `${simulatorId}-${group}-${fieldIndex + 1}-${slugify(field.key) || "item"}`;
+      const fieldMarkup = `
+        <div class="simulator__field" data-simulator-field-wrap data-simulator-key="${escapeHtml(field.key)}" data-simulator-group="${escapeHtml(group)}">
+          <label class="simulator__label" for="${escapeHtml(inputId)}">${escapeHtml(field.label)}</label>
+          <input
+            id="${escapeHtml(inputId)}"
+            class="simulator__input"
+            type="number"
+            inputmode="decimal"
+            step="0.01"
+            min="0"
+            data-simulator-field
+            data-simulator-group="${escapeHtml(group)}"
+            data-simulator-key="${escapeHtml(field.key)}"
+          >
+        </div>
+      `;
+      if (!isBudgetSheet) return fieldMarkup;
+
+      const needsNote = /(^other(?:-income)?$|^etc$)/i.test(field.key) || /(^other\b|etc\.)/i.test(field.label);
+      if (!needsNote) {
+        return `<div class="budget-sheet__field-group">${fieldMarkup}</div>`;
+      }
+
+      const noteId = `${inputId}-note`;
+      const notePrompt = /etc/i.test(field.key) || /etc/i.test(field.label)
+        ? 'Explain "Etc."'
+        : 'Explain "Other"';
+      return `
+        <div class="budget-sheet__field-group">
+          ${fieldMarkup}
+          <div class="simulator__field simulator__field--note" data-simulator-note-wrap data-simulator-key="${escapeHtml(field.key)}" data-simulator-group="${escapeHtml(group)}">
+            <label class="simulator__label simulator__label--note" for="${escapeHtml(noteId)}">${escapeHtml(notePrompt)}</label>
+            <input
+              id="${escapeHtml(noteId)}"
+              class="simulator__input simulator__input--note"
+              type="text"
+              data-simulator-note
+              data-simulator-group="${escapeHtml(group)}"
+              data-simulator-key="${escapeHtml(field.key)}"
+            >
+          </div>
+        </div>
+      `;
+    };
+    const incomeFields = (block.incomeFields || [])
+      .map((field, fieldIndex) => renderSimulatorField(field, fieldIndex, "income"))
+      .join("");
+    const expenseFields = (block.expenseFields || [])
+      .map((field, fieldIndex) => renderSimulatorField(field, fieldIndex, "expense"))
+      .join("");
+    const total = (block.incomeFields || []).length + (block.expenseFields || []).length;
+    if (isBudgetSheet) {
+      return `
+        <section
+          class="simulator card budget-sheet"
+          data-simulator
+          data-simulator-id="${escapeHtml(simulatorId)}"
+          data-simulator-kind="${escapeHtml(block.simulatorKind || "generic")}"
+          data-simulator-total="${escapeHtml(total)}"
+        >
+          <div class="simulator__header budget-sheet__header">
+            <div>
+              <h3 class="simulator__title">${escapeHtml(block.title || "Simulator")}</h3>
+              ${block.descriptionHtml ? `<div class="simulator__description budget-sheet__description">${block.descriptionHtml}</div>` : ""}
+            </div>
+            <p class="simulator__progress" data-simulator-progress>0 / ${escapeHtml(total)} complete</p>
+          </div>
+          <div class="simulator__grid budget-sheet__grid">
+            <div class="simulator__column budget-sheet__column">
+              <h4 class="simulator__column-title">Income (+)</h4>
+              ${incomeFields}
+            </div>
+            <div class="simulator__column budget-sheet__column">
+              <h4 class="simulator__column-title">Expenses (-)</h4>
+              ${expenseFields}
+            </div>
+          </div>
+          <div class="budget-sheet__summary">
+            <article class="budget-sheet__summary-item">
+              <span class="budget-sheet__summary-label">Income</span>
+              <span class="budget-sheet__summary-value" data-simulator-income-total>$0.00</span>
+            </article>
+            <article class="budget-sheet__summary-item">
+              <span class="budget-sheet__summary-label">Expenses</span>
+              <span class="budget-sheet__summary-value" data-simulator-expense-total>$0.00</span>
+            </article>
+            <article class="budget-sheet__summary-item budget-sheet__summary-item--net">
+              <span class="budget-sheet__summary-label">Net</span>
+              <span class="budget-sheet__summary-value" data-simulator-net-total>$0.00</span>
+            </article>
+          </div>
+        </section>
+      `;
+    }
+    return `
+      <section
+        class="simulator card"
+        data-simulator
+        data-simulator-id="${escapeHtml(simulatorId)}"
+        data-simulator-kind="${escapeHtml(block.simulatorKind || "generic")}"
+        data-simulator-total="${escapeHtml(total)}"
+      >
+        <div class="simulator__header">
+          <h3 class="simulator__title">${escapeHtml(block.title || "Simulator")}</h3>
+          <p class="simulator__progress" data-simulator-progress>0 / ${escapeHtml(total)} complete</p>
+        </div>
+        ${block.descriptionHtml ? `<div class="simulator__description">${block.descriptionHtml}</div>` : ""}
+        <div class="simulator__metrics">
+          <article class="simulator__metric">
+            <span class="simulator__metric-label">Income</span>
+            <span class="simulator__metric-value" data-simulator-income-total>$0.00</span>
+          </article>
+          <article class="simulator__metric">
+            <span class="simulator__metric-label">Expenses</span>
+            <span class="simulator__metric-value" data-simulator-expense-total>$0.00</span>
+          </article>
+          <article class="simulator__metric simulator__metric--net">
+            <span class="simulator__metric-label">Net</span>
+            <span class="simulator__metric-value" data-simulator-net-total>$0.00</span>
+          </article>
+        </div>
+        <div class="simulator__grid">
+          <div class="simulator__column">
+            <h4 class="simulator__column-title">Income</h4>
+            ${incomeFields}
+          </div>
+          <div class="simulator__column">
+            <h4 class="simulator__column-title">Expenses</h4>
+            ${expenseFields}
+          </div>
         </div>
       </section>
     `;

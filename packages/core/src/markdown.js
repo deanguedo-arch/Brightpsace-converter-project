@@ -115,9 +115,9 @@ function parseWorkbook(bodyLines) {
 
   const title = String(config.title || config.heading || "Workbook").trim() || "Workbook";
   const description = String(config.description || config.instructions || "").trim();
-  const rawLayout = String(config.layout || "default").trim().toLowerCase();
-  const allowedLayouts = new Set(["default", "split", "budget-grid", "case-stack"]);
-  const layout = allowedLayouts.has(rawLayout) ? rawLayout : "default";
+  const rawLayout = String(config.layout || "stack").trim().toLowerCase();
+  const allowedLayouts = new Set(["default", "split", "budget-grid", "case-stack", "stack", "paired-rows"]);
+  const layout = allowedLayouts.has(rawLayout) ? rawLayout : "stack";
   const fieldsRaw = Array.isArray(config.fields) ? config.fields : [];
   const fields = fieldsRaw
     .map((field, index) => normalizeWorkbookField(field, index))
@@ -328,6 +328,44 @@ function parseSubmission(bodyLines) {
   };
 }
 
+function normalizeSimulatorField(rawField, index) {
+  if (!rawField || typeof rawField !== "object") return null;
+  const label = String(rawField.label || "").trim();
+  const key = slugify(rawField.key || rawField.id || label) || `field-${index + 1}`;
+  if (!label) return null;
+  return { key, label };
+}
+
+function parseSimulator(bodyLines) {
+  const source = bodyLines.join("\n").trim();
+  if (!source) return null;
+  const config = yaml.load(source);
+  if (!config || typeof config !== "object" || Array.isArray(config)) return null;
+
+  const simulatorKind = String(config.kind || "generic").trim().toLowerCase();
+  if (simulatorKind !== "budget") return null;
+
+  const title = String(config.title || "Simulator").trim() || "Simulator";
+  const description = String(config.description || config.instructions || "").trim();
+  const incomeFields = (Array.isArray(config.income) ? config.income : [])
+    .map((field, index) => normalizeSimulatorField(field, index))
+    .filter(Boolean);
+  const expenseFields = (Array.isArray(config.expenses) ? config.expenses : [])
+    .map((field, index) => normalizeSimulatorField(field, index))
+    .filter(Boolean);
+
+  if (incomeFields.length === 0 && expenseFields.length === 0) return null;
+
+  return {
+    type: "simulator",
+    simulatorKind,
+    title,
+    descriptionHtml: description ? md.render(description) : "",
+    incomeFields,
+    expenseFields
+  };
+}
+
 function createSection(title, idsInUse) {
   const base = slugify(title || "section") || "section";
   let id = base;
@@ -363,7 +401,7 @@ export function parseMarkdownToUnitBlocks(content) {
   for (let index = 0; index < lines.length; index += 1) {
     const line = lines[index];
 
-    const directiveStart = line.match(/^:::(info|warning|example|accordion|knowledge|workbook|scenario|ranking|decision-tree|submission)\s*$/);
+    const directiveStart = line.match(/^:::(info|warning|example|accordion|knowledge|workbook|scenario|ranking|decision-tree|simulator|submission)\s*$/);
     if (directiveStart) {
       pushMarkdownBlock(buffer, currentSection);
       const kind = directiveStart[1];
@@ -401,6 +439,9 @@ export function parseMarkdownToUnitBlocks(content) {
       } else if (kind === "decision-tree") {
         const tree = parseDecisionTree(bodyLines);
         if (tree) currentSection.blocks.push(tree);
+      } else if (kind === "simulator") {
+        const simulator = parseSimulator(bodyLines);
+        if (simulator) currentSection.blocks.push(simulator);
       } else if (kind === "submission") {
         const submission = parseSubmission(bodyLines);
         if (submission) currentSection.blocks.push(submission);

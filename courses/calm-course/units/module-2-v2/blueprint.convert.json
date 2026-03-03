@@ -1,7 +1,8 @@
 {
   "version": 1,
-  "generatedAt": "2026-03-03T16:15:43.960Z",
+  "generatedAt": "2026-03-03T21:25:37.972Z",
   "converter": "calm-module-2",
+  "target": "brightspace-embed",
   "courseSlug": "calm-course",
   "unitSlug": "module-2-v2",
   "sourceFiles": [
@@ -11,5 +12,532 @@
   "extractedMaterials": [
     "CALM Module 2 - Resource Choices.docx",
     "CALM Module 2 - Resourse Choices.pdf"
-  ]
+  ],
+  "patternDecisions": [
+    {
+      "sectionId": "module-launch",
+      "intents": [
+        "launch",
+        "decision_making",
+        "reflection"
+      ],
+      "patternId": "launch-frame",
+      "interactionScore": 11,
+      "confidence": 0.7272727272727273,
+      "reasons": [
+        "launch setup prompts detected",
+        "launch intent qualifies for launch frame"
+      ],
+      "sourceCoverageScore": 1,
+      "issues": [],
+      "trace": [
+        {
+          "stage": "fidelity",
+          "code": "SOURCE_COVERAGE_OK",
+          "result": "pass",
+          "detail": "Coverage 1.00.",
+          "patternId": "launch-frame"
+        },
+        {
+          "stage": "sanitation",
+          "code": "SANITATION_OK",
+          "result": "pass",
+          "detail": "No sanitation artifacts detected.",
+          "patternId": "launch-frame"
+        },
+        {
+          "stage": "pedagogy",
+          "code": "PEDAGOGY_OK",
+          "result": "pass",
+          "detail": "Selected pattern \"launch-frame\".",
+          "patternId": "launch-frame"
+        },
+        {
+          "stage": "layout",
+          "code": "LAYOUT_POLICY_APPLIED",
+          "result": "pass",
+          "detail": "Renderer layout policy will enforce stack-first workbook composition.",
+          "patternId": "launch-frame"
+        },
+        {
+          "stage": "visual",
+          "code": "VISUAL_POLICY_APPLIED",
+          "result": "pass",
+          "detail": "Theme/token policy will apply during target rendering.",
+          "patternId": "launch-frame"
+        }
+      ],
+      "policyVersion": "1.0.0",
+      "precedence": [
+        "fidelity",
+        "sanitation",
+        "pedagogy",
+        "layout",
+        "visual"
+      ],
+      "override": null
+    },
+    {
+      "sectionId": "spending-influences",
+      "intents": [
+        "knowledge",
+        "decision_making",
+        "reflection"
+      ],
+      "patternId": "knowledge-atlas",
+      "interactionScore": 10,
+      "confidence": 0.6,
+      "reasons": [
+        "instructional knowledge content detected",
+        "purchase log structure detected",
+        "knowledge density qualifies for knowledge atlas"
+      ],
+      "sourceCoverageScore": 1,
+      "issues": [],
+      "trace": [
+        {
+          "stage": "fidelity",
+          "code": "SOURCE_COVERAGE_OK",
+          "result": "pass",
+          "detail": "Coverage 1.00.",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "sanitation",
+          "code": "SANITATION_OK",
+          "result": "pass",
+          "detail": "No sanitation artifacts detected.",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "pedagogy",
+          "code": "PEDAGOGY_OK",
+          "result": "pass",
+          "detail": "Selected pattern \"knowledge-atlas\".",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "layout",
+          "code": "LAYOUT_POLICY_APPLIED",
+          "result": "pass",
+          "detail": "Renderer layout policy will enforce stack-first workbook composition.",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "visual",
+          "code": "VISUAL_POLICY_APPLIED",
+          "result": "pass",
+          "detail": "Theme/token policy will apply during target rendering.",
+          "patternId": "knowledge-atlas"
+        }
+      ],
+      "policyVersion": "1.0.0",
+      "precedence": [
+        "fidelity",
+        "sanitation",
+        "pedagogy",
+        "layout",
+        "visual"
+      ],
+      "override": null
+    },
+    {
+      "sectionId": "joe-vs-sally",
+      "intents": [
+        "decision_making",
+        "compare_contrast",
+        "budgeting",
+        "reflection"
+      ],
+      "patternId": "decision-pathway",
+      "interactionScore": 17,
+      "confidence": 0.4117647058823529,
+      "reasons": [
+        "paired tradeoff narrative detected",
+        "compare/tradeoff signals qualify for decision pathway"
+      ],
+      "sourceCoverageScore": 1,
+      "issues": [],
+      "trace": [
+        {
+          "stage": "fidelity",
+          "code": "SOURCE_COVERAGE_OK",
+          "result": "pass",
+          "detail": "Coverage 1.00.",
+          "patternId": "decision-pathway"
+        },
+        {
+          "stage": "sanitation",
+          "code": "SANITATION_OK",
+          "result": "pass",
+          "detail": "No sanitation artifacts detected.",
+          "patternId": "decision-pathway"
+        },
+        {
+          "stage": "pedagogy",
+          "code": "PEDAGOGY_OK",
+          "result": "pass",
+          "detail": "Selected pattern \"decision-pathway\".",
+          "patternId": "decision-pathway"
+        },
+        {
+          "stage": "layout",
+          "code": "LAYOUT_POLICY_APPLIED",
+          "result": "pass",
+          "detail": "Renderer layout policy will enforce stack-first workbook composition.",
+          "patternId": "decision-pathway"
+        },
+        {
+          "stage": "visual",
+          "code": "VISUAL_POLICY_APPLIED",
+          "result": "pass",
+          "detail": "Theme/token policy will apply during target rendering.",
+          "patternId": "decision-pathway"
+        }
+      ],
+      "policyVersion": "1.0.0",
+      "precedence": [
+        "fidelity",
+        "sanitation",
+        "pedagogy",
+        "layout",
+        "visual"
+      ],
+      "override": null
+    },
+    {
+      "sectionId": "budget-builder",
+      "intents": [
+        "budgeting",
+        "knowledge",
+        "reflection",
+        "decision_making"
+      ],
+      "patternId": "mini-simulator",
+      "interactionScore": 21,
+      "confidence": 0.5238095238095238,
+      "reasons": [
+        "instructional knowledge content detected",
+        "budget table detected",
+        "numeric budget structure qualifies for mini simulator"
+      ],
+      "sourceCoverageScore": 1,
+      "issues": [],
+      "trace": [
+        {
+          "stage": "fidelity",
+          "code": "SOURCE_COVERAGE_OK",
+          "result": "pass",
+          "detail": "Coverage 1.00.",
+          "patternId": "mini-simulator"
+        },
+        {
+          "stage": "sanitation",
+          "code": "SANITATION_OK",
+          "result": "pass",
+          "detail": "No sanitation artifacts detected.",
+          "patternId": "mini-simulator"
+        },
+        {
+          "stage": "pedagogy",
+          "code": "PEDAGOGY_OK",
+          "result": "pass",
+          "detail": "Selected pattern \"mini-simulator\".",
+          "patternId": "mini-simulator"
+        },
+        {
+          "stage": "layout",
+          "code": "LAYOUT_POLICY_APPLIED",
+          "result": "pass",
+          "detail": "Renderer layout policy will enforce stack-first workbook composition.",
+          "patternId": "mini-simulator"
+        },
+        {
+          "stage": "visual",
+          "code": "VISUAL_POLICY_APPLIED",
+          "result": "pass",
+          "detail": "Theme/token policy will apply during target rendering.",
+          "patternId": "mini-simulator"
+        }
+      ],
+      "policyVersion": "1.0.0",
+      "precedence": [
+        "fidelity",
+        "sanitation",
+        "pedagogy",
+        "layout",
+        "visual"
+      ],
+      "override": null
+    },
+    {
+      "sectionId": "honesty-and-relationship-cases",
+      "intents": [
+        "ethical_reasoning",
+        "knowledge",
+        "decision_making",
+        "reflection"
+      ],
+      "patternId": "scenario-judge",
+      "interactionScore": 15,
+      "confidence": 0.4666666666666667,
+      "reasons": [
+        "instructional knowledge content detected",
+        "repeated ethical judgment prompts detected",
+        "ethical reasoning question set qualifies for scenario judge"
+      ],
+      "sourceCoverageScore": 1,
+      "issues": [],
+      "trace": [
+        {
+          "stage": "fidelity",
+          "code": "SOURCE_COVERAGE_OK",
+          "result": "pass",
+          "detail": "Coverage 1.00.",
+          "patternId": "scenario-judge"
+        },
+        {
+          "stage": "sanitation",
+          "code": "SANITATION_OK",
+          "result": "pass",
+          "detail": "No sanitation artifacts detected.",
+          "patternId": "scenario-judge"
+        },
+        {
+          "stage": "pedagogy",
+          "code": "PEDAGOGY_OK",
+          "result": "pass",
+          "detail": "Selected pattern \"scenario-judge\".",
+          "patternId": "scenario-judge"
+        },
+        {
+          "stage": "layout",
+          "code": "LAYOUT_POLICY_APPLIED",
+          "result": "pass",
+          "detail": "Renderer layout policy will enforce stack-first workbook composition.",
+          "patternId": "scenario-judge"
+        },
+        {
+          "stage": "visual",
+          "code": "VISUAL_POLICY_APPLIED",
+          "result": "pass",
+          "detail": "Theme/token policy will apply during target rendering.",
+          "patternId": "scenario-judge"
+        }
+      ],
+      "policyVersion": "1.0.0",
+      "precedence": [
+        "fidelity",
+        "sanitation",
+        "pedagogy",
+        "layout",
+        "visual"
+      ],
+      "override": null
+    },
+    {
+      "sectionId": "conflict-and-communication",
+      "intents": [
+        "communication_practice",
+        "knowledge",
+        "reflection"
+      ],
+      "patternId": "premium-stacked-workbook",
+      "interactionScore": 12,
+      "confidence": 0.5833333333333334,
+      "reasons": [
+        "instructional knowledge content detected",
+        "communication repair practice detected",
+        "premium stacked workbook is the safe fallback"
+      ],
+      "sourceCoverageScore": 1,
+      "issues": [],
+      "trace": [
+        {
+          "stage": "fidelity",
+          "code": "SOURCE_COVERAGE_OK",
+          "result": "pass",
+          "detail": "Coverage 1.00.",
+          "patternId": "premium-stacked-workbook"
+        },
+        {
+          "stage": "sanitation",
+          "code": "SANITATION_OK",
+          "result": "pass",
+          "detail": "No sanitation artifacts detected.",
+          "patternId": "premium-stacked-workbook"
+        },
+        {
+          "stage": "pedagogy",
+          "code": "PEDAGOGY_OK",
+          "result": "pass",
+          "detail": "Selected pattern \"premium-stacked-workbook\".",
+          "patternId": "premium-stacked-workbook"
+        },
+        {
+          "stage": "layout",
+          "code": "LAYOUT_POLICY_APPLIED",
+          "result": "pass",
+          "detail": "Renderer layout policy will enforce stack-first workbook composition.",
+          "patternId": "premium-stacked-workbook"
+        },
+        {
+          "stage": "visual",
+          "code": "VISUAL_POLICY_APPLIED",
+          "result": "pass",
+          "detail": "Theme/token policy will apply during target rendering.",
+          "patternId": "premium-stacked-workbook"
+        }
+      ],
+      "policyVersion": "1.0.0",
+      "precedence": [
+        "fidelity",
+        "sanitation",
+        "pedagogy",
+        "layout",
+        "visual"
+      ],
+      "override": null
+    },
+    {
+      "sectionId": "case-studies",
+      "intents": [
+        "case_analysis"
+      ],
+      "patternId": "case-workspace",
+      "interactionScore": 8,
+      "confidence": 1,
+      "reasons": [
+        "multi-case analysis set detected",
+        "multi-case structure qualifies for case workspace"
+      ],
+      "sourceCoverageScore": 1,
+      "issues": [],
+      "trace": [
+        {
+          "stage": "fidelity",
+          "code": "SOURCE_COVERAGE_OK",
+          "result": "pass",
+          "detail": "Coverage 1.00.",
+          "patternId": "case-workspace"
+        },
+        {
+          "stage": "sanitation",
+          "code": "SANITATION_OK",
+          "result": "pass",
+          "detail": "No sanitation artifacts detected.",
+          "patternId": "case-workspace"
+        },
+        {
+          "stage": "pedagogy",
+          "code": "PEDAGOGY_OK",
+          "result": "pass",
+          "detail": "Selected pattern \"case-workspace\".",
+          "patternId": "case-workspace"
+        },
+        {
+          "stage": "layout",
+          "code": "LAYOUT_POLICY_APPLIED",
+          "result": "pass",
+          "detail": "Renderer layout policy will enforce stack-first workbook composition.",
+          "patternId": "case-workspace"
+        },
+        {
+          "stage": "visual",
+          "code": "VISUAL_POLICY_APPLIED",
+          "result": "pass",
+          "detail": "Theme/token policy will apply during target rendering.",
+          "patternId": "case-workspace"
+        }
+      ],
+      "policyVersion": "1.0.0",
+      "precedence": [
+        "fidelity",
+        "sanitation",
+        "pedagogy",
+        "layout",
+        "visual"
+      ],
+      "override": null
+    },
+    {
+      "sectionId": "review-submit",
+      "intents": [],
+      "patternId": "premium-stacked-workbook",
+      "interactionScore": 0,
+      "confidence": 0,
+      "reasons": [
+        "premium stacked workbook is the safe fallback"
+      ],
+      "sourceCoverageScore": 1,
+      "issues": [],
+      "trace": [
+        {
+          "stage": "fidelity",
+          "code": "SOURCE_COVERAGE_OK",
+          "result": "pass",
+          "detail": "Coverage 1.00.",
+          "patternId": "premium-stacked-workbook"
+        },
+        {
+          "stage": "sanitation",
+          "code": "SANITATION_OK",
+          "result": "pass",
+          "detail": "No sanitation artifacts detected.",
+          "patternId": "premium-stacked-workbook"
+        },
+        {
+          "stage": "pedagogy",
+          "code": "PEDAGOGY_OK",
+          "result": "pass",
+          "detail": "Selected pattern \"premium-stacked-workbook\".",
+          "patternId": "premium-stacked-workbook"
+        },
+        {
+          "stage": "layout",
+          "code": "LAYOUT_POLICY_APPLIED",
+          "result": "pass",
+          "detail": "Renderer layout policy will enforce stack-first workbook composition.",
+          "patternId": "premium-stacked-workbook"
+        },
+        {
+          "stage": "visual",
+          "code": "VISUAL_POLICY_APPLIED",
+          "result": "pass",
+          "detail": "Theme/token policy will apply during target rendering.",
+          "patternId": "premium-stacked-workbook"
+        }
+      ],
+      "policyVersion": "1.0.0",
+      "precedence": [
+        "fidelity",
+        "sanitation",
+        "pedagogy",
+        "layout",
+        "visual"
+      ],
+      "override": null
+    }
+  ],
+  "sourceCoverage": {
+    "sectionsCovered": 1,
+    "blocksCovered": 1
+  },
+  "designPolicy": {
+    "version": "1.0.0",
+    "precedence": [
+      "fidelity",
+      "sanitation",
+      "pedagogy",
+      "layout",
+      "visual"
+    ],
+    "overridesFile": "",
+    "overridesApplied": [],
+    "overrideWarnings": []
+  },
+  "fingerprints": {
+    "inputHash": "c67e8318a96a6cd3fa83c7e38154998ee752e2da6b0560f070ea48e3004f2905",
+    "contentHash": "ee09bb302472d9335cafba32cf4dd5c9f40e39a2f867939cfdb800b4778df9fd"
+  }
 }

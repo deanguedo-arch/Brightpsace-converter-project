@@ -740,6 +740,36 @@ function printAuditResult(target, report) {
       console.log(`    - ${entry.targetId}: ${detail}`);
     }
   }
+  if (report.visual) {
+    console.log(`  Visual: ${report.visual.achievedLevel} (required ${report.visual.requiredLevel})`);
+    console.log(`    - Knowledge blocks: ${report.visual.metrics.knowledge.knowledgeBlocks}`);
+    console.log(`    - Dense narrative blocks: ${report.visual.metrics.knowledge.denseNarrativeBlocks}`);
+    console.log(`    - Long knowledge paragraphs: ${report.visual.metrics.knowledge.longParagraphCount}`);
+    if (Array.isArray(report.visual.violations) && report.visual.violations.length > 0) {
+      console.log("  Visual violations:");
+      for (const violation of report.visual.violations) {
+        console.log(`    - [${violation.severity}] ${violation.code}: ${violation.detail}`);
+      }
+    }
+  }
+  if (report.editorial) {
+    console.log(`  Editorial: ${report.editorial.achievedLevel} (required ${report.editorial.requiredLevel})`);
+    console.log(`    - Avg sentence words: ${report.editorial.metrics.averageSentenceWords}`);
+    console.log(`    - Long sentence rate: ${report.editorial.metrics.longSentenceRate}`);
+    if (Array.isArray(report.editorial.violations) && report.editorial.violations.length > 0) {
+      console.log("  Editorial violations:");
+      for (const violation of report.editorial.violations) {
+        console.log(`    - [${violation.severity}] ${violation.code}: ${violation.detail}`);
+      }
+    }
+  }
+  if (report.policyViolations?.length > 0) {
+    console.log("  Policy violations:");
+    for (const violation of report.policyViolations) {
+      const section = violation.sectionId ? ` (${violation.sectionId})` : "";
+      console.log(`    - [${violation.severity}] ${violation.code}${section}: ${violation.detail}`);
+    }
+  }
   console.log(`  Next slice: ${report.nextSlice}`);
 }
 

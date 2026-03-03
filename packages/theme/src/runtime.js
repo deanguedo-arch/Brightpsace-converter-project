@@ -217,6 +217,28 @@
     return state;
   }
 
+  function collectSimulatorState() {
+    const state = {};
+    document.querySelectorAll("[data-simulator]").forEach((simulator) => {
+      const simulatorId = simulator.getAttribute("data-simulator-id");
+      if (!simulatorId) return;
+      const values = {};
+      const notes = {};
+      simulator.querySelectorAll("[data-simulator-field]").forEach((field) => {
+        const key = field.getAttribute("data-simulator-key");
+        if (!key) return;
+        values[key] = field.value || "";
+      });
+      simulator.querySelectorAll("[data-simulator-note]").forEach((field) => {
+        const key = field.getAttribute("data-simulator-key");
+        if (!key) return;
+        notes[key] = field.value || "";
+      });
+      state[simulatorId] = { values, notes };
+    });
+    return state;
+  }
+
   function collectActiveSectionId() {
     const active = document.querySelector('.content-column > [data-section].is-active-section');
     return active?.getAttribute("id") || "";
@@ -271,6 +293,16 @@
         .filter(Boolean);
       total += treeTotal;
       completed += new Set(visited).size;
+    });
+
+    const simulatorFields = Array.from(section.querySelectorAll("[data-simulator-field-wrap]"));
+    simulatorFields.forEach((wrapper) => {
+      total += 1;
+      const key = wrapper.getAttribute("data-simulator-key");
+      const group = wrapper.getAttribute("data-simulator-group");
+      if (!key || !group) return;
+      const input = section.querySelector(`[data-simulator-field][data-simulator-key="${key}"][data-simulator-group="${group}"]`);
+      if (input && String(input.value || "").trim()) completed += 1;
     });
 
     if (total === 0) {
@@ -471,6 +503,24 @@
     });
   }
 
+  function restoreSimulatorState(state) {
+    document.querySelectorAll("[data-simulator]").forEach((simulator) => {
+      const simulatorId = simulator.getAttribute("data-simulator-id");
+      const values = state?.[simulatorId]?.values || {};
+      const notes = state?.[simulatorId]?.notes || {};
+      simulator.querySelectorAll("[data-simulator-field]").forEach((field) => {
+        const key = field.getAttribute("data-simulator-key");
+        if (!key) return;
+        field.value = typeof values[key] === "string" ? values[key] : "";
+      });
+      simulator.querySelectorAll("[data-simulator-note]").forEach((field) => {
+        const key = field.getAttribute("data-simulator-key");
+        if (!key) return;
+        field.value = typeof notes[key] === "string" ? notes[key] : "";
+      });
+    });
+  }
+
   function updateDecisionTreeProgress() {
     let totalOverall = 0;
     let completedOverall = 0;
@@ -489,6 +539,51 @@
       totalOverall += total;
       completedOverall += count;
     });
+    return { total: totalOverall, completed: completedOverall };
+  }
+
+  function formatCurrency(value) {
+    const numeric = Number(value) || 0;
+    const sign = numeric < 0 ? "-" : "";
+    return `${sign}$${Math.abs(numeric).toFixed(2)}`;
+  }
+
+  function updateSimulatorProgress() {
+    let totalOverall = 0;
+    let completedOverall = 0;
+
+    document.querySelectorAll("[data-simulator]").forEach((simulator) => {
+      const fields = Array.from(simulator.querySelectorAll("[data-simulator-field]"));
+      const total = fields.length;
+      const completed = fields.filter((field) => String(field.value || "").trim().length > 0).length;
+      let incomeTotal = 0;
+      let expenseTotal = 0;
+
+      fields.forEach((field) => {
+        const numeric = Number(field.value || 0);
+        if (!Number.isFinite(numeric)) return;
+        const group = field.getAttribute("data-simulator-group");
+        if (group === "income") incomeTotal += numeric;
+        if (group === "expense") expenseTotal += numeric;
+      });
+
+      const progress = simulator.querySelector("[data-simulator-progress]");
+      if (progress) {
+        progress.textContent = `${completed} / ${total} complete`;
+      }
+
+      const incomeNode = simulator.querySelector("[data-simulator-income-total]");
+      if (incomeNode) incomeNode.textContent = formatCurrency(incomeTotal);
+      const expenseNode = simulator.querySelector("[data-simulator-expense-total]");
+      if (expenseNode) expenseNode.textContent = formatCurrency(expenseTotal);
+      const netNode = simulator.querySelector("[data-simulator-net-total]");
+      if (netNode) netNode.textContent = formatCurrency(incomeTotal - expenseTotal);
+
+      simulator.classList.toggle("is-complete", total > 0 && completed === total);
+      totalOverall += total;
+      completedOverall += completed;
+    });
+
     return { total: totalOverall, completed: completedOverall };
   }
 
@@ -599,9 +694,14 @@
   }
 
   function refreshProgressUi() {
+    const workbookMetrics = updateWorkbookProgress();
+    const simulatorMetrics = updateSimulatorProgress();
     const metrics = {
       flashcards: updateFlashcardProgress(),
-      workbook: updateWorkbookProgress(),
+      workbook: {
+        total: workbookMetrics.total + simulatorMetrics.total,
+        completed: workbookMetrics.completed + simulatorMetrics.completed
+      },
       scenario: updateScenarioProgress(),
       ranking: updateRankingProgress(),
       decisionTree: updateDecisionTreeProgress()
@@ -693,6 +793,28 @@
     return visitedIds.map((id) => nodeLabels.get(id) || id).filter(Boolean);
   }
 
+  function collectSimulatorExport(simulator) {
+    const values = [];
+    simulator.querySelectorAll("[data-simulator-field-wrap]").forEach((wrapper) => {
+      const label = normalizeInlineText(wrapper.querySelector(".simulator__label")?.textContent) || "Budget field";
+      const key = wrapper.getAttribute("data-simulator-key");
+      const group = wrapper.getAttribute("data-simulator-group");
+      if (!key || !group) return;
+      const input = simulator.querySelector(`[data-simulator-field][data-simulator-key="${key}"][data-simulator-group="${group}"]`);
+      const value = normalizeInlineText(input?.value);
+      if (!value) return;
+      const note = normalizeInlineText(simulator.querySelector(`[data-simulator-note][data-simulator-key="${key}"][data-simulator-group="${group}"]`)?.value);
+      values.push(note ? `${label}: ${value} (${note})` : `${label}: ${value}`);
+    });
+    const income = normalizeInlineText(simulator.querySelector("[data-simulator-income-total]")?.textContent);
+    const expenses = normalizeInlineText(simulator.querySelector("[data-simulator-expense-total]")?.textContent);
+    const net = normalizeInlineText(simulator.querySelector("[data-simulator-net-total]")?.textContent);
+    if (income) values.push(`Income Total: ${income}`);
+    if (expenses) values.push(`Expense Total: ${expenses}`);
+    if (net) values.push(`Net Total: ${net}`);
+    return values;
+  }
+
   function collectStudentName() {
     const wrappers = Array.from(document.querySelectorAll("[data-workbook-field-wrap]"));
     const hit = wrappers.find((wrapper) => {
@@ -758,6 +880,15 @@
         if (visited.length === 0) return;
         const label = trees.length > 1 ? `Decision Path ${index + 1}` : "Decision Path";
         lines.push(`${label}: ${visited.join(" -> ")}`);
+      });
+
+      const simulators = Array.from(section.querySelectorAll("[data-simulator]"));
+      simulators.forEach((simulator, index) => {
+        const values = collectSimulatorExport(simulator);
+        if (values.length === 0) return;
+        const label = simulators.length > 1 ? `Budget Simulator ${index + 1}` : "Budget Simulator";
+        lines.push(`${label}:`);
+        values.forEach((entry) => lines.push(`- ${entry}`));
       });
 
       lines.push("");
@@ -898,6 +1029,19 @@
           onChange();
         });
       }
+    });
+  }
+
+  function initSimulatorHandlers(onChange) {
+    document.querySelectorAll("[data-simulator-field]").forEach((field) => {
+      field.addEventListener("input", () => {
+        onChange();
+      });
+    });
+    document.querySelectorAll("[data-simulator-note]").forEach((field) => {
+      field.addEventListener("input", () => {
+        onChange();
+      });
     });
   }
 
@@ -1158,7 +1302,7 @@
 
   function initSectionReveal(reducedMotion = false) {
     const targets = Array.from(
-      document.querySelectorAll(".objectives, .learning-dashboard, .section-stage, .unit-section, .resources, .flashcards, .workbook, .scenario, .ranking, .decision-tree")
+      document.querySelectorAll(".objectives, .learning-dashboard, .section-stage, .unit-section, .resources, .flashcards, .workbook, .scenario, .ranking, .simulator, .decision-tree")
     );
     if (targets.length === 0) return;
 
@@ -1259,6 +1403,7 @@
     restoreScenarioState(state.scenario || {});
     restoreRankingState(state.ranking || {});
     restoreDecisionTreeState(state.decisionTree || {});
+    restoreSimulatorState(state.simulator || {});
     restoreSectionCompletionFlags(state.sectionCompletion || {});
     refreshProgressUi();
 
@@ -1288,6 +1433,7 @@
         scenario: collectScenarioState(),
         ranking: collectRankingState(),
         decisionTree: collectDecisionTreeState(),
+        simulator: collectSimulatorState(),
         activeSection: collectActiveSectionId(),
         sectionCompletion: collectSectionCompletionFlags()
       };
@@ -1318,6 +1464,7 @@
     initScenarioHandlers(handleInteractionChange);
     initRankingHandlers(handleInteractionChange);
     initDecisionTreeHandlers(handleInteractionChange);
+    initSimulatorHandlers(handleInteractionChange);
     initTeacherExport();
     const isPaged = initSectionStage(String(state.activeSection || ""), reducedMotion, () => persist());
     if (!isPaged) {

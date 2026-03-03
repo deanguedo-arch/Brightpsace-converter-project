@@ -596,6 +596,10 @@ body[data-template="guided-workbook"] .unit-section {
   margin-bottom: var(--space-2);
 }
 
+.unit-section > :not(.unit-section__header) + :not(.unit-section__header) {
+  margin-top: 1.75rem;
+}
+
 .unit-section__chip {
   width: 2.1rem;
   height: 2.1rem;
@@ -893,6 +897,7 @@ body[data-theme="clay-workbook"].js-paged .unit-section,
 body[data-theme="clay-workbook"].js-paged .workbook,
 body[data-theme="clay-workbook"].js-paged .scenario,
 body[data-theme="clay-workbook"].js-paged .ranking,
+body[data-theme="clay-workbook"].js-paged .simulator,
 body[data-theme="clay-workbook"].js-paged .decision-tree,
 body[data-theme="clay-workbook"].js-paged .submission {
   background: #ffffff;
@@ -903,6 +908,7 @@ body[data-theme="clay-workbook"].js-paged .submission {
 body[data-theme="clay-workbook"].js-paged .workbook__field,
 body[data-theme="clay-workbook"].js-paged .scenario__prompt,
 body[data-theme="clay-workbook"].js-paged .ranking__row,
+body[data-theme="clay-workbook"].js-paged .simulator__field,
 body[data-theme="clay-workbook"].js-paged .decision-tree__node,
 body[data-theme="clay-workbook"].js-paged .submission__checklist {
   border: 2px solid #eef2f7;
@@ -911,6 +917,7 @@ body[data-theme="clay-workbook"].js-paged .submission__checklist {
 
 body[data-theme="clay-workbook"].js-paged .workbook__input,
 body[data-theme="clay-workbook"].js-paged .workbook__textarea,
+body[data-theme="clay-workbook"].js-paged .simulator__input,
 body[data-theme="clay-workbook"].js-paged .ranking__select {
   border: 2px solid #e2e8f0;
   border-radius: 1rem;
@@ -1140,7 +1147,7 @@ body.js-paged .content-column > [data-section-role="aux"] {
   display: grid;
   gap: 0.22rem;
   text-align: left;
-  padding: 0.95rem 1rem;
+  padding: 0.95rem 1rem 0.9rem;
   background: transparent;
   color: var(--text-strong);
   cursor: pointer;
@@ -1175,7 +1182,7 @@ body.js-paged .content-column > [data-section-role="aux"] {
 
 .knowledge__panel {
   border-top: 1px solid color-mix(in srgb, var(--warning-strong) 18%, #ffffff 82%);
-  padding: 0.9rem 1rem 1rem;
+  padding: 1rem 1rem 1.05rem;
   background: rgb(255 255 255 / 48%);
 }
 
@@ -1184,9 +1191,73 @@ body.js-paged .content-column > [data-section-role="aux"] {
   color: color-mix(in srgb, var(--text-body) 92%, #000000 8%);
 }
 
+.knowledge__content {
+  max-width: 75ch;
+}
+
+.knowledge__description {
+  margin-bottom: 0.75rem;
+}
+
 .knowledge__description > :last-child,
 .knowledge__content > :last-child {
   margin-bottom: 0;
+}
+
+.knowledge__content > * + * {
+  margin-top: 0.85rem;
+}
+
+.knowledge__content p {
+  margin: 0;
+  line-height: 1.68;
+}
+
+.knowledge__content p + p {
+  margin-top: 0.82rem;
+}
+
+.knowledge__content h4 {
+  margin: 0.2rem 0 0;
+  font-size: 0.98rem;
+  line-height: 1.2;
+  color: var(--text-strong);
+  letter-spacing: -0.01em;
+}
+
+.knowledge__content h4:not(:first-child) {
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid color-mix(in srgb, var(--warning-strong) 20%, #ffffff 80%);
+}
+
+.knowledge__content hr {
+  border: 0;
+  border-top: 1px solid color-mix(in srgb, var(--warning-strong) 26%, #ffffff 74%);
+  margin: 1rem 0;
+}
+
+.knowledge__content ul,
+.knowledge__content ol {
+  margin: 0.42rem 0 0.35rem;
+  padding: 0;
+  padding-left: 1.28rem;
+  display: grid;
+  gap: 0.48rem;
+}
+
+.knowledge__content li {
+  padding-left: 0.06rem;
+  line-height: 1.55;
+  max-width: 74ch;
+}
+
+.knowledge__content li + li {
+  margin-top: 0.1rem;
+}
+
+.knowledge__content strong {
+  color: var(--text-strong);
 }
 
 .workbook {
@@ -1234,27 +1305,38 @@ body.js-paged .content-column > [data-section-role="aux"] {
 
 .workbook__grid {
   display: grid;
-  gap: var(--space-3);
-  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: var(--space-4);
+  grid-template-columns: 1fr;
 }
 
 .workbook[data-workbook-layout="split"] .workbook__grid {
-  grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+  gap: var(--space-3);
 }
 
 .workbook[data-workbook-layout="budget-grid"] .workbook__grid {
   grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
 }
 
+.workbook[data-workbook-layout="paired-rows"] .workbook__grid {
+  gap: var(--space-3);
+}
+
 .workbook[data-workbook-layout="case-stack"] .workbook__grid {
   grid-template-columns: 1fr;
+}
+
+.workbook__pair-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+  align-items: start;
 }
 
 .workbook__field {
   display: grid;
   gap: var(--space-2);
   margin: 0;
-  padding: var(--space-3);
+  padding: var(--space-4);
   border: 1px solid var(--surface-border);
   border-radius: var(--radius-md);
   background: rgb(255 255 255 / 82%);
@@ -1339,8 +1421,20 @@ body.js-paged .content-column > [data-section-role="aux"] {
   margin: 0;
 }
 
+.workbook[data-workbook-layout="case-stack"] {
+  border-left: 0.24rem solid color-mix(in srgb, var(--accent) 70%, #ffffff 30%);
+}
+
+.workbook[data-workbook-layout="case-stack"] .workbook__description {
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  background: color-mix(in srgb, var(--accent-soft) 45%, #ffffff 55%);
+  color: var(--text-body);
+}
+
 .scenario,
 .ranking,
+.simulator,
 .decision-tree {
   display: grid;
   gap: var(--space-4);
@@ -1350,6 +1444,7 @@ body.js-paged .content-column > [data-section-role="aux"] {
 
 .scenario.is-complete,
 .ranking.is-complete,
+.simulator.is-complete,
 .decision-tree.is-complete {
   border-color: #64b88f;
   box-shadow: 0 22px 52px rgb(13 82 64 / 16%);
@@ -1357,6 +1452,7 @@ body.js-paged .content-column > [data-section-role="aux"] {
 
 .scenario__header,
 .ranking__header,
+.simulator__header,
 .decision-tree__header {
   display: flex;
   align-items: center;
@@ -1367,6 +1463,7 @@ body.js-paged .content-column > [data-section-role="aux"] {
 
 .scenario__title,
 .ranking__title,
+.simulator__title,
 .decision-tree__title {
   margin: 0;
   font-size: 1.22rem;
@@ -1374,6 +1471,7 @@ body.js-paged .content-column > [data-section-role="aux"] {
 
 .scenario__progress,
 .ranking__progress,
+.simulator__progress,
 .decision-tree__progress {
   margin: 0;
   border-radius: 999px;
@@ -1386,12 +1484,14 @@ body.js-paged .content-column > [data-section-role="aux"] {
 
 .scenario__description,
 .ranking__description,
+.simulator__description,
 .decision-tree__description {
   color: var(--text-muted);
 }
 
 .scenario__description > :last-child,
 .ranking__description > :last-child,
+.simulator__description > :last-child,
 .decision-tree__description > :last-child {
   margin-bottom: 0;
 }
@@ -1500,6 +1600,207 @@ body.js-paged .content-column > [data-section-role="aux"] {
 .decision-tree__controls {
   display: flex;
   justify-content: flex-end;
+}
+
+.simulator__metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-3);
+}
+
+.simulator__metric {
+  display: grid;
+  gap: 0.2rem;
+  padding: var(--space-3);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-md);
+  background: rgb(255 255 255 / 82%);
+}
+
+.simulator__metric--net {
+  background:
+    linear-gradient(145deg, rgb(236 248 255 / 92%) 0%, rgb(234 251 244 / 88%) 100%);
+}
+
+.simulator__metric-label {
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.simulator__metric-value {
+  color: var(--text-strong);
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+.simulator__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-4);
+}
+
+.simulator__column {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.simulator__column-title {
+  margin: 0;
+  color: var(--text-strong);
+  font-size: 1rem;
+}
+
+.simulator__field {
+  display: grid;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-md);
+  background: rgb(255 255 255 / 82%);
+}
+
+.simulator__label {
+  font-weight: 700;
+  color: var(--text-strong);
+}
+
+.simulator__input {
+  width: 100%;
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-sm);
+  background: rgb(255 255 255 / 92%);
+  color: var(--text-body);
+  padding: 0.58rem 0.68rem;
+  font: inherit;
+}
+
+.simulator__input:focus {
+  border-color: var(--accent);
+  outline: 2px solid color-mix(in srgb, var(--accent) 33%, #ffffff 67%);
+  outline-offset: 1px;
+}
+
+.budget-sheet {
+  gap: var(--space-4);
+  padding: 0;
+  overflow: hidden;
+  background: rgb(250 251 255 / 96%);
+  border-color: color-mix(in srgb, var(--accent) 34%, #d8dde8 66%);
+  box-shadow:
+    0 2px 0 rgb(208 215 230 / 85%),
+    0 18px 42px rgb(31 41 55 / 10%);
+}
+
+.budget-sheet__header {
+  padding: var(--space-4) var(--space-5);
+  background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 86%, #ffffff 14%) 0%, color-mix(in srgb, var(--accent-strong) 68%, #ffffff 32%) 100%);
+  color: #fff;
+}
+
+.budget-sheet__header .simulator__title,
+.budget-sheet__header .simulator__progress {
+  color: inherit;
+}
+
+.budget-sheet__header .simulator__progress {
+  background: rgb(255 255 255 / 18%);
+}
+
+.budget-sheet__description {
+  color: rgb(255 255 255 / 82%);
+  max-width: 38rem;
+}
+
+.budget-sheet__description p {
+  margin: 0;
+}
+
+.budget-sheet__grid {
+  padding: 0 var(--space-4);
+  align-items: start;
+}
+
+.budget-sheet__column {
+  gap: var(--space-2);
+}
+
+.budget-sheet__column .simulator__column-title {
+  padding: 0 var(--space-2);
+  font-size: 1.05rem;
+}
+
+.budget-sheet__field-group {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.budget-sheet .simulator__field {
+  gap: 0.5rem;
+  padding: 0.85rem 1rem;
+  background: rgb(255 255 255 / 94%);
+}
+
+.budget-sheet .simulator__field:not(.simulator__field--note) {
+  grid-template-columns: minmax(0, 1fr) 7rem;
+  align-items: center;
+}
+
+.budget-sheet .simulator__label {
+  line-height: 1.3;
+}
+
+.budget-sheet .simulator__label--note {
+  font-size: 0.84rem;
+  color: var(--text-muted);
+}
+
+.budget-sheet .simulator__input {
+  min-width: 0;
+}
+
+.budget-sheet .simulator__field:not(.simulator__field--note) .simulator__input {
+  text-align: right;
+}
+
+.budget-sheet .simulator__input--note {
+  text-align: left;
+}
+
+.budget-sheet__summary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-3);
+  padding: 0 var(--space-4) var(--space-4);
+}
+
+.budget-sheet__summary-item {
+  display: grid;
+  gap: 0.15rem;
+  padding: 0.95rem 1rem;
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-md);
+  background: rgb(255 255 255 / 92%);
+}
+
+.budget-sheet__summary-item--net {
+  background: linear-gradient(145deg, rgb(236 248 255 / 92%) 0%, rgb(234 251 244 / 88%) 100%);
+}
+
+.budget-sheet__summary-label {
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.budget-sheet__summary-value {
+  color: var(--text-strong);
+  font-size: 1.15rem;
+  font-weight: 800;
 }
 
 .submission {
@@ -1840,6 +2141,7 @@ body.js-paged .content-column > [data-section-role="aux"] {
 .js-animate .workbook,
 .js-animate .scenario,
 .js-animate .ranking,
+.js-animate .simulator,
 .js-animate .decision-tree {
   opacity: 0;
   transform: translateY(16px);
@@ -1900,6 +2202,17 @@ body.js-paged .content-column > [data-section-role="aux"] {
 
   body.js-paged .section-stage__actions {
     justify-content: flex-start;
+  }
+
+  .simulator__metrics,
+  .simulator__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .workbook__pair-row,
+  .budget-sheet__summary,
+  .budget-sheet .simulator__field:not(.simulator__field--note) {
+    grid-template-columns: 1fr;
   }
 }
 

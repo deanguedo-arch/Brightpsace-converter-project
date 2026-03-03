@@ -25,7 +25,6 @@ sectionMap:
     requiredElements:
       - workbook
       - knowledge
-      - ranking
   - sourceLabel: What Are You Waiting For
     targetId: joe-vs-sally
     requiredElements:
@@ -38,7 +37,7 @@ sectionMap:
   - sourceLabel: Honesty Quiz
     targetId: honesty-and-relationship-cases
     requiredElements:
-      - scenario
+      - knowledge
       - workbook
   - sourceLabel: Maintaining Positive Relationships
     targetId: conflict-and-communication

@@ -2,6 +2,15 @@ import { slugify } from "./utils.js";
 
 export const DEFAULT_TEMPLATE_PRESET = "premium-core";
 export const DEFAULT_THEME_PRESET = "bold-clay";
+export const ACTIVITY_PATTERN_PRESETS = [
+  "launch-frame",
+  "knowledge-atlas",
+  "decision-pathway",
+  "mini-simulator",
+  "scenario-judge",
+  "case-workspace",
+  "premium-stacked-workbook"
+];
 
 function premiumCoreTemplate(unitTitle) {
   return `## Start Here

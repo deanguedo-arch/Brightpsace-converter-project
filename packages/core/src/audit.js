@@ -1,6 +1,9 @@
 import fs from "node:fs/promises";
+import path from "node:path";
 import { buildPreviewUnit } from "./build.js";
 import { loadReferenceProfile } from "./referenceProfiles.js";
+import { evaluateEditorialQuality } from "./editorialQuality.js";
+import { evaluateVisualQuality } from "./visualQuality.js";
 
 function round(value, digits = 2) {
   const factor = 10 ** digits;
@@ -59,6 +62,15 @@ function hasWorkbookLayout(unit, targetLayout) {
   );
 }
 
+function hasSimulatorKind(unit, simulatorKind) {
+  return (unit.sections || []).some((section) =>
+    (section.blocks || []).some((block) =>
+      normalizeBlockType(block.type) === "simulator"
+      && String(block.simulatorKind || "").trim() === simulatorKind
+    )
+  );
+}
+
 function hasKnowledgeBlock(unit) {
   return (unit.sections || []).some((section) =>
     (section.blocks || []).some((block) => normalizeBlockType(block.type) === "knowledge")
@@ -80,7 +92,10 @@ function evaluateMandatoryFeatures({ unit, html }) {
     "autosize-textareas": hasAutosizeTextarea(unit) && hasHtml(html, /data-autosize="true"/),
     "teacher-export": hasHtml(html, /data-teacher-export/),
     "section-completion-feedback": hasHtml(html, /data-completion-feedback="burst"/),
-    "budget-workbook-layout": hasWorkbookLayout(unit, "budget-grid") && hasHtml(html, /data-workbook-layout="budget-grid"/),
+    "budget-workbook-layout": (
+      (hasWorkbookLayout(unit, "budget-grid") && hasHtml(html, /data-workbook-layout="budget-grid"/))
+      || (hasSimulatorKind(unit, "budget") && hasHtml(html, /data-simulator-kind="budget"/))
+    ),
     "case-study-layout": hasWorkbookLayout(unit, "case-stack") && hasHtml(html, /data-workbook-layout="case-stack"/)
   };
 }
@@ -154,6 +169,77 @@ function scoreCompletionFlow({ html, unit }) {
   return round(score);
 }
 
+function htmlToText(html) {
+  return String(html || "")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function collectSemanticArtifacts(unit) {
+  const violations = [];
+  const addViolation = (code, detail, sectionId = "") => {
+    violations.push({
+      code,
+      severity: "error",
+      sectionId,
+      detail
+    });
+  };
+
+  const pushLinesFromText = (text, sectionId, fieldLabel = "") => {
+    String(text || "")
+      .split(/\r?\n/g)
+      .map((line) => line.trim())
+      .filter(Boolean)
+      .forEach((line) => {
+        if (/^(and|or|:|;|,|[-*])$/i.test(line)) {
+          addViolation(
+            "SEMANTIC_ARTIFACT",
+            `Found orphan token line "${line}"${fieldLabel ? ` in "${fieldLabel}"` : ""}.`,
+            sectionId
+          );
+        }
+      });
+  };
+
+  (unit.sections || []).forEach((section) => {
+    (section.blocks || []).forEach((block) => {
+      if (block.type === "knowledge") {
+        pushLinesFromText(htmlToText(block.bodyHtml), section.id, block.title || "Knowledge");
+      }
+      if (block.type === "workbook") {
+        (block.fields || []).forEach((field) => {
+          pushLinesFromText(field.label, section.id, field.id || "field");
+          pushLinesFromText(field.hint, section.id, field.id || "field");
+        });
+      }
+    });
+  });
+
+  return violations;
+}
+
+function collectLayoutViolations(unit) {
+  const violations = [];
+  (unit.sections || []).forEach((section) => {
+    (section.blocks || []).forEach((block) => {
+      if (normalizeBlockType(block.type) !== "workbook") return;
+      const layout = String(block.layout || "stack").trim().toLowerCase();
+      const textareaCount = (block.fields || []).filter((field) => String(field.kind || "").trim() === "textarea").length;
+      if ((layout === "default" || layout === "split") && textareaCount > 1) {
+        violations.push({
+          code: "LAYOUT_POLICY_VIOLATION",
+          severity: "error",
+          sectionId: section.id,
+          detail: `Workbook "${block.title || section.title}" used layout "${layout}" with ${textareaCount} long-answer fields.`
+        });
+      }
+    });
+  });
+  return violations;
+}
+
 function determineNextSlice(scores, threshold) {
   if (scores.visualShell < threshold.visualShell) return "Theme/template shell parity";
   if (scores.interactionParity < threshold.interactionParity) return "Interaction primitives";
@@ -178,6 +264,8 @@ export async function auditUnitAgainstReference({
   });
   const html = await fs.readFile(built.indexPath, "utf8");
   const unit = built.unitModel;
+  const componentsCss = await fs.readFile(path.join(repoRoot, "packages", "theme", "src", "components.css"), "utf8")
+    .catch(() => "");
 
   const featureMap = evaluateMandatoryFeatures({ unit, html });
   const missingMandatory = profile.mandatoryFeatures.filter((feature) => !featureMap[feature]);
@@ -198,9 +286,29 @@ export async function auditUnitAgainstReference({
       + scores.completionFlow
   );
 
+  const policyViolations = [
+    ...collectSemanticArtifacts(unit),
+    ...collectLayoutViolations(unit)
+  ];
+  const visual = evaluateVisualQuality({
+    unit,
+    courseSlug,
+    unitSlug,
+    componentsCss
+  });
+  policyViolations.push(...visual.violations);
+  const editorial = evaluateEditorialQuality({
+    unit,
+    courseSlug,
+    unitSlug
+  });
+  policyViolations.push(...editorial.violations);
+  const blockingViolations = policyViolations.filter((violation) => violation.severity === "error");
+
   const threshold = profile.threshold;
   const passed =
     missingMandatory.length === 0
+    && blockingViolations.length === 0
     && scores.overall >= threshold.overall
     && scores.visualShell >= threshold.visualShell
     && scores.interactionParity >= threshold.interactionParity
@@ -217,6 +325,9 @@ export async function auditUnitAgainstReference({
     features: featureMap,
     missingMandatory,
     sectionCoverage: sectionCoverage.results,
+    visual,
+    editorial,
+    policyViolations,
     nextSlice: determineNextSlice(scores, threshold)
   };
 }

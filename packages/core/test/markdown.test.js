@@ -118,6 +118,39 @@ fields:
   assert.equal(workbook.fields[1].autosize, true);
 });
 
+test("parses stack and paired-rows workbook layouts", () => {
+  const markdown = `
+## Layouts
+
+:::workbook
+title: Reflection
+layout: stack
+fields:
+  - type: textarea
+    id: reflection
+    label: Reflection prompt
+:::
+
+:::workbook
+title: Purchase Log
+layout: paired-rows
+fields:
+  - type: text
+    id: item-1
+    label: Item 1
+  - type: text
+    id: influence-1
+    label: Influence 1
+:::
+`;
+
+  const parsed = parseMarkdownToUnitBlocks(markdown);
+  const [stacked, paired] = parsed.sections[0].blocks.filter((block) => block.type === "workbook");
+
+  assert.equal(stacked.layout, "stack");
+  assert.equal(paired.layout, "paired-rows");
+});
+
 test("parses scenario, ranking, and decision-tree directives", () => {
   const markdown = `
 ## Activities
@@ -174,4 +207,36 @@ nodes:
   assert.equal(scenario.prompts.length, 1);
   assert.equal(ranking.items.length, 3);
   assert.equal(decisionTree.nodes.length, 3);
+});
+
+test("parses simulator directives for budget mini-apps", () => {
+  const markdown = `
+## Budget Builder
+
+:::simulator
+kind: budget
+title: Monthly Budget Builder
+description: Build a current monthly budget.
+income:
+  - key: job
+    label: Job
+  - key: family
+    label: Parents or Family
+expenses:
+  - key: rent
+    label: Rent or Room and Board
+  - key: groceries
+    label: Groceries
+:::
+`;
+
+  const parsed = parseMarkdownToUnitBlocks(markdown);
+  const simulator = parsed.sections[0].blocks.find((block) => block.type === "simulator");
+
+  assert.ok(simulator);
+  assert.equal(simulator.simulatorKind, "budget");
+  assert.equal(simulator.incomeFields.length, 2);
+  assert.equal(simulator.expenseFields.length, 2);
+  assert.equal(simulator.incomeFields[0].key, "job");
+  assert.equal(simulator.expenseFields[1].key, "groceries");
 });

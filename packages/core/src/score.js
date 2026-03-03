@@ -19,10 +19,12 @@ function collectBlockStats(unit) {
     callout: 0,
     accordion: 0,
     workbook: 0,
+    simulator: 0,
     scenario: 0,
     ranking: 0,
     decisionTree: 0,
     workbookFields: 0,
+    simulatorFields: 0,
     scenarioPrompts: 0,
     rankingItems: 0,
     decisionNodes: 0
@@ -37,6 +39,11 @@ function collectBlockStats(unit) {
       if (block.type === "workbook") {
         stats.workbook += 1;
         stats.workbookFields += Array.isArray(block.fields) ? block.fields.length : 0;
+      }
+      if (block.type === "simulator") {
+        stats.simulator += 1;
+        stats.simulatorFields += (Array.isArray(block.incomeFields) ? block.incomeFields.length : 0)
+          + (Array.isArray(block.expenseFields) ? block.expenseFields.length : 0);
       }
       if (block.type === "scenario") {
         stats.scenario += 1;
@@ -75,7 +82,7 @@ function scorePedagogy(unit, stats) {
 
 function scoreActivityRichness(unit, stats) {
   const interactionTypes = [
-    stats.workbook > 0,
+    stats.workbook > 0 || stats.simulator > 0,
     stats.scenario > 0,
     stats.ranking > 0,
     stats.decisionTree > 0,
@@ -85,6 +92,7 @@ function scoreActivityRichness(unit, stats) {
 
   const interactionDensity =
     stats.workbookFields +
+    stats.simulatorFields +
     stats.scenarioPrompts +
     stats.rankingItems +
     stats.decisionNodes +
@@ -99,7 +107,7 @@ function scoreActivityRichness(unit, stats) {
 }
 
 function scoreAssessment(stats) {
-  const assessmentCount = stats.workbook + stats.scenario + stats.ranking + stats.decisionTree;
+  const assessmentCount = stats.workbook + stats.simulator + stats.scenario + stats.ranking + stats.decisionTree;
   let score = 1;
   if (assessmentCount >= 2) score = 3;
   if (assessmentCount >= 4) score = 4;
@@ -141,7 +149,7 @@ function scoreUiQuality(html) {
   if (/class="[^"]*unit-header/.test(text)) score += 1;
   if (/class="[^"]*sticky-nav/.test(text)) score += 1;
   if (/class="[^"]*card/.test(text)) score += 1;
-  if (/class="[^"]*workbook|flashcards|scenario|ranking|decision-tree/.test(text)) score += 1;
+  if (/class="[^"]*workbook|flashcards|scenario|ranking|simulator|decision-tree/.test(text)) score += 1;
   return clampScore(score);
 }
 
@@ -157,7 +165,7 @@ function collectRecommendations(dimensions) {
     recommendations.push("Increase section scaffolding and explicit learning objectives.");
   }
   if (dimensions.activityRichness.score < 3) {
-    recommendations.push("Add more interactive blocks (workbook/scenario/ranking/decision-tree).");
+    recommendations.push("Add more interactive blocks (workbook/simulator/scenario/ranking/decision-tree).");
   }
   if (dimensions.assessmentQuality.score < 3) {
     recommendations.push("Add stronger formative checks and summative prompts.");
@@ -217,6 +225,7 @@ export function scoreUnitQuality({ unit, html, validation = { errors: [], warnin
     recommendations: collectRecommendations(dimensions),
     interaction: {
       workbookFields: stats.workbookFields,
+      simulatorFields: stats.simulatorFields,
       scenarioPrompts: stats.scenarioPrompts,
       rankingItems: stats.rankingItems,
       decisionNodes: stats.decisionNodes,

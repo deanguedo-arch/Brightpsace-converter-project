@@ -301,3 +301,222 @@ fields:
   assert.match(html, /data-template="guided-workbook"/);
   assert.match(html, /data-theme="clay-workbook"/);
 });
+
+test("renderUnitToPreview renders structured knowledge markdown with headings and lists", async () => {
+  const tempRoot = await fs.mkdtemp(path.join(os.tmpdir(), "cf-render-"));
+  const outputDir = path.join(tempRoot, "preview");
+  const sourceDir = path.join(tempRoot, "unit");
+  await fs.mkdir(sourceDir, { recursive: true });
+
+  const parsed = parseMarkdownToUnitBlocks(`
+## Knowledge
+
+:::knowledge
+title: The Price of Cool
+description: Read both cases before answering.
+body: |
+  #### Joe
+
+  Joe buys the Camaro.
+
+  ---
+
+  #### Sally
+
+  - Sally pays cash.
+  - Sally invests the difference.
+:::
+`);
+
+  await renderUnitToPreview({
+    repoRoot: path.resolve(process.cwd()),
+    outputDir,
+    unit: {
+      courseSlug: "demo-course",
+      unitSlug: "demo-unit",
+      sourceDir,
+      title: "Demo Unit",
+      subtitle: "",
+      estimatedMinutes: 10,
+      objectives: [],
+      sections: parsed.sections,
+      nav: parsed.nav,
+      resources: [],
+      flashcards: []
+    }
+  });
+
+  const html = await fs.readFile(path.join(outputDir, "index.html"), "utf8");
+  assert.match(html, /class="knowledge__description"/);
+  assert.match(html, /<h4>Joe<\/h4>/);
+  assert.match(html, /<h4>Sally<\/h4>/);
+  assert.match(html, /<ul>/);
+});
+
+test("renderUnitToPreview renders paired workbook rows and stack workbook layouts without auto-fit tiling hooks", async () => {
+  const tempRoot = await fs.mkdtemp(path.join(os.tmpdir(), "cf-render-"));
+  const outputDir = path.join(tempRoot, "preview");
+  const sourceDir = path.join(tempRoot, "unit");
+  await fs.mkdir(sourceDir, { recursive: true });
+
+  const parsed = parseMarkdownToUnitBlocks(`
+## Workbook Layouts
+
+:::workbook
+title: Stacked Reflection
+layout: stack
+fields:
+  - type: textarea
+    id: one
+    label: First prompt
+  - type: textarea
+    id: two
+    label: Second prompt
+:::
+
+:::workbook
+title: Recent Purchases
+layout: paired-rows
+fields:
+  - type: text
+    id: item-1
+    label: Item 1
+  - type: text
+    id: influence-1
+    label: Influence 1
+  - type: text
+    id: item-2
+    label: Item 2
+  - type: text
+    id: influence-2
+    label: Influence 2
+:::
+`);
+
+  await renderUnitToPreview({
+    repoRoot: path.resolve(process.cwd()),
+    outputDir,
+    unit: {
+      courseSlug: "demo-course",
+      unitSlug: "demo-unit",
+      sourceDir,
+      title: "Demo Unit",
+      subtitle: "",
+      estimatedMinutes: 10,
+      objectives: [],
+      sections: parsed.sections,
+      nav: parsed.nav,
+      resources: [],
+      flashcards: []
+    }
+  });
+
+  const html = await fs.readFile(path.join(outputDir, "index.html"), "utf8");
+  assert.match(html, /data-workbook-layout="stack"/);
+  assert.match(html, /data-workbook-layout="paired-rows"/);
+  assert.match(html, /workbook__pair-row/);
+  assert.doesNotMatch(html, /data-workbook-layout="split"/);
+});
+
+test("renderUnitToPreview renders budget simulators as budget sheets without metric cards", async () => {
+  const tempRoot = await fs.mkdtemp(path.join(os.tmpdir(), "cf-render-"));
+  const outputDir = path.join(tempRoot, "preview");
+  const sourceDir = path.join(tempRoot, "unit");
+  await fs.mkdir(sourceDir, { recursive: true });
+
+  const parsed = parseMarkdownToUnitBlocks(`
+## Budget
+
+:::simulator
+kind: budget
+title: Monthly Budget Builder
+description: Build a current monthly budget.
+income:
+  - key: job
+    label: Job
+  - key: other
+    label: Other
+expenses:
+  - key: rent
+    label: Rent
+  - key: etc
+    label: Etc.
+:::
+`);
+
+  await renderUnitToPreview({
+    repoRoot: path.resolve(process.cwd()),
+    outputDir,
+    unit: {
+      courseSlug: "demo-course",
+      unitSlug: "demo-unit",
+      sourceDir,
+      title: "Demo Unit",
+      subtitle: "",
+      estimatedMinutes: 10,
+      objectives: [],
+      sections: parsed.sections,
+      nav: parsed.nav,
+      resources: [],
+      flashcards: []
+    }
+  });
+
+  const html = await fs.readFile(path.join(outputDir, "index.html"), "utf8");
+  assert.match(html, /data-simulator-kind="budget"/);
+  assert.match(html, /budget-sheet/);
+  assert.match(html, /data-simulator-income-total/);
+  assert.match(html, /data-simulator-expense-total/);
+  assert.match(html, /data-simulator-net-total/);
+  assert.doesNotMatch(html, /simulator__metrics/);
+});
+
+test("renderUnitToPreview includes simulator blocks with budget totals hooks", async () => {
+  const tempRoot = await fs.mkdtemp(path.join(os.tmpdir(), "cf-render-"));
+  const outputDir = path.join(tempRoot, "preview");
+  const sourceDir = path.join(tempRoot, "unit");
+  await fs.mkdir(sourceDir, { recursive: true });
+
+  const parsed = parseMarkdownToUnitBlocks(`
+## Budget Builder
+
+:::simulator
+kind: budget
+title: Monthly Budget Builder
+description: Build a current monthly budget.
+income:
+  - key: job
+    label: Job
+expenses:
+  - key: rent
+    label: Rent or Room and Board
+:::
+`);
+
+  await renderUnitToPreview({
+    repoRoot: path.resolve(process.cwd()),
+    outputDir,
+    unit: {
+      courseSlug: "demo-course",
+      unitSlug: "demo-unit",
+      sourceDir,
+      title: "Demo Unit",
+      subtitle: "",
+      estimatedMinutes: 10,
+      objectives: [],
+      sections: parsed.sections,
+      nav: parsed.nav,
+      resources: [],
+      flashcards: [],
+      template: "guided-workbook",
+      theme: "clay-workbook"
+    }
+  });
+
+  const html = await fs.readFile(path.join(outputDir, "index.html"), "utf8");
+  assert.match(html, /data-simulator/);
+  assert.match(html, /data-simulator-kind="budget"/);
+  assert.match(html, /data-simulator-income-total/);
+  assert.match(html, /data-simulator-expense-total/);
+  assert.match(html, /data-simulator-net-total/);
+});

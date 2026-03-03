@@ -6,6 +6,9 @@ import { initUnitScaffold } from "./scaffold.js";
 import { extractTextByExtension } from "./extractText.js";
 import { slugify } from "./utils.js";
 import { compileUnitFromSource } from "./compile.js";
+import { normalizeSourceMaterial } from "./sourceNormalization.js";
+import { renderGuidedUnit } from "./renderGuidedUnit.js";
+import { loadDesignOverrides } from "./designPolicy.js";
 
 const MARKDOWN_EXTENSIONS = new Set([".md", ".markdown"]);
 const TEXT_EXTENSIONS = new Set([".txt"]);
@@ -735,7 +738,8 @@ export async function convertUnitFromSource({
   sourcePath,
   courseSlug,
   unitSlug,
-  extract = true
+  extract = true,
+  target = "brightspace-embed"
 }) {
   const normalizedCourseSlug = slugify(courseSlug);
   const normalizedUnitSlug = slugify(unitSlug);
@@ -764,6 +768,8 @@ export async function convertUnitFromSource({
   let converter = "";
   let title = "";
   let content = "";
+  let renderResult = null;
+  let designOverridesMeta = null;
 
   if (looksLikeCalmModule1(corpus)) {
     converter = "calm-module-1";
@@ -772,14 +778,35 @@ export async function convertUnitFromSource({
   } else if (looksLikeCalmModule2(corpus)) {
     converter = "calm-module-2";
     title = "CALM Module 2: Resource Choices";
-    content = buildCalmModule2Content(corpus);
+    const plannedUnitDir = path.join(
+      repoRoot,
+      "courses",
+      normalizedCourseSlug,
+      "units",
+      normalizedUnitSlug
+    );
+    designOverridesMeta = await loadDesignOverrides({ unitDir: plannedUnitDir });
+    const normalizedUnit = normalizeSourceMaterial({
+      courseSlug: normalizedCourseSlug,
+      unitSlug: normalizedUnitSlug,
+      title,
+      sourceFiles: sourceFiles.map((filePath) => toRelative(sourceRoot, filePath)),
+      corpus
+    });
+    renderResult = renderGuidedUnit({
+      normalizedUnit,
+      target,
+      designOverrides: designOverridesMeta.overrides
+    });
+    content = renderResult.content;
   } else {
     return compileUnitFromSource({
       repoRoot,
       sourcePath,
       courseSlug: normalizedCourseSlug,
       unitSlug: normalizedUnitSlug,
-      extract
+      extract,
+      target
     });
   }
 
@@ -808,10 +835,23 @@ export async function convertUnitFromSource({
     version: 1,
     generatedAt: new Date().toISOString(),
     converter,
+    target,
     courseSlug: normalizedCourseSlug,
     unitSlug: normalizedUnitSlug,
     sourceFiles: sourceFiles.map((filePath) => toRelative(sourceRoot, filePath)),
-    extractedMaterials: materials.map((item) => toRelative(sourceRoot, item.filePath))
+    extractedMaterials: materials.map((item) => toRelative(sourceRoot, item.filePath)),
+    ...(renderResult ? {
+      patternDecisions: renderResult.patternDecisions,
+      sourceCoverage: renderResult.sourceCoverage,
+      designPolicy: {
+        version: renderResult.designPolicyVersion,
+        precedence: renderResult.governancePrecedence,
+        overridesFile: designOverridesMeta?.exists ? toRelative(repoRoot, designOverridesMeta.filePath) : "",
+        overridesApplied: renderResult.overridesApplied,
+        overrideWarnings: designOverridesMeta?.warnings || []
+      },
+      fingerprints: renderResult.fingerprints
+    } : {})
   };
 
   const blueprintPath = path.join(unitDir, "blueprint.convert.json");

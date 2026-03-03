@@ -42,10 +42,14 @@ async function setupReferenceRepo() {
       "    requiredElements:",
       "      - workbook",
       "      - knowledge",
-      "      - ranking",
       "  - sourceLabel: Managing your Money",
       "    targetId: budget-builder",
       "    requiredElements:",
+      "      - workbook",
+      "  - sourceLabel: Honesty Quiz",
+      "    targetId: honesty-and-relationship-cases",
+      "    requiredElements:",
+      "      - knowledge",
       "      - workbook",
       "  - sourceLabel: Case Studies",
       "    targetId: review-submit",
@@ -111,13 +115,6 @@ test("auditUnitAgainstReference passes a unit with the required parity markers",
       "    hint: Think about ads, friends, habit, or convenience.",
       ":::",
       "",
-      ":::ranking",
-      "title: Rank the influences",
-      "items:",
-      "  - Advertising",
-      "  - Friends",
-      ":::",
-      "",
       "## Budget Builder",
       "",
       ":::workbook",
@@ -136,6 +133,21 @@ test("auditUnitAgainstReference passes a unit with the required parity markers",
       "fields:",
       "  - type: textarea",
       "    label: What would you say first?",
+      ":::",
+      "",
+      "## Honesty And Relationship Cases",
+      "",
+      ":::knowledge",
+      "title: Healthy Relationships",
+      "body: |",
+      "  Trust and honesty matter.",
+      ":::",
+      "",
+      ":::workbook",
+      "title: Honesty Quiz",
+      "fields:",
+      "  - type: textarea",
+      "    label: Is this action justified?",
       ":::",
       "",
       "## Review Submit",
@@ -157,6 +169,14 @@ test("auditUnitAgainstReference passes a unit with the required parity markers",
   assert.equal(report.passed, true);
   assert.equal(report.missingMandatory.length, 0);
   assert.ok(report.scores.overall >= 85);
+  assert.ok(report.visual);
+  assert.equal(report.visual.requiredLevel, "L3");
+  assert.equal(report.visual.passed, true);
+  assert.ok(Array.isArray(report.policyViolations));
+  assert.equal(report.policyViolations.length, 0);
+  assert.ok(report.editorial);
+  assert.equal(report.editorial.requiredLevel, "L2");
+  assert.equal(report.editorial.passed, true);
 });
 
 test("auditUnitAgainstReference reports missing parity features when the unit is incomplete", async () => {
@@ -183,4 +203,6 @@ test("auditUnitAgainstReference reports missing parity features when the unit is
   assert.equal(report.passed, false);
   assert.ok(report.missingMandatory.length >= 1);
   assert.ok(report.nextSlice);
+  assert.ok(Array.isArray(report.policyViolations));
+  assert.ok(report.editorial);
 });
