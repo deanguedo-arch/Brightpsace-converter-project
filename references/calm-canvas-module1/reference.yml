@@ -1,0 +1,26 @@
+id: calm-canvas-module1
+title: CALM Module 1 Canvas Reference
+referenceFile: EXAMPLES/CALM MODULE .HTML
+targetTheme: clay-workbook
+targetTemplate: guided-workbook
+mandatoryFeatures:
+  - top-progress-shell
+  - collapsible-knowledge
+  - field-level-hints
+  - autosize-textareas
+  - teacher-export
+  - section-completion-feedback
+weights:
+  visualShell: 30
+  interactionParity: 25
+  sourceCoverage: 20
+  learnerFlow: 15
+  completionFlow: 10
+sectionMap: []
+threshold:
+  overall: 85
+  visualShell: 24
+  interactionParity: 18
+  sourceCoverage: 16
+  learnerFlow: 12
+  completionFlow: 8

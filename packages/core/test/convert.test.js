@@ -6,7 +6,7 @@ import path from "node:path";
 import { convertUnitFromSource } from "../src/convert.js";
 import { CALM_MODULE_2_CORPUS } from "./fixtures/calmModule2Corpus.js";
 
-test("convertUnitFromSource converts CALM Module 1 sources into a premium unit draft", async () => {
+test("convertUnitFromSource converts CALM Module 1 sources through the guided pipeline", async () => {
   const root = await fs.mkdtemp(path.join(os.tmpdir(), "cf-convert-"));
   const sourceDir = path.join(root, "source");
   await fs.mkdir(sourceDir, { recursive: true });
@@ -46,8 +46,10 @@ test("convertUnitFromSource converts CALM Module 1 sources into a premium unit d
 
   const unitDir = path.join(root, "courses", "calm-course", "units", "module-1-v2");
   const contentPath = path.join(unitDir, "content.md");
+  const blueprintPath = path.join(unitDir, "blueprint.convert.json");
   const resourcesCopy = path.join(unitDir, "resources", "calm-module-1.txt");
   const content = await fs.readFile(contentPath, "utf8");
+  const blueprint = JSON.parse(await fs.readFile(blueprintPath, "utf8"));
 
   assert.equal(result.courseSlug, "calm-course");
   assert.equal(result.unitSlug, "module-1-v2");
@@ -56,10 +58,12 @@ test("convertUnitFromSource converts CALM Module 1 sources into a premium unit d
   assert.match(content, /Alcohol Awareness/i);
   assert.match(content, /Inside Out/i);
   assert.match(content, /:::submission/);
+  assert.ok(Array.isArray(blueprint.patternDecisions));
+  assert.ok(blueprint.patternDecisions.length > 0);
   assert.equal(await fs.stat(resourcesCopy).then((stats) => stats.isFile()), true);
 });
 
-test("convertUnitFromSource falls back to compile for unknown sources", async () => {
+test("convertUnitFromSource keeps unknown sources on the guided conversion path", async () => {
   const root = await fs.mkdtemp(path.join(os.tmpdir(), "cf-convert-fallback-"));
   const sourceDir = path.join(root, "source");
   await fs.mkdir(sourceDir, { recursive: true });
@@ -80,9 +84,14 @@ test("convertUnitFromSource falls back to compile for unknown sources", async ()
   });
 
   const contentPath = path.join(root, "courses", "fallback-course", "units", "unit-a", "content.md");
+  const blueprintPath = path.join(root, "courses", "fallback-course", "units", "unit-a", "blueprint.convert.json");
   const content = await fs.readFile(contentPath, "utf8");
-  assert.match(content, /:::scenario/);
-  assert.match(content, /:::workbook/);
+  const blueprint = JSON.parse(await fs.readFile(blueprintPath, "utf8"));
+  assert.match(content, /## Module Launch/);
+  assert.match(content, /## Review & Submit/);
+  assert.match(content, /:::submission/);
+  assert.ok(Array.isArray(blueprint.patternDecisions));
+  assert.equal(blueprint.converter, "guided-auto");
 });
 
 test("convertUnitFromSource converts CALM Module 2 sources into a resource choices unit draft", async () => {

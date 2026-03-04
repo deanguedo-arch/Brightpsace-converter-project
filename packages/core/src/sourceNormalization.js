@@ -1,3 +1,5 @@
+import { slugify } from "./utils.js";
+
 function normalizeText(raw) {
   return String(raw || "")
     .replace(/\r/g, "\n")
@@ -578,6 +580,326 @@ function buildReviewSection() {
   };
 }
 
+function looksLikeModule2Corpus(text) {
+  const value = normalizeText(text).toLowerCase();
+  return value.includes("module 2") && value.includes("resource choices");
+}
+
+function normalizeGenericRawLines(raw) {
+  return String(raw || "")
+    .replace(/\r/g, "\n")
+    .replace(/[ \t]+/g, " ")
+    .replace(/\u00a0/g, " ")
+    .replace(/[â€¢Â·â–ªâ—¦â– â–¡â–®â–¯]/g, " ")
+    .replace(/[\u2022\u00B7]/g, " ")
+    .split("\n")
+    .map((line) => repairExtractedLine(line).trimEnd());
+}
+
+function isGenericNoiseLine(line) {
+  const value = String(line || "").trim();
+  if (!value) return false;
+  if (/^CALM MODULE/i.test(value)) return true;
+  if (/^OUTREACH PROGRAMS/i.test(value)) return true;
+  if (/^SENIOR HIGH SCHOOL$/i.test(value)) return true;
+  if (/^(Fort Saskatchewan|Sherwood Park|Vegreville)\b/i.test(value)) return true;
+  if (/^nextstep/i.test(value)) return true;
+  if (/^\d{1,2}$/.test(value)) return true;
+  return false;
+}
+
+function toTitleCase(value) {
+  return String(value || "")
+    .toLowerCase()
+    .replace(/\b\w/g, (match) => match.toUpperCase())
+    .replace(/\bSti\b/g, "STI");
+}
+
+function normalizeGenericHeading(line) {
+  const value = String(line || "").trim().replace(/[:\s]+$/, "");
+  const personalMatch = value.match(/^Personal Choices:\s*(.+)$/i);
+  if (personalMatch) return toTitleCase(personalMatch[1]);
+  const summativeMatch = value.match(/^Summative Task\s*([A-Z])?\s*:\s*[\"“”']?(.+?)[\"“”']?$/i);
+  if (summativeMatch) return `Summative Task: ${toTitleCase(summativeMatch[2])}`.trim();
+  if (/^COURSE OVERVIEW$/i.test(value)) return "Course Overview";
+  if (/^LIFE MAP RUBRIC:?$/i.test(value)) return "Life Map Rubric";
+  if (/^What Works For Me Inventory/i.test(value)) return value.replace(/\s{2,}/g, " ");
+  return toTitleCase(value);
+}
+
+const GENERIC_HEADING_PATTERNS = [
+  /^COURSE OVERVIEW$/i,
+  /^What Works For Me Inventory(?: Part \d+)?$/i,
+  /^Personal Choices:/i,
+  /^Relationship Progression Activity$/i,
+  /^Process of Addictions$/i,
+  /^Summative Task\s*[A-Z]?\s*:/i,
+  /^LIFE MAP RUBRIC:?$/i,
+  /^What you can do to feel better/i
+];
+
+function isLikelyGenericHeading(line, previousWasBlank = false) {
+  const value = String(line || "").trim();
+  if (!value) return false;
+  if (GENERIC_HEADING_PATTERNS.some((pattern) => pattern.test(value))) return true;
+  if (!previousWasBlank) return false;
+  if (/[?]/.test(value)) return false;
+  if (/^[-*]/.test(value)) return false;
+  if (/^Scenario\s+\d+:/i.test(value)) return false;
+  const words = value.split(/\s+/g).filter(Boolean);
+  if (words.length < 2 || words.length > 9) return false;
+  if (/[.!]$/.test(value)) return false;
+  const letters = value.replace(/[^A-Za-z]/g, "");
+  if (letters.length < 6) return false;
+  return words.every((word) => /^[A-Z][A-Za-z'"/()-]*$/.test(word) || /^[A-Z]{2,}$/.test(word));
+}
+
+function mergeWrappedLines(lines) {
+  const merged = [];
+  for (const rawLine of lines || []) {
+    const line = repairExtractedLine(rawLine).trim();
+    if (!line) {
+      merged.push("");
+      continue;
+    }
+    if (merged.length === 0) {
+      merged.push(line);
+      continue;
+    }
+
+    const previous = merged[merged.length - 1];
+    const previousIsBlank = previous === "";
+    const shouldMerge = !previousIsBlank
+      && !/[.?!:]$/.test(previous)
+      && (
+        /^[a-z(]/.test(line)
+        || line.split(" ").length <= 5
+        || /^(\d+[.)]|[ivx]+[.)])/i.test(line)
+      );
+
+    if (shouldMerge) {
+      merged[merged.length - 1] = `${previous} ${line}`.replace(/\s+/g, " ").trim();
+      continue;
+    }
+
+    merged.push(line);
+  }
+  return merged;
+}
+
+function cleanPromptLine(line) {
+  return String(line || "")
+    .replace(/^\d{1,2}[.)]\s+/, "")
+    .replace(/^[_\-\s]+/, "")
+    .replace(/\s*_{3,}\s*$/, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function looksLikePrompt(line) {
+  const value = cleanPromptLine(line);
+  if (!value) return false;
+  if (isGenericNoiseLine(value)) return false;
+  if (/^No risk|^Minimal risk|^Some risk|^Significant risk|^High risk/i.test(value)) return false;
+  if (/\?$/.test(value)) return value.length >= 12;
+  if (/^(Using a dictionary, define|List and explain|Describe|Explain|Rate the risk|What could you do|If you were|How much should you drink|How did you determine|Was it easier to think|What obstacle was the hardest|What accomplishment were you most proud)/i.test(value)) {
+    return true;
+  }
+  return false;
+}
+
+function collectPrompts(lines) {
+  const prompts = [];
+  const seen = new Set();
+  for (const line of lines || []) {
+    if (!looksLikePrompt(line)) continue;
+    const prompt = cleanPromptLine(line);
+    const key = prompt.toLowerCase();
+    if (seen.has(key)) continue;
+    seen.add(key);
+    prompts.push(prompt);
+  }
+  return prompts;
+}
+
+function collectChecklistItems(lines) {
+  const items = [];
+  for (const raw of lines || []) {
+    const line = cleanListItem(raw);
+    if (!line) continue;
+    if (/^No risk|^Minimal risk|^Some risk|^Significant risk|^High risk/i.test(line)) continue;
+    if (/^[_-]{3,}$/.test(line)) continue;
+    if (/^(•|-|❒)/.test(String(raw || "").trim()) || /^(Healthy Risks|Unhealthy Risks)$/i.test(line)) {
+      items.push(line.replace(/^(•|-|❒)\s*/, ""));
+    }
+  }
+  return mergeContinuationLines(items).filter(Boolean);
+}
+
+function collectParagraphs(lines, prompts) {
+  const promptSet = new Set(prompts.map((prompt) => prompt.toLowerCase()));
+  const kept = [];
+  for (const raw of lines || []) {
+    const line = repairExtractedLine(raw).trim();
+    if (!line) {
+      kept.push("");
+      continue;
+    }
+    if (isGenericNoiseLine(line)) continue;
+    if (/^[_-]{3,}$/.test(line)) continue;
+    if (/^No risk|^Minimal risk|^Some risk|^Significant risk|^High risk/i.test(line)) continue;
+    if (promptSet.has(cleanPromptLine(line).toLowerCase())) continue;
+    kept.push(line);
+  }
+
+  return kept
+    .join("\n")
+    .split(/\n{2,}/g)
+    .map((paragraph) => paragraph.replace(/\n+/g, " ").replace(/\s+/g, " ").trim())
+    .filter(Boolean);
+}
+
+function buildGenericSection({ id, title, order, lines }) {
+  const mergedLines = mergeWrappedLines(lines);
+  const prompts = collectPrompts(mergedLines);
+  const checklistItems = collectChecklistItems(mergedLines);
+  const paragraphs = collectParagraphs(mergedLines, prompts);
+  const blocks = [];
+
+  if (paragraphs.length > 0) {
+    blocks.push({
+      type: "intro",
+      text: paragraphs[0]
+    });
+  }
+
+  if (paragraphs.length > 1) {
+    blocks.push({
+      type: "knowledge",
+      title,
+      items: paragraphs.slice(1),
+      rawText: paragraphs.slice(1).join("\n\n")
+    });
+  }
+
+  if (checklistItems.length >= 4) {
+    blocks.push({
+      type: "checklist",
+      title: `${title} Checklist`,
+      items: checklistItems
+    });
+  }
+
+  if (prompts.length > 0) {
+    blocks.push({
+      type: "question_set",
+      title: `${title} Responses`,
+      questions: prompts.slice(0, 40).map((prompt, index) => toQuestion(`${id}-q-${index + 1}`, prompt))
+    });
+  }
+
+  if (blocks.length === 0) {
+    blocks.push({
+      type: "other",
+      rawText: lines.map((line) => String(line || "").trim()).filter(Boolean).join("\n")
+    });
+  }
+
+  return {
+    id,
+    sourceTitle: title,
+    normalizedTitle: title,
+    order,
+    blocks
+  };
+}
+
+function buildGenericSections(corpus) {
+  const rawLines = normalizeGenericRawLines(corpus);
+  const sections = [];
+  let currentTitle = "Module Launch";
+  let currentLines = [];
+  let previousWasBlank = true;
+  const ids = new Map();
+
+  const flush = () => {
+    const filtered = currentLines
+      .map((line) => String(line || "").trim())
+      .filter((line) => line || line === "");
+    const contentLines = filtered.filter((line) => line !== "");
+    if (contentLines.length === 0) {
+      currentLines = [];
+      return;
+    }
+    const baseId = slugify(currentTitle) || `section-${sections.length + 1}`;
+    const idCount = ids.get(baseId) || 0;
+    ids.set(baseId, idCount + 1);
+    const id = idCount > 0 ? `${baseId}-${idCount + 1}` : baseId;
+    sections.push(buildGenericSection({
+      id,
+      title: currentTitle,
+      order: sections.length + 1,
+      lines: filtered
+    }));
+    currentLines = [];
+  };
+
+  for (const rawLine of rawLines) {
+    const line = String(rawLine || "").trim();
+    if (!line) {
+      if (currentLines[currentLines.length - 1] !== "") currentLines.push("");
+      previousWasBlank = true;
+      continue;
+    }
+    if (isGenericNoiseLine(line)) {
+      previousWasBlank = false;
+      continue;
+    }
+
+    if (isLikelyGenericHeading(line, previousWasBlank)) {
+      flush();
+      currentTitle = normalizeGenericHeading(line);
+      previousWasBlank = false;
+      continue;
+    }
+
+    currentLines.push(line);
+    previousWasBlank = false;
+  }
+
+  flush();
+
+  if (sections.length === 0) {
+    sections.push(buildGenericSection({
+      id: "module-launch",
+      title: "Module Launch",
+      order: 1,
+      lines: normalizeLines(corpus)
+    }));
+  }
+
+  const hasReview = sections.some((section) => section.id === "review-submit");
+  if (!hasReview) {
+    sections.push({
+      id: "review-submit",
+      sourceTitle: "Review & Submit",
+      normalizedTitle: "Review & Submit",
+      order: sections.length + 1,
+      blocks: [
+        {
+          type: "other",
+          rawText: "Confirm each section is complete, then export your teacher-view text file for Brightspace submission."
+        }
+      ]
+    });
+  }
+
+  return sections.map((section, index) => ({
+    ...section,
+    order: index + 1
+  }));
+}
+
 export function normalizeSourceMaterial({
   courseSlug,
   unitSlug,
@@ -585,6 +907,16 @@ export function normalizeSourceMaterial({
   sourceFiles = [],
   corpus
 }) {
+  if (!looksLikeModule2Corpus(corpus)) {
+    return {
+      courseSlug,
+      unitSlug,
+      title,
+      sourceFiles,
+      sections: buildGenericSections(corpus)
+    };
+  }
+
   const normalizedCorpus = normalizeText(corpus);
 
   const advertisingText = getSlice(normalizedCorpus, "Resources: Who Decides What You Buy", ["Resources: What are you Waiting For?"]);

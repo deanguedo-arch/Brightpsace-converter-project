@@ -1,0 +1,1634 @@
+{
+  "version": 1,
+  "generatedAt": "2026-03-03T22:31:47.706Z",
+  "converter": "calm-module-1",
+  "target": "brightspace-embed",
+  "courseSlug": "calm-course",
+  "unitSlug": "module-1-v3",
+  "sourceFiles": [
+    "CALM Module 1 - Personal Choices.pdf"
+  ],
+  "extractedMaterials": [
+    "CALM Module 1 - Personal Choices.pdf"
+  ],
+  "patternDecisions": [
+    {
+      "sectionId": "module-launch",
+      "intents": [
+        "launch",
+        "knowledge"
+      ],
+      "patternId": "launch-frame",
+      "interactionScore": 12,
+      "confidence": 0.6666666666666666,
+      "reasons": [
+        "launch setup prompts detected",
+        "instructional knowledge content detected",
+        "launch intent qualifies for launch frame"
+      ],
+      "sourceCoverageScore": 1,
+      "issues": [],
+      "trace": [
+        {
+          "stage": "fidelity",
+          "code": "SOURCE_COVERAGE_OK",
+          "result": "pass",
+          "detail": "Coverage 1.00.",
+          "patternId": "launch-frame"
+        },
+        {
+          "stage": "sanitation",
+          "code": "SANITATION_OK",
+          "result": "pass",
+          "detail": "No sanitation artifacts detected.",
+          "patternId": "launch-frame"
+        },
+        {
+          "stage": "pedagogy",
+          "code": "PEDAGOGY_OK",
+          "result": "pass",
+          "detail": "Selected pattern \"launch-frame\".",
+          "patternId": "launch-frame"
+        },
+        {
+          "stage": "layout",
+          "code": "LAYOUT_POLICY_APPLIED",
+          "result": "pass",
+          "detail": "Renderer layout policy will enforce stack-first workbook composition.",
+          "patternId": "launch-frame"
+        },
+        {
+          "stage": "visual",
+          "code": "VISUAL_POLICY_APPLIED",
+          "result": "pass",
+          "detail": "Theme/token policy will apply during target rendering.",
+          "patternId": "launch-frame"
+        }
+      ],
+      "policyVersion": "1.0.0",
+      "precedence": [
+        "fidelity",
+        "sanitation",
+        "pedagogy",
+        "layout",
+        "visual"
+      ],
+      "override": null
+    },
+    {
+      "sectionId": "course-overview",
+      "intents": [
+        "knowledge",
+        "decision_making"
+      ],
+      "patternId": "knowledge-atlas",
+      "interactionScore": 6,
+      "confidence": 0.6666666666666666,
+      "reasons": [
+        "instructional knowledge content detected",
+        "knowledge density qualifies for knowledge atlas"
+      ],
+      "sourceCoverageScore": 1,
+      "issues": [],
+      "trace": [
+        {
+          "stage": "fidelity",
+          "code": "SOURCE_COVERAGE_OK",
+          "result": "pass",
+          "detail": "Coverage 1.00.",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "sanitation",
+          "code": "SANITATION_OK",
+          "result": "pass",
+          "detail": "No sanitation artifacts detected.",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "pedagogy",
+          "code": "PEDAGOGY_OK",
+          "result": "pass",
+          "detail": "Selected pattern \"knowledge-atlas\".",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "layout",
+          "code": "LAYOUT_POLICY_APPLIED",
+          "result": "pass",
+          "detail": "Renderer layout policy will enforce stack-first workbook composition.",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "visual",
+          "code": "VISUAL_POLICY_APPLIED",
+          "result": "pass",
+          "detail": "Theme/token policy will apply during target rendering.",
+          "patternId": "knowledge-atlas"
+        }
+      ],
+      "policyVersion": "1.0.0",
+      "precedence": [
+        "fidelity",
+        "sanitation",
+        "pedagogy",
+        "layout",
+        "visual"
+      ],
+      "override": null
+    },
+    {
+      "sectionId": "what-works-for-me-inventory",
+      "intents": [
+        "knowledge",
+        "reflection"
+      ],
+      "patternId": "knowledge-atlas",
+      "interactionScore": 5,
+      "confidence": 0.8,
+      "reasons": [
+        "instructional knowledge content detected",
+        "knowledge density qualifies for knowledge atlas"
+      ],
+      "sourceCoverageScore": 1,
+      "issues": [],
+      "trace": [
+        {
+          "stage": "fidelity",
+          "code": "SOURCE_COVERAGE_OK",
+          "result": "pass",
+          "detail": "Coverage 1.00.",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "sanitation",
+          "code": "SANITATION_OK",
+          "result": "pass",
+          "detail": "No sanitation artifacts detected.",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "pedagogy",
+          "code": "PEDAGOGY_OK",
+          "result": "pass",
+          "detail": "Selected pattern \"knowledge-atlas\".",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "layout",
+          "code": "LAYOUT_POLICY_APPLIED",
+          "result": "pass",
+          "detail": "Renderer layout policy will enforce stack-first workbook composition.",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "visual",
+          "code": "VISUAL_POLICY_APPLIED",
+          "result": "pass",
+          "detail": "Theme/token policy will apply during target rendering.",
+          "patternId": "knowledge-atlas"
+        }
+      ],
+      "policyVersion": "1.0.0",
+      "precedence": [
+        "fidelity",
+        "sanitation",
+        "pedagogy",
+        "layout",
+        "visual"
+      ],
+      "override": null
+    },
+    {
+      "sectionId": "what-works-for-me-inventory-part-2",
+      "intents": [
+        "knowledge"
+      ],
+      "patternId": "knowledge-atlas",
+      "interactionScore": 4,
+      "confidence": 1,
+      "reasons": [
+        "instructional knowledge content detected",
+        "knowledge density qualifies for knowledge atlas"
+      ],
+      "sourceCoverageScore": 1,
+      "issues": [],
+      "trace": [
+        {
+          "stage": "fidelity",
+          "code": "SOURCE_COVERAGE_OK",
+          "result": "pass",
+          "detail": "Coverage 1.00.",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "sanitation",
+          "code": "SANITATION_OK",
+          "result": "pass",
+          "detail": "No sanitation artifacts detected.",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "pedagogy",
+          "code": "PEDAGOGY_OK",
+          "result": "pass",
+          "detail": "Selected pattern \"knowledge-atlas\".",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "layout",
+          "code": "LAYOUT_POLICY_APPLIED",
+          "result": "pass",
+          "detail": "Renderer layout policy will enforce stack-first workbook composition.",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "visual",
+          "code": "VISUAL_POLICY_APPLIED",
+          "result": "pass",
+          "detail": "Theme/token policy will apply during target rendering.",
+          "patternId": "knowledge-atlas"
+        }
+      ],
+      "policyVersion": "1.0.0",
+      "precedence": [
+        "fidelity",
+        "sanitation",
+        "pedagogy",
+        "layout",
+        "visual"
+      ],
+      "override": null
+    },
+    {
+      "sectionId": "goals",
+      "intents": [
+        "knowledge",
+        "reflection"
+      ],
+      "patternId": "knowledge-atlas",
+      "interactionScore": 5,
+      "confidence": 0.8,
+      "reasons": [
+        "instructional knowledge content detected",
+        "knowledge density qualifies for knowledge atlas"
+      ],
+      "sourceCoverageScore": 1,
+      "issues": [],
+      "trace": [
+        {
+          "stage": "fidelity",
+          "code": "SOURCE_COVERAGE_OK",
+          "result": "pass",
+          "detail": "Coverage 1.00.",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "sanitation",
+          "code": "SANITATION_OK",
+          "result": "pass",
+          "detail": "No sanitation artifacts detected.",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "pedagogy",
+          "code": "PEDAGOGY_OK",
+          "result": "pass",
+          "detail": "Selected pattern \"knowledge-atlas\".",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "layout",
+          "code": "LAYOUT_POLICY_APPLIED",
+          "result": "pass",
+          "detail": "Renderer layout policy will enforce stack-first workbook composition.",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "visual",
+          "code": "VISUAL_POLICY_APPLIED",
+          "result": "pass",
+          "detail": "Theme/token policy will apply during target rendering.",
+          "patternId": "knowledge-atlas"
+        }
+      ],
+      "policyVersion": "1.0.0",
+      "precedence": [
+        "fidelity",
+        "sanitation",
+        "pedagogy",
+        "layout",
+        "visual"
+      ],
+      "override": null
+    },
+    {
+      "sectionId": "romantic-relationships",
+      "intents": [],
+      "patternId": "premium-stacked-workbook",
+      "interactionScore": 0,
+      "confidence": 0,
+      "reasons": [
+        "premium stacked workbook is the safe fallback"
+      ],
+      "sourceCoverageScore": 1,
+      "issues": [],
+      "trace": [
+        {
+          "stage": "fidelity",
+          "code": "SOURCE_COVERAGE_OK",
+          "result": "pass",
+          "detail": "Coverage 1.00.",
+          "patternId": "premium-stacked-workbook"
+        },
+        {
+          "stage": "sanitation",
+          "code": "SANITATION_OK",
+          "result": "pass",
+          "detail": "No sanitation artifacts detected.",
+          "patternId": "premium-stacked-workbook"
+        },
+        {
+          "stage": "pedagogy",
+          "code": "PEDAGOGY_OK",
+          "result": "pass",
+          "detail": "Selected pattern \"premium-stacked-workbook\".",
+          "patternId": "premium-stacked-workbook"
+        },
+        {
+          "stage": "layout",
+          "code": "LAYOUT_POLICY_APPLIED",
+          "result": "pass",
+          "detail": "Renderer layout policy will enforce stack-first workbook composition.",
+          "patternId": "premium-stacked-workbook"
+        },
+        {
+          "stage": "visual",
+          "code": "VISUAL_POLICY_APPLIED",
+          "result": "pass",
+          "detail": "Theme/token policy will apply during target rendering.",
+          "patternId": "premium-stacked-workbook"
+        }
+      ],
+      "policyVersion": "1.0.0",
+      "precedence": [
+        "fidelity",
+        "sanitation",
+        "pedagogy",
+        "layout",
+        "visual"
+      ],
+      "override": null
+    },
+    {
+      "sectionId": "relationship-progression-activity",
+      "intents": [
+        "knowledge"
+      ],
+      "patternId": "knowledge-atlas",
+      "interactionScore": 4,
+      "confidence": 1,
+      "reasons": [
+        "instructional knowledge content detected",
+        "knowledge density qualifies for knowledge atlas"
+      ],
+      "sourceCoverageScore": 1,
+      "issues": [],
+      "trace": [
+        {
+          "stage": "fidelity",
+          "code": "SOURCE_COVERAGE_OK",
+          "result": "pass",
+          "detail": "Coverage 1.00.",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "sanitation",
+          "code": "SANITATION_OK",
+          "result": "pass",
+          "detail": "No sanitation artifacts detected.",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "pedagogy",
+          "code": "PEDAGOGY_OK",
+          "result": "pass",
+          "detail": "Selected pattern \"knowledge-atlas\".",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "layout",
+          "code": "LAYOUT_POLICY_APPLIED",
+          "result": "pass",
+          "detail": "Renderer layout policy will enforce stack-first workbook composition.",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "visual",
+          "code": "VISUAL_POLICY_APPLIED",
+          "result": "pass",
+          "detail": "Theme/token policy will apply during target rendering.",
+          "patternId": "knowledge-atlas"
+        }
+      ],
+      "policyVersion": "1.0.0",
+      "precedence": [
+        "fidelity",
+        "sanitation",
+        "pedagogy",
+        "layout",
+        "visual"
+      ],
+      "override": null
+    },
+    {
+      "sectionId": "talking-on-the-phone",
+      "intents": [],
+      "patternId": "premium-stacked-workbook",
+      "interactionScore": 0,
+      "confidence": 0,
+      "reasons": [
+        "premium stacked workbook is the safe fallback"
+      ],
+      "sourceCoverageScore": 1,
+      "issues": [],
+      "trace": [
+        {
+          "stage": "fidelity",
+          "code": "SOURCE_COVERAGE_OK",
+          "result": "pass",
+          "detail": "Coverage 1.00.",
+          "patternId": "premium-stacked-workbook"
+        },
+        {
+          "stage": "sanitation",
+          "code": "SANITATION_OK",
+          "result": "pass",
+          "detail": "No sanitation artifacts detected.",
+          "patternId": "premium-stacked-workbook"
+        },
+        {
+          "stage": "pedagogy",
+          "code": "PEDAGOGY_OK",
+          "result": "pass",
+          "detail": "Selected pattern \"premium-stacked-workbook\".",
+          "patternId": "premium-stacked-workbook"
+        },
+        {
+          "stage": "layout",
+          "code": "LAYOUT_POLICY_APPLIED",
+          "result": "pass",
+          "detail": "Renderer layout policy will enforce stack-first workbook composition.",
+          "patternId": "premium-stacked-workbook"
+        },
+        {
+          "stage": "visual",
+          "code": "VISUAL_POLICY_APPLIED",
+          "result": "pass",
+          "detail": "Theme/token policy will apply during target rendering.",
+          "patternId": "premium-stacked-workbook"
+        }
+      ],
+      "policyVersion": "1.0.0",
+      "precedence": [
+        "fidelity",
+        "sanitation",
+        "pedagogy",
+        "layout",
+        "visual"
+      ],
+      "override": null
+    },
+    {
+      "sectionId": "exchanging-emails-text-messages",
+      "intents": [
+        "knowledge"
+      ],
+      "patternId": "knowledge-atlas",
+      "interactionScore": 4,
+      "confidence": 1,
+      "reasons": [
+        "instructional knowledge content detected",
+        "knowledge density qualifies for knowledge atlas"
+      ],
+      "sourceCoverageScore": 1,
+      "issues": [],
+      "trace": [
+        {
+          "stage": "fidelity",
+          "code": "SOURCE_COVERAGE_OK",
+          "result": "pass",
+          "detail": "Coverage 1.00.",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "sanitation",
+          "code": "SANITATION_OK",
+          "result": "pass",
+          "detail": "No sanitation artifacts detected.",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "pedagogy",
+          "code": "PEDAGOGY_OK",
+          "result": "pass",
+          "detail": "Selected pattern \"knowledge-atlas\".",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "layout",
+          "code": "LAYOUT_POLICY_APPLIED",
+          "result": "pass",
+          "detail": "Renderer layout policy will enforce stack-first workbook composition.",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "visual",
+          "code": "VISUAL_POLICY_APPLIED",
+          "result": "pass",
+          "detail": "Theme/token policy will apply during target rendering.",
+          "patternId": "knowledge-atlas"
+        }
+      ],
+      "policyVersion": "1.0.0",
+      "precedence": [
+        "fidelity",
+        "sanitation",
+        "pedagogy",
+        "layout",
+        "visual"
+      ],
+      "override": null
+    },
+    {
+      "sectionId": "simple-kissing",
+      "intents": [
+        "knowledge"
+      ],
+      "patternId": "knowledge-atlas",
+      "interactionScore": 4,
+      "confidence": 1,
+      "reasons": [
+        "instructional knowledge content detected",
+        "knowledge density qualifies for knowledge atlas"
+      ],
+      "sourceCoverageScore": 1,
+      "issues": [],
+      "trace": [
+        {
+          "stage": "fidelity",
+          "code": "SOURCE_COVERAGE_OK",
+          "result": "pass",
+          "detail": "Coverage 1.00.",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "sanitation",
+          "code": "SANITATION_OK",
+          "result": "pass",
+          "detail": "No sanitation artifacts detected.",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "pedagogy",
+          "code": "PEDAGOGY_OK",
+          "result": "pass",
+          "detail": "Selected pattern \"knowledge-atlas\".",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "layout",
+          "code": "LAYOUT_POLICY_APPLIED",
+          "result": "pass",
+          "detail": "Renderer layout policy will enforce stack-first workbook composition.",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "visual",
+          "code": "VISUAL_POLICY_APPLIED",
+          "result": "pass",
+          "detail": "Theme/token policy will apply during target rendering.",
+          "patternId": "knowledge-atlas"
+        }
+      ],
+      "policyVersion": "1.0.0",
+      "precedence": [
+        "fidelity",
+        "sanitation",
+        "pedagogy",
+        "layout",
+        "visual"
+      ],
+      "override": null
+    },
+    {
+      "sectionId": "long-term-commitment-marriage",
+      "intents": [
+        "knowledge"
+      ],
+      "patternId": "knowledge-atlas",
+      "interactionScore": 4,
+      "confidence": 1,
+      "reasons": [
+        "instructional knowledge content detected",
+        "knowledge density qualifies for knowledge atlas"
+      ],
+      "sourceCoverageScore": 1,
+      "issues": [],
+      "trace": [
+        {
+          "stage": "fidelity",
+          "code": "SOURCE_COVERAGE_OK",
+          "result": "pass",
+          "detail": "Coverage 1.00.",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "sanitation",
+          "code": "SANITATION_OK",
+          "result": "pass",
+          "detail": "No sanitation artifacts detected.",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "pedagogy",
+          "code": "PEDAGOGY_OK",
+          "result": "pass",
+          "detail": "Selected pattern \"knowledge-atlas\".",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "layout",
+          "code": "LAYOUT_POLICY_APPLIED",
+          "result": "pass",
+          "detail": "Renderer layout policy will enforce stack-first workbook composition.",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "visual",
+          "code": "VISUAL_POLICY_APPLIED",
+          "result": "pass",
+          "detail": "Theme/token policy will apply during target rendering.",
+          "patternId": "knowledge-atlas"
+        }
+      ],
+      "policyVersion": "1.0.0",
+      "precedence": [
+        "fidelity",
+        "sanitation",
+        "pedagogy",
+        "layout",
+        "visual"
+      ],
+      "override": null
+    },
+    {
+      "sectionId": "evaluating-relationships",
+      "intents": [
+        "knowledge"
+      ],
+      "patternId": "knowledge-atlas",
+      "interactionScore": 4,
+      "confidence": 1,
+      "reasons": [
+        "instructional knowledge content detected",
+        "knowledge density qualifies for knowledge atlas"
+      ],
+      "sourceCoverageScore": 1,
+      "issues": [],
+      "trace": [
+        {
+          "stage": "fidelity",
+          "code": "SOURCE_COVERAGE_OK",
+          "result": "pass",
+          "detail": "Coverage 1.00.",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "sanitation",
+          "code": "SANITATION_OK",
+          "result": "pass",
+          "detail": "No sanitation artifacts detected.",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "pedagogy",
+          "code": "PEDAGOGY_OK",
+          "result": "pass",
+          "detail": "Selected pattern \"knowledge-atlas\".",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "layout",
+          "code": "LAYOUT_POLICY_APPLIED",
+          "result": "pass",
+          "detail": "Renderer layout policy will enforce stack-first workbook composition.",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "visual",
+          "code": "VISUAL_POLICY_APPLIED",
+          "result": "pass",
+          "detail": "Theme/token policy will apply during target rendering.",
+          "patternId": "knowledge-atlas"
+        }
+      ],
+      "policyVersion": "1.0.0",
+      "precedence": [
+        "fidelity",
+        "sanitation",
+        "pedagogy",
+        "layout",
+        "visual"
+      ],
+      "override": null
+    },
+    {
+      "sectionId": "healthy-relationships-unhealthy-relationships",
+      "intents": [
+        "knowledge"
+      ],
+      "patternId": "knowledge-atlas",
+      "interactionScore": 4,
+      "confidence": 1,
+      "reasons": [
+        "instructional knowledge content detected",
+        "knowledge density qualifies for knowledge atlas"
+      ],
+      "sourceCoverageScore": 1,
+      "issues": [],
+      "trace": [
+        {
+          "stage": "fidelity",
+          "code": "SOURCE_COVERAGE_OK",
+          "result": "pass",
+          "detail": "Coverage 1.00.",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "sanitation",
+          "code": "SANITATION_OK",
+          "result": "pass",
+          "detail": "No sanitation artifacts detected.",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "pedagogy",
+          "code": "PEDAGOGY_OK",
+          "result": "pass",
+          "detail": "Selected pattern \"knowledge-atlas\".",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "layout",
+          "code": "LAYOUT_POLICY_APPLIED",
+          "result": "pass",
+          "detail": "Renderer layout policy will enforce stack-first workbook composition.",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "visual",
+          "code": "VISUAL_POLICY_APPLIED",
+          "result": "pass",
+          "detail": "Theme/token policy will apply during target rendering.",
+          "patternId": "knowledge-atlas"
+        }
+      ],
+      "policyVersion": "1.0.0",
+      "precedence": [
+        "fidelity",
+        "sanitation",
+        "pedagogy",
+        "layout",
+        "visual"
+      ],
+      "override": null
+    },
+    {
+      "sectionId": "alcohol-awareness",
+      "intents": [
+        "knowledge",
+        "decision_making",
+        "reflection"
+      ],
+      "patternId": "knowledge-atlas",
+      "interactionScore": 7,
+      "confidence": 0.5714285714285714,
+      "reasons": [
+        "instructional knowledge content detected",
+        "knowledge density qualifies for knowledge atlas"
+      ],
+      "sourceCoverageScore": 1,
+      "issues": [],
+      "trace": [
+        {
+          "stage": "fidelity",
+          "code": "SOURCE_COVERAGE_OK",
+          "result": "pass",
+          "detail": "Coverage 1.00.",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "sanitation",
+          "code": "SANITATION_OK",
+          "result": "pass",
+          "detail": "No sanitation artifacts detected.",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "pedagogy",
+          "code": "PEDAGOGY_OK",
+          "result": "pass",
+          "detail": "Selected pattern \"knowledge-atlas\".",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "layout",
+          "code": "LAYOUT_POLICY_APPLIED",
+          "result": "pass",
+          "detail": "Renderer layout policy will enforce stack-first workbook composition.",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "visual",
+          "code": "VISUAL_POLICY_APPLIED",
+          "result": "pass",
+          "detail": "Theme/token policy will apply during target rendering.",
+          "patternId": "knowledge-atlas"
+        }
+      ],
+      "policyVersion": "1.0.0",
+      "precedence": [
+        "fidelity",
+        "sanitation",
+        "pedagogy",
+        "layout",
+        "visual"
+      ],
+      "override": null
+    },
+    {
+      "sectionId": "choice-possible-positive-consequences-possible-negative-consequences",
+      "intents": [
+        "knowledge"
+      ],
+      "patternId": "knowledge-atlas",
+      "interactionScore": 4,
+      "confidence": 1,
+      "reasons": [
+        "instructional knowledge content detected",
+        "knowledge density qualifies for knowledge atlas"
+      ],
+      "sourceCoverageScore": 1,
+      "issues": [],
+      "trace": [
+        {
+          "stage": "fidelity",
+          "code": "SOURCE_COVERAGE_OK",
+          "result": "pass",
+          "detail": "Coverage 1.00.",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "sanitation",
+          "code": "SANITATION_OK",
+          "result": "pass",
+          "detail": "No sanitation artifacts detected.",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "pedagogy",
+          "code": "PEDAGOGY_OK",
+          "result": "pass",
+          "detail": "Selected pattern \"knowledge-atlas\".",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "layout",
+          "code": "LAYOUT_POLICY_APPLIED",
+          "result": "pass",
+          "detail": "Renderer layout policy will enforce stack-first workbook composition.",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "visual",
+          "code": "VISUAL_POLICY_APPLIED",
+          "result": "pass",
+          "detail": "Theme/token policy will apply during target rendering.",
+          "patternId": "knowledge-atlas"
+        }
+      ],
+      "policyVersion": "1.0.0",
+      "precedence": [
+        "fidelity",
+        "sanitation",
+        "pedagogy",
+        "layout",
+        "visual"
+      ],
+      "override": null
+    },
+    {
+      "sectionId": "tobacco-awareness",
+      "intents": [
+        "knowledge",
+        "reflection"
+      ],
+      "patternId": "knowledge-atlas",
+      "interactionScore": 5,
+      "confidence": 0.8,
+      "reasons": [
+        "instructional knowledge content detected",
+        "knowledge density qualifies for knowledge atlas"
+      ],
+      "sourceCoverageScore": 1,
+      "issues": [],
+      "trace": [
+        {
+          "stage": "fidelity",
+          "code": "SOURCE_COVERAGE_OK",
+          "result": "pass",
+          "detail": "Coverage 1.00.",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "sanitation",
+          "code": "SANITATION_OK",
+          "result": "pass",
+          "detail": "No sanitation artifacts detected.",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "pedagogy",
+          "code": "PEDAGOGY_OK",
+          "result": "pass",
+          "detail": "Selected pattern \"knowledge-atlas\".",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "layout",
+          "code": "LAYOUT_POLICY_APPLIED",
+          "result": "pass",
+          "detail": "Renderer layout policy will enforce stack-first workbook composition.",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "visual",
+          "code": "VISUAL_POLICY_APPLIED",
+          "result": "pass",
+          "detail": "Theme/token policy will apply during target rendering.",
+          "patternId": "knowledge-atlas"
+        }
+      ],
+      "policyVersion": "1.0.0",
+      "precedence": [
+        "fidelity",
+        "sanitation",
+        "pedagogy",
+        "layout",
+        "visual"
+      ],
+      "override": null
+    },
+    {
+      "sectionId": "risk-taking",
+      "intents": [
+        "communication_practice",
+        "knowledge",
+        "reflection"
+      ],
+      "patternId": "premium-stacked-workbook",
+      "interactionScore": 12,
+      "confidence": 0.5833333333333334,
+      "reasons": [
+        "instructional knowledge content detected",
+        "communication repair practice detected",
+        "premium stacked workbook is the safe fallback"
+      ],
+      "sourceCoverageScore": 1,
+      "issues": [],
+      "trace": [
+        {
+          "stage": "fidelity",
+          "code": "SOURCE_COVERAGE_OK",
+          "result": "pass",
+          "detail": "Coverage 1.00.",
+          "patternId": "premium-stacked-workbook"
+        },
+        {
+          "stage": "sanitation",
+          "code": "SANITATION_OK",
+          "result": "pass",
+          "detail": "No sanitation artifacts detected.",
+          "patternId": "premium-stacked-workbook"
+        },
+        {
+          "stage": "pedagogy",
+          "code": "PEDAGOGY_OK",
+          "result": "pass",
+          "detail": "Selected pattern \"premium-stacked-workbook\".",
+          "patternId": "premium-stacked-workbook"
+        },
+        {
+          "stage": "layout",
+          "code": "LAYOUT_POLICY_APPLIED",
+          "result": "pass",
+          "detail": "Renderer layout policy will enforce stack-first workbook composition.",
+          "patternId": "premium-stacked-workbook"
+        },
+        {
+          "stage": "visual",
+          "code": "VISUAL_POLICY_APPLIED",
+          "result": "pass",
+          "detail": "Theme/token policy will apply during target rendering.",
+          "patternId": "premium-stacked-workbook"
+        }
+      ],
+      "policyVersion": "1.0.0",
+      "precedence": [
+        "fidelity",
+        "sanitation",
+        "pedagogy",
+        "layout",
+        "visual"
+      ],
+      "override": null
+    },
+    {
+      "sectionId": "healthy-risks",
+      "intents": [
+        "knowledge",
+        "reflection"
+      ],
+      "patternId": "knowledge-atlas",
+      "interactionScore": 5,
+      "confidence": 0.8,
+      "reasons": [
+        "instructional knowledge content detected",
+        "knowledge density qualifies for knowledge atlas"
+      ],
+      "sourceCoverageScore": 1,
+      "issues": [],
+      "trace": [
+        {
+          "stage": "fidelity",
+          "code": "SOURCE_COVERAGE_OK",
+          "result": "pass",
+          "detail": "Coverage 1.00.",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "sanitation",
+          "code": "SANITATION_OK",
+          "result": "pass",
+          "detail": "No sanitation artifacts detected.",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "pedagogy",
+          "code": "PEDAGOGY_OK",
+          "result": "pass",
+          "detail": "Selected pattern \"knowledge-atlas\".",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "layout",
+          "code": "LAYOUT_POLICY_APPLIED",
+          "result": "pass",
+          "detail": "Renderer layout policy will enforce stack-first workbook composition.",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "visual",
+          "code": "VISUAL_POLICY_APPLIED",
+          "result": "pass",
+          "detail": "Theme/token policy will apply during target rendering.",
+          "patternId": "knowledge-atlas"
+        }
+      ],
+      "policyVersion": "1.0.0",
+      "precedence": [
+        "fidelity",
+        "sanitation",
+        "pedagogy",
+        "layout",
+        "visual"
+      ],
+      "override": null
+    },
+    {
+      "sectionId": "addictions",
+      "intents": [
+        "knowledge",
+        "reflection"
+      ],
+      "patternId": "knowledge-atlas",
+      "interactionScore": 5,
+      "confidence": 0.8,
+      "reasons": [
+        "instructional knowledge content detected",
+        "knowledge density qualifies for knowledge atlas"
+      ],
+      "sourceCoverageScore": 1,
+      "issues": [],
+      "trace": [
+        {
+          "stage": "fidelity",
+          "code": "SOURCE_COVERAGE_OK",
+          "result": "pass",
+          "detail": "Coverage 1.00.",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "sanitation",
+          "code": "SANITATION_OK",
+          "result": "pass",
+          "detail": "No sanitation artifacts detected.",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "pedagogy",
+          "code": "PEDAGOGY_OK",
+          "result": "pass",
+          "detail": "Selected pattern \"knowledge-atlas\".",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "layout",
+          "code": "LAYOUT_POLICY_APPLIED",
+          "result": "pass",
+          "detail": "Renderer layout policy will enforce stack-first workbook composition.",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "visual",
+          "code": "VISUAL_POLICY_APPLIED",
+          "result": "pass",
+          "detail": "Theme/token policy will apply during target rendering.",
+          "patternId": "knowledge-atlas"
+        }
+      ],
+      "policyVersion": "1.0.0",
+      "precedence": [
+        "fidelity",
+        "sanitation",
+        "pedagogy",
+        "layout",
+        "visual"
+      ],
+      "override": null
+    },
+    {
+      "sectionId": "process-of-addictions",
+      "intents": [
+        "knowledge",
+        "decision_making"
+      ],
+      "patternId": "knowledge-atlas",
+      "interactionScore": 6,
+      "confidence": 0.6666666666666666,
+      "reasons": [
+        "instructional knowledge content detected",
+        "knowledge density qualifies for knowledge atlas"
+      ],
+      "sourceCoverageScore": 1,
+      "issues": [],
+      "trace": [
+        {
+          "stage": "fidelity",
+          "code": "SOURCE_COVERAGE_OK",
+          "result": "pass",
+          "detail": "Coverage 1.00.",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "sanitation",
+          "code": "SANITATION_OK",
+          "result": "pass",
+          "detail": "No sanitation artifacts detected.",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "pedagogy",
+          "code": "PEDAGOGY_OK",
+          "result": "pass",
+          "detail": "Selected pattern \"knowledge-atlas\".",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "layout",
+          "code": "LAYOUT_POLICY_APPLIED",
+          "result": "pass",
+          "detail": "Renderer layout policy will enforce stack-first workbook composition.",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "visual",
+          "code": "VISUAL_POLICY_APPLIED",
+          "result": "pass",
+          "detail": "Theme/token policy will apply during target rendering.",
+          "patternId": "knowledge-atlas"
+        }
+      ],
+      "policyVersion": "1.0.0",
+      "precedence": [
+        "fidelity",
+        "sanitation",
+        "pedagogy",
+        "layout",
+        "visual"
+      ],
+      "override": null
+    },
+    {
+      "sectionId": "mental-health-awareness",
+      "intents": [
+        "knowledge",
+        "reflection"
+      ],
+      "patternId": "knowledge-atlas",
+      "interactionScore": 5,
+      "confidence": 0.8,
+      "reasons": [
+        "instructional knowledge content detected",
+        "knowledge density qualifies for knowledge atlas"
+      ],
+      "sourceCoverageScore": 1,
+      "issues": [],
+      "trace": [
+        {
+          "stage": "fidelity",
+          "code": "SOURCE_COVERAGE_OK",
+          "result": "pass",
+          "detail": "Coverage 1.00.",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "sanitation",
+          "code": "SANITATION_OK",
+          "result": "pass",
+          "detail": "No sanitation artifacts detected.",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "pedagogy",
+          "code": "PEDAGOGY_OK",
+          "result": "pass",
+          "detail": "Selected pattern \"knowledge-atlas\".",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "layout",
+          "code": "LAYOUT_POLICY_APPLIED",
+          "result": "pass",
+          "detail": "Renderer layout policy will enforce stack-first workbook composition.",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "visual",
+          "code": "VISUAL_POLICY_APPLIED",
+          "result": "pass",
+          "detail": "Theme/token policy will apply during target rendering.",
+          "patternId": "knowledge-atlas"
+        }
+      ],
+      "policyVersion": "1.0.0",
+      "precedence": [
+        "fidelity",
+        "sanitation",
+        "pedagogy",
+        "layout",
+        "visual"
+      ],
+      "override": null
+    },
+    {
+      "sectionId": "what-you-can-do-to-feel-better-tips-for-depressed-teens",
+      "intents": [
+        "knowledge",
+        "decision_making",
+        "reflection"
+      ],
+      "patternId": "knowledge-atlas",
+      "interactionScore": 7,
+      "confidence": 0.5714285714285714,
+      "reasons": [
+        "instructional knowledge content detected",
+        "knowledge density qualifies for knowledge atlas"
+      ],
+      "sourceCoverageScore": 1,
+      "issues": [],
+      "trace": [
+        {
+          "stage": "fidelity",
+          "code": "SOURCE_COVERAGE_OK",
+          "result": "pass",
+          "detail": "Coverage 1.00.",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "sanitation",
+          "code": "SANITATION_OK",
+          "result": "pass",
+          "detail": "No sanitation artifacts detected.",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "pedagogy",
+          "code": "PEDAGOGY_OK",
+          "result": "pass",
+          "detail": "Selected pattern \"knowledge-atlas\".",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "layout",
+          "code": "LAYOUT_POLICY_APPLIED",
+          "result": "pass",
+          "detail": "Renderer layout policy will enforce stack-first workbook composition.",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "visual",
+          "code": "VISUAL_POLICY_APPLIED",
+          "result": "pass",
+          "detail": "Theme/token policy will apply during target rendering.",
+          "patternId": "knowledge-atlas"
+        }
+      ],
+      "policyVersion": "1.0.0",
+      "precedence": [
+        "fidelity",
+        "sanitation",
+        "pedagogy",
+        "layout",
+        "visual"
+      ],
+      "override": null
+    },
+    {
+      "sectionId": "summative-task-life-map-exploration",
+      "intents": [
+        "knowledge",
+        "reflection"
+      ],
+      "patternId": "knowledge-atlas",
+      "interactionScore": 5,
+      "confidence": 0.8,
+      "reasons": [
+        "instructional knowledge content detected",
+        "knowledge density qualifies for knowledge atlas"
+      ],
+      "sourceCoverageScore": 1,
+      "issues": [],
+      "trace": [
+        {
+          "stage": "fidelity",
+          "code": "SOURCE_COVERAGE_OK",
+          "result": "pass",
+          "detail": "Coverage 1.00.",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "sanitation",
+          "code": "SANITATION_OK",
+          "result": "pass",
+          "detail": "No sanitation artifacts detected.",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "pedagogy",
+          "code": "PEDAGOGY_OK",
+          "result": "pass",
+          "detail": "Selected pattern \"knowledge-atlas\".",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "layout",
+          "code": "LAYOUT_POLICY_APPLIED",
+          "result": "pass",
+          "detail": "Renderer layout policy will enforce stack-first workbook composition.",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "visual",
+          "code": "VISUAL_POLICY_APPLIED",
+          "result": "pass",
+          "detail": "Theme/token policy will apply during target rendering.",
+          "patternId": "knowledge-atlas"
+        }
+      ],
+      "policyVersion": "1.0.0",
+      "precedence": [
+        "fidelity",
+        "sanitation",
+        "pedagogy",
+        "layout",
+        "visual"
+      ],
+      "override": null
+    },
+    {
+      "sectionId": "life-map-rubric",
+      "intents": [
+        "knowledge"
+      ],
+      "patternId": "knowledge-atlas",
+      "interactionScore": 4,
+      "confidence": 1,
+      "reasons": [
+        "instructional knowledge content detected",
+        "knowledge density qualifies for knowledge atlas"
+      ],
+      "sourceCoverageScore": 1,
+      "issues": [],
+      "trace": [
+        {
+          "stage": "fidelity",
+          "code": "SOURCE_COVERAGE_OK",
+          "result": "pass",
+          "detail": "Coverage 1.00.",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "sanitation",
+          "code": "SANITATION_OK",
+          "result": "pass",
+          "detail": "No sanitation artifacts detected.",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "pedagogy",
+          "code": "PEDAGOGY_OK",
+          "result": "pass",
+          "detail": "Selected pattern \"knowledge-atlas\".",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "layout",
+          "code": "LAYOUT_POLICY_APPLIED",
+          "result": "pass",
+          "detail": "Renderer layout policy will enforce stack-first workbook composition.",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "visual",
+          "code": "VISUAL_POLICY_APPLIED",
+          "result": "pass",
+          "detail": "Theme/token policy will apply during target rendering.",
+          "patternId": "knowledge-atlas"
+        }
+      ],
+      "policyVersion": "1.0.0",
+      "precedence": [
+        "fidelity",
+        "sanitation",
+        "pedagogy",
+        "layout",
+        "visual"
+      ],
+      "override": null
+    },
+    {
+      "sectionId": "summative-task-inside-out-film-study",
+      "intents": [
+        "knowledge",
+        "decision_making",
+        "reflection"
+      ],
+      "patternId": "knowledge-atlas",
+      "interactionScore": 7,
+      "confidence": 0.5714285714285714,
+      "reasons": [
+        "instructional knowledge content detected",
+        "knowledge density qualifies for knowledge atlas"
+      ],
+      "sourceCoverageScore": 1,
+      "issues": [],
+      "trace": [
+        {
+          "stage": "fidelity",
+          "code": "SOURCE_COVERAGE_OK",
+          "result": "pass",
+          "detail": "Coverage 1.00.",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "sanitation",
+          "code": "SANITATION_OK",
+          "result": "pass",
+          "detail": "No sanitation artifacts detected.",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "pedagogy",
+          "code": "PEDAGOGY_OK",
+          "result": "pass",
+          "detail": "Selected pattern \"knowledge-atlas\".",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "layout",
+          "code": "LAYOUT_POLICY_APPLIED",
+          "result": "pass",
+          "detail": "Renderer layout policy will enforce stack-first workbook composition.",
+          "patternId": "knowledge-atlas"
+        },
+        {
+          "stage": "visual",
+          "code": "VISUAL_POLICY_APPLIED",
+          "result": "pass",
+          "detail": "Theme/token policy will apply during target rendering.",
+          "patternId": "knowledge-atlas"
+        }
+      ],
+      "policyVersion": "1.0.0",
+      "precedence": [
+        "fidelity",
+        "sanitation",
+        "pedagogy",
+        "layout",
+        "visual"
+      ],
+      "override": null
+    },
+    {
+      "sectionId": "review-submit",
+      "intents": [],
+      "patternId": "premium-stacked-workbook",
+      "interactionScore": 0,
+      "confidence": 0,
+      "reasons": [
+        "premium stacked workbook is the safe fallback"
+      ],
+      "sourceCoverageScore": 1,
+      "issues": [],
+      "trace": [
+        {
+          "stage": "fidelity",
+          "code": "SOURCE_COVERAGE_OK",
+          "result": "pass",
+          "detail": "Coverage 1.00.",
+          "patternId": "premium-stacked-workbook"
+        },
+        {
+          "stage": "sanitation",
+          "code": "SANITATION_OK",
+          "result": "pass",
+          "detail": "No sanitation artifacts detected.",
+          "patternId": "premium-stacked-workbook"
+        },
+        {
+          "stage": "pedagogy",
+          "code": "PEDAGOGY_OK",
+          "result": "pass",
+          "detail": "Selected pattern \"premium-stacked-workbook\".",
+          "patternId": "premium-stacked-workbook"
+        },
+        {
+          "stage": "layout",
+          "code": "LAYOUT_POLICY_APPLIED",
+          "result": "pass",
+          "detail": "Renderer layout policy will enforce stack-first workbook composition.",
+          "patternId": "premium-stacked-workbook"
+        },
+        {
+          "stage": "visual",
+          "code": "VISUAL_POLICY_APPLIED",
+          "result": "pass",
+          "detail": "Theme/token policy will apply during target rendering.",
+          "patternId": "premium-stacked-workbook"
+        }
+      ],
+      "policyVersion": "1.0.0",
+      "precedence": [
+        "fidelity",
+        "sanitation",
+        "pedagogy",
+        "layout",
+        "visual"
+      ],
+      "override": null
+    }
+  ],
+  "sourceCoverage": {
+    "sectionsCovered": 1,
+    "blocksCovered": 1
+  },
+  "designPolicy": {
+    "version": "1.0.0",
+    "precedence": [
+      "fidelity",
+      "sanitation",
+      "pedagogy",
+      "layout",
+      "visual"
+    ],
+    "overridesFile": "",
+    "overridesApplied": [],
+    "overrideWarnings": []
+  },
+  "fingerprints": {
+    "inputHash": "3890c6bfdd5b5e515cad64802a6e6268b0dd89ca14851648703d4e526d5efc48",
+    "contentHash": "d0d80a9e7406ac0816ff2cf23edc3a2835eed5ae6855587d24c42c62568de3a8"
+  }
+}
